@@ -2,7 +2,8 @@
 import "../style/index.scss";
  
 export const metadata = {
-  title: 'Ecosaver Connect',
+  title: 'Aquabrim',
+  description: 'Aquabrim delivers smart, affordable, and reliable water automation solutions for homes, apartments, and industries. Efficient water level management since 2008.',
 };
 
 

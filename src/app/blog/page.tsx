@@ -5,8 +5,8 @@ import React from 'react';
 
 
 export const metadata = {
-  title: 'Aquabrim',
-  description: "Aquabrim is a leading provider of smart water automation solutions since 2008. We offer advanced water level controllers and motorized valve systems for homes, apartments, and industries.  ",
+  title: 'Blog | Aquabrim',
+  description: "Read the latest news and updates from Aquabrim about smart water level controllers and motorized valve systems. Expert advice on water automation since 2008.",
 }
 
 

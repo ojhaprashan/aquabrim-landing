@@ -4,8 +4,8 @@ import Wrapper from '@/layouts/Wrapper';
 import React from 'react';
 
 export const metadata = {
-  title: 'Contract Right',
-  description: "Contract Right Consulting is a leading advisor and resource provider for green banks, contractors, and nonprofits seeking to drive environmental sustainability and business efficiency. With over ten years of experience in the industry, Earth Right Consulting offers a wealth of knowledge and expertise to help clients navigate the complexities of the ever-changing market.  ",
+  title: 'About | Aquabrim',
+  description: "Learn more about Aquabrim and our commitment to smart, efficient water level management since 2008.",
 }
 
 const index = () => {
