@@ -1,0 +1,44 @@
+
+@import "../../public/assets/css/all.min.css";
+@import "../../public/assets/css/animate.css";
+@import "../../public/assets/css/animate.min.css";
+@import "../../public/assets/css/animated-text.css";
+@import "../../public/assets/css/bootstrap-icons.css";
+@import "../../public/assets/css/flaticon.css";
+@import "../../public/assets/css/theme-default.css";
+
+
+@import "swiper/css/bundle";  
+@import "node_modules/react-modal-video/css/modal-video.css";
+@import 'react-toastify/dist/ReactToastify.css';
+
+@import "~bootstrap/scss/bootstrap";
+
+@import "../../public/assets/css/meanmenu.min.css";
+@import "../../public/assets/css/style.css";
+@import "../../public/assets/css/responsive.css";
+
+/* Custom Mobile Header Styles */
+.mean-container .mean-bar::before {
+    display: none !important;
+}
+
+.mean-logo-container {
+    position: absolute !important;
+    left: 15px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 10002 !important;
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+}
+
+.mean-logo-text {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-left: 10px !important;
+    display: block !important;
+}
