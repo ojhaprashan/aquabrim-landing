@@ -44,4 +44,9 @@ const FaqArea = () => {
   );
 };
 
+
+
+
+
+
 export default FaqArea;
