@@ -170,8 +170,8 @@ Tags: alternative energy, company, eco, eco-friendly, ecology, environment, natu
 }
 
 .solar-menu {
-    width: 50rem;
-    margin-left: 70px;
+    display: flex;
+    justify-content: center;
     padding: 10px;
 }
 

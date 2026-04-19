@@ -60,13 +60,13 @@ const NavMenu = () => {
           bottom: -2px;
           width: 100%;
           height: 2px;
-          background-color: #2FAB73;
+          background-color: #006CD0;
           visibility: hidden; /* Hide underline by default */
         }
 
         .menu-item:hover:after {
           visibility: visible;
-          background-color:#2FAB73 ;
+          background-color:#006CD0 ;
         }
         
         .active .menu-item:after {
