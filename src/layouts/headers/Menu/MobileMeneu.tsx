@@ -87,7 +87,6 @@ const MobileMeneu = () => {
                   if (title.includes("project")) iconClass = "bi bi-briefcase";
                   if (title.includes("contact")) iconClass = "bi bi-envelope";
                   if (title.includes("blog")) iconClass = "bi bi-journal-text";
-                  if (title.includes("finance")) iconClass = "bi bi-currency-dollar";
                   if (title.includes("operation")) iconClass = "bi bi-gear-wide-connected";
                   if (title.includes("community")) iconClass = "bi bi-people";
 

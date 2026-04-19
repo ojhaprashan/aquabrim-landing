@@ -30,9 +30,9 @@ const HomeOne = () => {
         <VedioAreaHomeOne />
         <ContactAreaHomeOne />
         <ProtfolioAreaHomeOne />
-        <OfferAreaHomeOne />
+        {/* <OfferAreaHomeOne /> */}
         <TeamAreaHomeOne />
-        <AppointmentAreaHomeOne />
+        {/* <AppointmentAreaHomeOne /> */}
         <BlogAreaHomeOne />
         <SubscribeAreaHomeOne />
       </main>

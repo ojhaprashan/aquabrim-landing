@@ -32,11 +32,10 @@ const menu_data: DataType[] = [
 	
 	
 	{
-		id: 4,
-		title: "Finance",
-		link: "/finance",
+		id: 6,
+		title: "Contact",
+		link: "/contact",
 		has_dropdown: false,
-		
 	},
 	{
 		id: 4,
@@ -72,25 +71,5 @@ const menu_data: DataType[] = [
 			{ link: "/project-details", title: "Project Details" },
 		],
 	},
-	// {
-	// 	id: 5,
-	// 	title: "Pages",
-	// 	link: "#",
-	// 	has_dropdown: true,
-	// 	sub_menus: [
-	// 		{ link: "/blog", title: "Blog" },
-	// 		{ link: "/blog-details", title: "Blog Details " },
-	// 		{ link: "/team", title: "Team " },
-	// 		{ link: "/team-details", title: "Team Details" },
-	// 		{ link: "/faq", title: "FAQ" },
-	// 		{ link: "/erorr", title: "Erorr" },
-	// 	],
-	// },
-	// {
-	// 	id: 6,
-	// 	title: "Contact",
-	// 	link: "/contact",
-	// 	has_dropdown: false,
-	// },
 ];
 export default menu_data;
