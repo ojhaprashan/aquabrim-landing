@@ -39,9 +39,8 @@ const HeaderOne = ({ style }: any) => {
               <div className="solar-top-content-menu">
                 <div className="solar-top-content">
                   <select id="Language">
-                    <option value="volvo">Language</option>
-                    <option value="saab">English</option>
-                    <option value="opel">Hinde</option>
+                    <option value="en">English</option>
+                    <option value="hi">Hindi</option>
                   </select>
                 </div>
                 <div className="solar-top-social-icon">
@@ -58,7 +57,7 @@ const HeaderOne = ({ style }: any) => {
       <header className={`solar-header-section ${style ? 'style-two' : ''} ${sticky ? 'sticky-nav' : ''}`} id="sticky-header">
         <div className="container">
           <div className="row align-items-center row">
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-2 col-md-6">
               <div className={`logo ${style ? 'style-two' : ''}`}>
                <Link href="/" className="d-flex align-items-center text-decoration-none">
                 <Image src="/assets/images/logo.png" width={50} height={50} style={{height: 'auto'}} alt="Aquabrim Logo" />
@@ -66,17 +65,16 @@ const HeaderOne = ({ style }: any) => {
                </Link>
               </div>
             </div>
-            <div className="col-lg-6 col-md-6">
-              <div className="solar-menu">
+            <div className="col-lg-8 col-md-6">
+              <div className="solar-menu justify-content-start" style={{ marginLeft: '130px' }}>
                 <NavMenu />
               </div>
             </div>
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-2 col-md-6">
               <div className="solar-search-button">
                
                 <div className="solar-btn">
-                  <Link href="#">Sign In <i className="bi bi-arrow-right"></i></Link>
-                  
+                  <Link href="/login">Sign In <i className="bi bi-arrow-right"></i></Link>
                 </div>
                
               </div>

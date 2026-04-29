@@ -108,23 +108,23 @@ interface DataType {
 const team_social_data: DataType[] = [
   {
     id: 1,
-    link: "http://facebook.com",
+    link: "https://www.facebook.com/aquabrim",
     icon: "fab fa-facebook-f",
   },
   {
     id: 2,
-    link: "http://twitter.com",
-    icon: "fab fa-twitter",
-  },
-  {
-    id: 3,
-    link: "http://vimeo.com",
-    icon: "fab fa-vimeo-v",
-  },
-  {
-    id: 3,
-    link: "http://instagram.com",
+    link: "https://www.instagram.com/aquabrim",
     icon: "fab fa-instagram",
+  },
+  {
+    id: 3,
+    link: "https://www.linkedin.com/company/aquabrim",
+    icon: "fab fa-linkedin-in",
+  },
+  {
+    id: 4,
+    link: "https://www.youtube.com/@aquabrim",
+    icon: "fab fa-youtube",
   },
 ]
 

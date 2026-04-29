@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 
 
 interface DataType {
@@ -14,16 +14,16 @@ interface DataType {
 }
 
 const hero_slider_data: DataType[] = [
-  {
-    id: 1,
-    bg_img: "slider-bg.png",
-    subtitle: "Smart Water Automation",
-    title: <>Advanced Water Level <br />Controllers</>,
-    sm_des: "Smart, affordable, and reliable water automation solutions for homes, apartments, and industries.",
-  },
+  // {
+  //   id: 1,
+  //   bg_img: "test.png",
+  //   subtitle: "Smart Water Automation",
+  //   title: <>Advanced Water Level <br />Controllers</>,
+  //   sm_des: "Smart, affordable, and reliable water automation solutions for homes, apartments, and industries.",
+  // },
   {
     id: 2,
-    bg_img: "slider2.png",
+    bg_img: "test.png",
     subtitle: "Precision Control",
     title: <>Smart Water Automation <br />by Aquabrim</>,
     sm_des: "Prevent tank overflow, protect motors from dry-run, and maintain a consistent water supply completely automatically.",
@@ -31,14 +31,14 @@ const hero_slider_data: DataType[] = [
   // update for swiper 
   {
     id: 3,
-    bg_img: "slider3.png",
+    bg_img: "test.png",
     subtitle: "Energy Efficient",
     title: <>Wireless Motorized <br />Valve Systems</>,
     sm_des: "Our patented controllers offer precise control for overhead and underground tanks, easy to install and energy-efficient.",
   },
   {
     id: 4,
-    bg_img: "slider4.png",
+    bg_img: "test.png",
     subtitle: "Choosing Aquabrim",
     title: <>Effortless Water <br />Management</>,
     sm_des: "Enhance safety and deliver long-lasting performance with Aquabrim's dependable automation systems.",
@@ -50,7 +50,7 @@ const HeroAreaHomeOne = () => {
     <>
       <Swiper
         loop={true}
-        modules={[Navigation]}
+        modules={[Navigation, Autoplay]}
         autoplay={{
           delay: 5000,
           disableOnInteraction: false
@@ -74,7 +74,7 @@ const HeroAreaHomeOne = () => {
         {hero_slider_data.map((item, i) =>
           <SwiperSlide key={i}
             className={`slider-section hero_slider d-flex align-items-center`}
-            style={{ 
+            style={{
               backgroundImage: `url(/assets/images/slider/${item.bg_img})` // Dynamic background
             }}>
             <div className="container">
@@ -85,12 +85,12 @@ const HeroAreaHomeOne = () => {
                     <h1>{item.title}</h1>
                     <p>{item.sm_des}</p>
                     <div className='buttons'>
-                    <div className="solar-btn slider1 wow slideInLeft">
-                      <Link href="/service-details">Our Service <i className="bi bi-arrow-right"></i></Link>
-                    </div>
-                    <div className="solar-btn slider2  wow slideRight">
-                      <Link href="/about">More About! <i className="bi bi-arrow-right"></i></Link>
-                    </div>
+                      <div className="solar-btn slider1 wow slideInLeft">
+                        <Link href="/service-details">Our Service <i className="bi bi-arrow-right"></i></Link>
+                      </div>
+                      <div className="solar-btn slider2  wow slideRight">
+                        <Link href="/about">More About! <i className="bi bi-arrow-right"></i></Link>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -47,6 +47,30 @@ const service_data: DataType[] = [
     title: "Smart Tank Monitoring",
     sm_des: "Real-time alerts and accurate water level detection for homes, apartments, and industries.",
   },
+  {
+    id: 4,
+    path: "home_1",
+    img: service_img_1,
+    icon: service_icon_1,
+    title: "Automatic Motor Starters",
+    sm_des: "Protect your motors from voltage fluctuations and ensure smooth operations with our smart starters.",
+  },
+  {
+    id: 5,
+    path: "home_1",
+    img: service_img_2,
+    icon: service_icon_2,
+    title: "Industrial Water Control",
+    sm_des: "Scalable water management solutions for large scale industries and commercial complexes.",
+  },
+  {
+    id: 6,
+    path: "home_1",
+    img: service_img_3,
+    icon: service_icon_3,
+    title: "Custom Automation",
+    sm_des: "Bespoke water automation systems tailored to your specific household or industrial needs.",
+  },
 
   // service
   {

@@ -1,38 +1,62 @@
 
+'use client';
 import service_data from '@/data/ServiceData';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
 
 const services = service_data.filter(item => item.path === "home_1");
 
-const ServiceAreaHomeOne = ({style, style_2}: any) => {
+const ServiceAreaHomeOne = ({ style, style_2 }: any) => {
   const data = style ? service_data : services
   return (
     <>
       <div className={`service-section ${style ? "style-two" : style_2 ? "style-three" : ""}`}>
         <div className="container">
-          {!style_2 && 
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="section-title text-center">
-                <div className="section-sub-title wow slideInLeft">
-                  <h4>Our Most Service</h4>
-                </div>
-                <div className="section-main-title wow slideInLeft">
-                  <h2>Smart Water Solutions</h2>
+          {!style_2 &&
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="section-title text-center">
+                  <div className="section-sub-title wow slideInLeft">
+                    <h4>Our Most Service</h4>
+                  </div>
+                  <div className="section-main-title wow slideInLeft">
+                    <h2>Smart Water Solutions</h2>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>      
-          
           }
-          <div className="row">
+
+          <Swiper
+            slidesPerView={3}
+            spaceBetween={30}
+            loop={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay, Pagination]}
+            breakpoints={{
+              320: {
+                slidesPerView: 1,
+              },
+              768: {
+                slidesPerView: 2,
+              },
+              1200: {
+                slidesPerView: 3,
+              },
+            }}
+            className="service-slider"
+          >
             {data.map((item, index) => (
-              <div key={index} className="col-lg-4 col-md-6">
-                <div className={`service-box ${style ? "style-two" : ""} wow animate__backInUp`}>
+              <SwiperSlide key={index}>
+                <div className={`service-box ${style ? "style-two" : ""} wow animate__backInUp`} style={{ marginBottom: '30px' }}>
                   <div className="service-thumb">
-                    <Image src={item.img} style={{height: 'auto'}} alt="image-title" />
+                    <Image src={item.img} style={{ height: 'auto', width: '100%' }} alt="image-title" />
                     <div className="service-content">
                       <div className="service-icon-thumb">
                         <Image src={item.icon} alt="image-title" />
@@ -45,9 +69,9 @@ const ServiceAreaHomeOne = ({style, style_2}: any) => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </div>
       </div>
     </>

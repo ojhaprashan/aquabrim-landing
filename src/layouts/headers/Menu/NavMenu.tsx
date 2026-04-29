@@ -51,6 +51,19 @@ const NavMenu = () => {
       <style jsx>{`
         .menu-item {
           position: relative;
+          font-size: 16px;
+          margin-right: 20px;
+        }
+        
+        ul {
+          display: flex;
+          align-items: center;
+          padding: 0;
+          margin: 0;
+        }
+
+        li {
+          list-style: none;
         }
 
         .menu-item:after {

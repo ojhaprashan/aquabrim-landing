@@ -42,3 +42,15 @@
     margin-left: 10px !important;
     display: block !important;
 }
+
+/* Enforce pill shape for buttons and fix hover overflow */
+.solar-btn a,
+.solar-btn a:hover,
+.solar-btn a::before,
+.solar-btn a::after {
+    border-radius: 50rem !important;
+}
+
+.solar-btn a {
+    overflow: hidden !important;
+}

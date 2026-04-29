@@ -1,81 +1,25 @@
 'use client'
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 import about_thumb from "@/assets/images/about/about-thumb.jpg";
 import about_shape from "@/assets/images/about/about-shape.png";
-interface DataType {
-  tab_id: string;
-  tab_name: string;
-  sm_info: string;
-  feature_list_1: string[];
-  feature_list_2: string[];
-}
 
-const tab_data:DataType[] = [
-  {
-    tab_id: "home",
-    tab_name: "About Us",
-    sm_info: "Since 2008, Aquabrim has been delivering smart, affordable, and reliable water automation solutions for homes, apartments, and industries. Our systems prevent tank overflow and protect motors from dry-run.",
-    feature_list_1: [
-      "Smart Water Controllers",
-      "Wireless Valve Systems",
-      "Energy Efficient",
-    ],
-    feature_list_2: [
-      "24/7 Monitoring",
-      "Easy Installation",
-      "Trusted Since 2008",
-    ]
-  },
-  {
-    tab_id: "profile",
-    tab_name: "Mission",
-    sm_info: "Our mission is to provide intelligent automation that ensures accurate water level detection, smooth motor operation, and long-term protection for your water infrastructure.",
-    feature_list_1: [
-      "Prevent Water Waste",
-      "Enhance Safety",
-      "Reduce Manual Work",
-    ],
-    feature_list_2: [
-      "Affordable Solutions",
-      "Reliable Performance",
-      "Expert Support",
-    ]
-  },
-  {
-    tab_id: "contact",
-    tab_name: "Vision",
-    sm_info: "Choosing Aquabrim means choosing a dependable automation system that saves water, reduces manual work, and delivers long-lasting performance.",
-    feature_list_1: [
-      "Smart Water Management",
-      "Innovative Technology",
-      "Quality Assurance",
-    ],
-    feature_list_2: [
-      "Sustainable Future",
-      "Customer Centric",
-      "Global Standards",
-    ]
-  },
-]
-
-const AboutAreaHomeOne = (style: any) => {
-
-  const [currentTab, setCurrentTab] = useState(0);
-  const handleTabClick = (index: number) => {
-    setCurrentTab(index);
-  };
+const AboutAreaHomeOne = ({ style }: any) => {
 
   return (
     <>
-      <div className={`about-section  ${style ? "style-three" : ""}`}>
+      <div className={`about-section pt-5 pb-5 ${style ? "style-three" : ""}`}>
         <div className="container">
-          <div className="row">
-            <div className="col-lg-6 col-md-12">
+          <div className="row align-items-center">
+
+            {/* Left Column: Image & Floating Stats */}
+            <div className="col-lg-6 col-md-12 mb-5 mb-lg-0">
               <div className="wow slideInLeft">
-                <div className="about-thumb">
-                  <Image src={about_thumb} style={{ height: "auto" }} alt="image-title" />
+                <div className="about-thumb position-relative">
+                  <Image src={about_thumb} style={{ height: "auto", borderRadius: "8px" }} alt="Aquabrim Installation" />
+
+                  {/* Floating Box 1: Experience */}
                   <div className="about-counter">
                     <div className="about-counter-text">
                       <div className="about-numbar">
@@ -87,92 +31,106 @@ const AboutAreaHomeOne = (style: any) => {
                       </div>
                     </div>
                   </div>
-                  <div className="about-counter-two d-flex align-items-center ">
-                    <div className="about-counter-img">
-                      <Image src={about_shape} alt="image-title" />
+
+                  {/* Floating Box 2: Satisfied Clients */}
+                  <div className="about-counter-two d-flex align-items-center shadow-lg bg-white rounded p-3">
+                    <div className="about-counter-img me-3">
+                      <Image src={about_shape} alt="Client Icon" width={50} height={50} />
                     </div>
                     <div className="about-number-two">
-                      <h4 className="counter">2900</h4>
-                      <span>+</span>
-                      <h5>Satisfied Clients</h5>
+                      <h4 className="counter text-primary mb-0 fw-bold">3000+</h4>
+                      <h5 className="text-muted mb-0" style={{ fontSize: '14px' }}>Clients Served</h5>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            {/* Right Column: Static Introduction Content */}
             <div className="col-lg-6 col-md-12">
-              <div className="about-section-title">
+              <div className="about-section-title mb-4">
                 <div className="about-section-sub-title wow slideInUp">
-                  <h4>Our Introduction</h4>
+                  <h4 className="text-primary text-uppercase fw-bold">Our Introduction</h4>
                 </div>
                 <div className="about-section-main-title wow slideInRight">
-                  <h2>Developing Smart
-                    Water Solutions </h2>
+                  <h2 className="display-5 fw-bold mb-3">Developing Smart Water Solutions</h2>
                 </div>
               </div>
-              {/* <!-- tab --> */}
 
-              <div className="tab">
-                <ul className="nav nav-pills tabs active wow slideInRight" id="pills-tab" role="tablist">
-                  {tab_data.map((item, index) =>
-                    <li key={index} className={`nav-item ${currentTab === index ? "current" : ""}`} onClick={() => handleTabClick(index)} role="presentation">
-                      <button
-                        className={`nav-link tab_items ${currentTab === index ? "active" : ""}`}
-                        id={`pills-${item.tab_id}-tab`}
-                        data-bs-toggle="pill"
-                        data-bs-target={`#pills-${item.tab_id}`}
-                        type="button" role="tab" aria-controls={`pills-${item.tab_id}`}
-                        aria-selected={`${currentTab === index ? true : false}`}>
-                        {item.tab_name} <i className="bi bi-arrow-up-right"></i>
-                      </button>
-                    </li>
-                  )}
+              <div className="about-content-discription wow slideInLeft mb-4">
+                <p className="text-muted" style={{ lineHeight: "1.8" }}>
+                  Since 2008, Aquabrim has been delivering smart, affordable, and reliable water automation solutions. Our mission is to provide intelligent automation that ensures accurate water level detection, prevents overflow, and protects motors for your water infrastructure.
+                </p>
+              </div>
 
-                </ul>
-                <div className="tab-content" id="pills-tabContent">
-                  {tab_data.map((item, index) =>
-                    <div key={index} className={`tab-pane fade ${index === 0 ? "show active" : ""}`} 
-                    id={`pills-${item.tab_id}`} 
-                    role="tabpanel" 
-                    aria-labelledby={`pills-${item.tab_id}-tab`}>
-                      <div className="tabs_item">
-                        <div className="tabs-items-content">
-                          <div className="about-content-discription wow slideInLeft">
-                            <p>{item.sm_info}</p>
-                          </div>
-                          <div className="row">
-                            <div className="col-lg-6 col-md-6 col-sm-6 col-6">
-                              <div className="about-list wow slideInLeft">
-                                <ul>
-                                  {item.feature_list_1.map((item, i) =>
-                                    <li key={i}> <i className="bi bi-chevron-double-right"></i> {item}</li>
-                                  )}
-                                </ul>
-                              </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 col-sm-6 col-6">
-                              <div className="about-list wow slideInRight">
-                                <ul>
-                                  {item.feature_list_2.map((item, i) =>
-                                    <li key={i}><i className="bi bi-chevron-double-right"></i> {item}</li>
-                                  )}
-                                </ul>
-                              </div>
-                            </div>
-                            <div className="solar-btn about wow slideInDown">
-                              <a href="#">Our Service <i className="bi bi-arrow-right"></i></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
+              {/* Feature List Grid */}
+              <div className="row mb-4">
+                <div className="col-lg-6 col-md-6 col-sm-6">
+                  <div className="about-list wow slideInLeft">
+                    <ul className="list-unstyled">
+                      <li className="mb-2"><i className="bi bi-chevron-double-right text-primary me-2"></i> Prevent Water Waste</li>
+                      <li className="mb-2"><i className="bi bi-chevron-double-right text-primary me-2"></i> Enhance Safety</li>
+                      <li className="mb-2"><i className="bi bi-chevron-double-right text-primary me-2"></i> Smart Automation</li>
+                    </ul>
+                  </div>
                 </div>
+                <div className="col-lg-6 col-md-6 col-sm-6">
+                  <div className="about-list wow slideInRight">
+                    <ul className="list-unstyled">
+                      <li className="mb-2"><i className="bi bi-chevron-double-right text-primary me-2"></i> Affordable Solutions</li>
+                      <li className="mb-2"><i className="bi bi-chevron-double-right text-primary me-2"></i> Trusted Since 2008</li>
+                      <li className="mb-2"><i className="bi bi-chevron-double-right text-primary me-2"></i> 24/7 Monitoring</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Call to Action Button */}
+              <div className="solar-btn about wow slideInDown">
+                <a href="/about" className="btn btn-primary px-4 py-3 rounded-pill fw-bold shadow-sm">
+                  Discover About Us <i className="bi bi-arrow-right ms-2"></i>
+                </a>
               </div>
             </div>
           </div>
         </div>
+
+        {/* --- NEW SECTION: Stats in Polished Blue Boxes --- */}
+        <div className="container mt-5 pt-5 wow fadeInUp">
+          <div className="row text-center g-4">
+
+            <div className="col-lg-3 col-md-6 col-sm-6">
+              <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded h-100 transition-hover">
+                <h2 className="fw-bold text-white display-6 mb-2">5,000+</h2>
+                <p className="text-white fw-semibold mb-0">Systems Installed</p>
+              </div>
+            </div>
+
+            <div className="col-lg-3 col-md-6 col-sm-6">
+              <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded h-100 transition-hover">
+                <h2 className="fw-bold text-white display-6 mb-2">3,000+</h2>
+                <p className="text-white fw-semibold mb-0">Clients Served</p>
+              </div>
+            </div>
+
+            <div className="col-lg-3 col-md-6 col-sm-6">
+              <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded h-100 transition-hover">
+                <h2 className="fw-bold text-white display-6 mb-2">20+</h2>
+                <p className="text-white fw-semibold mb-0">Cities Covered</p>
+              </div>
+            </div>
+
+            <div className="col-lg-3 col-md-6 col-sm-6">
+              <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded h-100 transition-hover">
+                <h2 className="fw-bold text-white display-6 mb-2">Tracked</h2>
+                <p className="text-white fw-semibold mb-0">Water Saved</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        {/* --- END NEW SECTION --- */}
+
       </div>
     </>
   );
