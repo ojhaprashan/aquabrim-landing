@@ -20,10 +20,10 @@ const ServiceAreaHomeOne = ({ style, style_2 }: any) => {
               <div className="col-lg-12">
                 <div className="section-title text-center">
                   <div className="section-sub-title wow slideInLeft">
-                    <h4>Our Most Service</h4>
+                    <h4>Our Products</h4>
                   </div>
                   <div className="section-main-title wow slideInLeft">
-                    <h2>Smart Water Solutions</h2>
+                    <h2>Advanced Automation Products</h2>
                   </div>
                 </div>
               </div>
@@ -64,7 +64,7 @@ const ServiceAreaHomeOne = ({ style, style_2 }: any) => {
                       <div className="service-text">
                         <h4><Link href="/service-details">{item.title}</Link></h4>
                         <p>{item.sm_des}</p>
-                        <Link href="/service-details">Read More <i className="bi bi-arrow-up-right"></i></Link>
+                        <Link href="/service-details">Product Details <i className="bi bi-arrow-up-right"></i></Link>
                       </div>
                     </div>
                   </div>

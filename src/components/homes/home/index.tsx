@@ -4,6 +4,8 @@ import HeaderOne from '@/layouts/headers/HeaderOne';
 import HeroAreaHomeOne from './HeroAreaHomeOne';
 import AboutAreaHomeOne from './AboutAreaHomeOne';
 import ServiceAreaHomeOne from './ServiceAreaHomeOne';
+import ProductFeatureAreaHomeOne from './ProductFeatureAreaHomeOne';
+import PlatformAreaHomeOne from './PlatformAreaHomeOne';
 import CtaAreaHomeOne from './CtaAreaHomeOne';
 import PricingAreaHomeOne from './PricingAreaHomeOne';
 import VedioAreaHomeOne from './VedioAreaHomeOne';
@@ -25,16 +27,18 @@ const HomeOne = () => {
         <HeroAreaHomeOne />
         <AboutAreaHomeOne />
         <ServiceAreaHomeOne />
-        <CtaAreaHomeOne />
+        <ProductFeatureAreaHomeOne />
+        <PlatformAreaHomeOne />
+        {/* <CtaAreaHomeOne /> */}
         <PricingAreaHomeOne />
         <VedioAreaHomeOne />
         <ContactAreaHomeOne />
-        <ProtfolioAreaHomeOne />
+        {/* <ProtfolioAreaHomeOne /> */}
         {/* <OfferAreaHomeOne /> */}
         {/* <TeamAreaHomeOne /> */}
         {/* <AppointmentAreaHomeOne /> */}
-        <BlogAreaHomeOne />
-        <SubscribeAreaHomeOne />
+        {/* <BlogAreaHomeOne /> */}
+        {/* <SubscribeAreaHomeOne /> */}
       </main>
       <FooterOne />
     </>

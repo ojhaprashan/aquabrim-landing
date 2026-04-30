@@ -1,8 +1,9 @@
 
 
-import service_img_1 from "@/assets/images/resource/blog-inner1.jpg";
-import service_img_2 from "@/assets/images/resource/blog-inner2.jpg";
-import service_img_3 from "@/assets/images/resource/blog-inner3.jpg";
+import service_img_1 from "@/assets/images/resource/prod_controller.png";
+import service_img_2 from "@/assets/images/resource/prod_valve.png";
+import service_img_3 from "@/assets/images/resource/prod_tank_monitor.png";
+import service_img_4 from "@/assets/images/resource/prod_starter.png";
 
 import service_icon_1 from "@/assets/images/resource/service-icon1.png";
 import service_icon_2 from "@/assets/images/resource/service-icon2.png";
@@ -50,7 +51,7 @@ const service_data: DataType[] = [
   {
     id: 4,
     path: "home_1",
-    img: service_img_1,
+    img: service_img_4,
     icon: service_icon_1,
     title: "Automatic Motor Starters",
     sm_des: "Protect your motors from voltage fluctuations and ensure smooth operations with our smart starters.",

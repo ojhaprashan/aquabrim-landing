@@ -7,6 +7,16 @@ import about_shape from "@/assets/images/about/about-shape.png";
 
 const AboutAreaHomeOne = ({ style }: any) => {
 
+  // Dummy data for the client slider
+  const dummyClients = [
+    { name: "RailTech", icon: "bi-train-freight-front" },
+    { name: "AquaCorp", icon: "bi-water" },
+    { name: "MetroBuild", icon: "bi-building" },
+    { name: "EcoFlow", icon: "bi-lightning-charge" },
+    { name: "PureDrop", icon: "bi-droplet-half" },
+    { name: "UrbanGear", icon: "bi-house-gear" },
+  ];
+
   return (
     <>
       <div className={`about-section pt-5 pb-5 ${style ? "style-three" : ""}`}>
@@ -14,7 +24,7 @@ const AboutAreaHomeOne = ({ style }: any) => {
           <div className="row align-items-center">
 
             {/* Left Column: Image & Floating Stats */}
-            <div className="col-lg-6 col-md-12 mb-5 mb-lg-0">
+            <div className="col-lg-6 col-md-12 order-2 order-lg-1">
               <div className="wow slideInLeft">
                 <div className="about-thumb position-relative">
                   <Image src={about_thumb} style={{ height: "auto", borderRadius: "8px" }} alt="Aquabrim Installation" />
@@ -47,11 +57,8 @@ const AboutAreaHomeOne = ({ style }: any) => {
             </div>
 
             {/* Right Column: Static Introduction Content */}
-            <div className="col-lg-6 col-md-12">
+            <div className="col-lg-6 col-md-12 mb-5 mb-lg-0 order-1 order-lg-2">
               <div className="about-section-title mb-4">
-                <div className="about-section-sub-title wow slideInUp">
-                  <h4 className="text-primary text-uppercase fw-bold">Our Introduction</h4>
-                </div>
                 <div className="about-section-main-title wow slideInRight">
                   <h2 className="display-5 fw-bold mb-3">Developing Smart Water Solutions</h2>
                 </div>
@@ -95,41 +102,92 @@ const AboutAreaHomeOne = ({ style }: any) => {
           </div>
         </div>
 
-        {/* --- NEW SECTION: Stats in Polished Blue Boxes --- */}
-        <div className="container mt-5 pt-5 wow fadeInUp">
-          <div className="row text-center g-4">
+        {/* --- Stats & Clients inside a large grey box --- */}
+        <div className="container mt-4 wow fadeInUp">
+          <div className="bg-light p-5 rounded-4 shadow-sm border border-light overflow-hidden">
 
-            <div className="col-lg-3 col-md-6 col-sm-6">
-              <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded h-100 transition-hover">
-                <h2 className="fw-bold text-white display-6 mb-2">5,000+</h2>
-                <p className="text-white fw-semibold mb-0">Systems Installed</p>
+            {/* Heading for the Stats Section */}
+            <div className="text-center mb-5">
+              <h3 className="fw-bold display-6 mb-2">Our Impact in Numbers</h3>
+              <p className="text-muted fs-5">Delivering reliable automation across thousands of installations.</p>
+            </div>
+
+            {/* Stats Row */}
+            <div className="row text-center g-4">
+              <div className="col-lg-3 col-md-6 col-sm-6">
+                <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded-3 h-100 transition-hover">
+                  <h2 className="fw-bold text-white display-6 mb-2">5,000+</h2>
+                  <p className="text-white fw-semibold mb-0">Systems Installed</p>
+                </div>
+              </div>
+
+              <div className="col-lg-3 col-md-6 col-sm-6">
+                <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded-3 h-100 transition-hover">
+                  <h2 className="fw-bold text-white display-6 mb-2">3,000+</h2>
+                  <p className="text-white fw-semibold mb-0">Clients Served</p>
+                </div>
+              </div>
+
+              <div className="col-lg-3 col-md-6 col-sm-6">
+                <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded-3 h-100 transition-hover">
+                  <h2 className="fw-bold text-white display-6 mb-2">20+</h2>
+                  <p className="text-white fw-semibold mb-0">Cities Covered</p>
+                </div>
+              </div>
+
+              <div className="col-lg-3 col-md-6 col-sm-6">
+                <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded-3 h-100 transition-hover">
+                  <h2 className="fw-bold text-white display-6 mb-2">Tracked</h2>
+                  <p className="text-white fw-semibold mb-0">Water Saved</p>
+                </div>
               </div>
             </div>
 
-            <div className="col-lg-3 col-md-6 col-sm-6">
-              <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded h-100 transition-hover">
-                <h2 className="fw-bold text-white display-6 mb-2">3,000+</h2>
-                <p className="text-white fw-semibold mb-0">Clients Served</p>
-              </div>
+            {/* Divider */}
+            <hr className="my-5 text-muted" style={{ opacity: 0.15 }} />
+
+            {/* --- NEW SECTION: Auto-scrolling Clients --- */}
+            <div className="text-center mb-4">
+              <h6 className="fw-bold text-muted text-uppercase" style={{ letterSpacing: '1.5px' }}>Trusted By Leading Organizations</h6>
             </div>
 
-            <div className="col-lg-3 col-md-6 col-sm-6">
-              <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded h-100 transition-hover">
-                <h2 className="fw-bold text-white display-6 mb-2">20+</h2>
-                <p className="text-white fw-semibold mb-0">Cities Covered</p>
+            <div className="w-100 position-relative">
+              <div className="marquee-track d-flex align-items-center py-2">
+                {/* We map the array twice to create a seamless infinite loop */}
+                {[...dummyClients, ...dummyClients].map((client, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white shadow-sm rounded-3 px-4 py-3 mx-3 d-flex align-items-center justify-content-center"
+                    style={{ minWidth: '180px' }}
+                  >
+                    <i className={`bi ${client.icon} fs-3 me-2 text-primary`}></i>
+                    <span className="fw-bold text-secondary" style={{ fontSize: '15px' }}>{client.name}</span>
+                  </div>
+                ))}
               </div>
             </div>
-
-            <div className="col-lg-3 col-md-6 col-sm-6">
-              <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded h-100 transition-hover">
-                <h2 className="fw-bold text-white display-6 mb-2">Tracked</h2>
-                <p className="text-white fw-semibold mb-0">Water Saved</p>
-              </div>
-            </div>
+            {/* --- END NEW SECTION --- */}
 
           </div>
         </div>
-        {/* --- END NEW SECTION --- */}
+
+        {/* CSS for the seamless infinite slider */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            .marquee-track {
+              width: max-content;
+              animation: marqueeScroll 25s linear infinite;
+            }
+            .marquee-track:hover {
+              animation-play-state: paused;
+            }
+            @keyframes marqueeScroll {
+              0% { transform: translateX(0); }
+              /* It translates exactly 50% which equals one full set of the duplicated array */
+              100% { transform: translateX(-50%); } 
+            }
+          `
+        }} />
 
       </div>
     </>
