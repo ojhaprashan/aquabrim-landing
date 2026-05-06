@@ -58,13 +58,13 @@ const AboutAreaHomeOne = ({ style }: any) => {
 
             {/* Right Column: Static Introduction Content */}
             <div className="col-lg-6 col-md-12 mb-5 mb-lg-0 order-1 order-lg-2">
-              <div className="about-section-title mb-4">
+              <div className="about-section-title mb-4 text-center text-lg-start">
                 <div className="about-section-main-title wow slideInRight">
-                  <h2 className="display-5 fw-bold mb-3">Developing Smart Water Solutions</h2>
+                  <h2 className="display-6 fw-bold mb-3">Developing Smart Water Solutions</h2>
                 </div>
               </div>
 
-              <div className="about-content-discription wow slideInLeft mb-4">
+              <div className="about-content-discription wow slideInLeft mb-4 text-center text-lg-start">
                 <p className="text-muted" style={{ lineHeight: "1.8" }}>
                   Since 2008, Aquabrim has been delivering smart, affordable, and reliable water automation solutions. Our mission is to provide intelligent automation that ensures accurate water level detection, prevents overflow, and protects motors for your water infrastructure.
                 </p>
@@ -93,8 +93,8 @@ const AboutAreaHomeOne = ({ style }: any) => {
               </div>
 
               {/* Call to Action Button */}
-              <div className="solar-btn about wow slideInDown">
-                <a href="/about" className="btn btn-primary px-4 py-3 rounded-pill fw-bold shadow-sm">
+              <div className="solar-btn about wow slideInDown text-center text-lg-start">
+                <a href="/about" className="btn btn-primary px-4 py-3 fw-bold shadow-sm">
                   Discover About Us <i className="bi bi-arrow-right ms-2"></i>
                 </a>
               </div>
@@ -104,39 +104,39 @@ const AboutAreaHomeOne = ({ style }: any) => {
 
         {/* --- Stats & Clients inside a large grey box --- */}
         <div className="container mt-4 wow fadeInUp">
-          <div className="bg-light p-5 rounded-4 shadow-sm border border-light overflow-hidden">
+          <div className="bg-light p-3 p-md-5 rounded-4 shadow-sm border border-light overflow-hidden">
 
             {/* Heading for the Stats Section */}
             <div className="text-center mb-5">
-              <h3 className="fw-bold display-6 mb-2">Our Impact in Numbers</h3>
+              <h3 className="fw-bold display-6 mb-2" style={{ fontSize: 'calc(1.375rem + 1.5vw)' }}>Our Impact in Numbers</h3>
               <p className="text-muted fs-5">Delivering reliable automation across thousands of installations.</p>
             </div>
 
             {/* Stats Row */}
             <div className="row text-center g-4">
               <div className="col-lg-3 col-md-6 col-sm-6">
-                <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded-3 h-100 transition-hover">
+                <div className="stat-box p-4 bg-primary shadow-sm rounded-3 h-100 transition-hover border-0">
                   <h2 className="fw-bold text-white display-6 mb-2">5,000+</h2>
                   <p className="text-white fw-semibold mb-0">Systems Installed</p>
                 </div>
               </div>
 
               <div className="col-lg-3 col-md-6 col-sm-6">
-                <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded-3 h-100 transition-hover">
+                <div className="stat-box p-4 bg-primary shadow-sm rounded-3 h-100 transition-hover border-0">
                   <h2 className="fw-bold text-white display-6 mb-2">3,000+</h2>
                   <p className="text-white fw-semibold mb-0">Clients Served</p>
                 </div>
               </div>
 
               <div className="col-lg-3 col-md-6 col-sm-6">
-                <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded-3 h-100 transition-hover">
+                <div className="stat-box p-4 bg-primary shadow-sm rounded-3 h-100 transition-hover border-0">
                   <h2 className="fw-bold text-white display-6 mb-2">20+</h2>
                   <p className="text-white fw-semibold mb-0">Cities Covered</p>
                 </div>
               </div>
 
               <div className="col-lg-3 col-md-6 col-sm-6">
-                <div className="stat-box p-4 bg-primary shadow-sm border-0 rounded-3 h-100 transition-hover">
+                <div className="stat-box p-4 bg-primary shadow-sm rounded-3 h-100 transition-hover border-0">
                   <h2 className="fw-bold text-white display-6 mb-2">Tracked</h2>
                   <p className="text-white fw-semibold mb-0">Water Saved</p>
                 </div>

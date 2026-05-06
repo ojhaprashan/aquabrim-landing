@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { CopyRight, TeamSocialLinks } from '@/components/common/SocialLinks';
 
 import footer_logo from  "@/assets/images/resource/footer-logo.png";
-import footer_thumb from  "@/assets/images/resource/footer-thumb.png";
 
 
 const footer_content = {
@@ -55,7 +54,7 @@ const FooterOne = () => {
       <footer className="footer-section">
         <div className="container">
           <div className="row">
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-4 col-md-6">
               <div className="footer-wiget wow animate__zoomIn">
                 <div className="footer-wiget-log">
                  <Link href="/" className="d-flex align-items-center text-decoration-none">
@@ -73,7 +72,7 @@ const FooterOne = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-4 col-md-6">
               <div className="footer-wiget wow animate__slideInDown">
                 <div className="footer-wiget-title">
                   <h4>{list_title}</h4>
@@ -87,7 +86,7 @@ const FooterOne = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-4 col-md-6">
               <div className="footer-wiget-quick-contanct wow animate__slideInUp">
                 <div className="footer-wiget-title">
                   <h4>{title}</h4>
@@ -101,11 +100,7 @@ const FooterOne = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3">
-              <div className="footer-thumb wow animate__slideInDown">
-                <Image src={footer_thumb} alt="image-title" />
-              </div>
-            </div>
+
           </div>
           <div className="row footer-line">
             <div className="col-lg-3 col-md-6">
