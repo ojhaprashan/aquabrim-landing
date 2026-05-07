@@ -45,7 +45,7 @@ const ProductFeatureAreaHomeOne = () => {
     <section className="product-features-section py-5 bg-white overflow-hidden">
       <div className="container">
         <div className="text-center mb-5 wow fadeInUp">
-          <h4 className="text-primary text-uppercase fw-bold mb-2" style={{ fontSize: 'calc(14px + 0.4vw)', letterSpacing: '1px' }}>Product Features</h4>
+          <h4 className="text-primary text-uppercase fw-bold mb-2" style={{ fontSize: 'clamp(22px, 5vw, 28px)', letterSpacing: '1px' }}>Product Features</h4>
         </div>
         
         <div className="w-100 position-relative feature-marquee-wrapper">
@@ -126,10 +126,42 @@ const ProductFeatureAreaHomeOne = () => {
         }
 
         @media (max-width: 767px) {
+          .feature-marquee-wrapper {
+            height: 480px;
+          }
+          .feature-marquee-track {
+            flex-direction: column;
+            width: 100% !important;
+            height: max-content;
+            animation: verticalFeatureScroll 20s linear infinite;
+          }
+          .feature-marquee-track > div {
+            width: 100% !important;
+            padding: 10px 0 !important;
+          }
+          
+          /* Adjust fades for vertical orientation */
           .feature-marquee-wrapper::before,
           .feature-marquee-wrapper::after {
-            width: 40px;
+            width: 100%;
+            height: 60px;
+            left: 0;
+            right: 0;
           }
+          .feature-marquee-wrapper::before {
+            top: 0;
+            background: linear-gradient(to bottom, white, transparent);
+          }
+          .feature-marquee-wrapper::after {
+            bottom: 0;
+            top: auto;
+            background: linear-gradient(to top, white, transparent);
+          }
+        }
+        
+        @keyframes verticalFeatureScroll {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
         }
       `}</style>
     </section>

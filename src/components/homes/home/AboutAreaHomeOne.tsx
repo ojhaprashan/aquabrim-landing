@@ -148,10 +148,10 @@ const AboutAreaHomeOne = ({ style }: any) => {
 
             {/* --- NEW SECTION: Auto-scrolling Clients --- */}
             <div className="text-center mb-4">
-              <h6 className="fw-bold text-muted text-uppercase" style={{ letterSpacing: '1.5px' }}>Trusted By Leading Organizations</h6>
+              <h6 className="fw-bold text-muted text-uppercase" style={{ letterSpacing: '1.5px', fontSize: 'clamp(22px, 5vw, 28px)' }}>Trusted By Leading Organizations</h6>
             </div>
 
-            <div className="w-100 position-relative">
+            <div className="w-100 position-relative marquee-wrapper">
               <div className="marquee-track d-flex align-items-center py-2">
                 {/* We map the array twice to create a seamless infinite loop */}
                 {[...dummyClients, ...dummyClients].map((client, idx) => (
@@ -177,14 +177,36 @@ const AboutAreaHomeOne = ({ style }: any) => {
             .marquee-track {
               width: max-content;
               animation: marqueeScroll 25s linear infinite;
+              display: flex;
             }
             .marquee-track:hover {
               animation-play-state: paused;
             }
             @keyframes marqueeScroll {
               0% { transform: translateX(0); }
-              /* It translates exactly 50% which equals one full set of the duplicated array */
               100% { transform: translateX(-50%); } 
+            }
+
+            @media (max-width: 767px) {
+              .marquee-wrapper {
+                height: 350px;
+                overflow: hidden;
+              }
+              .marquee-track {
+                flex-direction: column;
+                width: 100% !important;
+                height: max-content;
+                animation: verticalMarqueeScroll 20s linear infinite;
+                align-items: center;
+              }
+              .marquee-track > div {
+                margin: 10px 0 !important;
+              }
+            }
+
+            @keyframes verticalMarqueeScroll {
+              0% { transform: translateY(0); }
+              100% { transform: translateY(-50%); }
             }
           `
         }} />
