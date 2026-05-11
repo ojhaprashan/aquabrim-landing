@@ -7,14 +7,21 @@ import about_shape from "@/assets/images/about/about-shape.png";
 
 const AboutAreaHomeOne = ({ style }: any) => {
 
-  // Dummy data for the client slider
-  const dummyClients = [
-    { name: "RailTech", icon: "bi-train-freight-front" },
-    { name: "AquaCorp", icon: "bi-water" },
-    { name: "MetroBuild", icon: "bi-building" },
-    { name: "EcoFlow", icon: "bi-lightning-charge" },
-    { name: "PureDrop", icon: "bi-droplet-half" },
-    { name: "UrbanGear", icon: "bi-house-gear" },
+  const clients = [
+    "/assets/client/1280px-Radisson_Blu_logo.svg.png",
+    "/assets/client/Bharat_Heavy_Electricals_Limited-Logo.wine.png",
+    "/assets/client/Bharat_Petroleum_logo.svg.png",
+    "/assets/client/Coca-Cola_logo.svg.png",
+    "/assets/client/EIL logo.png",
+    "/assets/client/Indian-Oil-Logo-768x483.png",
+    "/assets/client/Indian_Railway_Logo_2.png",
+    "/assets/client/Unilever.svg.png",
+    "/assets/client/Emaar-Properties-Logo-1.jpg.jpeg",
+    "/assets/client/max healthcar.png",
+    "/assets/client/bhutani infra logo.png",
+    "/assets/client/hyatt regency.jpeg",
+    "/assets/client/pwd.jpeg",
+    "/assets/client/M3M.webp",
   ];
 
   return (
@@ -104,7 +111,7 @@ const AboutAreaHomeOne = ({ style }: any) => {
 
         {/* --- Stats & Clients inside a large grey box --- */}
         <div className="container mt-4 wow fadeInUp">
-          <div className="bg-light p-3 p-md-5 rounded-4 shadow-sm border border-light overflow-hidden">
+          <div className="p-3 p-md-5 rounded-4 shadow-sm border border-light overflow-hidden" style={{ backgroundColor: '#f0f4f8' }}>
 
             {/* Heading for the Stats Section */}
             <div className="text-center mb-5">
@@ -154,14 +161,19 @@ const AboutAreaHomeOne = ({ style }: any) => {
             <div className="w-100 position-relative marquee-wrapper">
               <div className="marquee-track d-flex align-items-center py-2">
                 {/* We map the array twice to create a seamless infinite loop */}
-                {[...dummyClients, ...dummyClients].map((client, idx) => (
+                {[...clients, ...clients].map((img, idx) => (
                   <div
                     key={idx}
-                    className="bg-white shadow-sm rounded-3 px-4 py-3 mx-3 d-flex align-items-center justify-content-center"
-                    style={{ minWidth: '180px' }}
+                    className="px-4 py-3 mx-3 d-flex align-items-center justify-content-center"
+                    style={{ minWidth: '180px', height: '80px' }}
                   >
-                    <i className={`bi ${client.icon} fs-3 me-2 text-primary`}></i>
-                    <span className="fw-bold text-secondary" style={{ fontSize: '15px' }}>{client.name}</span>
+                    <Image 
+                      src={img} 
+                      alt="Client Logo" 
+                      width={120} 
+                      height={60} 
+                      style={{ objectFit: 'contain' }}
+                    />
                   </div>
                 ))}
               </div>

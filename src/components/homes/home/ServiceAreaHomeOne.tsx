@@ -13,7 +13,7 @@ const ServiceAreaHomeOne = ({ style, style_2 }: any) => {
   const data = style ? service_data : services
   return (
     <>
-      <div className={`service-section ${style ? "style-two" : style_2 ? "style-three" : ""}`}>
+      <div className={`service-section ${style ? "style-two" : style_2 ? "style-three" : ""}`} style={{ backgroundColor: '#f0f4f8' }}>
         <div className="container">
           {!style_2 &&
             <div className="row">

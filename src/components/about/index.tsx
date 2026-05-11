@@ -7,7 +7,9 @@ import AboutAreaHomeOne from '../homes/home/AboutAreaHomeOne';
 import ServiceAreaHomeOne from '../homes/home/ServiceAreaHomeOne';
 import CtaAreaHomeOne from '../homes/home/CtaAreaHomeOne';
 import TeamAreaHomeOne from '../homes/home/TeamAreaHomeOne';
-import SubscribeAreaHomeOne from '../homes/home/SubscribeAreaHomeOne';
+import ServiceAreaPanIndia from '../homes/home/ServiceAreaPanIndia';
+import TestimonialAreaHomeOne from '../homes/home/TestimonialAreaHomeOne';
+import CtaBanner from '../common/CtaBanner';
 
 const About = () => {
   return (
@@ -16,11 +18,14 @@ const About = () => {
       <main>
         <Breadcrumb top_title="About Us" title="About Us" />
         <AboutAreaHomeOne style={true} />
-        <ServiceAreaHomeOne />
-        <CtaAreaHomeOne />
+        <TestimonialAreaHomeOne />
+        {/* <ServiceAreaHomeOne /> */}
+        {/* <CtaAreaHomeOne /> */}
         <TeamAreaHomeOne />
-        <SubscribeAreaHomeOne />
+        <ServiceAreaPanIndia />
+        {/* <SubscribeAreaHomeOne /> */}
       </main>
+      <CtaBanner />
       <FooterOne />
     </>
   );

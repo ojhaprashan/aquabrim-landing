@@ -1,42 +1,55 @@
 'use client';
 import React from 'react';
+import Image from 'next/image';
 
 const feature_data = [
   {
     id: 1,
-    icon: "bi-droplet",
-    title: "Automatic Control",
-    desc: "Automatically starts and stops the pump based on water level."
+    img: "/assets/product_feature/WebApp Based Monitoring System.png",
+    title: "App-based Water Control",
+    className: "feature-card-wide",
+    bg: "blue",
+    textColor: "text-white"
   },
   {
     id: 2,
-    icon: "bi-shield-check",
-    title: "Dry Run Protection",
-    desc: "Protects the motor from running in dry conditions."
+    img: "/assets/product_feature/Smart Scheduling.png",
+    title: "Smart Scheduling",
+    className: "feature-card-narrow",
+    bg: "light",
+    textColor: "text-dark"
   },
   {
     id: 3,
-    icon: "bi-water",
-    title: "Overflow Protection",
-    desc: "Stops the pump when tank is full and prevents overflow."
+    img: "/assets/product_feature/Dry-run Protection.png",
+    title: "Automatic Controller",
+    className: "feature-card-narrow",
+    bg: "blue",
+    textColor: "text-white"
   },
   {
     id: 4,
-    icon: "bi-hand-index-thumb",
-    title: "Water Saving",
-    desc: "Smart operation helps you save water and money."
+    img: "/assets/product_feature/Tank Level Monitoring.png",
+    title: "Customizable Tank Levels",
+    className: "feature-card-narrow",
+    bg: "blue",
+    textColor: "text-white"
   },
   {
     id: 5,
-    icon: "bi-tools",
-    title: "Easy Installation",
-    desc: "Simple wiring and user-friendly installation."
+    img: "/assets/product_feature/SMS Alert.png",
+    title: "Real-time Updates",
+    className: "feature-card-narrow",
+    bg: "light",
+    textColor: "text-dark"
   },
   {
     id: 6,
-    icon: "bi-display",
-    title: "LED Indication",
-    desc: "Clear LED status for power, motor and water level."
+    img: "/assets/product_feature/Wireless Technology.png",
+    title: "IoT-based Water Level Controller",
+    className: "feature-card-wide",
+    bg: "blue",
+    textColor: "text-white"
   }
 ];
 
@@ -47,121 +60,82 @@ const ProductFeatureAreaHomeOne = () => {
         <div className="text-center mb-5 wow fadeInUp">
           <h4 className="text-primary text-uppercase fw-bold mb-2" style={{ fontSize: 'clamp(22px, 5vw, 28px)', letterSpacing: '1px' }}>Product Features</h4>
         </div>
-        
-        <div className="w-100 position-relative feature-marquee-wrapper">
-          <div className="feature-marquee-track d-flex align-items-stretch py-3">
-            {/* Double the data for seamless looping */}
-            {[...feature_data, ...feature_data].map((item, index) => (
-              <div key={`${item.id}-${index}`} className="px-2 px-md-3" style={{ minWidth: '260px' }}>
-                <div className="feature-card p-3 p-md-4 bg-white shadow-sm border border-light rounded-4 text-center h-100 transition-hover d-flex flex-column align-items-center justify-content-center" 
-                     style={{ minHeight: '220px' }}>
-                  <div className="icon-wrapper mb-3 d-inline-flex align-items-center justify-content-center rounded-circle" 
-                       style={{ width: '60px', height: '60px', backgroundColor: '#f0f7ff' }}>
-                    <i className={`bi ${item.icon} text-primary fs-3`}></i>
-                  </div>
-                  <h6 className="fw-bold mb-2" style={{ fontSize: '16px' }}>{item.title}</h6>
-                  <p className="text-muted mb-0" style={{ fontSize: '14px', lineHeight: '1.5' }}>{item.desc}</p>
+
+        <div className="bento-grid">
+          {feature_data.map((item) => (
+            <div key={item.id} className={`bento-item ${item.className} ${item.bg === 'blue' ? 'bg-primary-blue' : 'bg-light-gray'} wow fadeInUp`}>
+              <div className="card-content h-100 d-flex flex-column p-4">
+                <h5 className={`fw-bold mb-4 ${item.textColor}`} style={{ fontSize: '1.2rem', zIndex: 2 }}>
+                  {item.title}
+                </h5>
+                <div className="image-container flex-grow-1 position-relative mt-2">
+                  <Image
+                    src={item.img}
+                    alt={item.title}
+                    fill
+                    style={{ objectFit: 'contain', objectPosition: 'center bottom' }}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
 
       <style jsx>{`
-        .transition-hover {
-          transition: all 0.3s ease;
-        }
-        .transition-hover:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important;
-          border-color: #007bff33 !important;
-        }
-        
-        .feature-marquee-wrapper {
-          position: relative;
-          overflow: hidden;
-        }
-        
-        /* Fade effect on edges */
-        .feature-marquee-wrapper::before,
-        .feature-marquee-wrapper::after {
-          content: "";
-          position: absolute;
-          top: 0;
-          width: 80px;
-          height: 100%;
-          z-index: 2;
-          pointer-events: none;
-        }
-        
-        .feature-marquee-wrapper::before {
-          left: 0;
-          background: linear-gradient(to right, white, transparent);
-        }
-        
-        .feature-marquee-wrapper::after {
-          right: 0;
-          background: linear-gradient(to left, white, transparent);
+        .bento-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 20px;
+          margin: 0 auto;
         }
 
-        .feature-marquee-track {
-          width: max-content;
-          animation: featureScroll 30s linear infinite;
-          display: flex;
-          align-items: stretch;
-          will-change: transform;
+        .bento-item {
+          border-radius: 24px;
+          overflow: hidden;
+          min-height: 320px;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          border: 1px solid rgba(0,0,0,0.03);
         }
-        
-        /* Only pause on actual mouse hover, not touch */
-        @media (hover: hover) {
-          .feature-marquee-track:hover {
-            animation-play-state: paused;
+
+        .bento-item:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .feature-card-wide {
+          grid-column: span 2;
+        }
+
+        .feature-card-narrow {
+          grid-column: span 1;
+        }
+
+        .bg-primary-blue {
+          background-color: #0081ff !important;
+        }
+
+        .bg-light-gray {
+          background-color: #f0f6ff !important;
+        }
+
+        @media (max-width: 1199px) {
+          .bento-grid {
+            grid-template-columns: repeat(2, 1fr);
           }
-        }
-        
-        @keyframes featureScroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); } 
+          .feature-card-wide, .feature-card-narrow {
+            grid-column: span 1;
+          }
         }
 
         @media (max-width: 767px) {
-          .feature-marquee-wrapper {
-            height: 480px;
+          .bento-grid {
+            grid-template-columns: 1fr;
           }
-          .feature-marquee-track {
-            flex-direction: column;
-            width: 100% !important;
-            height: max-content;
-            animation: verticalFeatureScroll 20s linear infinite;
+          .bento-item {
+            min-height: 280px;
           }
-          .feature-marquee-track > div {
-            width: 100% !important;
-            padding: 10px 0 !important;
-          }
-          
-          /* Adjust fades for vertical orientation */
-          .feature-marquee-wrapper::before,
-          .feature-marquee-wrapper::after {
-            width: 100%;
-            height: 60px;
-            left: 0;
-            right: 0;
-          }
-          .feature-marquee-wrapper::before {
-            top: 0;
-            background: linear-gradient(to bottom, white, transparent);
-          }
-          .feature-marquee-wrapper::after {
-            bottom: 0;
-            top: auto;
-            background: linear-gradient(to top, white, transparent);
-          }
-        }
-        
-        @keyframes verticalFeatureScroll {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(-50%); }
         }
       `}</style>
     </section>

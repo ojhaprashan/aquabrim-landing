@@ -50,9 +50,12 @@ const PricingAreaHomeOne = () => {
                     </li>
                   </ul>
                   
-                  <div className="solar-btn d-grid">
-                    <a href="/contact" className="btn btn-primary py-3 fw-bold shadow-sm d-flex align-items-center justify-content-center">
+                  <div className="d-flex flex-column flex-sm-row gap-3">
+                    <a href="/contact" className="btn btn-primary py-3 px-4 fw-bold shadow-sm d-flex align-items-center justify-content-center flex-grow-1" style={{ borderRadius: '12px' }}>
                       Get in Touch <i className="bi bi-arrow-right ms-2"></i>
+                    </a>
+                    <a href="/faq" className="btn btn-outline-primary py-3 px-4 fw-bold shadow-sm d-flex align-items-center justify-content-center flex-grow-1" style={{ borderRadius: '12px' }}>
+                      FAQs <i className="bi bi-question-circle ms-2"></i>
                     </a>
                   </div>
                 </div>
@@ -72,10 +75,13 @@ const PricingAreaHomeOne = () => {
             transition: all 0.3s ease;
           }
           .support-card:hover .icon-circle {
-            background-color: #007bff;
+            background-color: #006CD0 !important;
           }
-          .support-card:hover .icon-circle i {
+          .support-card:hover .icon-circle :global(i) {
             color: white !important;
+          }
+          .support-card:hover .support-icon-box :global(i) {
+            color: #006CD0 !important;
           }
           @media (max-width: 767px) {
             .section-main-title h2 {
@@ -91,6 +97,19 @@ const PricingAreaHomeOne = () => {
             .support-icon-box i {
               font-size: 30px !important;
             }
+          }
+          :global(.accordion-item h2) {
+            background-color: #f0f4f8 !important;
+            border-radius: 8px !important;
+            overflow: hidden;
+          }
+          :global(.accordion-button) {
+            background-color: #f0f4f8 !important;
+            font-weight: 600 !important;
+          }
+          :global(.accordion-body) {
+             background-color: #f0f4f8 !important;
+             border-top: 1px solid rgba(0,0,0,0.05);
           }
         `}</style>
       </div>

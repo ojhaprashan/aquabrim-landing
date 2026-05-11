@@ -5,7 +5,7 @@ import mockup from '../../../../public/assets/images/resource/multi-device-mocku
 
 const PlatformAreaHomeOne = () => {
   return (
-    <section className="platform-area py-5 bg-light overflow-hidden">
+    <section className="platform-area py-5 overflow-hidden" style={{ backgroundColor: '#f0f4f8' }}>
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-6 order-2 order-lg-1 wow slideInLeft">

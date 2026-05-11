@@ -16,7 +16,9 @@ import TeamAreaHomeOne from './TeamAreaHomeOne';
 import AppointmentAreaHomeOne from './AppointmentAreaHomeOne';
 import BlogAreaHomeOne from './BlogAreaHomeOne';
 import SubscribeAreaHomeOne from './SubscribeAreaHomeOne';
+
 import FooterOne from '@/layouts/footers/FooterOne';
+import CtaBanner from '@/components/common/CtaBanner';
 
 const HomeOne = () => {
 
@@ -31,14 +33,15 @@ const HomeOne = () => {
         <PlatformAreaHomeOne />
         {/* <CtaAreaHomeOne /> */}
         <PricingAreaHomeOne />
-        <VedioAreaHomeOne />
-        <ContactAreaHomeOne />
+        {/* <VedioAreaHomeOne /> */}
+        {/* <ContactAreaHomeOne /> */}
         {/* <ProtfolioAreaHomeOne /> */}
         {/* <OfferAreaHomeOne /> */}
         {/* <TeamAreaHomeOne /> */}
         {/* <AppointmentAreaHomeOne /> */}
         {/* <BlogAreaHomeOne /> */}
         {/* <SubscribeAreaHomeOne /> */}
+        <CtaBanner />
       </main>
       <FooterOne />
     </>
