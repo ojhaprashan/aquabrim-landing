@@ -1,5 +1,5 @@
 
-import React from 'react'; 
+import React from 'react';
 import HeroAreaHomeTwo from './HeroAreaHomeTwo';
 import AboutAreaHomeTwo from './AboutAreaHomeTwo';
 import OfferAreaHomeTwo from './OfferAreaHomeTwo';
@@ -16,14 +16,14 @@ import HeaderOne from '@/layouts/headers/HeaderOne';
 
 const HomeTwo = () => {
   return (
-    <> 
+    <>
       <HeaderOne style={true} />
       <main>
         <HeroAreaHomeTwo />
         <AboutAreaHomeTwo />
         <OfferAreaHomeTwo />
         <CtaAreaHomeOne />
-        <TeamAreaHomeOne style={true} />
+        <TeamAreaHomeOne />
         <VedioAreaHomeOne style={true} />
         <ContactAreaHomeOne />
         <TestiomonialAreaHomeTwo />
