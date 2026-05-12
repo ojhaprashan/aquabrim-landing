@@ -12,7 +12,7 @@ const Team = () => {
       <HeaderOne />
       <main>
         <Breadcrumb top_title='Team' title='Team' />
-        <TeamAreaHomeOne style_2={true} />
+        <TeamAreaHomeOne />
         <SubscribeAreaHomeOne />
       </main>
       <FooterOne />
