@@ -7,18 +7,22 @@ import VedioAreaHomeOne from '../homes/home/VedioAreaHomeOne';
 import ContactAreaHomeOne from '../homes/home/ContactAreaHomeOne';
 import SubscribeAreaHomeOne from '../homes/home/SubscribeAreaHomeOne';
 import FooterOne from '@/layouts/footers/FooterOne';
+import CtaBanner from '../common/CtaBanner';
+import ProductList from './ProductList';
 
 const Service = () => {
   return (
     <>
       <HeaderOne />
       <main>
-        <Breadcrumb top_title="Service" title="Service" />
-        <ServiceAreaHomeOne style={true} />
-        <VedioAreaHomeOne />
-        <ContactAreaHomeOne />
-        <SubscribeAreaHomeOne />
+        {/* <Breadcrumb top_title="Service" title="Service" /> */}
+        {/* <ServiceAreaHomeOne style={true} /> */}
+        {/* <VedioAreaHomeOne /> */}
+        {/* <ContactAreaHomeOne /> */}
+        {/* <SubscribeAreaHomeOne /> */}
+        <ProductList />
       </main>
+      <CtaBanner />
       <FooterOne />
     </>
   );

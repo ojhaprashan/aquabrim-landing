@@ -5,7 +5,7 @@ import Image from 'next/image';
 import about_thumb from "@/assets/images/about/about-thumb.jpg";
 import about_shape from "@/assets/images/about/about-shape.png";
 
-const AboutAreaHomeOne = ({ style }: any) => {
+const AboutAreaHomeOne = ({ style, hideClients }: any) => {
 
   const clients = [
     "/assets/client/1280px-Radisson_Blu_logo.svg.png",
@@ -150,34 +150,38 @@ const AboutAreaHomeOne = ({ style }: any) => {
               </div>
             </div>
 
-            {/* Divider */}
-            <hr className="my-5 text-muted" style={{ opacity: 0.15 }} />
+            {!hideClients && (
+              <>
+                {/* Divider */}
+                <hr className="my-5 text-muted" style={{ opacity: 0.15 }} />
 
-            {/* --- NEW SECTION: Auto-scrolling Clients --- */}
-            <div className="text-center mb-4">
-              <h6 className="fw-bold text-muted text-uppercase" style={{ letterSpacing: '1.5px', fontSize: 'clamp(22px, 5vw, 28px)' }}>Trusted By Leading Organizations</h6>
-            </div>
+                {/* --- NEW SECTION: Auto-scrolling Clients --- */}
+                <div className="text-center mb-4">
+                  <h6 className="fw-bold text-muted text-uppercase" style={{ letterSpacing: '1.5px', fontSize: 'clamp(22px, 5vw, 28px)' }}>Trusted By Leading Organizations</h6>
+                </div>
 
-            <div className="w-100 position-relative marquee-wrapper">
-              <div className="marquee-track d-flex align-items-center py-2">
-                {/* We map the array twice to create a seamless infinite loop */}
-                {[...clients, ...clients].map((img, idx) => (
-                  <div
-                    key={idx}
-                    className="px-4 py-3 mx-3 d-flex align-items-center justify-content-center"
-                    style={{ minWidth: '180px', height: '80px' }}
-                  >
-                    <Image 
-                      src={img} 
-                      alt="Client Logo" 
-                      width={120} 
-                      height={60} 
-                      style={{ objectFit: 'contain' }}
-                    />
+                <div className="w-100 position-relative marquee-wrapper">
+                  <div className="marquee-track d-flex align-items-center py-2">
+                    {/* We map the array twice to create a seamless infinite loop */}
+                    {[...clients, ...clients].map((img, idx) => (
+                      <div
+                        key={idx}
+                        className="px-4 py-3 mx-3 d-flex align-items-center justify-content-center"
+                        style={{ minWidth: '180px', height: '80px' }}
+                      >
+                        <Image
+                          src={img}
+                          alt="Client Logo"
+                          width={120}
+                          height={60}
+                          style={{ objectFit: 'contain' }}
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
+              </>
+            )}
             {/* --- END NEW SECTION --- */}
 
           </div>

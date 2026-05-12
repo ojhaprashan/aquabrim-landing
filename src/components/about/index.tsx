@@ -2,26 +2,26 @@
 import React from 'react';
 import FooterOne from '@/layouts/footers/FooterOne';
 import HeaderOne from '@/layouts/headers/HeaderOne';
-import Breadcrumb from '../common/breadcrumb/breadcrumb';
 import AboutAreaHomeOne from '../homes/home/AboutAreaHomeOne';
-import ServiceAreaHomeOne from '../homes/home/ServiceAreaHomeOne';
-import CtaAreaHomeOne from '../homes/home/CtaAreaHomeOne';
+import MissionVision from './MissionVision';
+import TestimonialAreaHomeOne from '../homes/home/TestimonialAreaHomeOne';
 import TeamAreaHomeOne from '../homes/home/TeamAreaHomeOne';
 import ServiceAreaPanIndia from '../homes/home/ServiceAreaPanIndia';
-import TestimonialAreaHomeOne from '../homes/home/TestimonialAreaHomeOne';
 import CtaBanner from '../common/CtaBanner';
+import Founders from './Founders';
 
 const About = () => {
   return (
     <>
       <HeaderOne />
       <main>
-        <Breadcrumb top_title="About Us" title="About Us" />
-        <AboutAreaHomeOne style={true} />
+        <AboutAreaHomeOne style={true} hideClients={true} />
+        <MissionVision />
         <TestimonialAreaHomeOne />
+        <Founders />
         {/* <ServiceAreaHomeOne /> */}
         {/* <CtaAreaHomeOne /> */}
-        <TeamAreaHomeOne />
+        {/* <TeamAreaHomeOne /> */}
         <ServiceAreaPanIndia />
         {/* <SubscribeAreaHomeOne /> */}
       </main>
