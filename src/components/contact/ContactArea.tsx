@@ -3,88 +3,90 @@
 import React from 'react';
 import ContactForm from '../forms/ContactForm';
 
-
-interface DataType {
-  subtitle: string;
-  title: string;
-  sm_info: string;
-  contact_data: {
-    id: number;
-    icon: string;
-    title: string;
-    info: string;
-  }[];
-}
-
-const contact_content: DataType = {
-  subtitle: "Contact Wlth Us",
-  title: "Get In Touch!",
-  sm_info: "Get in Touch! Contact with us Get in Touch! Contact with us",
-  contact_data: [
-    {
-      id: 1,
-      icon: "bi bi-geo-alt-fill",
-      title: "Address",
-      info: "7515 Carriage Court, Coachella,",
-    },
-    {
-      id: 2,
-      icon: "bi bi-phone-flip",
-      title: "Call Us Today",
-      info: "+1 (305) 1234-5678",
-    },
-    {
-      id: 3,
-      icon: "bi bi-envelope",
-      title: "Email Us",
-      info: "example@gmail.com",
-    }
-
-  ]
-}
-
-const { subtitle, title, sm_info, contact_data } = contact_content
-
 const ContactArea = () => {
   return (
-    <>
-      <div className="contact-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6 col-md-12">
-              <div className="contact-title">
-                <div className="contact-sub-title ">
-                  <h4>{subtitle}</h4>
+    <div className="contact-section py-5" style={{ backgroundColor: '#ffffff' }}>
+      <div className="container">
+        <div className="row g-4">
+          {/* Left Column: Contact Form */}
+          <div className="col-lg-7">
+            <div className="card border-0 shadow-sm p-4 p-md-5 h-100" style={{ borderRadius: '20px' }}>
+              <div className="contact-title mb-4">
+                <h3 className="fw-bold mb-2">Send Us a Message</h3>
+                <p className="text-muted">Fill out the form below and our team will get back to you as soon as possible.</p>
+              </div>
+              <ContactForm />
+            </div>
+          </div>
+
+          {/* Right Column: Contact Information & Map */}
+          <div className="col-lg-5">
+            <div className="card border-0 shadow-sm p-4 p-md-5 h-100" style={{ borderRadius: '20px' }}>
+              <div className="contact-info-section mb-4">
+                <h3 className="fw-bold mb-4">Contact Information</h3>
+                
+                <div className="d-flex align-items-start mb-4">
+                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
+                    <i className="bi bi-geo-alt-fill fs-5"></i>
+                  </div>
+                  <div>
+                    <h5 className="fw-bold mb-1">Address</h5>
+                    <p className="text-muted mb-0">Aquabrim Technologies Pvt. Ltd.<br />123 Water Solutions Park,<br />Pune, Maharashtra 411057, India</p>
+                  </div>
                 </div>
-                <div className="contact-main-title">
-                  <h2>{title}</h2>
+
+                <div className="d-flex align-items-start mb-4">
+                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
+                    <i className="bi bi-telephone-fill fs-5"></i>
+                  </div>
+                  <div>
+                    <h5 className="fw-bold mb-1">Phone</h5>
+                    <p className="text-muted mb-0">+91 12345 67890<br />Mon - Sat: 9:00 AM - 6:00 PM</p>
+                  </div>
                 </div>
-                <div className="contact-discription">
-                  <p>{sm_info}</p>
+
+                <div className="d-flex align-items-start mb-4">
+                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
+                    <i className="bi bi-envelope-fill fs-5"></i>
+                  </div>
+                  <div>
+                    <h5 className="fw-bold mb-1">Email</h5>
+                    <p className="text-muted mb-0">info@aquabrim.com<br />support@aquabrim.com</p>
+                  </div>
+                </div>
+
+                <div className="d-flex align-items-start mb-4">
+                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
+                    <i className="bi bi-globe fs-5"></i>
+                  </div>
+                  <div>
+                    <h5 className="fw-bold mb-1">Website</h5>
+                    <p className="text-muted mb-0">www.aquabrim.com</p>
+                  </div>
                 </div>
               </div>
 
-              {contact_data.map((item, i) => (
-                <div key={i} className="contact-box-item">
-                  <div className="contact-icon">
-                    <i className={item.icon}></i>
-                  </div>
-                  <div className="contact-adress">
-                    <h5>{item.title}</h5>
-                    <span>{item.info}</span>
-                  </div>
+              {/* Map Integration */}
+              <div className="map-wrapper rounded-4 overflow-hidden mt-auto" style={{ height: '200px', position: 'relative' }}>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7496149.95373021!2d85.84621250756469!3d23.452185887261447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30adaaed80e18ba7%3A0xf2d28e0c4e1fc6b!2sBangladesh!5e0!3m2!1sen!2sbd!4v1635150422284!5m2!1sen!2sbd"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                ></iframe>
+                <div className="map-overlay position-absolute bottom-0 start-0 w-100 p-3 text-center">
+                   <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="btn btn-light btn-sm shadow-sm rounded-pill px-3">
+                     View on Google Maps <i className="bi bi-arrow-right small"></i>
+                   </a>
                 </div>
-              ))}
-            </div>
-            <div className="col-lg-6 col-md-12">
-              <div className="choose-contact-box contact-inner">
-                <ContactForm />
               </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

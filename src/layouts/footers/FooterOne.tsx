@@ -17,16 +17,18 @@ const footer_content = {
   ],
   company: [
     { title: "About Us", link: "/about" },
-    { title: "Privacy Policy", link: "#" },
-    { title: "Terms of Use", link: "#" },
-    { title: "Terms of Service", link: "#" },
-    { title: "Pricing Policy", link: "#" },
-  ],
-  support: [
+    { title: "Contact Us", link: "/contact" },
     { title: "FAQs", link: "#" },
-    { title: "Write to us", link: "/contact" },
     { title: "Blogs", link: "#" },
     { title: "Careers", link: "#" },
+  ],
+  support: [
+    { title: "Pricing Policy", link: "/pricing-policy" },
+    { title: "Privacy Policy", link: "#" },
+    { title: "Refund Policy", link: "#" },
+    { title: "Shipping Policy", link: "#" },
+    { title: "Warranty Policy", link: "#" },
+    { title: "Terms & Condition", link: "#" },
   ],
   social: {
     title: "SOCIAL",

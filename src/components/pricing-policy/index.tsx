@@ -1,20 +1,18 @@
 
-
 import React from 'react';
 import HeaderOne from '@/layouts/headers/HeaderOne';
 import Breadcrumb from '../common/breadcrumb/breadcrumb';
-import ContactArea from './ContactArea';
-import MapArea from './MapArea';
 import FooterOne from '@/layouts/footers/FooterOne';
 import CtaBanner from '../common/CtaBanner';
+import PricingPolicyArea from './PricingPolicyArea';
 
-const Contact = () => {
+const PricingPolicy = () => {
   return (
     <>
       <HeaderOne />
       <main>
-        {/* <Breadcrumb top_title='Contact' title='Contact' /> */}
-        <ContactArea />
+        {/* <Breadcrumb top_title='Pricing Policy' title='Pricing Policy' /> */}
+        <PricingPolicyArea />
       </main>
       <CtaBanner />
       <FooterOne />
@@ -22,4 +20,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default PricingPolicy;
