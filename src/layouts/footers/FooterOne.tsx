@@ -9,18 +9,10 @@ const footer_content = {
     app_text: "Aquabrim app is available on",
     tagline: "Make your water tank an Aquabrim Tank",
   },
-  products: [
-    { title: "Residential Monitor", link: "#" },
-    { title: "Industrial Flow", link: "#" },
-    { title: "Motor Controllers", link: "#" },
-    { title: "IoT Sensors", link: "#" },
-  ],
   company: [
     { title: "About Us", link: "/about" },
     { title: "Contact Us", link: "/contact" },
-    { title: "FAQs", link: "#" },
-    { title: "Blogs", link: "#" },
-    { title: "Careers", link: "#" },
+    { title: "Blogs", link: "/blog" },
   ],
   support: [
     { title: "Pricing Policy", link: "/pricing-policy" },
@@ -42,7 +34,7 @@ const footer_content = {
 };
 
 const FooterOne = () => {
-  const { brand_info, products, company, support, social, bottom } = footer_content;
+  const { brand_info, company, support, social, bottom } = footer_content;
 
   return (
     <>
@@ -53,7 +45,7 @@ const FooterOne = () => {
           <div className="row mb-4">
 
             {/* Column 1: Logo & App Info */}
-            <div className="col-lg-3 col-md-12 mb-4 mb-lg-0">
+            <div className="col-lg-4 col-md-12 mb-4 mb-lg-0">
               <Link href="/" className="d-flex align-items-center text-decoration-none mb-3">
                 <Image src="/assets/images/logo_blue.png" width={40} height={40} style={{ height: 'auto' }} alt="Aquabrim Logo" />
                 <span className='LogoHeader ms-2 fw-bold text-dark fs-5'>Aquabrim</span>
@@ -79,20 +71,8 @@ const FooterOne = () => {
               </p>
             </div>
 
-            {/* Column 2: Products */}
-            <div className="col-lg-2 col-md-3 col-6 mb-4">
-              <h6 className="text-muted text-uppercase mb-3" style={{ fontSize: '0.8rem' }}>Products</h6>
-              <ul className="list-unstyled">
-                {products.map((item, i) => (
-                  <li key={i} className="mb-2">
-                    <Link href={item.link} className="text-dark text-decoration-none small hover-primary">{item.title}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Column 3: Company */}
-            <div className="col-lg-2 col-md-3 col-6 mb-4">
+            {/* Column 2: Company */}
+            <div className="col-lg-2 col-md-4 col-6 mb-4">
               <h6 className="text-muted text-uppercase mb-3" style={{ fontSize: '0.8rem' }}>Company</h6>
               <ul className="list-unstyled">
                 {company.map((item, i) => (
@@ -103,8 +83,8 @@ const FooterOne = () => {
               </ul>
             </div>
 
-            {/* Column 4: Support */}
-            <div className="col-lg-2 col-md-3 col-6 mb-4">
+            {/* Column 3: Support */}
+            <div className="col-lg-3 col-md-4 col-6 mb-4">
               <h6 className="text-muted text-uppercase mb-3" style={{ fontSize: '0.8rem' }}>Support</h6>
               <ul className="list-unstyled">
                 {support.map((item, i) => (

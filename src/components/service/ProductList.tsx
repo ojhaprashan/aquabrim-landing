@@ -169,27 +169,28 @@ const ProductList = () => {
                 <div key={product.id} className="col-md-6 col-xl-4 wow fadeInUp">
                   <div className="premium-product-card h-100 rounded-3 shadow-sm overflow-hidden">
                     {/* Image Area */}
-                    <div className="product-image-container p-3 d-flex align-items-center justify-content-center position-relative">
+                    <div className="product-image-container position-relative">
                       <div className="category-badge">{product.categoryName}</div>
-                      <div className="image-hover-zoom">
+                      <div className="image-hover-zoom h-100">
                         <Image 
                           src={product.img} 
                           alt={product.title} 
-                          className="img-fluid"
-                          style={{ maxHeight: '180px', width: 'auto', objectFit: 'contain' }}
+                          className="w-100 h-100"
+                          style={{ objectFit: 'cover', objectPosition: 'top' }}
                         />
                       </div>
                     </div>
 
                     {/* Content Area */}
                     <div className="product-info-body p-4">
-                      <h5 className="product-title fw-bold mb-2">{product.title}</h5>
-                      <p className="product-desc mb-4">{product.description}</p>
-                      
-                      <Link href="/contact" className="btn-product-detail w-100 d-flex align-items-center justify-content-center gap-2">
-                        Get Information <i className="bi bi-arrow-right"></i>
-                      </Link>
+                      <div className="d-flex justify-content-between align-items-start mb-2">
+                        <h5 className="product-title fw-bold mb-0">{product.title}</h5>
+                      </div>
+                      <p className="product-desc mb-0">{product.description}</p>
                     </div>
+                    
+                    {/* Subtle Decoration */}
+                    <div className="card-accent-line"></div>
                   </div>
                 </div>
               ))}
@@ -253,61 +254,83 @@ const ProductList = () => {
 
         /* Product Card Styling */
         .premium-product-card {
-          background: #ffffff;
-          border: 1px solid rgba(226, 232, 240, 0.8);
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          background: #f4f9ff;
+          border: 1px solid rgba(0, 108, 208, 0.1);
+          transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
           display: flex;
           flex-direction: column;
-        }
-
-        .premium-product-card:hover {
-          transform: translateY(-12px);
-          box-shadow: 0 25px 50px -12px rgba(0, 108, 208, 0.12) !important;
-          border-color: rgba(0, 108, 208, 0.2);
-        }
-
-        .product-image-container {
-          background-color: #f1f5f9;
-          height: 200px;
+          position: relative;
+          z-index: 1;
           overflow: hidden;
         }
 
-        .premium-product-card:hover .product-image-container {
-          background-color: #e2e8f0;
+        .premium-product-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.08), 0 18px 36px -18px rgba(0, 0, 0, 0.03) !important;
+          border-color: rgba(0, 108, 208, 0.15);
+        }
+
+        .product-image-container {
+          background-color: #f8fafc;
+          aspect-ratio: 4 / 3;
+          overflow: hidden;
+          padding: 0 !important;
+          position: relative;
+        }
+
+        .product-image-container::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.1));
+          z-index: 1;
+          pointer-events: none;
         }
 
         .image-hover-zoom {
-          transition: transform 0.5s ease;
+          transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+          position: relative;
+          z-index: 1;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .premium-product-card:hover .image-hover-zoom {
-          transform: scale(1.1);
+          transform: scale(1.08) translateY(-5px);
         }
 
         .category-badge {
           position: absolute;
           top: 15px;
-          left: 15px;
-          background: rgba(255, 255, 255, 0.9);
-          backdrop-filter: blur(4px);
-          color: #006CD0;
-          padding: 4px 12px;
+          right: 15px;
+          left: auto;
+          background: rgba(0, 108, 208, 0.85);
+          backdrop-filter: blur(8px);
+          color: #ffffff;
+          padding: 5px 12px;
           border-radius: 50px;
-          font-size: 0.75rem;
-          font-weight: 700;
+          font-size: 0.7rem;
+          font-weight: 800;
           text-transform: uppercase;
+          letter-spacing: 0.5px;
           z-index: 2;
           border: 1px solid rgba(0, 108, 208, 0.1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
         }
 
         .product-info-body {
-          padding: 1.25rem !important;
+          padding: 1.5rem !important;
         }
 
         .product-title {
-          color: #1c1632;
-          font-size: 1.25rem;
-          line-height: 1.4;
+          color: #0f172a;
+          font-size: 1.15rem;
+          font-weight: 800 !important;
+          line-height: 1.3;
+          margin-bottom: 10px !important;
           transition: color 0.3s ease;
         }
 
@@ -317,29 +340,27 @@ const ProductList = () => {
 
         .product-desc {
           color: #64748b;
-          font-size: 0.95rem;
+          font-size: 0.9rem;
           line-height: 1.6;
           display: -webkit-box;
-          -webkit-line-clamp: 2;
+          -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
+          opacity: 0.85;
         }
 
-        .btn-product-detail {
-          background-color: #f1f5f9;
-          color: #006CD0;
-          font-weight: 700;
-          padding: 12px;
-          border-radius: 12px;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          border: 1px solid transparent;
+        .card-accent-line {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 3px;
+          background: #006CD0;
+          transition: width 0.4s ease;
         }
 
-        .premium-product-card:hover .btn-product-detail {
-          background-color: #006CD0;
-          color: #ffffff;
-          box-shadow: 0 4px 12px rgba(0, 108, 208, 0.2);
+        .premium-product-card:hover .card-accent-line {
+          width: 100%;
         }
 
         .empty-state .empty-icon {
@@ -380,7 +401,9 @@ const ProductList = () => {
             margin: 8px auto 0;
           }
           .product-image-container {
-            height: 180px;
+            aspect-ratio: 4 / 3;
+            height: auto;
+            padding: 0 !important;
           }
           .premium-product-card {
             margin-bottom: 10px;

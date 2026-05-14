@@ -175,7 +175,7 @@ const BlogScreen = () => {
           <div className="col-lg-3 order-1 order-lg-2">
             <div className="sidebar sticky-top" style={{ top: '100px' }}>
               {/* Search */}
-              <div className="sidebar-widget mb-5 p-4 bg-white rounded-4 shadow-sm border border-light">
+              <div className="sidebar-widget mb-4 mb-lg-5 p-4 bg-white rounded-4 shadow-sm border border-light">
                 <h6 className="fw-bold mb-3">Search Blogs</h6>
                 <div className="position-relative">
                   <input 
@@ -188,7 +188,7 @@ const BlogScreen = () => {
               </div>
 
               {/* Categories */}
-              <div className="sidebar-widget mb-5 p-4 bg-white rounded-4 shadow-sm border border-light">
+              <div className="sidebar-widget mb-4 mb-lg-5 p-4 bg-white rounded-4 shadow-sm border border-light">
                 <h6 className="fw-bold mb-4">Categories</h6>
                 <div className="category-list">
                   {categories.map((cat) => (
@@ -210,7 +210,7 @@ const BlogScreen = () => {
               </div>
 
               {/* Featured Post */}
-              <div className="sidebar-widget mb-5 p-4 bg-white rounded-4 shadow-sm border border-light">
+              <div className="sidebar-widget mb-5 p-4 bg-white rounded-4 shadow-sm border border-light d-none d-lg-block">
                 <h6 className="fw-bold mb-4">Featured Post</h6>
                 <div className="featured-post-card">
                   <div className="rounded-3 overflow-hidden mb-3" style={{ height: '140px' }}>
@@ -227,7 +227,7 @@ const BlogScreen = () => {
               </div>
 
               {/* Stay Updated */}
-              <div className="sidebar-widget p-4 bg-white rounded-4 shadow-sm border border-light text-center">
+              <div className="sidebar-widget p-4 bg-white rounded-4 shadow-sm border border-light text-center d-none d-lg-block">
                 <div className="icon-box mx-auto mb-3 bg-primary-subtle rounded-circle d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
                   <i className="bi bi-envelope-fill text-primary fs-4"></i>
                 </div>
@@ -237,6 +237,44 @@ const BlogScreen = () => {
                   <input type="email" className="form-control border-light-subtle rounded-3 text-center" placeholder="Enter your email" />
                 </div>
                 <button className="btn btn-primary w-100 rounded-3 fw-bold">Subscribe</button>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Bottom Widgets: Featured & Stay Updated */}
+          <div className="col-12 order-3 d-lg-none">
+            <div className="row">
+              <div className="col-md-6 mb-4">
+                {/* Featured Post */}
+                <div className="sidebar-widget p-4 bg-white rounded-4 shadow-sm border border-light h-100">
+                  <h6 className="fw-bold mb-4">Featured Post</h6>
+                  <div className="featured-post-card">
+                    <div className="rounded-3 overflow-hidden mb-3" style={{ height: '140px' }}>
+                      <Image src={blog_img_2} alt="Featured" className="w-100 h-100" style={{ objectFit: 'cover' }} />
+                    </div>
+                    <span className="badge bg-primary-subtle text-primary mb-2" style={{ fontSize: '10px' }}>Product Updates</span>
+                    <div className="text-muted small mb-2">15 Apr 2025 • 4 min read</div>
+                    <h6 className="fw-bold mb-2" style={{ fontSize: '15px', lineHeight: '1.4' }}>Understanding the Aquabrim Matrix Panel</h6>
+                    <p className="text-muted small mb-3">A complete overview of features, benefits, and real-world applications.</p>
+                    <Link href="/blog-details" className="text-primary small fw-bold text-decoration-none">
+                      Read More <i className="bi bi-arrow-right"></i>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6 mb-4">
+                {/* Stay Updated */}
+                <div className="sidebar-widget p-4 bg-white rounded-4 shadow-sm border border-light text-center h-100">
+                  <div className="icon-box mx-auto mb-3 bg-primary-subtle rounded-circle d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
+                    <i className="bi bi-envelope-fill text-primary fs-4"></i>
+                  </div>
+                  <h6 className="fw-bold mb-2">Stay Updated</h6>
+                  <p className="text-muted small mb-4">Subscribe to our newsletter and get the latest insights and updates.</p>
+                  <div className="mb-3">
+                    <input type="email" className="form-control border-light-subtle rounded-3 text-center" placeholder="Enter your email" />
+                  </div>
+                  <button className="btn btn-primary w-100 rounded-3 fw-bold">Subscribe</button>
+                </div>
               </div>
             </div>
           </div>
@@ -282,7 +320,7 @@ const BlogScreen = () => {
         @media (max-width: 991px) {
           .sidebar {
             position: static !important;
-            margin-top: 50px;
+            margin-top: 0px;
           }
           .category-chip {
             font-size: 13px !important;
