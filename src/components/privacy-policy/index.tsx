@@ -1,19 +1,17 @@
-
 import React from 'react';
 import HeaderOne from '@/layouts/headers/HeaderOne';
-import Breadcrumb from '../common/breadcrumb/breadcrumb';
 import FooterOne from '@/layouts/footers/FooterOne';
 import CtaBanner from '../common/CtaBanner';
-import PricingPolicyBanner from './PricingPolicyBanner';
-import PricingPolicyArea from './PricingPolicyArea';
+import PrivacyPolicyBanner from './PrivacyPolicyBanner';
+import PrivacyPolicyArea from './PrivacyPolicyArea';
 
-const PricingPolicy = () => {
+const PrivacyPolicy = () => {
   return (
     <>
       <HeaderOne />
       <main>
-        <PricingPolicyBanner />
-        <PricingPolicyArea />
+        <PrivacyPolicyBanner />
+        <PrivacyPolicyArea />
       </main>
       <CtaBanner />
       <FooterOne />
@@ -21,4 +19,4 @@ const PricingPolicy = () => {
   );
 };
 
-export default PricingPolicy;
+export default PrivacyPolicy;

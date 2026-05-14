@@ -15,7 +15,7 @@ const About = () => {
     <>
       <HeaderOne />
       <main>
-        <AboutAreaHomeOne style={true} hideClients={true} />
+        <AboutAreaHomeOne style={true} hideClients={true} hideImpact={true} />
         <MissionVision />
         <TestimonialAreaHomeOne />
         <Founders />

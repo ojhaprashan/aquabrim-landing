@@ -24,11 +24,11 @@ const footer_content = {
   ],
   support: [
     { title: "Pricing Policy", link: "/pricing-policy" },
-    { title: "Privacy Policy", link: "#" },
-    { title: "Refund Policy", link: "#" },
-    { title: "Shipping Policy", link: "#" },
-    { title: "Warranty Policy", link: "#" },
-    { title: "Terms & Condition", link: "#" },
+    { title: "Privacy Policy", link: "/privacy-policy" },
+    { title: "Refund Policy", link: "/refund-policy" },
+    { title: "Shipping Policy", link: "/shipping-policy" },
+    { title: "Warranty Policy", link: "/warranty-policy" },
+    { title: "Terms & Condition", link: "/terms-condition" },
   ],
   social: {
     title: "SOCIAL",

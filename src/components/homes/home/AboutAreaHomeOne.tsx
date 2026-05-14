@@ -5,7 +5,7 @@ import Image from 'next/image';
 import about_thumb from "@/assets/images/about/about-thumb.jpg";
 import about_shape from "@/assets/images/about/about-shape.png";
 
-const AboutAreaHomeOne = ({ style, hideClients }: any) => {
+const AboutAreaHomeOne = ({ style, hideClients, hideImpact }: any) => {
 
   const clients = [
     "/assets/client/1280px-Radisson_Blu_logo.svg.png",
@@ -26,7 +26,7 @@ const AboutAreaHomeOne = ({ style, hideClients }: any) => {
 
   return (
     <>
-      <div className={`about-section pt-5 pb-5 ${style ? "style-three" : ""}`}>
+      <div className={`about-section pt-5 pb-120 ${style ? "style-three" : ""}`} style={{ paddingBottom: '120px' }}>
         <div className="container">
           <div className="row align-items-center">
 
@@ -109,83 +109,88 @@ const AboutAreaHomeOne = ({ style, hideClients }: any) => {
           </div>
         </div>
 
-        {/* --- Stats & Clients inside a large grey box --- */}
-        <div className="container mt-4 wow fadeInUp">
-          <div className="p-3 p-md-5 rounded-4 shadow-sm border border-light overflow-hidden" style={{ backgroundColor: '#f0f4f8' }}>
+        {(!hideImpact || !hideClients) && (
+          <div className="container mt-4 wow fadeInUp">
+            <div className="p-3 p-md-5 rounded-4 shadow-sm border border-light overflow-hidden" style={{ backgroundColor: '#f0f4f8' }}>
 
-            {/* Heading for the Stats Section */}
-            <div className="text-center mb-5">
-              <h3 className="fw-bold display-6 mb-2" style={{ fontSize: 'calc(1.375rem + 1.5vw)' }}>Our Impact in Numbers</h3>
-              <p className="text-muted fs-5">Delivering reliable automation across thousands of installations.</p>
-            </div>
-
-            {/* Stats Row */}
-            <div className="row text-center g-4">
-              <div className="col-lg-3 col-md-6 col-sm-6">
-                <div className="stat-box p-4 bg-primary shadow-sm rounded-3 h-100 transition-hover border-0">
-                  <h2 className="fw-bold text-white display-6 mb-2">5,000+</h2>
-                  <p className="text-white fw-semibold mb-0">Systems Installed</p>
-                </div>
-              </div>
-
-              <div className="col-lg-3 col-md-6 col-sm-6">
-                <div className="stat-box p-4 bg-primary shadow-sm rounded-3 h-100 transition-hover border-0">
-                  <h2 className="fw-bold text-white display-6 mb-2">3,000+</h2>
-                  <p className="text-white fw-semibold mb-0">Clients Served</p>
-                </div>
-              </div>
-
-              <div className="col-lg-3 col-md-6 col-sm-6">
-                <div className="stat-box p-4 bg-primary shadow-sm rounded-3 h-100 transition-hover border-0">
-                  <h2 className="fw-bold text-white display-6 mb-2">20+</h2>
-                  <p className="text-white fw-semibold mb-0">Cities Covered</p>
-                </div>
-              </div>
-
-              <div className="col-lg-3 col-md-6 col-sm-6">
-                <div className="stat-box p-4 bg-primary shadow-sm rounded-3 h-100 transition-hover border-0">
-                  <h2 className="fw-bold text-white display-6 mb-2">Tracked</h2>
-                  <p className="text-white fw-semibold mb-0">Water Saved</p>
-                </div>
-              </div>
-            </div>
-
-            {!hideClients && (
-              <>
-                {/* Divider */}
-                <hr className="my-5 text-muted" style={{ opacity: 0.15 }} />
-
-                {/* --- NEW SECTION: Auto-scrolling Clients --- */}
-                <div className="text-center mb-4">
-                  <h6 className="fw-bold text-muted text-uppercase" style={{ letterSpacing: '1.5px', fontSize: 'clamp(22px, 5vw, 28px)' }}>Trusted By Leading Organizations</h6>
-                </div>
-
-                <div className="w-100 position-relative marquee-wrapper">
-                  <div className="marquee-track d-flex align-items-center py-2">
-                    {/* We map the array twice to create a seamless infinite loop */}
-                    {[...clients, ...clients].map((img, idx) => (
-                      <div
-                        key={idx}
-                        className="px-4 py-3 mx-3 d-flex align-items-center justify-content-center"
-                        style={{ minWidth: '180px', height: '80px' }}
-                      >
-                        <Image
-                          src={img}
-                          alt="Client Logo"
-                          width={120}
-                          height={60}
-                          style={{ objectFit: 'contain' }}
-                        />
-                      </div>
-                    ))}
+              {!hideImpact && (
+                <>
+                  {/* Heading for the Stats Section */}
+                  <div className="text-center mb-5">
+                    <h3 className="fw-bold display-6 mb-2" style={{ fontSize: 'calc(1.375rem + 1.5vw)' }}>Our Impact in Numbers</h3>
+                    <p className="text-muted fs-5">Delivering reliable automation across thousands of installations.</p>
                   </div>
-                </div>
-              </>
-            )}
-            {/* --- END NEW SECTION --- */}
 
+                  {/* Stats Row */}
+                  <div className="row text-center g-4">
+                    <div className="col-lg-3 col-md-6 col-sm-6">
+                      <div className="stat-box p-4 bg-primary shadow-sm rounded-3 h-100 transition-hover border-0">
+                        <h2 className="fw-bold text-white display-6 mb-2">5,000+</h2>
+                        <p className="text-white fw-semibold mb-0">Systems Installed</p>
+                      </div>
+                    </div>
+
+                    <div className="col-lg-3 col-md-6 col-sm-6">
+                      <div className="stat-box p-4 bg-primary shadow-sm rounded-3 h-100 transition-hover border-0">
+                        <h2 className="fw-bold text-white display-6 mb-2">3,000+</h2>
+                        <p className="text-white fw-semibold mb-0">Clients Served</p>
+                      </div>
+                    </div>
+
+                    <div className="col-lg-3 col-md-6 col-sm-6">
+                      <div className="stat-box p-4 bg-primary shadow-sm rounded-3 h-100 transition-hover border-0">
+                        <h2 className="fw-bold text-white display-6 mb-2">20+</h2>
+                        <p className="text-white fw-semibold mb-0">Cities Covered</p>
+                      </div>
+                    </div>
+
+                    <div className="col-lg-3 col-md-6 col-sm-6">
+                      <div className="stat-box p-4 bg-primary shadow-sm rounded-3 h-100 transition-hover border-0">
+                        <h2 className="fw-bold text-white display-6 mb-2">Tracked</h2>
+                        <p className="text-white fw-semibold mb-0">Water Saved</p>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {!hideClients && (
+                <>
+                  {/* Divider */}
+                  {!hideImpact && <hr className="my-5 text-muted" style={{ opacity: 0.15 }} />}
+
+                  {/* --- NEW SECTION: Auto-scrolling Clients --- */}
+                  <div className="text-center mb-4">
+                    <h6 className="fw-bold text-muted text-uppercase" style={{ letterSpacing: '1.5px', fontSize: 'clamp(22px, 5vw, 28px)' }}>Trusted By Leading Organizations</h6>
+                  </div>
+
+                  <div className="w-100 position-relative marquee-wrapper">
+                    <div className="marquee-track d-flex align-items-center py-2">
+                      {/* We map the array twice to create a seamless infinite loop */}
+                      {[...clients, ...clients].map((img, idx) => (
+                        <div
+                          key={idx}
+                          className="px-4 py-3 mx-3 d-flex align-items-center justify-content-center"
+                          style={{ minWidth: '180px', height: '80px' }}
+                        >
+                          <Image
+                            src={img}
+                            alt="Client Logo"
+                            width={120}
+                            height={60}
+                            style={{ objectFit: 'contain' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+              {/* --- END NEW SECTION --- */}
+
+            </div>
           </div>
-        </div>
+        )}
 
         {/* CSS for the seamless infinite slider */}
         <style dangerouslySetInnerHTML={{
