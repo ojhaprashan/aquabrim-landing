@@ -17,7 +17,7 @@ const categories = [
   { id: 'accessories', name: 'Accessories', icon: 'bi-tools' },
 ];
 
-const products = [
+export const products = [
   // Domestic
   {
     id: 1,
@@ -167,31 +167,33 @@ const ProductList = () => {
             <div className="row g-4">
               {filteredProducts.map((product) => (
                 <div key={product.id} className="col-md-6 col-xl-4 wow fadeInUp">
-                  <div className="premium-product-card h-100 rounded-3 shadow-sm overflow-hidden">
-                    {/* Image Area */}
-                    <div className="product-image-container position-relative">
-                      <div className="category-badge">{product.categoryName}</div>
-                      <div className="image-hover-zoom h-100">
-                        <Image 
-                          src={product.img} 
-                          alt={product.title} 
-                          className="w-100 h-100"
-                          style={{ objectFit: 'cover', objectPosition: 'top' }}
-                        />
+                  <Link href={`/service-details?id=${product.id}`} className="text-decoration-none d-block h-100">
+                    <div className="premium-product-card h-100 rounded-3 shadow-sm overflow-hidden">
+                      {/* Image Area */}
+                      <div className="product-image-container position-relative">
+                        <div className="category-badge">{product.categoryName}</div>
+                        <div className="image-hover-zoom h-100">
+                          <Image 
+                            src={product.img} 
+                            alt={product.title} 
+                            className="w-100 h-100"
+                            style={{ objectFit: 'cover', objectPosition: 'top' }}
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Content Area */}
-                    <div className="product-info-body p-4">
-                      <div className="d-flex justify-content-between align-items-start mb-2">
-                        <h5 className="product-title fw-bold mb-0">{product.title}</h5>
+                      {/* Content Area */}
+                      <div className="product-info-body p-4">
+                        <div className="d-flex justify-content-between align-items-start mb-2">
+                          <h5 className="product-title fw-bold mb-0">{product.title}</h5>
+                        </div>
+                        <p className="product-desc mb-0">{product.description}</p>
                       </div>
-                      <p className="product-desc mb-0">{product.description}</p>
+                      
+                      {/* Subtle Decoration */}
+                      <div className="card-accent-line"></div>
                     </div>
-                    
-                    {/* Subtle Decoration */}
-                    <div className="card-accent-line"></div>
-                  </div>
+                  </Link>
                 </div>
               ))}
             </div>

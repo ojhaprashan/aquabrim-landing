@@ -1,24 +1,19 @@
-
-import React from 'react';
+import React, { Suspense } from 'react';
 import HeaderOne from '@/layouts/headers/HeaderOne';
-import Breadcrumb from '../common/breadcrumb/breadcrumb';
 import ServiceDetailsArea from './ServiceDetailsArea';
-import ServiceAreaHomeOne from '../homes/home/ServiceAreaHomeOne';
-import SubscribeAreaHomeOne from '../homes/home/SubscribeAreaHomeOne';
 import FooterOne from '@/layouts/footers/FooterOne';
-
-
+import CtaBanner from '../common/CtaBanner';
 
 const ServiceDetails = () => {
   return (
     <>
       <HeaderOne />
       <main>
-        <Breadcrumb top_title='Service Details' title='Service Details' />
-        <ServiceDetailsArea />
-        <ServiceAreaHomeOne style_2={true} />
-        <SubscribeAreaHomeOne />
+        <Suspense fallback={<div className="container py-5 text-center text-muted fw-semibold">Loading product details...</div>}>
+          <ServiceDetailsArea />
+        </Suspense>
       </main>
+      <CtaBanner />
       <FooterOne />
     </>
   );

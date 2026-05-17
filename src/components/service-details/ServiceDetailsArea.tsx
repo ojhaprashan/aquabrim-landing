@@ -1,115 +1,176 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import Accordion from '../common/Accordion';
+import { useSearchParams } from 'next/navigation';
+import { products } from '../service/ProductList';
 
-import service_details_thumb_1 from '@/assets/images/resource/blog-inner1.jpg';
-import service_details_thumb_2 from '@/assets/images/resource/blog-inner2.jpg';
-import service_details_thumb_3 from '@/assets/images/resource/blog-inner3.jpg';
-
-interface DataType {
-  title: string;
-  sm_des_1: string;
-  sm_des_2: string;
-  title_2: string;
-  categories: string[];
-  help_title: string;
-  help_info: string;
-  phone: string;
-  email: string;
-}
-
-
-const service_details_content: DataType = {
-  title: "Advanced Water Management Systems",
-  sm_des_1: "Aquabrim provides end-to-end smart water management solutions designed for modern homes and large-scale industrial complexes. Our systems ensure precise water level detection, automated pumping control, and real-time monitoring to prevent overflow and protect your infrastructure from dry-run damage. With over 16 years of experience, we deliver reliability you can trust.",
-  sm_des_2: "Our patented wireless valve technology and intelligent controllers allow for seamless integration with multiple tanks, providing accurate data and effortless control through intuitive dashboards. Whether you are managing a residential society or an industrial plant, Aquabrim's solutions optimize water usage and energy efficiency.",
-  title_2: "Why Choose Our Smart Solutions?",
-
-  categories: [
-    "Water Level Control ",
-    "Multi-Tank Automation ",
-    "Wireless Valve Systems ",
-    "Smart Tank Monitoring ",
-    "Industrial Solutions ",
-    "Residential Automation ",
-    "Digital Dashboards ",
-  ],
-  help_title: "Need Expert Help?",
-  help_info: "Our engineering team is ready to help you design the perfect water management system for your needs. From site inspection to final installation and 24/7 support, Aquabrim is your partner in smart automation.",
-  phone: "+91 12345 67890",
-  email: "support@aquabrim.com",
-}
-const { title, sm_des_1, sm_des_2, title_2, categories, help_title, help_info, phone, email } = service_details_content
-
+import prod_controller from "@/assets/images/resource/prod_controller.png";
+import prod_starter from "@/assets/images/resource/prod_starter.png";
+import prod_tank_monitor from "@/assets/images/resource/prod_tank_monitor.png";
+import prod_valve from "@/assets/images/resource/prod_valve.png";
+import service_details_2 from "@/assets/images/resource/service-details2.png";
 
 const ServiceDetailsArea = () => {
+  const searchParams = useSearchParams();
+  const productId = searchParams.get('id');
+  const product = products.find(p => p.id === Number(productId)) || products[0];
+
+  const [quantity, setQuantity] = useState(1);
+  const [selectedImage, setSelectedImage] = useState<any>(null);
+
+  // Sync main image when product ID changes
+  useEffect(() => {
+    setSelectedImage(null);
+  }, [productId]);
+
+  const mainImage = selectedImage || product.img;
+
+  const defaultThumbnails = [prod_controller, prod_starter, prod_tank_monitor, prod_valve];
+  const images = [product.img, ...defaultThumbnails.filter(img => img !== product.img)];
+
   return (
-    <>
-      <div className="service-details-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-8 col-md-12">
-              <div className="service-details-thumb">
-                <Image src={service_details_thumb_1} style={{ width: '100%', height: 'auto' }} alt="service-details" />
+    <section className="product-details-section pt-100 pb-120">
+      <div className="container">
+        {/* Product Overview Row */}
+        <div className="row mb-5">
+          {/* Left: Images */}
+          <div className="col-lg-6 mb-5 mb-lg-0">
+            <div className="product-gallery sticky-lg-top" style={{ top: '100px' }}>
+              <div className="main-image-wrapper bg-light rounded-4 p-4 mb-3 text-center position-relative shadow-sm" style={{ aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8fafc' }}>
+                 <Image src={mainImage} alt={product.title} className="img-fluid" style={{ maxHeight: '100%', objectFit: 'contain' }} />
               </div>
-              <div className="service-details-title">
-                <h4>{title}</h4>
-              </div>
-              <div className="service-details-discription">
-                <p>{sm_des_1}</p>
-                <p>{sm_des_2}</p>
-              </div>
-              <div className="row">
-                <div className="col-lg-6 col-md-6">
-                  <div className="service-details-thumb-two">
-                    <Image src={service_details_thumb_2} style={{height: "auto"}} alt="image-title" />
+              <div className="thumbnail-gallery d-flex gap-3 overflow-auto pb-2 custom-scrollbar">
+                {images.map((img, idx) => (
+                  <div 
+                    key={idx} 
+                    className={`thumbnail-item rounded-3 p-2 bg-light shadow-sm ${mainImage === img ? 'active' : ''}`}
+                    style={{ 
+                      width: '80px', 
+                      height: '80px', 
+                      flexShrink: 0, 
+                      border: '2px solid', 
+                      borderColor: mainImage === img ? '#006CD0' : 'transparent', 
+                      cursor: 'pointer', 
+                      backgroundColor: '#f8fafc',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onClick={() => setSelectedImage(img)}
+                  >
+                    <Image src={img} alt={`Thumbnail ${idx}`} className="img-fluid w-100 h-100" style={{ objectFit: 'contain' }} />
                   </div>
-                </div>
-                <div className="col-lg-6 col-md-6">
-                  <div className="service-details-thumb-two">
-                    <Image src={service_details_thumb_3} style={{height: "auto"}} alt="image-title" />
-                  </div>
-                </div>
+                ))}
               </div>
-              <div className="service-details-title">
-                <h4>{title_2}</h4>
-              </div>
-              <div className="service-details-discription">
-                <p>{sm_des_1}</p>
-              </div>
-              <Accordion />
             </div>
-            <div className="col-lg-4 col-md-6">
-              {/* <!-- widget search --> */}
-              <div className="widget_search box mb-30">
-                <form onSubmit={e => e.preventDefault()} method="get">
-                  <input type="text" name="s" value="" placeholder="Search Here" title="Search for:" />
-                    <button type="submit" className="icons">
-                      <i className="fa fa-search"></i>
-                    </button>
-                </form>
+          </div>
+
+          {/* Right: Details */}
+          <div className="col-lg-6 ps-lg-5">
+            <div className="product-info wow fadeInRight">
+              <div className="d-flex align-items-center gap-2 mb-2">
+                <span className="badge px-3 py-2 rounded-pill fw-bold text-uppercase" style={{ backgroundColor: 'rgba(0, 108, 208, 0.1)', color: '#006CD0', fontSize: '0.75rem', letterSpacing: '0.5px' }}>
+                  {product.categoryName} Solutions
+                </span>
+                <span className="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill d-flex align-items-center gap-2 fw-semibold" style={{ fontSize: '0.75rem' }}>
+                  <div style={{ width: '6px', height: '6px', backgroundColor: '#198754', borderRadius: '50%' }}></div>
+                  In stock
+                </span>
               </div>
-              <div className="widget-categories-box two">
-                {/* <!-- widget categories menu --> */}
-                <div className="widget-categories-menu asd">
-                  <ul>
-                    {categories.map((item, i) => (
-                      <li><Link href="/service-details" style={{ color: "#000" }}>{item}<span><i className="bi bi-arrow-right"></i></span></Link></li>                      
-                    ))} 
-                  </ul>
+
+              <h2 className="display-5 fw-extrabold mb-2" style={{ color: '#0f172a', letterSpacing: '-0.5px' }}>{product.title}</h2>
+              <p className="text-primary fw-semibold mb-3 fs-5" style={{ color: '#006CD0' }}>{product.description}</p>
+              
+              <h3 className="fw-bold mb-4 d-flex align-items-center gap-2" style={{ color: '#0f172a' }}>
+                {product.id <= 5 ? "₹ 7,080.00" : "Price on Request"}
+                <span className="fs-6 fw-normal text-muted">(Excl. Taxes)</span>
+              </h3>
+
+              <p className="text-muted mb-4" style={{ fontSize: '0.98rem', lineHeight: '1.7' }}>
+                The Aquabrim {product.title} {product.description} represents our signature premium tier engineering. Specially optimized for smart and robust performance under dynamic Indian voltage, piping, and tank conditions.
+              </p>
+
+              <div className="row g-3 mb-4">
+                <div className="col-sm-6">
+                  <div className="color-selection p-3 rounded-3 border" style={{ borderColor: '#f1f5f9', backgroundColor: '#f8fafc' }}>
+                    <p className="fw-semibold mb-2" style={{ color: '#64748b', fontSize: '0.85rem' }}>Color Variant</p>
+                    <div className="d-flex align-items-center gap-2">
+                      <div className="color-circle" style={{ width: '24px', height: '24px', backgroundColor: '#000', borderRadius: '50%', border: '2px solid #fff', outline: '2px solid #000' }}></div>
+                      <span className="fw-semibold text-dark" style={{ fontSize: '0.9rem' }}>Classic Black</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="col-sm-6">
+                  <div className="quantity-selection p-3 rounded-3 border" style={{ borderColor: '#f1f5f9', backgroundColor: '#f8fafc' }}>
+                    <p className="fw-semibold mb-1" style={{ color: '#64748b', fontSize: '0.85rem' }}>Order Volume</p>
+                    <div className="d-flex align-items-center gap-2 mt-1">
+                      <div className="d-inline-flex align-items-center border rounded overflow-hidden bg-white" style={{ borderColor: '#cbd5e1' }}>
+                        <button className="btn btn-light border-0 px-2 py-0 bg-white fw-bold" style={{ fontSize: '1.1rem', height: '28px' }} onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
+                        <input type="text" className="form-control border-0 text-center bg-white p-0 fw-bold" style={{ width: '32px', height: '28px', fontSize: '0.9rem' }} value={quantity} readOnly />
+                        <button className="btn btn-light border-0 px-2 py-0 bg-white fw-bold" style={{ fontSize: '1.1rem', height: '28px' }} onClick={() => setQuantity(quantity + 1)}>+</button>
+                      </div>
+                      <span className="text-muted" style={{ fontSize: '0.8rem' }}>Unit(s)</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="widget-help-box">
-                <div className="widget-content">
-                  <h4>{help_title}</h4>
-                  <p>{help_info}</p>
-                  <div className="widget-info-social-link">
-                    <ul>
-                      <li><a href="tel:(555)123-4567"><i className="bi bi-telephone"></i> <span>{phone}</span></a></li>
-                      <li><a href="mailto:support@sertom.com"><i className="bi bi-envelope"></i> <span>{email}</span></a></li>
-                    </ul>
+
+              <Link href="/contact" className="btn btn-primary w-100 py-3 rounded-pill fw-bold mb-5 shadow-sm text-uppercase d-flex align-items-center justify-content-center gap-2 transition-all hover-lift text-white text-decoration-none" style={{ backgroundColor: '#006CD0', letterSpacing: '1px', fontSize: '0.95rem' }}>
+                <i className="bi bi-telephone-outbound fs-5"></i> Enquire / Contact to Buy
+              </Link>
+
+              {/* Accordion */}
+              <div className="accordion custom-accordion" id="productAccordion">
+                {/* Description */}
+                <div className="accordion-item">
+                  <h2 className="accordion-header">
+                    <button className="accordion-button d-flex align-items-center gap-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDesc" aria-expanded="true">
+                       <i className="bi bi-card-text fs-5 text-muted"></i> Description
+                    </button>
+                  </h2>
+                  <div id="collapseDesc" className="accordion-collapse collapse show" data-bs-parent="#productAccordion">
+                    <div className="accordion-body text-muted">
+                      <ul className="product-features-list">
+                        <li><strong>AUTOMATIC CONTROL:</strong> No need for manual monitoring; the system works on its own.</li>
+                        <li><strong>DRY RUN PROTECTION:</strong> Safeguards your pump from running without water.</li>
+                        <li><strong>ENERGY SAVING:</strong> Optimizes pump operation, reducing electricity consumption.</li>
+                        <li><strong>EASY INSTALLATION:</strong> Simple wiring with float sensors for tank and sump.</li>
+                        <li><strong>NO WATER WASTAGE:</strong> Prevents overflow and maintains efficient water usage.</li>
+                        <li><strong>RELIABLE PERFORMANCE:</strong> Ensures consistent water supply for daily use.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Tech Specs */}
+                <div className="accordion-item">
+                  <h2 className="accordion-header">
+                    <button className="accordion-button collapsed d-flex align-items-center gap-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTech">
+                       <i className="bi bi-sliders fs-5 text-muted"></i> Technical Specifications
+                    </button>
+                  </h2>
+                  <div id="collapseTech" className="accordion-collapse collapse" data-bs-parent="#productAccordion">
+                    <div className="accordion-body text-muted">
+                      <p className="mb-2"><strong>Operating Voltage:</strong> 230V AC</p>
+                      <p className="mb-2"><strong>Output Contacts:</strong> 10A Relay</p>
+                      <p className="mb-2"><strong>Sensor Type:</strong> Magnetic Float / Conductive</p>
+                      <p className="mb-0"><strong>Enclosure:</strong> High-quality ABS plastic</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Additional Info */}
+                <div className="accordion-item">
+                  <h2 className="accordion-header">
+                    <button className="accordion-button collapsed d-flex align-items-center gap-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInfo">
+                       <i className="bi bi-info-circle fs-5 text-muted"></i> Additional Information
+                    </button>
+                  </h2>
+                  <div id="collapseInfo" className="accordion-collapse collapse" data-bs-parent="#productAccordion">
+                    <div className="accordion-body text-muted">
+                      <p className="mb-2"><strong>Warranty:</strong> 1 Year Manufacturer Warranty</p>
+                      <p className="mb-0"><strong>Support:</strong> 24/7 Technical Support available.</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -117,7 +178,226 @@ const ServiceDetailsArea = () => {
           </div>
         </div>
       </div>
-    </>
+
+      {/* How It Works Section */}
+      <div className="how-it-works-section py-5 mt-4" style={{ backgroundColor: '#f8fafc' }}>
+        <div className="container py-lg-4">
+          <div className="row align-items-center">
+            <div className="col-lg-6 mb-5 mb-lg-0 pe-lg-5 wow fadeInLeft">
+              <h2 className="fw-bold mb-4 display-6" style={{ color: '#0f172a' }}>How It Works</h2>
+              
+              <div className="mb-4">
+                <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Monitors Water Levels</h5>
+                <p className="text-muted" style={{ lineHeight: '1.7' }}>The automatic water level controller uses four magnetic float sensors, two in the overhead tank and two in the underground sump, to continuously monitor water levels. This helps the system stay aware of current conditions and maintain a consistent water supply.</p>
+              </div>
+
+              <div className="mb-4">
+                <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Controls the Motor Automatically</h5>
+                <p className="text-muted" style={{ lineHeight: '1.7' }}>When the tank water level drops below the set point and the sump has enough water, the automatic water pump controller automatically switches the motor ON to start filling. Once the tank reaches the upper level, it turns the motor OFF, preventing overflow and saving electricity.</p>
+              </div>
+
+              <div>
+                <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Protects the Pump:</h5>
+                <p className="text-muted" style={{ lineHeight: '1.7' }}>If the sump water level becomes too low, the controller keeps the motor OFF to prevent dry running. The system resumes operation automatically once the sump refills, ensuring safe and reliable performance every day.</p>
+              </div>
+            </div>
+            <div className="col-lg-6 wow fadeInRight">
+               <div className="bg-white rounded-4 p-4 shadow-sm text-center h-100 d-flex align-items-center justify-content-center border overflow-hidden position-relative" style={{ borderColor: '#e2e8f0', minHeight: '400px' }}>
+                 <div className="image-hover-zoom w-100 h-100 d-flex align-items-center justify-content-center">
+                    <Image src={service_details_2} alt="System Setup Diagram" className="img-fluid" style={{ maxHeight: '380px', objectFit: 'contain' }} />
+                 </div>
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Working Procedure Section */}
+      <div className="working-procedure-section py-5">
+        <div className="container py-lg-4">
+          <div className="row align-items-center flex-column-reverse flex-lg-row">
+            <div className="col-lg-6 mt-5 mt-lg-0 wow fadeInLeft">
+               <div className="bg-light rounded-4 p-5 shadow-sm text-center h-100 d-flex align-items-center justify-content-center" style={{ backgroundColor: '#f8fafc', minHeight: '400px' }}>
+                  <Image src={prod_controller} alt="Controller Front" className="img-fluid drop-shadow" style={{ maxHeight: '300px', objectFit: 'contain', filter: 'drop-shadow(0px 10px 20px rgba(0,0,0,0.15))' }} />
+               </div>
+            </div>
+            <div className="col-lg-6 ps-lg-5 wow fadeInRight">
+              <h2 className="fw-bold mb-4 display-6" style={{ color: '#0f172a' }}>Working Procedure</h2>
+              
+              <div className="mb-4">
+                <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Auto Mode</h5>
+                <p className="text-muted" style={{ lineHeight: '1.7' }}>In the automatic water control system, the motor switches ON automatically when the overhead tank water level drops below the water level switches, and it switches OFF automatically once the tank fills above the sensors. This ensures a consistent water supply without manual monitoring.</p>
+              </div>
+
+              <div className="mb-4">
+                <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Manual Mode</h5>
+                <p className="text-muted" style={{ lineHeight: '1.7' }}>The automatic water control system also includes a Manual Mode, allowing you to turn the motor ON manually whenever needed. In this mode, the motor runs continuously until it is switched OFF manually, giving you full control when automation isn't required.</p>
+              </div>
+
+              <div>
+                <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Off State</h5>
+                <p className="text-muted" style={{ lineHeight: '1.7' }}>When the switch is in the flat/off position, the device stays powered OFF. The water level switches remain inactive, and the system conserves energy until reactivated.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        .product-details-section {
+          background-color: #ffffff;
+        }
+
+        /* Accordion Custom Styling - Premium Cards */
+        .custom-accordion {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        
+        .custom-accordion .accordion-item {
+          border: 1px solid #e2e8f0;
+          background-color: #ffffff;
+          border-radius: 8px !important;
+          overflow: hidden;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+          transition: all 0.3s ease;
+        }
+
+        .custom-accordion .accordion-item:hover {
+          border-color: #cbd5e1;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        .custom-accordion .accordion-button {
+          background-color: #f8fafc;
+          color: #1e293b;
+          font-weight: 700;
+          font-size: 0.95rem;
+          padding: 1.1rem 1.25rem;
+          border: none;
+          box-shadow: none;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          transition: all 0.25s ease;
+        }
+
+        .custom-accordion .accordion-button:not(.collapsed) {
+          color: #006CD0;
+          background-color: #edf5ff;
+          box-shadow: none;
+        }
+
+        .custom-accordion .accordion-button:focus {
+          box-shadow: none;
+        }
+
+        .custom-accordion .accordion-button i {
+          transition: color 0.25s ease;
+        }
+
+        .custom-accordion .accordion-button:not(.collapsed) i {
+          color: #006CD0 !important;
+        }
+
+        .custom-accordion .accordion-button::after {
+          background-size: 1rem;
+          transition: transform 0.25s ease;
+        }
+        
+        .custom-accordion .accordion-body {
+          padding: 1.25rem 1.25rem 1.5rem 3.25rem;
+          background-color: #ffffff;
+          border-top: 1px solid #f1f5f9;
+          font-size: 0.95rem;
+          line-height: 1.7;
+        }
+
+        /* Product features list */
+        .product-features-list {
+          list-style: none;
+          padding-left: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .product-features-list li {
+          position: relative;
+          padding-left: 1.25rem;
+          color: #475569;
+          font-size: 0.95rem;
+        }
+
+        .product-features-list li::before {
+          content: "•";
+          color: #006CD0;
+          font-weight: bold;
+          font-size: 1.3rem;
+          position: absolute;
+          left: 0;
+          top: -2px;
+        }
+        
+        .thumbnail-item {
+          transition: all 0.3s ease;
+        }
+        
+        .thumbnail-item:hover {
+          border-color: rgba(0, 108, 208, 0.5) !important;
+          transform: translateY(-2px);
+        }
+        
+        .hover-lift:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 20px rgba(0, 108, 208, 0.2) !important;
+        }
+        
+        /* Custom scrollbar for thumbnails */
+        .custom-scrollbar::-webkit-scrollbar {
+          height: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: #f1f5f9;
+          border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #cbd5e1;
+          border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8;
+        }
+
+        .image-hover-zoom {
+          transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .image-hover-zoom:hover {
+          transform: scale(1.05);
+        }
+
+        /* Mobile specific fixes */
+        @media (max-width: 991px) {
+          .pt-100 {
+            padding-top: 40px !important;
+          }
+          .pb-120 {
+            padding-bottom: 60px !important;
+          }
+          .display-6 {
+            font-size: 2rem;
+          }
+          .custom-accordion .accordion-body {
+            padding: 1.25rem;
+          }
+        }
+      `}</style>
+    </section>
   );
 };
 

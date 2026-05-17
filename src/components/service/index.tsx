@@ -15,11 +15,6 @@ const Service = () => {
     <>
       <HeaderOne />
       <main>
-        {/* <Breadcrumb top_title="Service" title="Service" /> */}
-        {/* <ServiceAreaHomeOne style={true} /> */}
-        {/* <VedioAreaHomeOne /> */}
-        {/* <ContactAreaHomeOne /> */}
-        {/* <SubscribeAreaHomeOne /> */}
         <ProductList />
       </main>
       <CtaBanner />
