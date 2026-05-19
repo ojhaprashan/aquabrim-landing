@@ -10,6 +10,9 @@ import prod_tank_monitor from "@/assets/images/resource/prod_tank_monitor.png";
 import prod_valve from "@/assets/images/resource/prod_valve.png";
 import accessories_img from "@/assets/images/resource/service-details3.png";
 
+// Import JSON data
+import productsData from "@/data/products.json";
+
 const categories = [
   { id: 'all', name: 'All Products', icon: 'bi-grid-fill' },
   { id: 'domestic', name: 'Domestic water level controllers', icon: 'bi-house-fill' },
@@ -17,115 +20,18 @@ const categories = [
   { id: 'accessories', name: 'Accessories', icon: 'bi-tools' },
 ];
 
-export const products = [
-  // Domestic
-  {
-    id: 1,
-    category: 'domestic',
-    categoryName: 'Domestic',
-    title: 'Ripple',
-    description: 'Smart Municipal Water Level Controller',
-    img: prod_controller,
-  },
-  {
-    id: 2,
-    category: 'domestic',
-    categoryName: 'Domestic',
-    title: 'iBot A',
-    description: 'Smart Water Tank Level Controller',
-    img: prod_controller,
-  },
-  {
-    id: 3,
-    category: 'domestic',
-    categoryName: 'Domestic',
-    title: 'iBot P',
-    description: 'Smart Borewell Water Controller',
-    img: prod_controller,
-  },
-  // Industrial
-  {
-    id: 4,
-    category: 'industrial',
-    categoryName: 'Industrial',
-    title: 'Matrix',
-    description: 'Multi-Tank Water Level Controller',
-    img: prod_tank_monitor,
-  },
-  {
-    id: 5,
-    category: 'industrial',
-    categoryName: 'Industrial',
-    title: 'Flexibell',
-    description: 'Wireless Water Level Alarm',
-    img: prod_tank_monitor,
-  },
-  // Accessories
-  {
-    id: 6,
-    category: 'accessories',
-    categoryName: 'Accessories',
-    title: 'Wireless Water Level Transmitter',
-    description: 'High-precision wireless data transmission for water levels.',
-    img: accessories_img,
-  },
-  {
-    id: 7,
-    category: 'accessories',
-    categoryName: 'Accessories',
-    title: 'IOT Gateway',
-    description: 'Central hub for connecting all smart water monitoring devices.',
-    img: accessories_img,
-  },
-  {
-    id: 8,
-    category: 'accessories',
-    categoryName: 'Accessories',
-    title: 'Wireless Electromagnetic Flow Meter',
-    description: 'Accurate flow measurement with wireless connectivity.',
-    img: accessories_img,
-  },
-  {
-    id: 9,
-    category: 'accessories',
-    categoryName: 'Accessories',
-    title: 'Wireless Signal booster',
-    description: 'Extend the range of your wireless sensors and controllers.',
-    img: accessories_img,
-  },
-  {
-    id: 10,
-    category: 'accessories',
-    categoryName: 'Accessories',
-    title: 'Ultrasonic sensor with Wireless Transmitter',
-    description: 'Non-contact level measurement with wireless output.',
-    img: accessories_img,
-  },
-  {
-    id: 11,
-    category: 'accessories',
-    categoryName: 'Accessories',
-    title: 'Wireless Temperature & Humidity Sensor',
-    description: 'Monitor environmental conditions remotely.',
-    img: accessories_img,
-  },
-  {
-    id: 12,
-    category: 'accessories',
-    categoryName: 'Accessories',
-    title: 'Pressure sensor with Wireless Transmitter',
-    description: 'Accurate pressure monitoring for pipe systems.',
-    img: accessories_img,
-  },
-  {
-    id: 13,
-    category: 'accessories',
-    categoryName: 'Accessories',
-    title: 'Wireless Motorised Valve',
-    description: 'Automated water flow control with wireless triggers.',
-    img: prod_valve,
-  },
-];
+const imageMap: Record<string, any> = {
+  prod_controller,
+  prod_starter,
+  prod_tank_monitor,
+  prod_valve,
+  accessories_img
+};
+
+export const products = productsData.map((item) => ({
+  ...item,
+  img: imageMap[item.imgKey] || accessories_img
+}));
 
 const ProductList = () => {
   const [activeCategory, setActiveCategory] = useState('all');

@@ -16,13 +16,64 @@ const ServiceDetailsArea = () => {
   const productId = searchParams.get('id');
   const product = products.find(p => p.id === Number(productId)) || products[0];
 
-  const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState<any>(null);
+  const scrollRef = React.useRef<HTMLDivElement>(null);
 
   // Sync main image when product ID changes
   useEffect(() => {
     setSelectedImage(null);
   }, [productId]);
+
+  // Auto scroll features list smoothly
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || !product.features) return;
+
+    let intervalId: any;
+    let scrollSpeed = 0.5; // Smooth pixel speed per step
+    let currentScroll = el.scrollLeft;
+
+    const startScroll = () => {
+      intervalId = setInterval(() => {
+        if (!el) return;
+        currentScroll += scrollSpeed;
+        
+        // Wrap around smoothly
+        if (currentScroll >= el.scrollWidth - el.clientWidth) {
+          currentScroll = 0;
+        }
+        
+        el.scrollLeft = Math.floor(currentScroll);
+      }, 16); // Smooth 60fps tick
+    };
+
+    const timer = setTimeout(() => {
+      startScroll();
+    }, 850);
+
+    const handleMouseEnter = () => clearInterval(intervalId);
+    const handleMouseLeave = () => {
+      currentScroll = el.scrollLeft; // Sync manual scroll position
+      clearInterval(intervalId);
+      startScroll();
+    };
+
+    el.addEventListener('mouseenter', handleMouseEnter);
+    el.addEventListener('mouseleave', handleMouseLeave);
+    el.addEventListener('touchstart', handleMouseEnter);
+    el.addEventListener('touchend', handleMouseLeave);
+
+    return () => {
+      clearTimeout(timer);
+      clearInterval(intervalId);
+      if (el) {
+        el.removeEventListener('mouseenter', handleMouseEnter);
+        el.removeEventListener('mouseleave', handleMouseLeave);
+        el.removeEventListener('touchstart', handleMouseEnter);
+        el.removeEventListener('touchend', handleMouseLeave);
+      }
+    };
+  }, [productId, product.features]);
 
   const mainImage = selectedImage || product.img;
 
@@ -80,43 +131,44 @@ const ServiceDetailsArea = () => {
               <h2 className="display-5 fw-extrabold mb-2" style={{ color: '#0f172a', letterSpacing: '-0.5px' }}>{product.title}</h2>
               <p className="text-primary fw-semibold mb-3 fs-5" style={{ color: '#006CD0' }}>{product.description}</p>
               
-              <h3 className="fw-bold mb-4 d-flex align-items-center gap-2" style={{ color: '#0f172a' }}>
-                {product.id <= 5 ? "₹ 7,080.00" : "Price on Request"}
-                <span className="fs-6 fw-normal text-muted">(Excl. Taxes)</span>
-              </h3>
-
-              <p className="text-muted mb-4" style={{ fontSize: '0.98rem', lineHeight: '1.7' }}>
-                The Aquabrim {product.title} {product.description} represents our signature premium tier engineering. Specially optimized for smart and robust performance under dynamic Indian voltage, piping, and tank conditions.
+              <p className="text-muted mb-4 mt-3" style={{ fontSize: '0.98rem', lineHeight: '1.7' }}>
+                {product.longDescription || `The Aquabrim ${product.title} ${product.description} represents our signature premium tier engineering. Specially optimized for smart and robust performance under dynamic Indian voltage, piping, and tank conditions.`}
               </p>
 
-              <div className="row g-3 mb-4">
-                <div className="col-sm-6">
-                  <div className="color-selection p-3 rounded-3 border" style={{ borderColor: '#f1f5f9', backgroundColor: '#f8fafc' }}>
-                    <p className="fw-semibold mb-2" style={{ color: '#64748b', fontSize: '0.85rem' }}>Color Variant</p>
-                    <div className="d-flex align-items-center gap-2">
-                      <div className="color-circle" style={{ width: '24px', height: '24px', backgroundColor: '#000', borderRadius: '50%', border: '2px solid #fff', outline: '2px solid #000' }}></div>
-                      <span className="fw-semibold text-dark" style={{ fontSize: '0.9rem' }}>Classic Black</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="col-sm-6">
-                  <div className="quantity-selection p-3 rounded-3 border" style={{ borderColor: '#f1f5f9', backgroundColor: '#f8fafc' }}>
-                    <p className="fw-semibold mb-1" style={{ color: '#64748b', fontSize: '0.85rem' }}>Order Volume</p>
-                    <div className="d-flex align-items-center gap-2 mt-1">
-                      <div className="d-inline-flex align-items-center border rounded overflow-hidden bg-white" style={{ borderColor: '#cbd5e1' }}>
-                        <button className="btn btn-light border-0 px-2 py-0 bg-white fw-bold" style={{ fontSize: '1.1rem', height: '28px' }} onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
-                        <input type="text" className="form-control border-0 text-center bg-white p-0 fw-bold" style={{ width: '32px', height: '28px', fontSize: '0.9rem' }} value={quantity} readOnly />
-                        <button className="btn btn-light border-0 px-2 py-0 bg-white fw-bold" style={{ fontSize: '1.1rem', height: '28px' }} onClick={() => setQuantity(quantity + 1)}>+</button>
+              {/* Features Small Slides Grid/Carousel */}
+              {product.features && (
+                <div className="features-slides-wrapper mb-4">
+                  <p className="fw-bold text-uppercase mb-3" style={{ fontSize: '0.82rem', letterSpacing: '1.2px', color: '#006CD0' }}>
+                    Key Product Features
+                  </p>
+                  <div ref={scrollRef} className="features-horizontal-scroll d-flex gap-3 overflow-auto pb-3 custom-scrollbar">
+                    {product.features.map((feat: string, fIdx: number) => (
+                      <div 
+                        key={fIdx} 
+                        className="feature-slide-card rounded-4 p-3 d-flex flex-column justify-content-between text-start shadow-sm"
+                        style={{ 
+                          minWidth: '180px', 
+                          width: '180px', 
+                          height: '110px', 
+                          background: 'linear-gradient(135deg, #f8fafc 0%, #edf5ff 100%)',
+                          border: '1px solid rgba(0, 108, 208, 0.06)',
+                          flexShrink: 0
+                        }}
+                      >
+                        <div className="feature-card-icon mb-1" style={{ color: '#006CD0' }}>
+                          <i className="bi bi-patch-check-fill fs-5"></i>
+                        </div>
+                        <span className="fw-bold text-dark" style={{ fontSize: '0.88rem', lineHeight: '1.3' }}>
+                          {feat}
+                        </span>
                       </div>
-                      <span className="text-muted" style={{ fontSize: '0.8rem' }}>Unit(s)</span>
-                    </div>
+                    ))}
                   </div>
                 </div>
-              </div>
+              )}
 
               <Link href="/contact" className="btn btn-primary w-100 py-3 rounded-pill fw-bold mb-5 shadow-sm text-uppercase d-flex align-items-center justify-content-center gap-2 transition-all hover-lift text-white text-decoration-none" style={{ backgroundColor: '#006CD0', letterSpacing: '1px', fontSize: '0.95rem' }}>
-                <i className="bi bi-telephone-outbound fs-5"></i> Enquire / Contact to Buy
+                <i className="bi bi-telephone-outbound fs-5"></i> Enquire Now / Contact Us
               </Link>
 
               {/* Accordion */}
@@ -125,19 +177,12 @@ const ServiceDetailsArea = () => {
                 <div className="accordion-item">
                   <h2 className="accordion-header">
                     <button className="accordion-button d-flex align-items-center gap-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDesc" aria-expanded="true">
-                       <i className="bi bi-card-text fs-5 text-muted"></i> Description
+                       <i className="bi bi-card-text fs-5 text-muted"></i> Product Overview
                     </button>
                   </h2>
                   <div id="collapseDesc" className="accordion-collapse collapse show" data-bs-parent="#productAccordion">
-                    <div className="accordion-body text-muted">
-                      <ul className="product-features-list">
-                        <li><strong>AUTOMATIC CONTROL:</strong> No need for manual monitoring; the system works on its own.</li>
-                        <li><strong>DRY RUN PROTECTION:</strong> Safeguards your pump from running without water.</li>
-                        <li><strong>ENERGY SAVING:</strong> Optimizes pump operation, reducing electricity consumption.</li>
-                        <li><strong>EASY INSTALLATION:</strong> Simple wiring with float sensors for tank and sump.</li>
-                        <li><strong>NO WATER WASTAGE:</strong> Prevents overflow and maintains efficient water usage.</li>
-                        <li><strong>RELIABLE PERFORMANCE:</strong> Ensures consistent water supply for daily use.</li>
-                      </ul>
+                    <div className="accordion-body text-muted" style={{ paddingLeft: '1.25rem' }}>
+                      {product.longDescription || `The Aquabrim ${product.title} is built to simplify and modernize the way water is monitored, controlled, and managed across residential, commercial, and industrial infrastructure.`}
                     </div>
                   </div>
                 </div>
@@ -150,10 +195,10 @@ const ServiceDetailsArea = () => {
                     </button>
                   </h2>
                   <div id="collapseTech" className="accordion-collapse collapse" data-bs-parent="#productAccordion">
-                    <div className="accordion-body text-muted">
+                    <div className="accordion-body text-muted" style={{ paddingLeft: '1.25rem' }}>
                       <p className="mb-2"><strong>Operating Voltage:</strong> 230V AC</p>
                       <p className="mb-2"><strong>Output Contacts:</strong> 10A Relay</p>
-                      <p className="mb-2"><strong>Sensor Type:</strong> Magnetic Float / Conductive</p>
+                      <p className="mb-2"><strong>Sensor Type:</strong> Magnetic Float / Conductive / Wireless</p>
                       <p className="mb-0"><strong>Enclosure:</strong> High-quality ABS plastic</p>
                     </div>
                   </div>
@@ -167,7 +212,7 @@ const ServiceDetailsArea = () => {
                     </button>
                   </h2>
                   <div id="collapseInfo" className="accordion-collapse collapse" data-bs-parent="#productAccordion">
-                    <div className="accordion-body text-muted">
+                    <div className="accordion-body text-muted" style={{ paddingLeft: '1.25rem' }}>
                       <p className="mb-2"><strong>Warranty:</strong> 1 Year Manufacturer Warranty</p>
                       <p className="mb-0"><strong>Support:</strong> 24/7 Technical Support available.</p>
                     </div>
@@ -186,20 +231,25 @@ const ServiceDetailsArea = () => {
             <div className="col-lg-6 mb-5 mb-lg-0 pe-lg-5 wow fadeInLeft">
               <h2 className="fw-bold mb-4 display-6" style={{ color: '#0f172a' }}>How It Works</h2>
               
-              <div className="mb-4">
-                <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Monitors Water Levels</h5>
-                <p className="text-muted" style={{ lineHeight: '1.7' }}>The automatic water level controller uses four magnetic float sensors, two in the overhead tank and two in the underground sump, to continuously monitor water levels. This helps the system stay aware of current conditions and maintain a consistent water supply.</p>
-              </div>
-
-              <div className="mb-4">
-                <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Controls the Motor Automatically</h5>
-                <p className="text-muted" style={{ lineHeight: '1.7' }}>When the tank water level drops below the set point and the sump has enough water, the automatic water pump controller automatically switches the motor ON to start filling. Once the tank reaches the upper level, it turns the motor OFF, preventing overflow and saving electricity.</p>
-              </div>
-
-              <div>
-                <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Protects the Pump:</h5>
-                <p className="text-muted" style={{ lineHeight: '1.7' }}>If the sump water level becomes too low, the controller keeps the motor OFF to prevent dry running. The system resumes operation automatically once the sump refills, ensuring safe and reliable performance every day.</p>
-              </div>
+              {product.howItWorks ? (
+                product.howItWorks.map((step: any, sIdx: number) => (
+                  <div key={sIdx} className="mb-4">
+                    <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>{step.title}</h5>
+                    <p className="text-muted" style={{ lineHeight: '1.7', fontSize: '0.96rem' }}>{step.desc}</p>
+                  </div>
+                ))
+              ) : (
+                <>
+                  <div className="mb-4">
+                    <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Monitors Water Levels</h5>
+                    <p className="text-muted" style={{ lineHeight: '1.7', fontSize: '0.96rem' }}>Continuous monitoring of water levels in tanks to ensure uninterrupted operational safety.</p>
+                  </div>
+                  <div className="mb-4">
+                    <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Intelligent Automation</h5>
+                    <p className="text-muted" style={{ lineHeight: '1.7', fontSize: '0.96rem' }}>Processes signal data automatically to control flow valves and pump starters seamlessly.</p>
+                  </div>
+                </>
+              )}
             </div>
             <div className="col-lg-6 wow fadeInRight">
                <div className="bg-white rounded-4 p-4 shadow-sm text-center h-100 d-flex align-items-center justify-content-center border overflow-hidden position-relative" style={{ borderColor: '#e2e8f0', minHeight: '400px' }}>
@@ -212,40 +262,26 @@ const ServiceDetailsArea = () => {
         </div>
       </div>
 
-      {/* Working Procedure Section */}
-      <div className="working-procedure-section py-5">
-        <div className="container py-lg-4">
-          <div className="row align-items-center flex-column-reverse flex-lg-row">
-            <div className="col-lg-6 mt-5 mt-lg-0 wow fadeInLeft">
-               <div className="bg-light rounded-4 p-5 shadow-sm text-center h-100 d-flex align-items-center justify-content-center" style={{ backgroundColor: '#f8fafc', minHeight: '400px' }}>
-                  <Image src={prod_controller} alt="Controller Front" className="img-fluid drop-shadow" style={{ maxHeight: '300px', objectFit: 'contain', filter: 'drop-shadow(0px 10px 20px rgba(0,0,0,0.15))' }} />
-               </div>
-            </div>
-            <div className="col-lg-6 ps-lg-5 wow fadeInRight">
-              <h2 className="fw-bold mb-4 display-6" style={{ color: '#0f172a' }}>Working Procedure</h2>
-              
-              <div className="mb-4">
-                <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Auto Mode</h5>
-                <p className="text-muted" style={{ lineHeight: '1.7' }}>In the automatic water control system, the motor switches ON automatically when the overhead tank water level drops below the water level switches, and it switches OFF automatically once the tank fills above the sensors. This ensures a consistent water supply without manual monitoring.</p>
-              </div>
-
-              <div className="mb-4">
-                <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Manual Mode</h5>
-                <p className="text-muted" style={{ lineHeight: '1.7' }}>The automatic water control system also includes a Manual Mode, allowing you to turn the motor ON manually whenever needed. In this mode, the motor runs continuously until it is switched OFF manually, giving you full control when automation isn't required.</p>
-              </div>
-
-              <div>
-                <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Off State</h5>
-                <p className="text-muted" style={{ lineHeight: '1.7' }}>When the switch is in the flat/off position, the device stays powered OFF. The water level switches remain inactive, and the system conserves energy until reactivated.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <style jsx>{`
         .product-details-section {
           background-color: #ffffff;
+        }
+
+        .features-horizontal-scroll {
+          scroll-behavior: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .feature-slide-card {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          cursor: grab;
+        }
+
+        .feature-slide-card:hover {
+          transform: translateY(-4px);
+          background: #ffffff !important;
+          border-color: rgba(0, 108, 208, 0.2) !important;
+          box-shadow: 0 10px 20px rgba(0, 108, 208, 0.06) !important;
         }
 
         /* Accordion Custom Styling - Premium Cards */

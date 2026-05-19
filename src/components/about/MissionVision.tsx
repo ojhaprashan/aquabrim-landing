@@ -17,7 +17,7 @@ const MissionVision = () => {
                 <div className="text-content">
                   <h3 className="card-title fw-bold mb-3">Our Mission</h3>
                   <p className="card-description mb-0">
-                    To make water management effortless, safe, and efficient through cutting-edge smart automation solutions that empower every household and industry.
+                    To develop reliable water level monitoring and automation systems that improve operational efficiency and support smarter infrastructure management.
                   </p>
                 </div>
               </div>
@@ -35,7 +35,7 @@ const MissionVision = () => {
                 <div className="text-content">
                   <h3 className="card-title fw-bold mb-3">Our Vision</h3>
                   <p className="card-description mb-0">
-                    To become the global leader in water automation, pioneering sustainable technologies that preserve our most precious resource for generations to come.
+                    To lead the future of water automation with intelligent, connected, and efficient infrastructure solutions.
                   </p>
                 </div>
               </div>
