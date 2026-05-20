@@ -5,10 +5,10 @@ const AboutPortfolio = () => {
   return (
     <section className="about-portfolio-section">
       <div className="container">
-        <div className="row align-items-center g-4 g-lg-5">
-
+        {/* Top Row: Image and Core Description */}
+        <div className="row align-items-center g-4 g-lg-5 mb-5">
           {/* Left Column: Image with premium decorative borders */}
-          <div className="col-lg-6 col-md-12 order-2 order-lg-1 mb-4 mb-lg-0">
+          <div className="col-lg-6 col-md-12 mb-4 mb-lg-0">
             <div className="portfolio-image-wrapper position-relative">
               <img
                 src="/assets/about/about.png"
@@ -19,9 +19,9 @@ const AboutPortfolio = () => {
             </div>
           </div>
 
-          {/* Right Column: Content and Portfolio Items */}
-          <div className="col-lg-6 col-md-12 order-1 order-lg-2">
-            <div className="portfolio-content text-center text-lg-start">
+          {/* Right Column: Core text description */}
+          <div className="col-lg-6 col-md-12">
+            <div className="portfolio-content text-start">
               <span className="subtitle text-uppercase text-primary fw-bold">About Aquabrim</span>
               <div className="title-line"></div>
 
@@ -38,64 +38,67 @@ const AboutPortfolio = () => {
               <p className="description mb-3">
                 From wireless water level automation systems to advanced industrial monitoring technologies, we design solutions that combine engineering reliability with smart automation to solve real-world water management challenges.
               </p>
-              <p className="description mb-4">
+              <p className="description mb-0">
                 With a strong focus on innovation, scalability, and long-term performance, Aquabrim continues to help homes, businesses, industries, and infrastructure projects transition toward smarter and more efficient water management systems.
               </p>
-
-              <h4 className="portfolio-title fw-bold mb-4">OUR EXPERTISE</h4>
-
-              <div className="portfolio-list">
-                {/* Item 1: Smart Water Automation */}
-                <div className="portfolio-item-custom">
-                  <div className="d-flex align-items-center gap-3">
-                    <div className="icon-badge">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-broadcast" viewBox="0 0 16 16">
-                        <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.122a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.314.5.5 0 1 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM6 8a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                      </svg>
-                    </div>
-                    <span className="item-text-title fw-bold">Smart Water Automation</span>
-                  </div>
-                  <p className="item-text-desc text-muted mb-0">
-                    Intelligent automation systems designed for efficient water monitoring and control.
-                  </p>
-                </div>
-
-                {/* Item 2: Industrial Monitoring Solutions */}
-                <div className="portfolio-item-custom">
-                  <div className="d-flex align-items-center gap-3">
-                    <div className="icon-badge">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M0 6a1 1 0 0 1 1-1h3.5v1H1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h3.5v1H1a1 1 0 0 1-1-1V6zm11.5-1H15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-3.5v-1H15a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-3.5v-1z" />
-                        <path d="M5 8a3 3 0 1 1 6 0 3 3 0 0 1-6 0z" />
-                        <path d="M7.5 5h1V1.5h-1V5zM6 1.5h4v1H6v-1z" />
-                      </svg>
-                    </div>
-                    <span className="item-text-title fw-bold">Industrial Monitoring Solutions</span>
-                  </div>
-                  <p className="item-text-desc text-muted mb-0">
-                    Advanced sensing, flow management, and automation technologies for industrial infrastructure.
-                  </p>
-                </div>
-
-                {/* Item 3: System Integration & Services */}
-                <div className="portfolio-item-custom">
-                  <div className="d-flex align-items-center gap-3">
-                    <div className="icon-badge">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-gear-fill" viewBox="0 0 16 16">
-                        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
-                      </svg>
-                    </div>
-                    <span className="item-text-title fw-bold">System Integration & Services</span>
-                  </div>
-                  <p className="item-text-desc text-muted mb-0">
-                    End-to-end implementation, integration, and technical support for automation projects.
-                  </p>
-                </div>
-              </div>
-
             </div>
           </div>
+        </div>
 
+        {/* Bottom Row: Our Expertise (Full-Width Grid) */}
+        <div className="row mt-5">
+          <div className="col-12">
+            <h4 className="portfolio-title fw-bold text-center mb-4">OUR EXPERTISE</h4>
+            
+            <div className="portfolio-list">
+              {/* Item 1: Smart Water Automation */}
+              <div className="portfolio-item-custom">
+                <div className="d-flex align-items-center gap-3">
+                  <div className="icon-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-broadcast" viewBox="0 0 16 16">
+                      <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.122a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.314.5.5 0 1 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM6 8a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                    </svg>
+                  </div>
+                  <span className="item-text-title fw-bold">Smart Water Automation</span>
+                </div>
+                <p className="item-text-desc text-muted mb-0">
+                  Intelligent automation systems designed for efficient water monitoring and control.
+                </p>
+              </div>
+
+              {/* Item 2: Industrial Monitoring Solutions */}
+              <div className="portfolio-item-custom">
+                <div className="d-flex align-items-center gap-3">
+                  <div className="icon-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M0 6a1 1 0 0 1 1-1h3.5v1H1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h3.5v1H1a1 1 0 0 1-1-1V6zm11.5-1H15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-3.5v-1H15a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-3.5v-1z" />
+                      <path d="M5 8a3 3 0 1 1 6 0 3 3 0 0 1-6 0z" />
+                      <path d="M7.5 5h1V1.5h-1V5zM6 1.5h4v1H6v-1z" />
+                    </svg>
+                  </div>
+                  <span className="item-text-title fw-bold">Industrial Monitoring Solutions</span>
+                </div>
+                <p className="item-text-desc text-muted mb-0">
+                  Advanced sensing, flow management, and automation technologies for industrial infrastructure.
+                </p>
+              </div>
+
+              {/* Item 3: System Integration & Services */}
+              <div className="portfolio-item-custom">
+                <div className="d-flex align-items-center gap-3">
+                  <div className="icon-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-gear-fill" viewBox="0 0 16 16">
+                      <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                    </svg>
+                  </div>
+                  <span className="item-text-title fw-bold">System Integration & Services</span>
+                </div>
+                <p className="item-text-desc text-muted mb-0">
+                  End-to-end implementation, integration, and technical support for automation projects.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -257,6 +260,27 @@ const AboutPortfolio = () => {
           color: #64748b;
           line-height: 1.6;
           padding-left: 64px;
+        }
+
+        @media (min-width: 992px) {
+          .portfolio-list {
+            flex-direction: row;
+            gap: 16px;
+          }
+
+          .portfolio-item-custom {
+            flex: 1;
+            padding: 16px;
+          }
+
+          .portfolio-item-custom:hover {
+            transform: translateY(-8px);
+          }
+
+          .item-text-desc {
+            padding-left: 0;
+            margin-top: 8px;
+          }
         }
 
         @media (max-width: 991px) {

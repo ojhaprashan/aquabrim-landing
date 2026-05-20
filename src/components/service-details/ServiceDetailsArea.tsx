@@ -171,54 +171,7 @@ const ServiceDetailsArea = () => {
                 <i className="bi bi-telephone-outbound fs-5"></i> Enquire Now / Contact Us
               </Link>
 
-              {/* Accordion */}
-              <div className="accordion custom-accordion" id="productAccordion">
-                {/* Description */}
-                <div className="accordion-item">
-                  <h2 className="accordion-header">
-                    <button className="accordion-button d-flex align-items-center gap-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDesc" aria-expanded="true">
-                       <i className="bi bi-card-text fs-5 text-muted"></i> Product Overview
-                    </button>
-                  </h2>
-                  <div id="collapseDesc" className="accordion-collapse collapse show" data-bs-parent="#productAccordion">
-                    <div className="accordion-body text-muted" style={{ paddingLeft: '1.25rem' }}>
-                      {product.longDescription || `The Aquabrim ${product.title} is built to simplify and modernize the way water is monitored, controlled, and managed across residential, commercial, and industrial infrastructure.`}
-                    </div>
-                  </div>
-                </div>
 
-                {/* Tech Specs */}
-                <div className="accordion-item">
-                  <h2 className="accordion-header">
-                    <button className="accordion-button collapsed d-flex align-items-center gap-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTech">
-                       <i className="bi bi-sliders fs-5 text-muted"></i> Technical Specifications
-                    </button>
-                  </h2>
-                  <div id="collapseTech" className="accordion-collapse collapse" data-bs-parent="#productAccordion">
-                    <div className="accordion-body text-muted" style={{ paddingLeft: '1.25rem' }}>
-                      <p className="mb-2"><strong>Operating Voltage:</strong> 230V AC</p>
-                      <p className="mb-2"><strong>Output Contacts:</strong> 10A Relay</p>
-                      <p className="mb-2"><strong>Sensor Type:</strong> Magnetic Float / Conductive / Wireless</p>
-                      <p className="mb-0"><strong>Enclosure:</strong> High-quality ABS plastic</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Additional Info */}
-                <div className="accordion-item">
-                  <h2 className="accordion-header">
-                    <button className="accordion-button collapsed d-flex align-items-center gap-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInfo">
-                       <i className="bi bi-info-circle fs-5 text-muted"></i> Additional Information
-                    </button>
-                  </h2>
-                  <div id="collapseInfo" className="accordion-collapse collapse" data-bs-parent="#productAccordion">
-                    <div className="accordion-body text-muted" style={{ paddingLeft: '1.25rem' }}>
-                      <p className="mb-2"><strong>Warranty:</strong> 1 Year Manufacturer Warranty</p>
-                      <p className="mb-0"><strong>Support:</strong> 24/7 Technical Support available.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
