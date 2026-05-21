@@ -6,10 +6,9 @@ import Image from 'next/image';
 const HeroAreaHomeOne = () => {
   // --- 1. Typewriter State ---
   const phrases = [
-    "Smart Water Automation",
-    "Reliable Motor Protection",
-    "Advanced Level Monitoring",
-    "Automatic Overflow Control"
+    "Homes",
+    "Apartments",
+    "Industries"
   ];
 
   const [text, setText] = useState('');
@@ -71,31 +70,31 @@ const HeroAreaHomeOne = () => {
             <div className="slider-content" style={{ visibility: 'visible', opacity: 1 }}>
 
               <h1 className="main-title">
-                {/* Position relative container holds the space so layout doesn't jump */}
-                <div className="position-relative">
+                Smartest Water Level Controller for{' '}
+                <span className="position-relative d-inline-block" style={{ color: '#006CD0' }}>
                   {/* Invisible placeholder of the longest text ensures container is always the right size */}
-                  <span className="invisible d-block" aria-hidden="true" style={{ pointerEvents: 'none', userSelect: 'none' }}>
-                    Automatic Overflow Control
+                  <span className="invisible" aria-hidden="true" style={{ pointerEvents: 'none', userSelect: 'none' }}>
+                    Apartments&nbsp;&nbsp;
                   </span>
 
-                  {/* The actual typing text positioned directly over the invisible placeholder - NOW THEME BLUE */}
-                  <div className="position-absolute top-0 start-0 w-100 h-100" style={{ color: '#006CD0' }}>
+                  {/* The actual typing text positioned directly over the invisible placeholder */}
+                  <span className="position-absolute top-0 start-0 w-100 h-100">
                     {text}
                     <span className="cursor">|</span>
-                  </div>
-                </div>
+                  </span>
+                </span>
               </h1>
 
               <p>
-                Prevent tank overflow, protect motors from dry-run, and maintain a consistent water supply completely automatically.
+                Prevent tank overflow, protect motors from dry-run, and maintain a consistent water supply with Aquabrim.
               </p>
 
               <div className='buttons'>
                 <div className="solar-btn slider1">
-                  <Link href="/service-details">Our Service <i className="bi bi-arrow-right"></i></Link>
+                  <Link href="/service">Our Products <i className="bi bi-arrow-right"></i></Link>
                 </div>
                 <div className="solar-btn slider2">
-                  <Link href="/about">More About! <i className="bi bi-arrow-right"></i></Link>
+                  <Link href="/contact">Talk to Expert <i className="bi bi-arrow-right"></i></Link>
                 </div>
               </div>
             </div>
@@ -193,6 +192,7 @@ const HeroAreaHomeOne = () => {
           margin-bottom: 20px !important;
           font-weight: 800 !important;
           font-size: 2.5rem !important; 
+          line-height: 1.25 !important;
         }
         
         .slider-content p {
@@ -250,7 +250,6 @@ const HeroAreaHomeOne = () => {
              padding-top: 50px !important; 
           }
           .slider-content h1 {
-            white-space: nowrap !important; 
             font-size: 2.8rem !important; 
           }
         }

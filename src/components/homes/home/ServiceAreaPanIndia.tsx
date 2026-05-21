@@ -3,14 +3,23 @@ import React from 'react';
 import Image from 'next/image';
 
 const ServiceAreaPanIndia = () => {
-  const cities_col_1 = [
-    "Chennai", "Bengaluru", "Coimbatore", "Madurai", "Trichy", 
-    "Salem", "Tiruppur", "Erode", "Hyderabad", "Vizag"
+  const states_col_1 = [
+    "Punjab", 
+    "Uttarakhand", 
+    "Delhi (Head Office)", 
+    "Rajasthan", 
+    "Uttar Pradesh", 
+    "Bihar", 
+    "West Bengal"
   ];
   
-  const cities_col_2 = [
-    "Pune", "Mumbai", "Delhi", "Ahmedabad", "Kolkata", 
-    "Surat", "Vijayawada", "Visakhapatnam", "Kochi", "Mysuru"
+  const states_col_2 = [
+    "Odisha", 
+    "Maharashtra", 
+    "Goa", 
+    "Karnataka", 
+    "Tamil Nadu", 
+    "Kerala"
   ];
 
   return (
@@ -31,7 +40,7 @@ const ServiceAreaPanIndia = () => {
                   <i className="bi bi-geo-alt-fill text-primary fs-4"></i>
                 </div>
                 <div>
-                  <h6 className="fw-bold mb-0">20+ Cities</h6>
+                  <h6 className="fw-bold mb-0">15+ Cities served</h6>
                 </div>
               </div>
               
@@ -40,7 +49,7 @@ const ServiceAreaPanIndia = () => {
                   <i className="bi bi-house-door-fill text-primary fs-4"></i>
                 </div>
                 <div>
-                  <h6 className="fw-bold mb-0">5,000+ Installations</h6>
+                  <h6 className="fw-bold mb-0">50,000+ Customers</h6>
                 </div>
               </div>
               
@@ -83,25 +92,34 @@ const ServiceAreaPanIndia = () => {
             </div>
           </div>
 
-          {/* Right Side: City List */}
+          {/* Right Side: State List */}
           <div className="col-lg-4 col-md-6 wow fadeInRight">
             <div className="row">
               <div className="col-6">
                 <ul className="list-unstyled">
-                  {cities_col_1.map((city, idx) => (
+                  {states_col_1.map((state, idx) => (
                     <li key={idx} className="mb-3 d-flex align-items-center">
                       <i className="bi bi-geo-alt-fill text-primary me-2 small"></i>
-                      <span className="text-secondary small fw-medium">{city}</span>
+                      {state === "Delhi (Head Office)" ? (
+                        <span className="fw-bold text-dark d-flex flex-wrap align-items-center" style={{ fontSize: '0.85rem' }}>
+                          Delhi
+                          <span className="badge bg-primary text-white ms-2" style={{ fontSize: '0.62rem', padding: '3px 8px' }}>
+                            Head Office
+                          </span>
+                        </span>
+                      ) : (
+                        <span className="text-secondary small fw-medium">{state}</span>
+                      )}
                     </li>
                   ))}
                 </ul>
               </div>
               <div className="col-6">
                 <ul className="list-unstyled">
-                  {cities_col_2.map((city, idx) => (
+                  {states_col_2.map((state, idx) => (
                     <li key={idx} className="mb-3 d-flex align-items-center">
                       <i className="bi bi-geo-alt-fill text-primary me-2 small"></i>
-                      <span className="text-secondary small fw-medium">{city}</span>
+                      <span className="text-secondary small fw-medium">{state}</span>
                     </li>
                   ))}
                 </ul>

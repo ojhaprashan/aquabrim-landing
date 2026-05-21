@@ -137,7 +137,7 @@ const OurJourney = () => {
 
       <style jsx>{`
         .journey-section {
-          background: radial-gradient(circle at 10% 20%, rgba(243, 248, 255, 0.6) 0%, rgba(255, 255, 255, 1) 90%);
+          background: #ffffff;
           padding: 100px 0;
           width: 100% !important;
           display: block !important;

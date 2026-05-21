@@ -16,8 +16,8 @@ const About = () => {
       <main>
         <AboutPortfolio />
         <MissionVision />
-        <TestimonialAreaHomeOne />
         <OurJourney />
+        <TestimonialAreaHomeOne />
         <Founders />
         <ServiceAreaPanIndia />
       </main>
