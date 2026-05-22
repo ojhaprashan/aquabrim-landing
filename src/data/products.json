@@ -6,6 +6,11 @@
     "title": "Ripple",
     "description": "Smart Municipal Water Level Controller",
     "imgKey": "prod_controller",
+    "images": [
+      "/assets/Product/ripple_1.png",
+      "/assets/Product/ripple_2.png",
+      "/assets/Product/ripple_3.png"
+    ],
     "longDescription": "Ripple is Aquabrim’s Smart Municipal Water Level Controller developed for homes, apartments, and commercial buildings. Designed for modern urban infrastructure, the system automatically detects water availability in the main supply line and manages motor operations to maintain ideal tank water levels without manual effort. Using advanced wireless water level sensor technology, Ripple supports real-time water monitoring, automatic tank filling, overflow prevention, and motor safety. With intelligent automation, wireless connectivity, dry run protection, and remote monitoring features, Ripple offers an efficient, reliable, and seamless water management solution.",
     "howItWorks": [
       { "title": "Detects Water Supply Automatically", "desc": "Ripple continuously monitors the municipal water supply line using intelligent water controller sensors to detect water availability in real time." },
@@ -33,6 +38,11 @@
     "title": "i-BOT A",
     "description": "Smart Water Tank Level Controller",
     "imgKey": "prod_controller",
+    "images": [
+      "/assets/Product/ibot_1.png",
+      "/assets/Product/ibot _2.png",
+      "/assets/Product/ibot_3.png"
+    ],
     "longDescription": "i-BOT A is Aquabrim’s Smart Water Tank Level Controller designed for efficient water management in residential infrastructure. The system automatically monitors water levels in both underground and overhead tanks and controls motor operations to maintain optimal water availability without manual intervention. Built with advanced wireless technology, i-BOT A enables real-time tank monitoring, automatic motor control, dry run protection, and voltage safety features for reliable day-to-day operation. With maintenance-free sensors, digital tank level display, and battery-powered transmitters, i-BOT A delivers a smarter, safer, and hassle-free water automation experience for modern homes.",
     "howItWorks": [
       { "title": "Monitors Tank Water Levels", "desc": "i-BOT A continuously monitors water levels in both overhead and underground tanks using intelligent wireless sensors." },
@@ -60,6 +70,11 @@
     "title": "i-BOT P",
     "description": "Smart Borewell Water Controller",
     "imgKey": "prod_controller",
+    "images": [
+      "/assets/Product/ibot_3.png",
+      "/assets/Product/ibot _2.png",
+      "/assets/Product/ibot_1.png"
+    ],
     "longDescription": "i-BOT P is Smart Borewell Water Controller designed for homes using borewell and submersible pump systems. The system intelligently monitors water levels in underground and overhead tanks and automatically controls motor operations to ensure efficient and uninterrupted water management. Built with advanced wireless technology, i-BOT P enables automatic tank filling, real-time water level monitoring, dry run protection, and voltage safety for reliable daily operation. With battery-powered transmitters, maintenance-free sensors, and digital tank level display, i-BOT P delivers a safe, efficient, and hassle-free water automation solution for modern residential infrastructure.",
     "howItWorks": [
       { "title": "Monitors Tank Water Levels", "desc": "i-BOT P continuously tracks water levels in overhead and underground tanks using intelligent wireless sensors." },
@@ -87,6 +102,11 @@
     "title": "MATRIX",
     "description": "Multi-Tank Water Level Controller",
     "imgKey": "prod_tank_monitor",
+    "images": [
+      "/assets/Product/matix_1.png",
+      "/assets/Product/matrix_2.png",
+      "/assets/Product/matrix_3.png"
+    ],
     "longDescription": "MATRIX is Aquabrim’s Multi-Tank Water Level Controller designed for intelligent monitoring and automated water management across residential, commercial, and industrial infrastructure. The system continuously monitors tank water levels in real time and automatically controls motors based on water availability and predefined operating conditions. Built with advanced wireless technology, MATRIX supports multi-tank automation, dual motor control, remote monitoring, dry run protection, and pressure-based operations for efficient and reliable performance. With smart automation features, MODBUS integration, and web-based monitoring capabilities, MATRIX delivers a complete and scalable water management solution for modern infrastructure.",
     "howItWorks": [
       { "title": "Monitors Water Levels in Real Time", "desc": "MATRIX continuously tracks water levels across overhead and underground tanks with high-accuracy monitoring." },
@@ -113,6 +133,11 @@
     "title": "FLEXIBELL",
     "description": "Wireless Water Level Alarm",
     "imgKey": "prod_tank_monitor",
+    "images": [
+      "/assets/Product/flexibell_1.png",
+      "/assets/Product/flexibell_2.png",
+      "/assets/Product/flexibeell_3.png"
+    ],
     "longDescription": "FLEXIBELL is Aquabrim’s wireless water level alarm and indicator system designed for real-time tank monitoring and timely water management. The system continuously tracks water levels across multiple tanks and provides instant alerts for low level, full tank, and overflow conditions to ensure efficient water operations. Built with advanced wireless communication technology, FLEXIBELL enables real-time water level indication, configurable tank alerts, SMS notifications, and pressure monitoring for modern residential, commercial, and industrial infrastructure. With multi-tank support and easy on-site configuration, FLEXIBELL delivers a reliable and convenient water level monitoring solution.",
     "howItWorks": [
       { "title": "Monitors Tank Levels in Real Time", "desc": "FLEXIBELL continuously tracks water levels across overhead and underground tanks with accurate real-time indication." },

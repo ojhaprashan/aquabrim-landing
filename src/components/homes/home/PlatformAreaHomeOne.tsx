@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import mockup from '../../../../public/assets/images/resource/multi-device-mockup.png';
+import mockup from "@/assets/Application/application.png";
 
 const PlatformAreaHomeOne = () => {
   return (

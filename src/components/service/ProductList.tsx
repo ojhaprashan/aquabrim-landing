@@ -28,10 +28,17 @@ const imageMap: Record<string, any> = {
   accessories_img
 };
 
-export const products = productsData.map((item) => ({
-  ...item,
-  img: imageMap[item.imgKey] || accessories_img
-}));
+export const products = productsData.map((item) => {
+  const customImages = (item as any).images;
+  const images = customImages && customImages.length > 0
+    ? customImages
+    : [imageMap[item.imgKey] || accessories_img];
+  return {
+    ...item,
+    img: images[0],
+    images: images
+  };
+});
 
 const ProductList = () => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -82,8 +89,10 @@ const ProductList = () => {
                           <Image 
                             src={product.img} 
                             alt={product.title} 
+                            width={450}
+                            height={450}
                             className="w-100 h-100"
-                            style={{ objectFit: 'cover', objectPosition: 'top' }}
+                            style={{ objectFit: 'contain' }}
                           />
                         </div>
                       </div>
@@ -180,9 +189,8 @@ const ProductList = () => {
 
         .product-image-container {
           background-color: #f8fafc;
-          aspect-ratio: 4 / 3;
+          aspect-ratio: 1 / 1;
           overflow: hidden;
-          padding: 0 !important;
           position: relative;
         }
 
@@ -190,7 +198,7 @@ const ProductList = () => {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.1));
+          background: transparent;
           z-index: 1;
           pointer-events: none;
         }
@@ -204,6 +212,7 @@ const ProductList = () => {
           display: flex;
           align-items: center;
           justify-content: center;
+          padding: 12px;
         }
 
         .premium-product-card:hover .image-hover-zoom {
@@ -309,7 +318,7 @@ const ProductList = () => {
             margin: 8px auto 0;
           }
           .product-image-container {
-            aspect-ratio: 4 / 3;
+            aspect-ratio: 1 / 1;
             height: auto;
             padding: 0 !important;
           }

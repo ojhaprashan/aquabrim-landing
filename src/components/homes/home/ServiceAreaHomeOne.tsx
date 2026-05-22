@@ -5,14 +5,15 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 
-import service_img_1 from "@/assets/images/resource/prod_controller.png";
-import service_img_2 from "@/assets/images/resource/prod_valve.png";
-import service_img_3 from "@/assets/images/resource/prod_tank_monitor.png";
-import service_img_4 from "@/assets/images/resource/prod_starter.png";
-
 import service_icon_1 from "@/assets/images/resource/service-icon1.png";
 import service_icon_2 from "@/assets/images/resource/service-icon2.png";
 import service_icon_3 from "@/assets/images/resource/service-icon3.png";
+
+import service_img_1 from "../../../../public/assets/Product/ripple_1.png";
+import service_img_2 from "../../../../public/assets/Product/flexibell_1.png";
+import service_img_3 from "../../../../public/assets/Product/ibot_1.png";
+import service_img_4 from "../../../../public/assets/Product/ibot_3.png";
+import service_img_5 from "../../../../public/assets/Product/matrix_2.png";
 
 const custom_products = [
   {
@@ -41,7 +42,7 @@ const custom_products = [
   },
   {
     id: 4,
-    img: service_img_1,
+    img: service_img_5,
     icon: service_icon_2,
     title: "Matrix",
     category: "Multi-Tank Water Level Controller",
@@ -111,7 +112,7 @@ const ServiceAreaHomeOne = ({ style, style_2 }: any) => {
                       </div>
                       <div className="service-text">
                         <h4 className="mb-1"><Link href="/service-details">{item.title}</Link></h4>
-                        <h6 className="fw-semibold mb-3" style={{ fontSize: '0.85rem', color: '#a5f3fc' }}>{item.category}</h6>
+                        <h6 className="fw-semibold mb-3 service-subtitle">{item.category}</h6>
                         <p className="mb-3" style={{ fontSize: '0.88rem', lineHeight: '1.5', color: '#f1f5f9' }}>{item.sm_des}</p>
                         <Link href="/service-details">Product Details <i className="bi bi-arrow-up-right"></i></Link>
                       </div>
@@ -123,6 +124,17 @@ const ServiceAreaHomeOne = ({ style, style_2 }: any) => {
           </Swiper>
         </div>
       </div>
+
+      <style jsx>{`
+        .service-subtitle {
+          font-size: 0.85rem;
+          color: rgba(255, 255, 255, 0.85) !important;
+          transition: color 0.4s ease-in-out;
+        }
+        .service-box:hover .service-subtitle {
+          color: #38bdf8 !important; /* cyan/sky-blue highlight on black hover background */
+        }
+      `}</style>
     </>
   );
 };

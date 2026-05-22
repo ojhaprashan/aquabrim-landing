@@ -3,59 +3,60 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+const phrases = [
+  "Homes",
+  "Apartments",
+  "Industries"
+];
+
 const HeroAreaHomeOne = () => {
   // --- 1. Typewriter State ---
-  const phrases = [
-    "Homes",
-    "Apartments",
-    "Industries"
-  ];
-
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(150);
 
   // --- 2. Slider State ---
   const sliderImages = [
-    "/assets/images/hero/product-hero.png",
-    "/assets/images/hero/product-hero2.png",
-    "/assets/images/hero/product-hero3.png"
+    "/assets/home/for homes.png",
+    "/assets/home/for apartments.png",
+    "/assets/home/for industries.png"
   ];
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // --- Typewriter Effect Logic ---
   useEffect(() => {
-    const handleType = () => {
-      const i = loopNum % phrases.length;
-      const fullText = phrases[i];
+    let timer: NodeJS.Timeout;
+    const currentPhrase = phrases[loopNum % phrases.length];
 
-      setText(isDeleting
-        ? fullText.substring(0, text.length - 1)
-        : fullText.substring(0, text.length + 1)
-      );
+    if (isDeleting) {
+      timer = setTimeout(() => {
+        setText((prev) => prev.slice(0, -1));
+      }, 50);
+    } else {
+      timer = setTimeout(() => {
+        setText(currentPhrase.slice(0, text.length + 1));
+      }, 150);
+    }
 
-      setTypingSpeed(isDeleting ? 50 : 150);
+    if (!isDeleting && text === currentPhrase) {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        setIsDeleting(true);
+      }, 2000);
+    }
 
-      if (!isDeleting && text === fullText) {
-        setTimeout(() => setIsDeleting(true), 2000);
-      } else if (isDeleting && text === '') {
-        setIsDeleting(false);
-        setLoopNum(loopNum + 1);
-      }
-    };
+    if (isDeleting && text === '') {
+      setIsDeleting(false);
+      setLoopNum((prev) => prev + 1);
+    }
 
-    const timer = setTimeout(handleType, typingSpeed);
     return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum, typingSpeed, phrases]);
+  }, [text, isDeleting, loopNum]);
 
-  // --- Auto-play Slider Logic ---
+  // --- Auto-play & Sync Slider Logic ---
   useEffect(() => {
-    const slideTimer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
-    }, 3000);
-    return () => clearInterval(slideTimer);
-  }, [sliderImages.length]);
+    setCurrentSlide(loopNum % phrases.length);
+  }, [loopNum]);
 
   return (
     <section

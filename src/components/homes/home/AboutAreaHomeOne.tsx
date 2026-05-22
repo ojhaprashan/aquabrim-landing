@@ -3,8 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import about_thumb from "@/assets/images/about/about-thumb.jpg";
-import about_shape from "@/assets/images/about/about-shape.png";
+import about_thumb from "@/assets/home/home page image.png";
 
 const AboutAreaHomeOne = ({ style, hideClients, hideImpact }: any) => {
 
@@ -37,29 +36,9 @@ const AboutAreaHomeOne = ({ style, hideClients, hideImpact }: any) => {
                 <div className="about-thumb position-relative">
                   <Image src={about_thumb} style={{ height: "auto", borderRadius: "8px" }} alt="Aquabrim Installation" />
 
-                  {/* Floating Box 1: Experience */}
-                  <div className="about-counter">
-                    <div className="about-counter-text">
-                      <div className="about-numbar">
-                        <h4 className="counter">16</h4>
-                        <span>+</span>
-                      </div>
-                      <div className="about-text">
-                        <h5>Years Experience</h5>
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* Floating Box 2: Satisfied Clients */}
-                  <div className="about-counter-two d-flex align-items-center shadow-lg bg-white rounded p-3">
-                    <div className="about-counter-img me-3">
-                      <Image src={about_shape} alt="Client Icon" width={50} height={50} />
-                    </div>
-                    <div className="about-number-two">
-                      <h4 className="counter text-primary mb-0 fw-bold">3000+</h4>
-                      <h5 className="text-muted mb-0" style={{ fontSize: '14px' }}>Clients Served</h5>
-                    </div>
-                  </div>
+
+
                 </div>
               </div>
             </div>
@@ -89,29 +68,9 @@ const AboutAreaHomeOne = ({ style, hideClients, hideImpact }: any) => {
                 <div className="about-thumb position-relative mx-auto" style={{ maxWidth: '480px' }}>
                   <Image src={about_thumb} style={{ height: "auto", borderRadius: "8px", width: "100%" }} alt="Aquabrim Installation" />
 
-                  {/* Floating Box 1: Experience */}
-                  <div className="about-counter">
-                    <div className="about-counter-text">
-                      <div className="about-numbar">
-                        <h4 className="counter">16</h4>
-                        <span>+</span>
-                      </div>
-                      <div className="about-text">
-                        <h5>Years Experience</h5>
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* Floating Box 2: Satisfied Clients */}
-                  <div className="about-counter-two d-flex align-items-center shadow-lg bg-white rounded p-3">
-                    <div className="about-counter-img me-3">
-                      <Image src={about_shape} alt="Client Icon" width={50} height={50} />
-                    </div>
-                    <div className="about-number-two">
-                      <h4 className="counter text-primary mb-0 fw-bold">3000+</h4>
-                      <h5 className="text-muted mb-0" style={{ fontSize: '14px' }}>Clients Served</h5>
-                    </div>
-                  </div>
+
+
                 </div>
               </div>
 
@@ -124,32 +83,32 @@ const AboutAreaHomeOne = ({ style, hideClients, hideImpact }: any) => {
                   justifyContent: 'start',
                   textAlign: 'left'
                 }}>
-                  <div className="d-flex align-items-start">
-                    <i className="bi bi-check-circle-fill text-success me-2 mt-1" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
+                  <div className="d-flex align-items-center">
+                    <i className="bi bi-check-circle-fill text-success me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
                     <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#4a5568', lineHeight: '1.4' }}>Detects water supply availability</span>
                   </div>
-                  <div className="d-flex align-items-start">
-                    <i className="bi bi-check-circle-fill text-success me-2 mt-1" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
+                  <div className="d-flex align-items-center">
+                    <i className="bi bi-check-circle-fill text-success me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
                     <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#4a5568', lineHeight: '1.4' }}>Prevents dry-run damage</span>
                   </div>
-                  <div className="d-flex align-items-start">
-                    <i className="bi bi-check-circle-fill text-success me-2 mt-1" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
+                  <div className="d-flex align-items-center">
+                    <i className="bi bi-check-circle-fill text-success me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
                     <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#4a5568', lineHeight: '1.4' }}>Monitors tank water level</span>
                   </div>
-                  <div className="d-flex align-items-start">
-                    <i className="bi bi-check-circle-fill text-success me-2 mt-1" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
+                  <div className="d-flex align-items-center">
+                    <i className="bi bi-check-circle-fill text-success me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
                     <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#4a5568', lineHeight: '1.4' }}>Avoids overflow and wastage</span>
                   </div>
-                  <div className="d-flex align-items-start">
-                    <i className="bi bi-check-circle-fill text-success me-2 mt-1" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
+                  <div className="d-flex align-items-center">
+                    <i className="bi bi-check-circle-fill text-success me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
                     <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#4a5568', lineHeight: '1.4' }}>Starts motor when level is low</span>
                   </div>
-                  <div className="d-flex align-items-start">
-                    <i className="bi bi-check-circle-fill text-success me-2 mt-1" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
+                  <div className="d-flex align-items-center">
+                    <i className="bi bi-check-circle-fill text-success me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
                     <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#4a5568', lineHeight: '1.4' }}>Maintains Consistent Water Supply</span>
                   </div>
-                  <div className="d-flex align-items-start">
-                    <i className="bi bi-check-circle-fill text-success me-2 mt-1" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
+                  <div className="d-flex align-items-center">
+                    <i className="bi bi-check-circle-fill text-success me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
                     <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#4a5568', lineHeight: '1.4' }}>Stops motor when tank is full</span>
                   </div>
                 </div>

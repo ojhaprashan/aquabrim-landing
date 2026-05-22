@@ -14,7 +14,7 @@ import service_details_2 from "@/assets/images/resource/service-details2.png";
 const ServiceDetailsArea = () => {
   const searchParams = useSearchParams();
   const productId = searchParams.get('id');
-  const product = products.find(p => p.id === Number(productId)) || products[0];
+  const product = (products.find(p => p.id === Number(productId)) || products[0]) as any;
 
   const [selectedImage, setSelectedImage] = useState<any>(null);
   const scrollRef = React.useRef<HTMLDivElement>(null);
@@ -77,8 +77,7 @@ const ServiceDetailsArea = () => {
 
   const mainImage = selectedImage || product.img;
 
-  const defaultThumbnails = [prod_controller, prod_starter, prod_tank_monitor, prod_valve];
-  const images = [product.img, ...defaultThumbnails.filter(img => img !== product.img)];
+  const images = product.images || [product.img];
 
   return (
     <section className="product-details-section pt-100 pb-120">
@@ -88,14 +87,21 @@ const ServiceDetailsArea = () => {
           {/* Left: Images */}
           <div className="col-lg-6 mb-5 mb-lg-0">
             <div className="product-gallery sticky-lg-top" style={{ top: '100px' }}>
-              <div className="main-image-wrapper bg-light rounded-4 p-4 mb-3 text-center position-relative shadow-sm" style={{ aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8fafc' }}>
-                 <Image src={mainImage} alt={product.title} className="img-fluid" style={{ maxHeight: '100%', objectFit: 'contain' }} />
+              <div className="main-image-wrapper bg-light rounded-4 p-3 mb-3 text-center position-relative shadow-sm overflow-hidden" style={{ aspectRatio: '1/1', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8fafc' }}>
+                 <Image 
+                   src={mainImage} 
+                   alt={product.title} 
+                   width={600}
+                   height={600}
+                   className="w-100 h-100" 
+                   style={{ objectFit: 'contain' }} 
+                 />
               </div>
-              <div className="thumbnail-gallery d-flex gap-3 overflow-auto pb-2 custom-scrollbar">
-                {images.map((img, idx) => (
+              <div className="thumbnail-gallery d-flex gap-3 overflow-auto pb-2 custom-scrollbar justify-content-md-start justify-content-center">
+                {images.map((img: any, idx: number) => (
                   <div 
                     key={idx} 
-                    className={`thumbnail-item rounded-3 p-2 bg-light shadow-sm ${mainImage === img ? 'active' : ''}`}
+                    className={`thumbnail-item rounded-3 p-1 bg-light shadow-sm overflow-hidden ${mainImage === img ? 'active' : ''}`}
                     style={{ 
                       width: '80px', 
                       height: '80px', 
@@ -108,7 +114,14 @@ const ServiceDetailsArea = () => {
                     }}
                     onClick={() => setSelectedImage(img)}
                   >
-                    <Image src={img} alt={`Thumbnail ${idx}`} className="img-fluid w-100 h-100" style={{ objectFit: 'contain' }} />
+                    <Image 
+                      src={img} 
+                      alt={`Thumbnail ${idx}`} 
+                      width={80}
+                      height={80}
+                      className="w-100 h-100" 
+                      style={{ objectFit: 'contain' }} 
+                    />
                   </div>
                 ))}
               </div>
