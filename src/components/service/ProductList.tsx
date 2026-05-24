@@ -17,7 +17,7 @@ const categories = [
   { id: 'all', name: 'All Products', icon: 'bi-grid-fill' },
   { id: 'domestic', name: 'Domestic water level controllers', icon: 'bi-house-fill' },
   { id: 'industrial', name: 'Industrial water level controllers', icon: 'bi-building' },
-  { id: 'accessories', name: 'Accessories', icon: 'bi-tools' },
+  { id: 'more_categories', name: 'More Category', icon: 'bi-plus-circle-fill' }
 ];
 
 const imageMap: Record<string, any> = {
@@ -40,12 +40,64 @@ export const products = productsData.map((item) => {
   };
 });
 
+const subCategories = [
+  { id: 'all', name: 'All Products', icon: 'bi-grid' },
+  { id: 'flowmeter', name: 'Flowmeter', icon: 'bi-speedometer2' },
+  { id: 'current_voltage', name: 'Current & Voltage monitoring system', icon: 'bi-lightning-charge' },
+  { id: 'motorized_valve', name: 'Motorized valve systems', icon: 'bi-gear-wide-connected' },
+  { id: 'temp_humidity', name: 'Temperature and humidity Monitoring system', icon: 'bi-thermometer-half' },
+  { id: 'lift_monitoring', name: 'Lift monitoring system', icon: 'bi-arrow-up-down' },
+  { id: 'wireless_capacitive', name: 'Wireless water level transmitter ( Capacitive)', icon: 'bi-broadcast-pin' },
+  { id: 'wireless_non_contact', name: 'Wireless water level transmitter ( Non Contact)', icon: 'bi-wifi' },
+  { id: 'integrated_control', name: 'Integrated Control & Command centre', icon: 'bi-cpu' },
+  { id: 'scada_bms', name: 'Scada & BMS system', icon: 'bi-pc-display-horizontal' }
+];
+
 const ProductList = () => {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [activeSubCategory, setActiveSubCategory] = useState('all');
 
-  const filteredProducts = activeCategory === 'all' 
-    ? products 
-    : products.filter(p => p.category === activeCategory);
+  // Drag-scroll states and handlers for subcategory filters
+  const subScrollRef = React.useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const container = subScrollRef.current;
+    if (!container) return;
+    setIsDragging(true);
+    setStartX(e.pageX - container.offsetLeft);
+    setScrollLeft(container.scrollLeft);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const container = subScrollRef.current;
+    if (!container) return;
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    container.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMouseUpOrLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleCategoryChange = (catId: string) => {
+    setActiveCategory(catId);
+    setActiveSubCategory('all');
+  };
+
+  const filteredProducts = products.filter(product => {
+    if (activeCategory === 'all') return true;
+    if (product.category !== activeCategory) return false;
+    if (activeCategory === 'more_categories' && activeSubCategory !== 'all') {
+      return (product as any).subCategory === activeSubCategory;
+    }
+    return true;
+  });
 
   return (
     <section className="product-list-section pt-100 pb-120" style={{ paddingTop: '100px' }}>
@@ -63,7 +115,7 @@ const ProductList = () => {
                   <button
                     key={cat.id}
                     className={`nav-link d-flex align-items-center gap-3 mb-3 text-start py-3 px-4 rounded-4 transition-all ${activeCategory === cat.id ? 'active' : 'inactive'}`}
-                    onClick={() => setActiveCategory(cat.id)}
+                    onClick={() => handleCategoryChange(cat.id)}
                   >
                     <div className="icon-box-small d-flex align-items-center justify-content-center">
                       <i className={`bi ${cat.icon}`}></i>
@@ -77,6 +129,38 @@ const ProductList = () => {
 
           {/* Product Grid */}
           <div className="col-lg-9">
+            {activeCategory === 'more_categories' && (
+              <div className="sub-filter-bar-wrapper mb-5 mt-2 mt-lg-0 wow fadeInDown" style={{ animationDuration: '0.5s' }}>
+                <div className="d-flex align-items-center gap-2 mb-3">
+                  <div className="sub-filter-title-line"></div>
+                  <span className="fw-bold text-uppercase text-secondary sub-filter-label">
+                    Filter by system
+                  </span>
+                </div>
+                <div
+                  ref={subScrollRef}
+                  className="sub-filter-scroll-container d-flex gap-2 overflow-auto custom-scrollbar"
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUpOrLeave}
+                  onMouseLeave={handleMouseUpOrLeave}
+                  style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+                >
+                  {subCategories.map((sub) => (
+                    <button
+                      key={sub.id}
+                      className={`btn sub-filter-chip rounded-pill text-nowrap transition-all d-inline-flex align-items-center gap-2 ${
+                        activeSubCategory === sub.id ? 'active' : 'inactive'
+                      }`}
+                      onClick={() => setActiveSubCategory(sub.id)}
+                    >
+                      <i className={`bi ${sub.icon}`}></i>
+                      <span>{sub.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="row g-4">
               {filteredProducts.map((product) => (
                 <div key={product.id} className="col-md-6 col-xl-4 wow fadeInUp">
@@ -86,13 +170,12 @@ const ProductList = () => {
                       <div className="product-image-container position-relative">
                         <div className="category-badge">{product.categoryName}</div>
                         <div className="image-hover-zoom h-100">
-                          <Image 
-                            src={product.img} 
-                            alt={product.title} 
+                          <Image
+                            src={product.img}
+                            alt={product.title}
                             width={450}
                             height={450}
-                            className="w-100 h-100"
-                            style={{ objectFit: 'contain' }}
+                            className="w-100 h-100 product-card-image"
                           />
                         </div>
                       </div>
@@ -215,6 +298,12 @@ const ProductList = () => {
           padding: 12px;
         }
 
+        .image-hover-zoom :global(.product-card-image) {
+          object-fit: contain;
+          width: 100%;
+          height: 100%;
+        }
+
         .premium-product-card:hover .image-hover-zoom {
           transform: scale(1.08) translateY(-5px);
         }
@@ -285,6 +374,93 @@ const ProductList = () => {
           color: #cbd5e1;
         }
 
+        /* Premium Sub Filter Styling */
+        .sub-filter-bar-wrapper {
+          background: #ffffff;
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(0, 108, 208, 0.08);
+          border-radius: 20px;
+          padding: 22px 24px;
+          box-shadow: 0 10px 30px -10px rgba(0, 108, 208, 0.08);
+          position: relative;
+          z-index: 2;
+          overflow: hidden;
+        }
+
+        .sub-filter-label {
+          font-size: 0.75rem;
+          letter-spacing: 1px;
+        }
+
+        .sub-filter-title-line {
+          width: 15px;
+          height: 3px;
+          background-color: #006CD0;
+          border-radius: 2px;
+        }
+
+        .sub-filter-scroll-container {
+          display: flex;
+          gap: 10px;
+          overflow-x: auto !important;
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+          width: 100%;
+          padding: 6px 2px 8px;
+          user-select: none;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+        }
+
+        .sub-filter-scroll-container::-webkit-scrollbar {
+          display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+        }
+
+        .sub-filter-chip {
+          font-size: 0.84rem;
+          font-weight: 600;
+          padding: 0.55rem 1.1rem;
+          border: 1px solid rgba(0, 108, 208, 0.08);
+          background-color: #ffffff;
+          color: #64748b;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+          transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+          letter-spacing: 0.2px;
+          flex-shrink: 0;
+        }
+
+        .sub-filter-chip i {
+          font-size: 0.95rem;
+          transition: transform 0.3s ease;
+        }
+
+        .sub-filter-chip.inactive:hover {
+          background-color: #ffffff;
+          color: #006CD0;
+          border-color: #006CD0;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 15px -5px rgba(0, 108, 208, 0.15);
+        }
+
+        .sub-filter-chip.inactive:hover i {
+          transform: scale(1.15);
+        }
+
+        .sub-filter-chip.active {
+          background: linear-gradient(135deg, #006CD0 0%, #004d98 100%);
+          color: #ffffff;
+          border-color: transparent;
+          box-shadow: 0 8px 20px -6px rgba(0, 108, 208, 0.35);
+          transform: translateY(-2px);
+        }
+
+        .sub-filter-chip.active i {
+          transform: scale(1.1);
+        }
+
         @media (max-width: 991px) {
           .sticky-top {
             position: static !important;
@@ -317,13 +493,62 @@ const ProductList = () => {
           .title-line {
             margin: 8px auto 0;
           }
+          .sub-filter-bar-wrapper {
+            padding: 18px 16px;
+            margin-top: 8px;
+          }
           .product-image-container {
             aspect-ratio: 1 / 1;
             height: auto;
             padding: 0 !important;
+            background: linear-gradient(180deg, #ffffff 0%, #eef4fb 100%);
+          }
+          .image-hover-zoom {
+            padding: 18px !important;
+          }
+          .image-hover-zoom :global(.product-card-image) {
+            object-fit: contain !important;
+            width: 100% !important;
+            height: 100% !important;
           }
           .premium-product-card {
             margin-bottom: 10px;
+            border-radius: 16px !important;
+          }
+          .category-badge {
+            top: 12px;
+            right: 12px;
+            font-size: 0.65rem;
+            padding: 4px 10px;
+          }
+          .product-info-body {
+            padding: 1.1rem !important;
+          }
+          .product-title {
+            font-size: 1.05rem;
+          }
+        }
+
+        @media (max-width: 575px) {
+          .product-list-section {
+            padding-top: 60px !important;
+          }
+          .sub-filter-bar-wrapper {
+            padding: 16px 14px;
+            border-radius: 16px;
+          }
+          .sub-filter-chip {
+            font-size: 0.78rem;
+            padding: 0.5rem 0.95rem;
+          }
+          .product-image-container {
+            aspect-ratio: 1 / 1;
+          }
+          .image-hover-zoom {
+            padding: 22px !important;
+          }
+          .image-hover-zoom :global(.product-card-image) {
+            object-fit: contain !important;
           }
         }
       `}</style>

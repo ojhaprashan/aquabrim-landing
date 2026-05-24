@@ -19,6 +19,16 @@ const ServiceDetailsArea = () => {
   const [selectedImage, setSelectedImage] = useState<any>(null);
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
+  // States for interactive zoom on details page
+  const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
+  const [isZoomed, setIsZoomed] = useState(false);
+
+  // States for glassmorphic detailed lightbox modal
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [lightboxZoom, setLightboxZoom] = useState(false);
+  const [lightboxPan, setLightboxPan] = useState({ x: 50, y: 50 });
+
   // Sync main image when product ID changes
   useEffect(() => {
     setSelectedImage(null);
@@ -78,6 +88,64 @@ const ServiceDetailsArea = () => {
   const mainImage = selectedImage || product.img;
 
   const images = product.images || [product.img];
+  const activeImageIdx = images.indexOf(mainImage);
+  const currentIdx = activeImageIdx !== -1 ? activeImageIdx : 0;
+
+  const getImgSrc = (img: any) => {
+    if (!img) return '';
+    return typeof img === 'object' && img.src ? img.src : img;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    setZoomPos({ x, y });
+  };
+
+  const openLightbox = () => {
+    setLightboxIndex(currentIdx);
+    setLightboxOpen(true);
+    setLightboxZoom(false);
+  };
+
+  const handlePrev = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setLightboxIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    setLightboxZoom(false);
+  };
+
+  const handleNext = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setLightboxIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    setLightboxZoom(false);
+  };
+
+  const handleLightboxMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!lightboxZoom) return;
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    setLightboxPan({ x, y });
+  };
+
+  // Keyboard navigation for Lightbox
+  useEffect(() => {
+    if (!lightboxOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setLightboxOpen(false);
+      } else if (e.key === 'ArrowLeft') {
+        handlePrev();
+      } else if (e.key === 'ArrowRight') {
+        handleNext();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen, images]);
 
   return (
     <section className="product-details-section pt-100 pb-120">
@@ -85,42 +153,60 @@ const ServiceDetailsArea = () => {
         {/* Product Overview Row */}
         <div className="row mb-5">
           {/* Left: Images */}
-          <div className="col-lg-6 mb-5 mb-lg-0">
+          <div className="col-lg-6 mb-4 mb-lg-0">
             <div className="product-gallery sticky-lg-top" style={{ top: '100px' }}>
-              <div className="main-image-wrapper bg-light rounded-4 p-3 mb-3 text-center position-relative shadow-sm overflow-hidden" style={{ aspectRatio: '1/1', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8fafc' }}>
-                 <Image 
-                   src={mainImage} 
-                   alt={product.title} 
+              <div 
+                className="main-image-wrapper rounded-4 mb-3 text-center position-relative shadow-sm overflow-hidden"
+                onMouseMove={handleMouseMove}
+                onMouseEnter={() => setIsZoomed(true)}
+                onMouseLeave={() => {
+                  setIsZoomed(false);
+                  setZoomPos({ x: 50, y: 50 });
+                }}
+                onClick={openLightbox}
+                style={{ cursor: 'zoom-in' }}
+              >
+                 <Image
+                   src={mainImage}
+                   alt={product.title}
                    width={600}
                    height={600}
-                   className="w-100 h-100" 
-                   style={{ objectFit: 'contain' }} 
+                   className="product-main-image transition-transform"
+                   style={{
+                     transform: isZoomed ? 'scale(2.2)' : 'scale(1)',
+                     transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`,
+                     transition: isZoomed ? 'transform 0.05s linear' : 'transform 0.3s ease-out',
+                     objectFit: 'contain'
+                   }}
                  />
+                 
+                 {/* Visual Hint Badge */}
+                 <div className="zoom-hint-badge d-flex align-items-center gap-2">
+                   <i className="bi bi-arrows-fullscreen"></i>
+                   <span>Click to Zoom</span>
+                 </div>
               </div>
               <div className="thumbnail-gallery d-flex gap-3 overflow-auto pb-2 custom-scrollbar justify-content-md-start justify-content-center">
                 {images.map((img: any, idx: number) => (
-                  <div 
-                    key={idx} 
+                  <div
+                    key={idx}
                     className={`thumbnail-item rounded-3 p-1 bg-light shadow-sm overflow-hidden ${mainImage === img ? 'active' : ''}`}
-                    style={{ 
-                      width: '80px', 
-                      height: '80px', 
-                      flexShrink: 0, 
-                      border: '2px solid', 
-                      borderColor: mainImage === img ? '#006CD0' : 'transparent', 
-                      cursor: 'pointer', 
+                    style={{
+                      flexShrink: 0,
+                      border: '2px solid',
+                      borderColor: mainImage === img ? '#006CD0' : 'transparent',
+                      cursor: 'pointer',
                       backgroundColor: '#f8fafc',
                       transition: 'all 0.3s ease'
                     }}
                     onClick={() => setSelectedImage(img)}
                   >
-                    <Image 
-                      src={img} 
-                      alt={`Thumbnail ${idx}`} 
+                    <Image
+                      src={img}
+                      alt={`Thumbnail ${idx}`}
                       width={80}
                       height={80}
-                      className="w-100 h-100" 
-                      style={{ objectFit: 'contain' }} 
+                      className="thumbnail-image"
                     />
                   </div>
                 ))}
@@ -231,6 +317,36 @@ const ServiceDetailsArea = () => {
       <style jsx>{`
         .product-details-section {
           background-color: #ffffff;
+        }
+
+        .main-image-wrapper {
+          background: linear-gradient(180deg, #ffffff 0%, #eef4fb 100%);
+          aspect-ratio: 1 / 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+        }
+
+        .main-image-wrapper :global(.product-main-image) {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+
+        .thumbnail-gallery {
+          padding: 4px 2px;
+        }
+
+        .thumbnail-item {
+          width: 80px;
+          height: 80px;
+        }
+
+        .thumbnail-item :global(.thumbnail-image) {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
         }
 
         .features-horizontal-scroll {
@@ -397,8 +513,353 @@ const ServiceDetailsArea = () => {
           .custom-accordion .accordion-body {
             padding: 1.25rem;
           }
+          .main-image-wrapper {
+            aspect-ratio: 4 / 3;
+            padding: 14px;
+            max-height: 340px;
+            max-width: 460px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .thumbnail-item {
+            width: 64px;
+            height: 64px;
+          }
+          .thumbnail-gallery {
+            justify-content: center;
+          }
+        }
+
+        @media (max-width: 575px) {
+          .main-image-wrapper {
+            aspect-ratio: 5 / 4;
+            padding: 12px;
+            max-height: 280px;
+            border-radius: 16px !important;
+          }
+          .thumbnail-item {
+            width: 56px;
+            height: 56px;
+          }
+        }
+
+        /* Lightbox Modal CSS */
+        .lightbox-modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(15, 23, 42, 0.85);
+          backdrop-filter: blur(15px);
+          -webkit-backdrop-filter: blur(15px);
+          z-index: 9999;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          animation: fadeIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .lightbox-header-bar {
+          position: absolute;
+          top: 24px;
+          left: 0;
+          right: 0;
+          padding: 0 32px;
+          z-index: 10001;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+        }
+
+        .lightbox-counter {
+          color: rgba(255, 255, 255, 0.9);
+          font-size: 0.9rem;
+          background: rgba(30, 41, 59, 0.5) !important;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          backdrop-filter: blur(5px);
+        }
+
+        .lightbox-close-btn {
+          background: rgba(30, 41, 59, 0.5);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          color: #ffffff;
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.25s ease;
+          font-size: 1.1rem;
+          backdrop-filter: blur(5px);
+        }
+
+        .lightbox-close-btn:hover {
+          background: rgba(239, 68, 68, 0.8);
+          border-color: transparent;
+          transform: rotate(90deg) scale(1.05);
+        }
+
+        .lightbox-body {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 80vh;
+          padding: 0 80px;
+          position: relative;
+        }
+
+        .lightbox-image-container {
+          background-color: transparent !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          position: relative;
+          box-shadow: none !important;
+        }
+
+        .lightbox-main-img {
+          max-height: 100% !important;
+          max-width: 100% !important;
+          width: auto !important;
+          height: auto !important;
+          object-fit: contain;
+          border-radius: 12px;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+          background-color: transparent;
+          transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .lightbox-nav-btn {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background: rgba(30, 41, 59, 0.55);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: #ffffff;
+          width: 56px;
+          height: 56px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+          font-size: 1.4rem;
+          z-index: 10005;
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+        }
+
+        .lightbox-nav-btn:hover {
+          background: #006CD0;
+          border-color: transparent;
+          color: white;
+          transform: translateY(-50%) scale(1.1);
+          box-shadow: 0 8px 20px rgba(0, 108, 208, 0.3);
+        }
+
+        .prev-btn {
+          left: 20px;
+        }
+
+        .next-btn {
+          right: 20px;
+        }
+
+        .lightbox-footer-bar {
+          position: absolute;
+          bottom: 24px;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: center;
+          z-index: 10001;
+        }
+
+        .lightbox-instruction {
+          color: rgba(255, 255, 255, 0.95);
+          font-size: 0.85rem;
+          background: rgba(30, 41, 59, 0.6) !important;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          letter-spacing: 0.5px;
+          backdrop-filter: blur(5px);
+        }
+
+        /* Hover Zoom styles for details page */
+        .zoom-hint-badge {
+          position: absolute;
+          bottom: 16px;
+          right: 16px;
+          background: rgba(15, 23, 42, 0.65);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          color: #ffffff;
+          padding: 6px 12px;
+          border-radius: 50px;
+          font-size: 0.72rem;
+          font-weight: 600;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          pointer-events: none;
+          transition: all 0.3s ease;
+          opacity: 0.75;
+          z-index: 2;
+        }
+
+        .main-image-wrapper:hover .zoom-hint-badge {
+          opacity: 1;
+          background: rgba(0, 108, 208, 0.85);
+          border-color: rgba(0, 108, 208, 0.2);
+          transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        @media (max-width: 991px) {
+          .lightbox-body {
+            padding: 0 20px;
+            height: 70vh;
+          }
+          .lightbox-nav-btn {
+            width: 48px;
+            height: 48px;
+            font-size: 1.2rem;
+          }
+          .prev-btn {
+            left: 10px;
+          }
+          .next-btn {
+            right: 10px;
+          }
+          .lightbox-main-img {
+            max-height: 100% !important;
+            max-width: 100% !important;
+          }
+        }
+
+        @media (max-width: 575px) {
+          .lightbox-header-bar {
+            padding: 0 16px;
+            top: 16px;
+          }
+          .lightbox-footer-bar {
+            bottom: 16px;
+          }
+          .lightbox-body {
+            height: 60vh;
+            padding: 0;
+          }
+          .lightbox-nav-btn {
+            position: fixed;
+            bottom: 80px;
+            top: auto;
+            transform: none;
+            width: 50px;
+            height: 50px;
+          }
+          .lightbox-nav-btn:hover {
+            transform: scale(1.05);
+          }
+          .prev-btn {
+            left: 24px;
+          }
+          .next-btn {
+            right: 24px;
+          }
+          .lightbox-main-img {
+            max-height: 100% !important;
+            max-width: 100% !important;
+          }
         }
       `}</style>
+
+      {/* Glassmorphic Lightbox Modal */}
+      {lightboxOpen && (
+        <div 
+          className="lightbox-modal-overlay"
+          onClick={() => setLightboxOpen(false)}
+        >
+          {/* Header Bar */}
+          <div className="lightbox-header-bar">
+            <span className="lightbox-counter badge bg-dark bg-opacity-50 px-3 py-2 rounded-pill fw-semibold">
+              {lightboxIndex + 1} / {images.length}
+            </span>
+            <button 
+              className="lightbox-close-btn" 
+              onClick={() => setLightboxOpen(false)}
+              aria-label="Close lightbox"
+            >
+              <i className="bi bi-x-lg"></i>
+            </button>
+          </div>
+
+          {/* Main Content Area */}
+          <div className="lightbox-body" onClick={(e) => e.stopPropagation()}>
+            {images.length > 1 && (
+              <button 
+                className="lightbox-nav-btn prev-btn" 
+                onClick={handlePrev}
+                aria-label="Previous image"
+              >
+                <i className="bi bi-chevron-left"></i>
+              </button>
+            )}
+
+            <div 
+              className="lightbox-image-container position-relative"
+              onMouseMove={handleLightboxMouseMove}
+              onClick={() => setLightboxZoom(!lightboxZoom)}
+              style={{ cursor: lightboxZoom ? 'zoom-out' : 'zoom-in' }}
+            >
+              <img
+                src={getImgSrc(images[lightboxIndex])}
+                alt={`${product.title} detailed view`}
+                className={`lightbox-main-img ${lightboxZoom ? 'zoomed' : ''}`}
+                style={{
+                  transform: lightboxZoom ? 'scale(2.5)' : 'scale(1)',
+                  transformOrigin: `${lightboxPan.x}% ${lightboxPan.y}%`,
+                  transition: lightboxZoom ? 'transform 0.05s linear' : 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)',
+                  objectFit: 'contain',
+                  maxHeight: '100%',
+                  maxWidth: '100%'
+                }}
+              />
+            </div>
+
+            {images.length > 1 && (
+              <button 
+                className="lightbox-nav-btn next-btn" 
+                onClick={handleNext}
+                aria-label="Next image"
+              >
+                <i className="bi bi-chevron-right"></i>
+              </button>
+            )}
+          </div>
+
+          {/* Footer Instruction */}
+          <div className="lightbox-footer-bar">
+            <div className="lightbox-instruction badge bg-dark bg-opacity-50 px-3 py-2 rounded-pill fw-medium">
+              {lightboxZoom 
+                ? "💡 Move mouse to pan • Click image to zoom out" 
+                : "💡 Click image to zoom in (2.5x)"}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
