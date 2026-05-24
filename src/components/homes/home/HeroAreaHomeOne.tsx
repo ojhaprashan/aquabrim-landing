@@ -115,7 +115,7 @@ const HeroAreaHomeOne = () => {
 
                 <div className="position-relative p-2 pt-0">
                   {/* Image Slider Container */}
-                  <div className="product-image-container rounded-3 overflow-hidden position-relative bg-light">
+                  <div className="product-image-container rounded-3 overflow-hidden position-relative bg-white">
                     {sliderImages.map((imgSrc, index) => (
                       <div
                         key={index}
@@ -131,7 +131,7 @@ const HeroAreaHomeOne = () => {
                           alt={`Aquabrim Smart Device View ${index + 1}`}
                           fill
                           className="img-fluid"
-                          style={{ objectFit: 'cover' }}
+                          style={{ objectFit: 'contain' }}
                         />
                       </div>
                     ))}
@@ -222,6 +222,7 @@ const HeroAreaHomeOne = () => {
         }
         .product-image-container {
           height: 300px; 
+          background-color: #ffffff !important;
         }
         .bg-success-soft { background-color: #e6fffa; }
         .text-success { color: #047857; }
@@ -276,7 +277,7 @@ const HeroAreaHomeOne = () => {
            ========================================= */
         @media (max-width: 767px) {
           .hero-new-bg {
-            padding: 90px 15px 50px !important; 
+            padding: 25px 15px 35px !important; 
             text-align: center;
           }
           
@@ -317,6 +318,7 @@ const HeroAreaHomeOne = () => {
           }
           .product-image-container {
             height: 230px; 
+            background-color: #ffffff !important;
           }
           .card-info.text-start {
             text-align: center !important;
