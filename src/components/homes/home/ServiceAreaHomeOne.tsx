@@ -99,13 +99,15 @@ const ServiceAreaHomeOne = ({ style, style_2 }: any) => {
                 slidesPerView: 3,
               },
             }}
-            className="service-slider"
+            className="service-slider equal-height-slider"
           >
             {data.map((item, index) => (
-              <SwiperSlide key={index}>
-                <div className={`service-box ${style ? "style-two" : ""} wow animate__backInUp`} style={{ marginBottom: '30px' }}>
+              <SwiperSlide key={index} className="h-auto">
+                <div className={`service-box ${style ? "style-two" : ""} wow animate__backInUp`}>
                   <div className="service-thumb">
-                    <Image src={item.img} style={{ height: 'auto', width: '100%' }} alt={item.title} />
+                    <div className="service-img-wrapper">
+                      <Image src={item.img} alt={item.title} fill style={{ objectFit: 'contain', objectPosition: 'center' }} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+                    </div>
                     <div className="service-content">
                       <div className="service-icon-thumb">
                         <Image src={item.icon} alt={item.title} />
@@ -113,8 +115,8 @@ const ServiceAreaHomeOne = ({ style, style_2 }: any) => {
                       <div className="service-text">
                         <h4 className="mb-1"><Link href="/service-details">{item.title}</Link></h4>
                         <h6 className="fw-semibold mb-3 service-subtitle">{item.category}</h6>
-                        <p className="mb-3" style={{ fontSize: '0.88rem', lineHeight: '1.5', color: '#f1f5f9' }}>{item.sm_des}</p>
-                        <Link href="/service-details">Product Details <i className="bi bi-arrow-up-right"></i></Link>
+                        <p className="service-desc mb-3">{item.sm_des}</p>
+                        <Link href="/service-details" className="service-details-link">Product Details <i className="bi bi-arrow-up-right"></i></Link>
                       </div>
                     </div>
                   </div>
@@ -132,7 +134,43 @@ const ServiceAreaHomeOne = ({ style, style_2 }: any) => {
           transition: color 0.4s ease-in-out;
         }
         .service-box:hover .service-subtitle {
-          color: #38bdf8 !important; /* cyan/sky-blue highlight on black hover background */
+          color: #38bdf8 !important;
+        }
+        .service-desc {
+          font-size: 0.88rem;
+          line-height: 1.5;
+          color: #f1f5f9;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          min-height: calc(0.88rem * 1.5 * 3);
+        }
+        .service-img-wrapper {
+          position: relative;
+          width: 100%;
+          height: 460px;
+          overflow: hidden;
+          background-color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .service-box {
+          margin-bottom: 30px;
+          height: 100%;
+        }
+      `}</style>
+      <style jsx global>{`
+        .equal-height-slider .swiper-wrapper {
+          align-items: stretch;
+        }
+        .equal-height-slider .swiper-slide {
+          height: auto;
+          display: flex;
+        }
+        .equal-height-slider .swiper-slide > div {
+          width: 100%;
         }
       `}</style>
     </>

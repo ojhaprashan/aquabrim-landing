@@ -16,7 +16,14 @@ const Blog = () => {
         {/* <BlogArea /> */}
         <BlogScreen />
       </main>
-      <CtaBanner />
+      <CtaBanner
+        title="Reliable Water Management Starts Here"
+        subtitle="Explore automation solutions trusted across industries and homes."
+        btnText="View Systems"
+        btnLink="/service"
+        icon="bi-droplet-half"
+        btnIcon="bi-grid-fill"
+      />
       <FooterOne />
 
     </>

@@ -16,7 +16,14 @@ const Contact = () => {
         {/* <Breadcrumb top_title='Contact' title='Contact' /> */}
         <ContactArea />
       </main>
-      <CtaBanner />
+      <CtaBanner
+        title="Let's Talk About Your Requirement"
+        subtitle="Connect with our experts for the right solution."
+        btnText="Call Now"
+        btnLink="tel:+919560088791"
+        icon="bi-headset"
+        btnIcon="bi-telephone-fill"
+      />
       <FooterOne />
     </>
   );

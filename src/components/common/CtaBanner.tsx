@@ -8,14 +8,16 @@ interface CtaBannerProps {
   btnText?: string;
   btnLink?: string;
   icon?: string;
+  btnIcon?: string;
 }
 
-const CtaBanner = ({ 
-  title = "Need Immediate Assistance?", 
-  subtitle = "Call our support team for quick help and solutions.", 
-  btnText = "Call Now", 
+const CtaBanner = ({
+  title = "Need Immediate Assistance?",
+  subtitle = "Call our support team for quick help and solutions.",
+  btnText = "Call Now",
   btnLink = "tel:+919560088791",
-  icon = "bi-headset"
+  icon = "bi-headset",
+  btnIcon = "bi-telephone-fill"
 }: CtaBannerProps) => {
   return (
     <div className="container mb-5 wow fadeInUp">
@@ -33,7 +35,7 @@ const CtaBanner = ({
         </div>
         <div className="cta-btn-wrapper">
           <Link href={btnLink} className="btn btn-light text-primary px-4 py-2 fw-bold d-flex align-items-center gap-2 cta-btn-custom" style={{ borderRadius: '12px' }}>
-            {btnText} <i className="bi bi-telephone-fill small"></i>
+            {btnText} <i className={`bi ${btnIcon} small`}></i>
           </Link>
         </div>
       </div>

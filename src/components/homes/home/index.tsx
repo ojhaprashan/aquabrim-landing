@@ -41,7 +41,14 @@ const HomeOne = () => {
         {/* <AppointmentAreaHomeOne /> */}
         {/* <BlogAreaHomeOne /> */}
         {/* <SubscribeAreaHomeOne /> */}
-        <CtaBanner />
+        <CtaBanner
+          title="Tired of Managing Water Manually?"
+          subtitle="Switch to smarter and automated water management."
+          btnText="Explore Products"
+          btnLink="/service"
+          icon="bi-droplet-half"
+          btnIcon="bi-arrow-right"
+        />
       </main>
       <FooterOne />
     </>

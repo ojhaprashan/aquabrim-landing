@@ -84,31 +84,31 @@ const AboutAreaHomeOne = ({ style, hideClients, hideImpact }: any) => {
                   textAlign: 'left'
                 }}>
                   <div className="d-flex align-items-center">
-                    <i className="bi bi-check-circle-fill text-success me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
+                    <i className="bi bi-check-circle-fill text-primary me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
                     <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#4a5568', lineHeight: '1.4' }}>Detects water supply availability</span>
                   </div>
                   <div className="d-flex align-items-center">
-                    <i className="bi bi-check-circle-fill text-success me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
+                    <i className="bi bi-check-circle-fill text-primary me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
                     <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#4a5568', lineHeight: '1.4' }}>Prevents dry-run damage</span>
                   </div>
                   <div className="d-flex align-items-center">
-                    <i className="bi bi-check-circle-fill text-success me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
+                    <i className="bi bi-check-circle-fill text-primary me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
                     <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#4a5568', lineHeight: '1.4' }}>Monitors tank water level</span>
                   </div>
                   <div className="d-flex align-items-center">
-                    <i className="bi bi-check-circle-fill text-success me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
+                    <i className="bi bi-check-circle-fill text-primary me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
                     <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#4a5568', lineHeight: '1.4' }}>Avoids overflow and wastage</span>
                   </div>
                   <div className="d-flex align-items-center">
-                    <i className="bi bi-check-circle-fill text-success me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
+                    <i className="bi bi-check-circle-fill text-primary me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
                     <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#4a5568', lineHeight: '1.4' }}>Starts motor when level is low</span>
                   </div>
                   <div className="d-flex align-items-center">
-                    <i className="bi bi-check-circle-fill text-success me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
+                    <i className="bi bi-check-circle-fill text-primary me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
                     <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#4a5568', lineHeight: '1.4' }}>Maintains Consistent Water Supply</span>
                   </div>
                   <div className="d-flex align-items-center">
-                    <i className="bi bi-check-circle-fill text-success me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
+                    <i className="bi bi-check-circle-fill text-primary me-2" style={{ flexShrink: 0, fontSize: '0.95rem' }}></i>
                     <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#4a5568', lineHeight: '1.4' }}>Stops motor when tank is full</span>
                   </div>
                 </div>

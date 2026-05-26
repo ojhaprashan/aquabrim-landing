@@ -17,7 +17,14 @@ const Service = () => {
       <main>
         <ProductList />
       </main>
-      <CtaBanner />
+      <CtaBanner
+        title="Need Help Choosing the Right System?"
+        subtitle="Our experts can help you find the best solution for your setup."
+        btnText="Talk to Expert"
+        btnLink="/contact"
+        icon="bi-person-workspace"
+        btnIcon="bi-chat-dots-fill"
+      />
       <FooterOne />
     </>
   );

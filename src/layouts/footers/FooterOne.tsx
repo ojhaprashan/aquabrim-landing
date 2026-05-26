@@ -7,12 +7,14 @@ import { TeamSocialLinks } from '@/components/common/SocialLinks';
 const footer_content = {
   brand_info: {
     app_text: "Aquabrim app is available on",
-    tagline: "Make your water tank an Aquabrim Tank",
+    tagline: "Transform Your Water System with Aquabrim ",
   },
   company: [
     { title: "About Us", link: "/about" },
     { title: "Contact Us", link: "/contact" },
     { title: "Blogs", link: "/blog" },
+    { title: "FAQs", link: "/faq" },
+
   ],
   support: [
     { title: "Pricing Policy", link: "/pricing-policy" },

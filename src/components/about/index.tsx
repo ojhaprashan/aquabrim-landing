@@ -21,7 +21,14 @@ const About = () => {
         <Founders />
         <ServiceAreaPanIndia />
       </main>
-      <CtaBanner />
+      <CtaBanner
+        title="Want to See What We Build?"
+        subtitle="Explore smart water Level controllers by Aquabrim."
+        btnText="Explore Products"
+        btnLink="/service"
+        icon="bi-eye-fill"
+        btnIcon="bi-arrow-right"
+      />
       <FooterOne />
     </>
   );

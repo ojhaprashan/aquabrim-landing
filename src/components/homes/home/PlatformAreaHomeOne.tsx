@@ -20,12 +20,10 @@ const PlatformAreaHomeOne = () => {
           <div className="col-lg-6 order-1 order-lg-2 wow slideInRight">
             <div className="platform-content ps-lg-5 text-center text-lg-start">
               <h2 className="display-6 fw-bold mb-4 text-dark" style={{ lineHeight: '1.2' }}>
-                Uniform experience across <span className="text-primary">Mobile and Web</span> platform.
+                Control Your Water System from <span className="text-primary">Anywhere</span>
               </h2>
               <p className="text-muted mb-4 fs-5" style={{ lineHeight: '1.6' }}>
-                Seamless sharing of information among all stakeholders enhances productivity in management. 
-                Sharing <span className="fw-bold text-dark">Aquabrim</span> devices with your team via the app is a simple process that can improve 
-                communication and serve as an <span className="text-primary fw-bold">essential team collaboration tool</span>.
+                Track water levels, motor performance, tank conditions, and system notifications in real time with <span className="fw-bold text-dark">Aquabrim&apos;s</span> smart web and mobile platform. Remotely access and manage your water automation system, receive instant alerts, and monitor operations seamlessly from anywhere with <span className="text-primary fw-bold">complete control and convenience</span>.
               </p>
               
               <div className="download-apps">

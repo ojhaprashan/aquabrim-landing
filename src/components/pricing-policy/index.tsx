@@ -15,7 +15,14 @@ const PricingPolicy = () => {
         <PricingPolicyBanner />
         <PricingPolicyArea />
       </main>
-      <CtaBanner />
+      <CtaBanner
+        title="Still Need Help?"
+        subtitle="Our team is here to assist you with any questions"
+        btnText="Contact Support"
+        btnLink="/contact"
+        icon="bi-life-preserver"
+        btnIcon="bi-headset"
+      />
       <FooterOne />
     </>
   );

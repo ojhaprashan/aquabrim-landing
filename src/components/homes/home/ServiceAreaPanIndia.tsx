@@ -6,19 +6,19 @@ const ServiceAreaPanIndia = () => {
   const [hoveredState, setHoveredState] = useState<string | null>(null);
 
   const states = [
-    { name: "Punjab", top: '22%', left: '38%' },
-    { name: "Uttarakhand", top: '25%', left: '47%' },
-    { name: "Delhi (Head Office)", displayName: "Delhi", isHeadOffice: true, top: '29%', left: '44%' },
-    { name: "Rajasthan", top: '36%', left: '33%' },
-    { name: "Uttar Pradesh", top: '34%', left: '52%' },
-    { name: "Bihar", top: '37%', left: '66%' },
-    { name: "West Bengal", top: '46%', left: '72%' },
-    { name: "Odisha", top: '53%', left: '64%' },
-    { name: "Maharashtra", top: '56%', left: '39%' },
-    { name: "Goa", top: '69%', left: '35%' },
-    { name: "Karnataka", top: '72%', left: '42%' },
-    { name: "Tamil Nadu", top: '84%', left: '48%' },
-    { name: "Kerala", top: '84%', left: '42%' }
+    { name: "Punjab", top: '22%', left: '33%' },
+    { name: "Uttarakhand", top: '24%', left: '41%' },
+    { name: "Delhi (Head Office)", displayName: "Delhi", isHeadOffice: true, top: '28%', left: '36%' },
+    { name: "Rajasthan", top: '36%', left: '29%' },
+    { name: "Uttar Pradesh", top: '33%', left: '43%' },
+    { name: "Bihar", top: '38%', left: '53%' },
+    { name: "West Bengal", top: '46%', left: '57%' },
+    { name: "Odisha", top: '52%', left: '50%' },
+    { name: "Maharashtra", top: '54%', left: '34%' },
+    { name: "Goa", top: '64%', left: '30%' },
+    { name: "Karnataka", top: '71%', left: '35%' },
+    { name: "Tamil Nadu", top: '80%', left: '42%' },
+    { name: "Kerala", top: '82%', left: '34%' }
   ];
 
   const states_col_1 = states.slice(0, 7);
@@ -66,7 +66,7 @@ const ServiceAreaPanIndia = () => {
             </div>
             
             <div className="mt-4">
-              <a href="/shop" className="btn btn-primary btn-lg rounded-pill px-4 py-2 shadow-sm transition-hover d-inline-flex align-items-center">
+              <a href="/service" className="btn btn-primary px-4 py-3 fw-bold shadow-sm">
                 View Products <i className="bi bi-arrow-right ms-2"></i>
               </a>
             </div>

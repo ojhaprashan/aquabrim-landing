@@ -212,7 +212,14 @@ const FaqArea = () => {
 
       {/* Corporate CTA Banner */}
       <div className="faq-cta-banner-wrapper py-5 bg-white">
-        <CtaBanner />
+        <CtaBanner
+          title="Need More Information?"
+          subtitle="Find answers related to products and installation."
+          btnText="Contact Team"
+          btnLink="/contact"
+          icon="bi-question-circle-fill"
+          btnIcon="bi-headset"
+        />
       </div>
 
       <style jsx>{`
