@@ -321,11 +321,13 @@ const ServiceDetailsArea = () => {
 
         .main-image-wrapper {
           background: linear-gradient(180deg, #ffffff 0%, #eef4fb 100%);
-          aspect-ratio: 1 / 1;
+          aspect-ratio: 1024 / 1536;
+          max-height: 550px;
+          margin: 0 auto;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 20px;
+          padding: 0px;
         }
 
         .main-image-wrapper :global(.product-main-image) {
@@ -502,7 +504,7 @@ const ServiceDetailsArea = () => {
         /* Mobile specific fixes */
         @media (max-width: 991px) {
           .pt-100 {
-            padding-top: 40px !important;
+            padding-top: 130px !important;
           }
           .pb-120 {
             padding-bottom: 60px !important;
@@ -514,10 +516,10 @@ const ServiceDetailsArea = () => {
             padding: 1.25rem;
           }
           .main-image-wrapper {
-            aspect-ratio: 4 / 3;
-            padding: 14px;
-            max-height: 340px;
-            max-width: 460px;
+            aspect-ratio: 1024 / 1536;
+            padding: 0px;
+            max-height: 400px;
+            max-width: 280px;
             margin-left: auto;
             margin-right: auto;
           }
@@ -531,10 +533,16 @@ const ServiceDetailsArea = () => {
         }
 
         @media (max-width: 575px) {
+          .pt-100 {
+            padding-top: 100px !important;
+          }
           .main-image-wrapper {
-            aspect-ratio: 5 / 4;
-            padding: 12px;
-            max-height: 280px;
+            aspect-ratio: 1024 / 1536;
+            padding: 0px;
+            max-width: 260px;
+            max-height: none;
+            margin-left: auto;
+            margin-right: auto;
             border-radius: 16px !important;
           }
           .thumbnail-item {

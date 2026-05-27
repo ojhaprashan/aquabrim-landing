@@ -13,13 +13,6 @@ import accessories_img from "@/assets/images/resource/service-details3.png";
 // Import JSON data
 import productsData from "@/data/products.json";
 
-const categories = [
-  { id: 'all', name: 'All Products', icon: 'bi-grid-fill' },
-  { id: 'domestic', name: 'Domestic water level controllers', icon: 'bi-house-fill' },
-  { id: 'industrial', name: 'Industrial water level controllers', icon: 'bi-building' },
-  { id: 'more_categories', name: 'More Category', icon: 'bi-plus-circle-fill' }
-];
-
 const imageMap: Record<string, any> = {
   prod_controller,
   prod_starter,
@@ -40,170 +33,154 @@ export const products = productsData.map((item) => {
   };
 });
 
-const subCategories = [
-  { id: 'all', name: 'All Products', icon: 'bi-grid' },
-  { id: 'flowmeter', name: 'Flowmeter', icon: 'bi-speedometer2' },
-  { id: 'current_voltage', name: 'Current & Voltage monitoring system', icon: 'bi-lightning-charge' },
-  { id: 'motorized_valve', name: 'Motorized valve systems', icon: 'bi-gear-wide-connected' },
-  { id: 'temp_humidity', name: 'Temperature and humidity Monitoring system', icon: 'bi-thermometer-half' },
-  { id: 'lift_monitoring', name: 'Lift monitoring system', icon: 'bi-arrow-up-down' },
-  { id: 'wireless_capacitive', name: 'Wireless water level transmitter ( Capacitive)', icon: 'bi-broadcast-pin' },
-  { id: 'wireless_non_contact', name: 'Wireless water level transmitter ( Non Contact)', icon: 'bi-wifi' },
-  { id: 'integrated_control', name: 'Integrated Control & Command centre', icon: 'bi-cpu' },
-  { id: 'scada_bms', name: 'Scada & BMS system', icon: 'bi-pc-display-horizontal' }
-];
-
 const ProductList = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [activeSubCategory, setActiveSubCategory] = useState('all');
+  const [activeFilter, setActiveFilter] = useState<'all' | 'domestic' | 'industrial'>('all');
 
-  // Drag-scroll states and handlers for subcategory filters
-  const subScrollRef = React.useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
+  const domesticCount = products.filter(p => p.category === 'domestic').length;
+  const industrialCount = products.filter(p => p.category === 'industrial' || p.category === 'more_categories').length;
+  const totalCount = products.length;
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    const container = subScrollRef.current;
-    if (!container) return;
-    setIsDragging(true);
-    setStartX(e.pageX - container.offsetLeft);
-    setScrollLeft(container.scrollLeft);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const container = subScrollRef.current;
-    if (!container) return;
-    const x = e.pageX - container.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    container.scrollLeft = scrollLeft - walk;
-  };
-
-  const handleMouseUpOrLeave = () => {
-    setIsDragging(false);
-  };
-
-  const handleCategoryChange = (catId: string) => {
-    setActiveCategory(catId);
-    setActiveSubCategory('all');
+  const handleReset = () => {
+    setActiveFilter('all');
   };
 
   const filteredProducts = products.filter(product => {
-    if (activeCategory === 'all') return true;
-    if (product.category !== activeCategory) return false;
-    if (activeCategory === 'more_categories' && activeSubCategory !== 'all') {
-      return (product as any).subCategory === activeSubCategory;
+    // Category Filter
+    if (activeFilter === 'domestic' && product.category !== 'domestic') {
+      return false;
     }
+    if (activeFilter === 'industrial' && product.category === 'domestic') {
+      return false;
+    }
+
     return true;
   });
 
   return (
-    <section className="product-list-section pt-100 pb-120" style={{ paddingTop: '100px' }}>
+    <section className="product-list-section pt-100 pb-120" style={{ paddingTop: '130px' }}>
       <div className="container">
         <div className="row">
-          {/* Sidebar - Filter */}
-          <div className="col-lg-3 mb-4 mb-lg-5">
-            <div className="sidebar-container sticky-top" style={{ top: '100px', zIndex: 10 }}>
-              <div className="sidebar-header mb-4">
-                <h5 className="fw-bold text-uppercase" style={{ letterSpacing: '1px', color: '#1c1632' }}>Categories</h5>
-                <div className="title-line"></div>
-              </div>
-              <div className="nav flex-column nav-pills custom-nav" role="tablist">
-                {categories.map((cat) => (
-                  <button
-                    key={cat.id}
-                    className={`nav-link d-flex align-items-center gap-3 mb-3 text-start py-3 px-4 rounded-4 transition-all ${activeCategory === cat.id ? 'active' : 'inactive'}`}
-                    onClick={() => handleCategoryChange(cat.id)}
-                  >
-                    <div className="icon-box-small d-flex align-items-center justify-content-center">
-                      <i className={`bi ${cat.icon}`}></i>
-                    </div>
-                    <span className="fw-semibold">{cat.name}</span>
-                  </button>
-                ))}
+          {/* Sidebar Left: Categories Only */}
+          <div className="col-lg-3 col-md-4 mb-4 mb-md-0">
+            <div className="sticky-top" style={{ top: '130px' }}>
+              <div className="d-flex flex-column gap-3 filter-vertical-group">
+                <button
+                  className={`btn-vertical-filter d-flex align-items-center justify-content-between rounded-3 border px-3 py-2.5 text-start w-100 transition-all ${
+                    activeFilter === 'all' ? 'active' : ''
+                  }`}
+                  onClick={() => setActiveFilter('all')}
+                >
+                  <div className="d-flex align-items-center gap-2">
+                    <i className="bi bi-grid-fill"></i>
+                    <span>All</span>
+                  </div>
+                  <span className="count-pill">{totalCount}</span>
+                </button>
+
+                <button
+                  className={`btn-vertical-filter d-flex align-items-center justify-content-between rounded-3 border px-3 py-2.5 text-start w-100 transition-all ${
+                    activeFilter === 'domestic' ? 'active' : ''
+                  }`}
+                  onClick={() => setActiveFilter('domestic')}
+                >
+                  <div className="d-flex align-items-center gap-2">
+                    <i className="bi bi-house-fill"></i>
+                    <span>Domestic</span>
+                  </div>
+                  <span className="count-pill">{domesticCount}</span>
+                </button>
+
+                <button
+                  className={`btn-vertical-filter d-flex align-items-center justify-content-between rounded-3 border px-3 py-2.5 text-start w-100 transition-all ${
+                    activeFilter === 'industrial' ? 'active' : ''
+                  }`}
+                  onClick={() => setActiveFilter('industrial')}
+                >
+                  <div className="d-flex align-items-center gap-2">
+                    <i className="bi bi-building"></i>
+                    <span>Industrial</span>
+                  </div>
+                  <span className="count-pill">{industrialCount}</span>
+                </button>
               </div>
             </div>
           </div>
 
-          {/* Product Grid */}
-          <div className="col-lg-9">
-            {activeCategory === 'more_categories' && (
-              <div className="sub-filter-bar-wrapper mb-5 mt-2 mt-lg-0 wow fadeInDown" style={{ animationDuration: '0.5s' }}>
-                <div className="d-flex align-items-center gap-2 mb-3">
-                  <div className="sub-filter-title-line"></div>
-                  <span className="fw-bold text-uppercase text-secondary sub-filter-label">
-                    Filter by system
-                  </span>
-                </div>
-                <div
-                  ref={subScrollRef}
-                  className="sub-filter-scroll-container d-flex gap-2 overflow-auto custom-scrollbar"
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUpOrLeave}
-                  onMouseLeave={handleMouseUpOrLeave}
-                  style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-                >
-                  {subCategories.map((sub) => (
-                    <button
-                      key={sub.id}
-                      className={`btn sub-filter-chip rounded-pill text-nowrap transition-all d-inline-flex align-items-center gap-2 ${
-                        activeSubCategory === sub.id ? 'active' : 'inactive'
-                      }`}
-                      onClick={() => setActiveSubCategory(sub.id)}
-                    >
-                      <i className={`bi ${sub.icon}`}></i>
-                      <span>{sub.name}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-            <div className="row g-4">
-              {filteredProducts.map((product) => (
-                <div key={product.id} className="col-md-6 col-xl-4 wow fadeInUp">
-                  <Link href={`/service-details?id=${product.id}`} className="text-decoration-none d-block h-100">
-                    <div className="premium-product-card h-100 rounded-3 shadow-sm overflow-hidden">
-                      {/* Image Area */}
-                      <div className="product-image-container position-relative">
-                        <div className="category-badge">{product.categoryName}</div>
-                        <div className="image-hover-zoom h-100">
-                          <Image
-                            src={product.img}
-                            alt={product.title}
-                            width={450}
-                            height={450}
-                            className="w-100 h-100 product-card-image"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Content Area */}
-                      <div className="product-info-body p-4">
-                        <div className="d-flex justify-content-between align-items-start mb-2">
-                          <h5 className="product-title fw-bold mb-0">{product.title}</h5>
-                        </div>
-                        <p className="product-desc mb-0">{product.description}</p>
-                      </div>
-                      
-                      {/* Subtle Decoration */}
-                      <div className="card-accent-line"></div>
-                    </div>
-                  </Link>
-                </div>
-              ))}
+          {/* Main Grid Right: Products */}
+          <div className="col-lg-9 col-md-8">
+            <div className="results-count-bar mb-3 d-flex align-items-center justify-content-between text-muted fw-semibold">
+              <span>Showing {filteredProducts.length} Systems</span>
             </div>
-            
+
+            <div className="row g-3">
+              {filteredProducts.map((product) => {
+                const isDomestic = product.category === 'domestic';
+                return (
+                  <div key={product.id} className="col-11 col-sm-9 col-md-6 col-lg-4 mx-auto wow fadeInUp">
+                    <Link href={`/service-details?id=${product.id}`} className="text-decoration-none d-block h-100">
+                      <div className="premium-product-card h-100 rounded-3 overflow-hidden position-relative d-flex flex-column border">
+                        {/* Image Container - compact */}
+                        <div className="product-image-container position-relative">
+                          <div className={`category-tag-new position-absolute ${isDomestic ? 'tag-domestic' : 'tag-industrial'}`}>
+                            <i className={`bi ${isDomestic ? 'bi-house-fill' : 'bi-building'} me-1`}></i>
+                            {isDomestic ? 'Domestic' : 'Industrial'}
+                          </div>
+                          <div className="image-hover-zoom h-100">
+                            <Image
+                              src={product.img}
+                              alt={product.title}
+                              width={1024}
+                              height={1536}
+                              className="w-100 h-100 product-card-image"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Content Section - tighter spacing */}
+                        <div className="product-info-body p-3 d-flex flex-column flex-grow-1">
+                          <h5 className="product-title fw-bold mb-1">{product.title}</h5>
+                          <p className="product-desc mb-3">{product.description}</p>
+                          
+                          {/* Features Pills (If exists) - compact */}
+                          {product.features && product.features.length > 0 && (
+                            <div className="product-features-badges d-flex flex-wrap gap-1 mb-3 mt-auto">
+                              {product.features.slice(0, 3).map((feature, idx) => (
+                                <span key={idx} className="badge feature-pill">{feature}</span>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Explore System Action Footer - compact */}
+                          <div className="card-footer-action d-flex align-items-center justify-content-between mt-auto pt-2 border-top">
+                            <span className="action-text text-uppercase fw-bold">Explore System</span>
+                            <div className="action-circle-btn d-flex align-items-center justify-content-center">
+                              <i className="bi bi-arrow-right-short"></i>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Underline Accent */}
+                        <div className="card-accent-line"></div>
+                      </div>
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Empty State */}
             {filteredProducts.length === 0 && (
-              <div className="text-center py-5 empty-state">
-                <div className="empty-icon mb-4">
-                   <i className="bi bi-search"></i>
+              <div className="text-center py-5 empty-state-wrapper rounded-3 p-4 bg-white border">
+                <div className="empty-icon-box mb-3 d-flex align-items-center justify-content-center mx-auto">
+                  <i className="bi bi-search"></i>
                 </div>
-                <h4 className="fw-bold">No products found</h4>
-                <p className="text-muted">Try selecting another category to find what you're looking for.</p>
-                <button onClick={() => setActiveCategory('all')} className="btn btn-primary mt-3 px-4 rounded-pill">View All Products</button>
+                <h4 className="fw-bold mb-2">No Match Found</h4>
+                <p className="text-muted mb-4">
+                  Try clearing your search query or selecting a different category.
+                </p>
+                <button onClick={handleReset} className="btn btn-reset-filters px-4 py-2 rounded-3 fw-semibold">
+                  Clear Filters
+                </button>
               </div>
             )}
           </div>
@@ -212,90 +189,162 @@ const ProductList = () => {
 
       <style jsx>{`
         .product-list-section {
-          background-color: #f8fafc;
+          background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
           min-height: 80vh;
         }
 
-        .title-line {
-          width: 50px;
-          height: 4px;
-          background-color: #006CD0;
-          border-radius: 2px;
-          margin-top: 8px;
-        }
-
         /* Sidebar Styling */
-        .custom-nav .nav-link {
-          border: 1px solid transparent;
+        .sidebar-filter-panel {
           background: #ffffff;
-          color: #64748b;
-          transition: all 0.3s ease;
-          border: 1px solid rgba(0, 108, 208, 0.05);
+          border: 1px solid rgba(0, 108, 208, 0.08) !important;
+          position: sticky;
+          top: 130px;
+          z-index: 10;
         }
 
-        .custom-nav .nav-link.inactive:hover {
-          background: #edf5ff;
-          color: #006CD0;
-          transform: translateX(5px);
-        }
-
-        .custom-nav .nav-link.active {
-          background: #006CD0;
-          color: #ffffff;
-          box-shadow: 0 10px 20px rgba(0, 108, 208, 0.15);
-        }
-
-        .icon-box-small {
-          width: 32px;
-          height: 32px;
+        .sidebar-title {
+          color: #0f172a;
           font-size: 1.1rem;
-          flex-shrink: 0;
+          border-bottom: 2px solid rgba(0, 108, 208, 0.08);
+          padding-bottom: 10px;
         }
 
-        /* Product Card Styling */
-        .premium-product-card {
-          background: #f4f9ff;
-          border: 1px solid rgba(0, 108, 208, 0.1);
-          transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-          display: flex;
-          flex-direction: column;
-          position: relative;
-          z-index: 1;
-          overflow: hidden;
+        .search-widget .form-label,
+        .filter-menu-widget .form-label {
+          font-size: 0.76rem;
+          letter-spacing: 0.8px;
+          text-transform: uppercase;
         }
 
-        .premium-product-card:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.08), 0 18px 36px -18px rgba(0, 0, 0, 0.03) !important;
-          border-color: rgba(0, 108, 208, 0.15);
+        /* Search input */
+        .search-input-wrapper {
+          width: 100%;
         }
 
-        .product-image-container {
-          background-color: #f8fafc;
-          aspect-ratio: 1 / 1;
-          overflow: hidden;
-          position: relative;
-        }
-
-        .product-image-container::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: transparent;
-          z-index: 1;
+        .search-icon-left {
+          left: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: #94a3b8;
+          font-size: 0.9rem;
           pointer-events: none;
         }
 
+        .search-input {
+          padding-left: 36px;
+          padding-right: 30px;
+          height: 40px;
+          font-size: 0.85rem;
+          border: 1px solid rgba(0, 108, 208, 0.12);
+          background-color: #ffffff;
+          color: #0f172a;
+          transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+          border-color: #006CD0;
+          box-shadow: 0 0 0 3px rgba(0, 108, 208, 0.1);
+        }
+
+        .btn-clear-search {
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: #94a3b8;
+          cursor: pointer;
+          font-size: 0.95rem;
+        }
+
+        /* Vertical Buttons */
+        .btn-vertical-filter {
+          background: #ffffff;
+          border: 1px solid rgba(0, 108, 208, 0.1) !important;
+          color: #475569;
+          font-size: 0.86rem;
+          font-weight: 600;
+          cursor: pointer;
+          height: 42px;
+        }
+
+        .btn-vertical-filter i {
+          color: #94a3b8;
+          font-size: 0.95rem;
+          transition: color 0.2s ease;
+        }
+
+        .btn-vertical-filter:hover {
+          background-color: rgba(0, 108, 208, 0.02);
+          color: #006CD0;
+          border-color: rgba(0, 108, 208, 0.2) !important;
+        }
+
+        .btn-vertical-filter:hover i {
+          color: #006CD0;
+        }
+
+        .btn-vertical-filter.active {
+          background: linear-gradient(135deg, #006CD0 0%, #0052a3 100%);
+          color: #ffffff;
+          border-color: transparent !important;
+          box-shadow: 0 4px 10px rgba(0, 108, 208, 0.15);
+        }
+
+        .btn-vertical-filter.active i {
+          color: #ffffff;
+        }
+
+        .count-pill {
+          background-color: rgba(0, 0, 0, 0.04);
+          color: #64748b;
+          font-size: 0.72rem;
+          font-weight: 700;
+          padding: 2px 7px;
+          border-radius: 50px;
+        }
+
+        .btn-vertical-filter.active .count-pill {
+          background-color: rgba(255, 255, 255, 0.2);
+          color: #ffffff;
+        }
+
+        /* Products Grid */
+        .results-count-bar {
+          font-size: 0.85rem;
+          padding-bottom: 8px;
+          border-bottom: 1px solid rgba(0, 108, 208, 0.06);
+        }
+
+        /* Compact Product Cards */
+        .premium-product-card {
+          background: #ffffff;
+          border: 1px solid rgba(0, 108, 208, 0.08) !important;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.015);
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .premium-product-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 20px -5px rgba(0, 108, 208, 0.04), 0 8px 8px -5px rgba(0, 108, 208, 0.02);
+          border-color: rgba(0, 108, 208, 0.16) !important;
+        }
+
+        .product-image-container {
+          background: #ffffff;
+          aspect-ratio: 1024 / 1536;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0px;
+        }
+
         .image-hover-zoom {
-          transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-          position: relative;
-          z-index: 1;
+          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           width: 100%;
           height: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 12px;
         }
 
         .image-hover-zoom :global(.product-card-image) {
@@ -305,38 +354,38 @@ const ProductList = () => {
         }
 
         .premium-product-card:hover .image-hover-zoom {
-          transform: scale(1.08) translateY(-5px);
+          transform: scale(1.08) translateY(-2px);
         }
 
-        .category-badge {
-          position: absolute;
-          top: 15px;
-          right: 15px;
-          left: auto;
-          background: rgba(0, 108, 208, 0.85);
-          backdrop-filter: blur(8px);
-          color: #ffffff;
-          padding: 5px 12px;
+        .category-tag-new {
+          top: 10px;
+          left: 10px;
+          padding: 4px 10px;
           border-radius: 50px;
-          font-size: 0.7rem;
-          font-weight: 800;
+          font-size: 0.65rem;
+          font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: 0.5px;
           z-index: 2;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+        }
+
+        .tag-domestic {
+          background-color: rgba(0, 108, 208, 0.08);
+          color: #006CD0;
           border: 1px solid rgba(0, 108, 208, 0.1);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
         }
 
-        .product-info-body {
-          padding: 1.5rem !important;
+        .tag-industrial {
+          background-color: rgba(15, 23, 42, 0.06);
+          color: #0f172a;
+          border: 1px solid rgba(15, 23, 42, 0.08);
         }
 
+        /* Card Text */
         .product-title {
           color: #0f172a;
-          font-size: 1.15rem;
-          font-weight: 800 !important;
-          line-height: 1.3;
-          margin-bottom: 10px !important;
+          font-size: 1.05rem;
+          font-weight: 700 !important;
           transition: color 0.3s ease;
         }
 
@@ -346,13 +395,55 @@ const ProductList = () => {
 
         .product-desc {
           color: #64748b;
-          font-size: 0.9rem;
-          line-height: 1.6;
+          font-size: 0.82rem;
+          line-height: 1.4;
           display: -webkit-box;
-          -webkit-line-clamp: 3;
+          -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
-          opacity: 0.85;
+        }
+
+        .feature-pill {
+          background-color: #f1f5f9;
+          color: #475569;
+          font-weight: 600;
+          font-size: 0.68rem;
+          padding: 2px 6px;
+          border-radius: 4px;
+          border: 1px solid #e2e8f0;
+          text-transform: capitalize;
+        }
+
+        /* Actions */
+        .card-footer-action {
+          border-top: 1px solid #f1f5f9 !important;
+        }
+
+        .action-text {
+          font-size: 0.72rem;
+          color: #94a3b8;
+          letter-spacing: 0.8px;
+          transition: color 0.3s ease;
+        }
+
+        .action-circle-btn {
+          width: 28px;
+          height: 28px;
+          background-color: #f8fafc;
+          border-radius: 50%;
+          color: #64748b;
+          font-size: 1.10rem;
+          transition: all 0.3s ease;
+        }
+
+        .premium-product-card:hover .action-text {
+          color: #006CD0;
+        }
+
+        .premium-product-card:hover .action-circle-btn {
+          background-color: #006CD0;
+          color: #ffffff;
+          transform: scale(1.05);
         }
 
         .card-accent-line {
@@ -361,7 +452,7 @@ const ProductList = () => {
           left: 0;
           width: 0;
           height: 3px;
-          background: #006CD0;
+          background: linear-gradient(90deg, #006CD0 0%, #00a4ff 100%);
           transition: width 0.4s ease;
         }
 
@@ -369,186 +460,83 @@ const ProductList = () => {
           width: 100%;
         }
 
-        .empty-state .empty-icon {
-          font-size: 4rem;
-          color: #cbd5e1;
-        }
-
-        /* Premium Sub Filter Styling */
-        .sub-filter-bar-wrapper {
-          background: #ffffff;
-          backdrop-filter: blur(20px);
-          border: 1px solid rgba(0, 108, 208, 0.08);
-          border-radius: 20px;
-          padding: 22px 24px;
-          box-shadow: 0 10px 30px -10px rgba(0, 108, 208, 0.08);
-          position: relative;
-          z-index: 2;
-          overflow: hidden;
-        }
-
-        .sub-filter-label {
-          font-size: 0.75rem;
-          letter-spacing: 1px;
-        }
-
-        .sub-filter-title-line {
-          width: 15px;
-          height: 3px;
-          background-color: #006CD0;
-          border-radius: 2px;
-        }
-
-        .sub-filter-scroll-container {
-          display: flex;
-          gap: 10px;
-          overflow-x: auto !important;
-          scroll-behavior: smooth;
-          -webkit-overflow-scrolling: touch;
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
-          width: 100%;
-          padding: 6px 2px 8px;
-          user-select: none;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-        }
-
-        .sub-filter-scroll-container::-webkit-scrollbar {
-          display: none; /* Hide scrollbar for Chrome, Safari and Opera */
-        }
-
-        .sub-filter-chip {
-          font-size: 0.84rem;
-          font-weight: 600;
-          padding: 0.55rem 1.1rem;
-          border: 1px solid rgba(0, 108, 208, 0.08);
-          background-color: #ffffff;
-          color: #64748b;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-          transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-          letter-spacing: 0.2px;
-          flex-shrink: 0;
-        }
-
-        .sub-filter-chip i {
-          font-size: 0.95rem;
-          transition: transform 0.3s ease;
-        }
-
-        .sub-filter-chip.inactive:hover {
-          background-color: #ffffff;
+        /* Empty State */
+        .empty-icon-box {
+          width: 50px;
+          height: 50px;
+          background-color: rgba(0, 108, 208, 0.06);
+          border-radius: 50%;
           color: #006CD0;
-          border-color: #006CD0;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 15px -5px rgba(0, 108, 208, 0.15);
+          font-size: 1.4rem;
         }
 
-        .sub-filter-chip.inactive:hover i {
-          transform: scale(1.15);
-        }
-
-        .sub-filter-chip.active {
-          background: linear-gradient(135deg, #006CD0 0%, #004d98 100%);
+        .btn-reset-filters {
+          background: linear-gradient(135deg, #006CD0 0%, #0052a3 100%);
           color: #ffffff;
-          border-color: transparent;
-          box-shadow: 0 8px 20px -6px rgba(0, 108, 208, 0.35);
-          transform: translateY(-2px);
+          border: none;
+          box-shadow: 0 4px 10px rgba(0, 108, 208, 0.1);
         }
 
-        .sub-filter-chip.active i {
-          transform: scale(1.1);
-        }
-
+        /* Responsive */
         @media (max-width: 991px) {
-          .sticky-top {
-            position: static !important;
+          .product-list-section {
+            padding-top: 130px !important;
           }
-          .custom-nav {
+        }
+
+        @media (max-width: 767px) {
+          .filter-vertical-group {
             flex-direction: row !important;
-            flex-wrap: wrap !important;
-            justify-content: center;
-            gap: 8px !important;
-            margin-bottom: 1rem;
-            padding: 10px 0;
+            overflow-x: auto;
+            gap: 4px !important;
+            padding-bottom: 4px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
           }
-          .custom-nav .nav-link {
-            width: auto !important;
-            padding: 8px 16px !important;
-            font-size: 13px !important;
-            margin: 0 !important;
-            border-radius: 50px !important;
-            border: 1px solid #eee !important;
-            gap: 8px !important;
+          .filter-vertical-group::-webkit-scrollbar {
+            display: none;
           }
-          .custom-nav .nav-link .icon-box-small {
-            width: 20px;
-            height: 20px;
-            font-size: 14px;
-          }
-          .sidebar-header {
-            text-align: center;
-          }
-          .title-line {
-            margin: 8px auto 0;
-          }
-          .sub-filter-bar-wrapper {
-            padding: 18px 16px;
-            margin-top: 8px;
-          }
-          .product-image-container {
-            aspect-ratio: 1 / 1;
+          .btn-vertical-filter {
+            justify-content: center !important;
+            padding: 8px 6px !important;
+            font-size: 0.8rem !important;
             height: auto;
-            padding: 0 !important;
-            background: linear-gradient(180deg, #ffffff 0%, #eef4fb 100%);
+            border: 1px solid rgba(0,0,0,0.05) !important;
+            white-space: nowrap;
+            flex: 1;
           }
-          .image-hover-zoom {
-            padding: 18px !important;
+          .btn-vertical-filter .d-flex {
+            gap: 4px !important;
           }
-          .image-hover-zoom :global(.product-card-image) {
-            object-fit: contain !important;
-            width: 100% !important;
-            height: 100% !important;
-          }
-          .premium-product-card {
-            margin-bottom: 10px;
-            border-radius: 16px !important;
-          }
-          .category-badge {
-            top: 12px;
-            right: 12px;
-            font-size: 0.65rem;
-            padding: 4px 10px;
-          }
-          .product-info-body {
-            padding: 1.1rem !important;
-          }
-          .product-title {
-            font-size: 1.05rem;
+          .btn-vertical-filter .count-pill {
+            display: inline-flex !important;
+            margin-left: 4px;
+            padding: 2px 5px;
           }
         }
 
         @media (max-width: 575px) {
           .product-list-section {
-            padding-top: 60px !important;
+            padding-top: 100px !important;
           }
-          .sub-filter-bar-wrapper {
-            padding: 16px 14px;
-            border-radius: 16px;
+          .btn-vertical-filter {
+            font-size: 0.8rem !important;
+            padding: 6px 12px !important;
           }
-          .sub-filter-chip {
-            font-size: 0.78rem;
-            padding: 0.5rem 0.95rem;
+          .product-desc {
+            display: none !important;
           }
-          .product-image-container {
-            aspect-ratio: 1 / 1;
+          .product-info-body {
+            padding: 10px !important;
           }
-          .image-hover-zoom {
-            padding: 22px !important;
+          .product-features-badges {
+            margin-bottom: 8px !important;
           }
-          .image-hover-zoom :global(.product-card-image) {
-            object-fit: contain !important;
+          .feature-pill:nth-child(n+3) {
+            display: none !important;
+          }
+          .card-footer-action {
+            padding-top: 6px !important;
           }
         }
       `}</style>
@@ -557,4 +545,3 @@ const ProductList = () => {
 };
 
 export default ProductList;
-
