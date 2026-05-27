@@ -116,7 +116,7 @@ const ProductList = () => {
               {filteredProducts.map((product) => {
                 const isDomestic = product.category === 'domestic';
                 return (
-                  <div key={product.id} className="col-11 col-sm-9 col-md-6 col-lg-4 mx-auto wow fadeInUp">
+                  <div key={product.id} className="col-9 col-sm-8 col-md-6 col-lg-4 mx-auto wow fadeInUp">
                     <Link href={`/service-details?id=${product.id}`} className="text-decoration-none d-block h-100">
                       <div className="premium-product-card h-100 rounded-3 overflow-hidden position-relative d-flex flex-column border">
                         {/* Image Container - compact */}
