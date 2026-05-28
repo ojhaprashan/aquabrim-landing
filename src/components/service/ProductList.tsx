@@ -524,9 +524,15 @@ const ProductList = () => {
             padding: 6px 12px !important;
           }
           
-          /* Restore aspect ratio so image is full width without cropping */
+          /* Allow card to be full width without side gaps */
+          .premium-product-card {
+            max-width: 100%;
+            margin: 0;
+          }
+
+          /* Reduce the height of the image so it fits better on screen, with very minimal cropping at the edges */
           .product-image-container {
-            aspect-ratio: 1024 / 1536 !important;
+            aspect-ratio: 4 / 5 !important;
           }
 
           .product-desc {
