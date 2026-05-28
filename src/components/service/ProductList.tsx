@@ -61,7 +61,7 @@ const ProductList = () => {
       <div className="container">
         <div className="row">
           {/* Sidebar Left: Categories Only */}
-          <div className="col-lg-3 col-md-4 mb-4 mb-md-0">
+          <div className="col-lg-3 col-md-4 mb-2 mb-md-0">
             <div className="sticky-top" style={{ top: '130px' }}>
               <div className="d-flex flex-column gap-3 filter-vertical-group">
                 <button
@@ -530,7 +530,7 @@ const ProductList = () => {
             margin: 0;
           }
 
-          /* Reduce the height of the image so it fits better on screen, with very minimal cropping at the edges */
+          /* Reduce the height of the image so it fits better on screen */
           .product-image-container {
             aspect-ratio: 4 / 5 !important;
           }
