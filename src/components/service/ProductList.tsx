@@ -116,7 +116,7 @@ const ProductList = () => {
               {filteredProducts.map((product) => {
                 const isDomestic = product.category === 'domestic';
                 return (
-                  <div key={product.id} className="col-9 col-sm-8 col-md-6 col-lg-4 mx-auto wow fadeInUp">
+                  <div key={product.id} className="col-6 col-sm-6 col-md-6 col-lg-4 mx-auto wow fadeInUp">
                     <Link href={`/service-details?id=${product.id}`} className="text-decoration-none d-block h-100">
                       <div className="premium-product-card h-100 rounded-3 overflow-hidden position-relative d-flex flex-column border">
                         {/* Image Container - compact */}
@@ -523,6 +523,12 @@ const ProductList = () => {
             font-size: 0.8rem !important;
             padding: 6px 12px !important;
           }
+          
+          /* Keep cards vertical but reduce image container height */
+          .product-image-container {
+            aspect-ratio: 1024 / 1536 !important;
+          }
+
           .product-desc {
             display: none !important;
           }

@@ -304,9 +304,9 @@ const ServiceDetailsArea = () => {
               )}
             </div>
             <div className="col-lg-6 wow fadeInRight">
-               <div className="bg-white rounded-4 p-4 shadow-sm text-center h-100 d-flex align-items-center justify-content-center border overflow-hidden position-relative" style={{ borderColor: '#e2e8f0', minHeight: '400px' }}>
+               <div className="how-it-works-img-container bg-white rounded-4 p-4 shadow-sm text-center h-100 d-flex align-items-center justify-content-center border overflow-hidden position-relative" style={{ borderColor: '#e2e8f0' }}>
                  <div className="image-hover-zoom w-100 h-100 d-flex align-items-center justify-content-center">
-                    <Image src={service_details_2} alt="System Setup Diagram" className="img-fluid" style={{ maxHeight: '380px', objectFit: 'contain' }} />
+                    <Image src={service_details_2} alt="System Setup Diagram" className="img-fluid" style={{ maxHeight: '100%', objectFit: 'contain' }} />
                  </div>
                </div>
             </div>
@@ -501,6 +501,11 @@ const ServiceDetailsArea = () => {
           transform: scale(1.05);
         }
 
+        /* How It Works Container */
+        .how-it-works-img-container {
+          min-height: 400px;
+        }
+
         /* Mobile specific fixes */
         @media (max-width: 991px) {
           .pt-100 {
@@ -536,18 +541,36 @@ const ServiceDetailsArea = () => {
           .pt-100 {
             padding-top: 100px !important;
           }
+          .display-5 {
+            font-size: 2rem !important;
+          }
+          .display-6 {
+            font-size: 1.75rem !important;
+          }
           .main-image-wrapper {
             aspect-ratio: 1024 / 1536;
             padding: 0px;
-            max-width: 260px;
+            width: 100%;
+            max-width: 100%;
             max-height: none;
             margin-left: auto;
             margin-right: auto;
-            border-radius: 16px !important;
+            border-radius: 12px !important;
+          }
+          .main-image-wrapper :global(.product-main-image) {
+            object-fit: contain !important;
+            object-position: center !important;
           }
           .thumbnail-item {
-            width: 56px;
-            height: 56px;
+            width: 60px;
+            height: 60px;
+          }
+          .thumbnail-gallery {
+            gap: 10px !important;
+          }
+          .how-it-works-img-container {
+            min-height: 250px;
+            padding: 1rem !important;
           }
         }
 
