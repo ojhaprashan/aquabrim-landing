@@ -112,7 +112,7 @@ const ProductList = () => {
               <span>Showing {filteredProducts.length} Systems</span>
             </div>
 
-            <div className="row g-3">
+            <div className="row g-4">
               {filteredProducts.map((product) => {
                 const isDomestic = product.category === 'domestic';
                 return (
@@ -141,22 +141,7 @@ const ProductList = () => {
                           <h5 className="product-title fw-bold mb-1">{product.title}</h5>
                           <p className="product-desc mb-3">{product.description}</p>
                           
-                          {/* Features Pills (If exists) - compact */}
-                          {product.features && product.features.length > 0 && (
-                            <div className="product-features-badges d-flex flex-wrap gap-1 mb-3 mt-auto">
-                              {product.features.slice(0, 3).map((feature, idx) => (
-                                <span key={idx} className="badge feature-pill">{feature}</span>
-                              ))}
-                            </div>
-                          )}
 
-                          {/* Explore System Action Footer - compact */}
-                          <div className="card-footer-action d-flex align-items-center justify-content-between mt-auto pt-2 border-top">
-                            <span className="action-text text-uppercase fw-bold">Explore System</span>
-                            <div className="action-circle-btn d-flex align-items-center justify-content-center">
-                              <i className="bi bi-arrow-right-short"></i>
-                            </div>
-                          </div>
                         </div>
                         
                         {/* Underline Accent */}
@@ -189,8 +174,17 @@ const ProductList = () => {
 
       <style jsx>{`
         .product-list-section {
-          background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
+          background: linear-gradient(135deg, #f8fafc 0%, #eef2f6 100%);
           min-height: 80vh;
+          position: relative;
+        }
+        .product-list-section::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 300px;
+          background: linear-gradient(180deg, rgba(0,108,208,0.03) 0%, rgba(248,250,252,0) 100%);
+          pointer-events: none;
         }
 
         /* Sidebar Styling */
@@ -283,10 +277,11 @@ const ProductList = () => {
         }
 
         .btn-vertical-filter.active {
-          background: linear-gradient(135deg, #006CD0 0%, #0052a3 100%);
+          background: linear-gradient(135deg, #006CD0 0%, #004c99 100%);
           color: #ffffff;
           border-color: transparent !important;
-          box-shadow: 0 4px 10px rgba(0, 108, 208, 0.15);
+          box-shadow: 0 8px 16px rgba(0, 108, 208, 0.25);
+          transform: translateY(-2px);
         }
 
         .btn-vertical-filter.active i {
@@ -316,20 +311,24 @@ const ProductList = () => {
 
         /* Compact Product Cards */
         .premium-product-card {
-          background: #ffffff;
-          border: 1px solid rgba(0, 108, 208, 0.08) !important;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.015);
-          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(0, 108, 208, 0.35) !important;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0,0,0,0.02);
+          border-radius: 16px !important;
+          transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .premium-product-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 15px 20px -5px rgba(0, 108, 208, 0.04), 0 8px 8px -5px rgba(0, 108, 208, 0.02);
-          border-color: rgba(0, 108, 208, 0.16) !important;
+          transform: translateY(-8px) scale(1.01);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 20px 40px rgba(0, 108, 208, 0.1), 0 10px 15px rgba(0, 0, 0, 0.04);
+          border: 1px solid rgba(0, 108, 208, 0.8) !important;
+          background: #ffffff;
         }
 
         .product-image-container {
-          background: #ffffff;
+          background: radial-gradient(circle at center, #ffffff 0%, #f8fafc 100%);
+          border-bottom: 1px solid rgba(0, 108, 208, 0.04);
           aspect-ratio: 1024 / 1536;
           overflow: hidden;
           display: flex;
@@ -358,15 +357,18 @@ const ProductList = () => {
         }
 
         .category-tag-new {
-          top: 10px;
-          left: 10px;
-          padding: 4px 10px;
+          top: 12px;
+          left: 12px;
+          padding: 6px 14px;
           border-radius: 50px;
           font-size: 0.65rem;
-          font-weight: 700;
+          font-weight: 800;
+          letter-spacing: 0.5px;
           text-transform: uppercase;
           z-index: 2;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
         }
 
         .tag-domestic {
@@ -384,8 +386,9 @@ const ProductList = () => {
         /* Card Text */
         .product-title {
           color: #0f172a;
-          font-size: 1.05rem;
-          font-weight: 700 !important;
+          font-size: 1.15rem;
+          font-weight: 800 !important;
+          letter-spacing: -0.3px;
           transition: color 0.3s ease;
         }
 
@@ -400,14 +403,16 @@ const ProductList = () => {
         }
 
         .feature-pill {
-          background-color: #f1f5f9;
-          color: #475569;
-          font-weight: 600;
+          background-color: #edf5ff;
+          color: #006CD0;
+          font-weight: 700;
           font-size: 0.68rem;
-          padding: 2px 6px;
-          border-radius: 4px;
-          border: 1px solid #e2e8f0;
+          padding: 4px 10px;
+          border-radius: 6px;
+          border: 1px solid rgba(0, 108, 208, 0.12);
           text-transform: capitalize;
+          box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+          letter-spacing: 0.2px;
         }
 
         /* Actions */
@@ -523,7 +528,7 @@ const ProductList = () => {
           /* Allow card to be full width without side gaps */
           .premium-product-card {
             max-width: 100%;
-            margin: 0;
+            margin-bottom: 24px !important;
           }
 
           /* Reduce the height of the image so it fits better on screen */

@@ -4,7 +4,7 @@
     "category": "domestic",
     "categoryName": "Domestic",
     "title": "Trigger",
-    "description": "Never miss water supply",
+    "description": "Never miss water supply (Smart controller for motor, directly connected to corporation water supply line)",
     "imgKey": "prod_controller",
     "images": [
       "/assets/Product/trigger_2.jpeg",
@@ -20,8 +20,6 @@
       { "title": "Stops the Motor Intelligently", "desc": "Trigger automatically switches off the motor when: the tank becomes full, water flow is interrupted, dry run conditions are detected, or voltage supply becomes unsafe. This protects the motor and prevents water tank overflow." }
     ],
     "features": [
-      "Smart controller for motor",
-      "directly connected to corporation water supply line",
       "Real-Time Water Detection",
       "Automatic Motor Control",
       "Wireless Technology",
@@ -39,7 +37,7 @@
     "category": "domestic",
     "categoryName": "Domestic",
     "title": "Macro",
-    "description": "Prevents tank overflow",
+    "description": "Prevents tank overflow (Controller for borewell/ submersible pumps, motor pumping from Underground tank to Overhead tank)",
     "imgKey": "prod_controller",
     "images": [
       "/assets/Product/macro_3.jpeg",
@@ -55,8 +53,6 @@
       { "title": "Stops Automatically for Protection", "desc": "The motor automatically switches off when: the overhead tank becomes full, underground water levels become low, or unsafe operating conditions are detected. This protects the motor and prevents dry run damage and water overflow." }
     ],
     "features": [
-      "Controller for borewell/ submersible pumps",
-      "motor pumping from Underground tank to Overhead tank",
       "Advanced Wireless Technology",
       "Real-Time Tank Monitoring",
       "Automatic Motor Control",
