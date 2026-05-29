@@ -37,7 +37,7 @@ const ProductList = () => {
   const [activeFilter, setActiveFilter] = useState<'all' | 'domestic' | 'industrial'>('all');
 
   const domesticCount = products.filter(p => p.category === 'domestic').length;
-  const industrialCount = products.filter(p => p.category === 'industrial' || p.category === 'more_categories').length;
+  const industrialCount = products.filter(p => p.category === 'industrial').length;
   const totalCount = products.length;
 
   const handleReset = () => {
@@ -49,7 +49,7 @@ const ProductList = () => {
     if (activeFilter === 'domestic' && product.category !== 'domestic') {
       return false;
     }
-    if (activeFilter === 'industrial' && product.category === 'domestic') {
+    if (activeFilter === 'industrial' && product.category !== 'industrial') {
       return false;
     }
 
@@ -62,7 +62,7 @@ const ProductList = () => {
         <div className="row">
           {/* Sidebar Left: Categories Only */}
           <div className="col-lg-3 col-md-4 mb-2 mb-md-0">
-            <div className="sticky-top" style={{ top: '130px' }}>
+            <div className="sticky-top" style={{ top: '130px', zIndex: 10 }}>
               <div className="d-flex flex-column gap-3 filter-vertical-group">
                 <button
                   className={`btn-vertical-filter d-flex align-items-center justify-content-between rounded-3 border px-3 py-2.5 text-start w-100 transition-all ${

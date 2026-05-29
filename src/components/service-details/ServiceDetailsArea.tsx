@@ -306,7 +306,7 @@ const ServiceDetailsArea = () => {
             <div className="col-lg-6 wow fadeInRight">
                <div className="how-it-works-img-container bg-white rounded-4 p-4 shadow-sm text-center h-100 d-flex align-items-center justify-content-center border overflow-hidden position-relative" style={{ borderColor: '#e2e8f0' }}>
                  <div className="image-hover-zoom w-100 h-100 d-flex align-items-center justify-content-center">
-                    <Image src={service_details_2} alt="System Setup Diagram" className="img-fluid" style={{ maxHeight: '100%', objectFit: 'contain' }} />
+                    <Image src={product.howItWorksImg || service_details_2} alt="System Setup Diagram" width={600} height={600} className="img-fluid" style={{ maxHeight: '100%', objectFit: 'contain' }} />
                  </div>
                </div>
             </div>

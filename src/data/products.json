@@ -3,20 +3,21 @@
     "id": 1,
     "category": "domestic",
     "categoryName": "Domestic",
-    "title": "Ripple",
+    "title": "Trigger",
     "description": "Smart Municipal Water Level Controller",
     "imgKey": "prod_controller",
     "images": [
-      "/assets/Product/ripple_1.png",
-      "/assets/Product/ripple_2.png",
-      "/assets/Product/ripple_3.png"
+      "/assets/Product/trigger_2.jpeg",
+      "/assets/Product/trigger_1.jpeg",
+      "/assets/Product/trigger_3.jpeg"
     ],
-    "longDescription": "Ripple is Aquabrim’s Smart Municipal Water Level Controller developed for homes, apartments, and commercial buildings. Designed for modern urban infrastructure, the system automatically detects water availability in the main supply line and manages motor operations to maintain ideal tank water levels without manual effort. Using advanced wireless water level sensor technology, Ripple supports real-time water monitoring, automatic tank filling, overflow prevention, and motor safety. With intelligent automation, wireless connectivity, dry run protection, and remote monitoring features, Ripple offers an efficient, reliable, and seamless water management solution.",
+    "howItWorksImg": "/assets/Product/trigger_works.jpeg",
+    "longDescription": "Trigger is Aquabrim’s Smart Municipal Water Level Controller designed for homes, apartments, and commercial buildings. Built for modern urban infrastructure, Trigger automatically detects water availability in the main supply line and intelligently manages motor operations to maintain optimal tank water levels without manual intervention. Powered by advanced wireless water level sensor technology, Trigger enables real-time water monitoring, automatic tank filling, overflow prevention, and motor safety protection. With intelligent automation, wireless connectivity, dry run protection, and remote monitoring capabilities, Trigger delivers a reliable, efficient, and seamless water management solution.",
     "howItWorks": [
-      { "title": "Detects Water Supply Automatically", "desc": "Ripple continuously monitors the municipal water supply line using intelligent water controller sensors to detect water availability in real time." },
-      { "title": "Starts the Motor Automatically", "desc": "As soon as water is detected, the automatic water tank controller activates the motor and starts filling the overhead water tank automatically." },
-      { "title": "Monitors Water Flow & Tank Levels", "desc": "The system tracks water flow and tank conditions through wireless water level sensors and intelligent monitoring technology to ensure uninterrupted operation." },
-      { "title": "Stops the Motor Intelligently", "desc": "Ripple automatically switches off the motor when: the tank becomes full, water flow is interrupted, dry run conditions occur, or voltage supply becomes unsafe. This protects the motor and prevents water tank overflow." }
+      { "title": "Detects Water Supply Automatically", "desc": "Trigger continuously monitors the municipal water supply line using intelligent water controller sensors to detect water availability in real time." },
+      { "title": "Starts the Motor Automatically", "desc": "As soon as water is detected, the automatic water tank controller activates the motor and begins filling the overhead water tank automatically." },
+      { "title": "Monitors Water Flow & Tank Levels", "desc": "The system continuously tracks water flow and tank conditions through wireless water level sensors and intelligent monitoring technology to ensure smooth and uninterrupted operation." },
+      { "title": "Stops the Motor Intelligently", "desc": "Trigger automatically switches off the motor when: the tank becomes full, water flow is interrupted, dry run conditions are detected, or voltage supply becomes unsafe. This protects the motor and prevents water tank overflow." }
     ],
     "features": [
       "Real-Time Water Detection",
@@ -35,64 +36,31 @@
     "id": 2,
     "category": "domestic",
     "categoryName": "Domestic",
-    "title": "i-BOT A",
+    "title": "Macro",
     "description": "Smart Water Tank Level Controller",
     "imgKey": "prod_controller",
     "images": [
-      "/assets/Product/ibot_1.png",
-      "/assets/Product/ibot _2.png",
-      "/assets/Product/ibot_3.png"
+      "/assets/Product/macro_3.jpeg",
+      "/assets/Product/macro_1.jpeg",
+      "/assets/Product/macro_2.jpeg"
     ],
-    "longDescription": "i-BOT A is Aquabrim’s Smart Water Tank Level Controller designed for efficient water management in residential infrastructure. The system automatically monitors water levels in both underground and overhead tanks and controls motor operations to maintain optimal water availability without manual intervention. Built with advanced wireless technology, i-BOT A enables real-time tank monitoring, automatic motor control, dry run protection, and voltage safety features for reliable day-to-day operation. With maintenance-free sensors, digital tank level display, and battery-powered transmitters, i-BOT A delivers a smarter, safer, and hassle-free water automation experience for modern homes.",
+    "howItWorksImg": "/assets/Product/macro_works.jpeg",
+    "longDescription": "Macro is Aquabrim’s Smart Water Tank Level Controller designed for efficient water management in residential infrastructure. The system automatically monitors water levels in both underground and overhead tanks while intelligently controlling motor operations to maintain optimal water availability without manual intervention. Built with advanced wireless technology, Macro enables real-time tank monitoring, automatic motor control, dry run protection, and voltage safety features for reliable day-to-day operation. With maintenance-free sensors, digital tank level display, and battery-powered transmitters, Macro delivers a smarter, safer, and hassle-free water automation experience for modern homes.",
     "howItWorks": [
-      { "title": "Monitors Tank Water Levels", "desc": "i-BOT A continuously monitors water levels in both overhead and underground tanks using intelligent wireless sensors." },
-      { "title": "Automatically Starts the Motor", "desc": "When the overhead tank level drops below the set limit, the system automatically starts the motor to begin tank filling." },
-      { "title": "Checks Underground Tank Availability", "desc": "Before operation, the controller verifies sufficient water availability in the underground tank for safe motor operation." },
-      { "title": "Stops Automatically for Protection", "desc": "The motor automatically switches off when the overhead tank is full, underground water levels are low, or unsafe operating conditions are detected." }
+      { "title": "Monitors Tank Water Levels", "desc": "Macro continuously monitors water levels in both overhead and underground tanks using intelligent wireless sensors." },
+      { "title": "Automatically Starts the Motor", "desc": "When the overhead tank level drops below the predefined limit, the system automatically starts the motor to begin tank filling." },
+      { "title": "Checks Underground Tank Availability", "desc": "Before starting operation, the controller verifies sufficient water availability in the underground tank to ensure safe motor functioning." },
+      { "title": "Stops Automatically for Protection", "desc": "The motor automatically switches off when: the overhead tank becomes full, underground water levels become low, or unsafe operating conditions are detected. This protects the motor and prevents dry run damage and water overflow." }
     ],
     "features": [
+      "Advanced Wireless Technology",
+      "Real-Time Tank Monitoring",
       "Automatic Motor Control",
-      "Wireless Technology",
-      "Digital Water Level Display",
-      "Battery Powered Sensors",
       "Dry Run Protection",
-      "Voltage Protection",
+      "Voltage Safety Features",
       "Maintenance-Free Sensors",
-      "LED Water Level Indicators",
-      "Manual Motor Control",
-      "Multi-Tank Support"
-    ]
-  },
-  {
-    "id": 3,
-    "category": "domestic",
-    "categoryName": "Domestic",
-    "title": "i-BOT P",
-    "description": "Smart Borewell Water Controller",
-    "imgKey": "prod_controller",
-    "images": [
-      "/assets/Product/ibot_3.png",
-      "/assets/Product/ibot _2.png",
-      "/assets/Product/ibot_1.png"
-    ],
-    "longDescription": "i-BOT P is Smart Borewell Water Controller designed for homes using borewell and submersible pump systems. The system intelligently monitors water levels in underground and overhead tanks and automatically controls motor operations to ensure efficient and uninterrupted water management. Built with advanced wireless technology, i-BOT P enables automatic tank filling, real-time water level monitoring, dry run protection, and voltage safety for reliable daily operation. With battery-powered transmitters, maintenance-free sensors, and digital tank level display, i-BOT P delivers a safe, efficient, and hassle-free water automation solution for modern residential infrastructure.",
-    "howItWorks": [
-      { "title": "Monitors Tank Water Levels", "desc": "i-BOT P continuously tracks water levels in overhead and underground tanks using intelligent wireless sensors." },
-      { "title": "Automatically Starts the Motor", "desc": "When the overhead tank level drops below the set limit, the controller automatically activates the borewell or submersible pump." },
-      { "title": "Checks Water Availability", "desc": "The system verifies sufficient water availability in the underground tank before starting operations for safe motor performance." },
-      { "title": "Stops Automatically for Protection", "desc": "The motor automatically switches off when the overhead tank is full, underground water levels are low, or unsafe operating conditions are detected." }
-    ],
-    "features": [
-      "Automatic Motor Control",
-      "Wireless Technology",
-      "Digital Water Level Display",
-      "Battery Powered Sensors",
-      "Dry Run Protection",
-      "Voltage Protection",
-      "Maintenance-Free Sensors",
-      "LED Water Level Indicators",
-      "Manual Motor Control",
-      "Multi-Tank Support"
+      "Digital Tank Level Display",
+      "Battery-Powered Transmitters"
     ]
   },
   {
