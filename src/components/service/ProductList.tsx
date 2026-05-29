@@ -397,10 +397,6 @@ const ProductList = () => {
           color: #64748b;
           font-size: 0.82rem;
           line-height: 1.4;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
         }
 
         .feature-pill {
@@ -535,9 +531,6 @@ const ProductList = () => {
             aspect-ratio: 4 / 5 !important;
           }
 
-          .product-desc {
-            display: none !important;
-          }
           .product-info-body {
             padding: 10px !important;
           }
