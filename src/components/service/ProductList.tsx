@@ -137,11 +137,12 @@ const ProductList = () => {
                         </div>
 
                         {/* Content Section - tighter spacing */}
-                        <div className="product-info-body p-3 d-flex flex-column flex-grow-1">
+                        <div className="product-info-body p-4 d-flex flex-column flex-grow-1">
                           <h5 className="product-title fw-bold mb-1">{product.title}</h5>
-                          <p className="product-desc mb-3">{product.description}</p>
-                          
-
+                          {(product as any).subtitle && (
+                            <h6 className="product-subtitle mb-2">{(product as any).subtitle}</h6>
+                          )}
+                          <p className="product-desc mb-0">{product.description}</p>
                         </div>
                         
                         {/* Underline Accent */}
@@ -316,6 +317,7 @@ const ProductList = () => {
           border: 1px solid rgba(0, 108, 208, 0.35) !important;
           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0,0,0,0.02);
           border-radius: 16px !important;
+          overflow: hidden;
           transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
@@ -384,6 +386,11 @@ const ProductList = () => {
         }
 
         /* Card Text */
+        .product-info-body {
+          background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
+          border-top: 1px solid rgba(0, 108, 208, 0.05);
+        }
+
         .product-title {
           color: #0f172a;
           font-size: 1.15rem;
@@ -396,8 +403,14 @@ const ProductList = () => {
           color: #006CD0;
         }
 
+        .product-subtitle {
+          color: #006CD0;
+          font-size: 0.95rem;
+          font-weight: 700;
+        }
+
         .product-desc {
-          color: #64748b;
+          color: #475569;
           font-size: 0.82rem;
           line-height: 1.4;
         }

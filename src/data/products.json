@@ -4,7 +4,8 @@
     "category": "domestic",
     "categoryName": "Domestic",
     "title": "Trigger",
-    "description": "Never miss water supply (Smart controller for motor, directly connected to corporation water supply line)",
+    "subtitle": "Never miss water supply",
+    "description": "Smart controller for motor, directly connected to corporation water supply line",
     "imgKey": "prod_controller",
     "images": [
       "/assets/Product/trigger_2.jpeg",
@@ -37,7 +38,8 @@
     "category": "domestic",
     "categoryName": "Domestic",
     "title": "Macro",
-    "description": "Prevents tank overflow (Controller for borewell/ submersible pumps, motor pumping from Underground tank to Overhead tank)",
+    "subtitle": "Prevents tank overflow",
+    "description": "Controller for borewell/ submersible pumps, motor pumping from Underground tank to Overhead tank",
     "imgKey": "prod_controller",
     "images": [
       "/assets/Product/macro_3.jpeg",
