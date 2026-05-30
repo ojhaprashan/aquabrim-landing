@@ -138,7 +138,7 @@ const ProductList = () => {
 
                         {/* Content Section - tighter spacing */}
                         <div className="product-info-body p-4 d-flex flex-column flex-grow-1">
-                          <h5 className="product-title fw-bold mb-1">{product.title}</h5>
+                          <h5 className="product-title fw-bold mb-2">{product.title}</h5>
                           {(product as any).subtitle && (
                             <h6 className="product-subtitle mb-2">{(product as any).subtitle}</h6>
                           )}
@@ -393,7 +393,7 @@ const ProductList = () => {
 
         .product-title {
           color: #0f172a;
-          font-size: 1.15rem;
+          font-size: 1.25rem;
           font-weight: 800 !important;
           letter-spacing: -0.3px;
           transition: color 0.3s ease;
@@ -405,14 +405,15 @@ const ProductList = () => {
 
         .product-subtitle {
           color: #006CD0;
-          font-size: 0.95rem;
+          font-size: 1rem;
           font-weight: 700;
+          letter-spacing: -0.2px;
         }
 
         .product-desc {
           color: #475569;
-          font-size: 0.82rem;
-          line-height: 1.4;
+          font-size: 0.9rem;
+          line-height: 1.5;
         }
 
         .feature-pill {
