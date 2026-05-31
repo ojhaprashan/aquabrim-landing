@@ -105,53 +105,37 @@ const HeroAreaHomeOne = () => {
           <div className="col-12 col-lg-5">
             <div className="hero-media-wrapper" style={{ visibility: 'visible', opacity: 1 }}>
 
-              {/* Product Card */}
-              <div className="product-card shadow-lg rounded-4 overflow-hidden bg-white p-2">
-                <div className="card-header-badge p-2 pb-1">
-                  <span className="badge bg-success-soft text-success px-3 py-1 rounded-pill fw-bold" style={{ fontSize: '0.75rem', letterSpacing: '0.5px' }}>
-                    <i className="bi bi-check-circle-fill me-1"></i> SMART SYSTEM
-                  </span>
-                </div>
-
-                <div className="position-relative p-2 pt-0">
-                  {/* Image Slider Container */}
-                  <div className="product-image-container rounded-3 overflow-hidden position-relative bg-white">
-                    {sliderImages.map((imgSrc, index) => (
-                      <div
-                        key={index}
-                        className="position-absolute top-0 start-0 w-100 h-100 transition-opacity"
-                        style={{
-                          opacity: currentSlide === index ? 1 : 0,
-                          transition: 'opacity 0.8s ease-in-out',
-                          zIndex: currentSlide === index ? 1 : 0
-                        }}
-                      >
-                        <Image
-                          src={imgSrc}
-                          alt={`Aquabrim Smart Device View ${index + 1}`}
-                          fill
-                          className="img-fluid"
-                          style={{ objectFit: 'contain' }}
-                        />
-                      </div>
-                    ))}
-
-                    <div className="slider-dots position-absolute bottom-0 start-50 translate-middle-x mb-2 d-flex gap-2" style={{ zIndex: 2 }}>
-                      {sliderImages.map((_, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setCurrentSlide(index)}
-                          className={`slider-dot ${currentSlide === index ? 'active' : ''}`}
-                          aria-label={`Go to slide ${index + 1}`}
-                        />
-                      ))}
-                    </div>
+              {/* Image Slider Container */}
+              <div className="product-image-container position-relative">
+                {sliderImages.map((imgSrc, index) => (
+                  <div
+                    key={index}
+                    className="position-absolute top-0 start-0 w-100 h-100 transition-opacity"
+                    style={{
+                      opacity: currentSlide === index ? 1 : 0,
+                      transition: 'opacity 0.8s ease-in-out',
+                      zIndex: currentSlide === index ? 1 : 0
+                    }}
+                  >
+                    <Image
+                      src={imgSrc}
+                      alt={`Aquabrim Smart Device View ${index + 1}`}
+                      fill
+                      className="img-fluid"
+                      style={{ objectFit: 'contain' }}
+                    />
                   </div>
+                ))}
 
-                  <div className="card-info mt-3 px-2 pb-1 text-start">
-                    <h3 className="card-title h6 fw-bold mb-0" style={{ color: '#1c1632' }}>Meet <span style={{ color: '#006CD0' }}>Aquabrim</span></h3>
-                    <p className="card-subtitle text-muted mb-0" style={{ fontSize: '0.85rem' }}>Your Smart Water Manager</p>
-                  </div>
+                <div className="slider-dots position-absolute bottom-0 start-50 translate-middle-x mb-2 d-flex gap-2" style={{ zIndex: 2 }}>
+                  {sliderImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`slider-dot ${currentSlide === index ? 'active' : ''}`}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
                 </div>
               </div>
 
@@ -210,22 +194,12 @@ const HeroAreaHomeOne = () => {
           margin-top: 25px; 
         }
 
-        .product-card {
+        .product-image-container {
+          height: 400px; 
+          background-color: transparent !important;
           max-width: 540px;
           margin: 0 auto;
-          transition: transform 0.3s ease;
-          border: 1px solid rgba(0,0,0,0.05);
         }
-        .product-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 1rem 3rem rgba(0,0,0,0.1) !important;
-        }
-        .product-image-container {
-          height: 300px; 
-          background-color: #ffffff !important;
-        }
-        .bg-success-soft { background-color: #e6fffa; }
-        .text-success { color: #047857; }
 
         .slider-dot {
           width: 8px;
@@ -317,11 +291,8 @@ const HeroAreaHomeOne = () => {
             margin-top: 35px !important; 
           }
           .product-image-container {
-            height: 230px; 
-            background-color: #ffffff !important;
-          }
-          .card-info.text-start {
-            text-align: center !important;
+            height: 300px; 
+            background-color: transparent !important;
           }
         }
       `}</style>

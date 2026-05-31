@@ -7,6 +7,8 @@ export const metadata = {
 };
 
 
+import FloatingIcons from "../components/common/FloatingIcons";
+
 export default function RootLayout({
   children,
 }: {
@@ -24,7 +26,10 @@ export default function RootLayout({
         />
       </head>
 
-      <body>{children}</body>
+      <body>
+        {children}
+        <FloatingIcons />
+      </body>
     </html>
   )
 }

@@ -23,7 +23,7 @@ const ContactArea = () => {
           <div className="col-lg-5">
             <div className="card border-0 shadow-sm p-4 p-md-5 h-100" style={{ borderRadius: '20px' }}>
               <div className="contact-info-section mb-4">
-                <h3 className="fw-bold mb-4">Contact Information</h3>
+                <h3 className="fw-bold mb-4">Head office</h3>
                 
                 <div className="d-flex align-items-start mb-4">
                   <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
@@ -31,7 +31,51 @@ const ContactArea = () => {
                   </div>
                   <div>
                     <h5 className="fw-bold mb-1">Address</h5>
-                    <p className="text-muted mb-0">Aquabrim Technologies Pvt. Ltd.<br />123 Water Solutions Park,<br />Pune, Maharashtra 411057, India</p>
+                    <p className="text-muted mb-0">Aquabrim Pvt. Ltd.<br />Plot no. 35, 1st Floor, Union Bank of India Building,<br />100 Feet road, Ghitorni, Delhi – 110030</p>
+                  </div>
+                </div>
+
+                <div className="d-flex align-items-start mb-4">
+                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
+                    <i className="bi bi-envelope-fill fs-5"></i>
+                  </div>
+                  <div>
+                    <h5 className="fw-bold mb-1">Mail us</h5>
+                    <p className="text-muted mb-0"><a href="mailto:save.water@aquabrim.com" className="text-muted text-decoration-none">save.water@aquabrim.com</a><br /><a href="mailto:sales@aquabrim.com" className="text-muted text-decoration-none">sales@aquabrim.com</a></p>
+                  </div>
+                </div>
+
+                <div className="d-flex align-items-start mb-5">
+                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
+                    <i className="bi bi-telephone-fill fs-5"></i>
+                  </div>
+                  <div>
+                    <h5 className="fw-bold mb-1">Phone</h5>
+                    <p className="text-muted mb-0">Domestic Sales: <a href="tel:+919310035211" className="text-muted text-decoration-none">+91-9310035211</a><br />Corporate Sales: <a href="tel:+919910672821" className="text-muted text-decoration-none">+91-9910672821</a></p>
+                  </div>
+                </div>
+
+                <hr className="mb-5 text-muted" style={{ opacity: 0.15 }} />
+
+                <h3 className="fw-bold mb-4">Branch address</h3>
+                
+                <div className="d-flex align-items-start mb-4">
+                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
+                    <i className="bi bi-geo-alt-fill fs-5"></i>
+                  </div>
+                  <div>
+                    <h5 className="fw-bold mb-1">STATE: KARNATAKA</h5>
+                    <p className="text-muted mb-0">Aquabrim Pvt. Ltd.<br />Flat no .20, Mahabala 2nd cross, Chamundi Narsari Road,<br />Jaraganahalli, Bangalore (Landmark: Shivanna Depo).</p>
+                  </div>
+                </div>
+
+                <div className="d-flex align-items-start mb-4">
+                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
+                    <i className="bi bi-envelope-fill fs-5"></i>
+                  </div>
+                  <div>
+                    <h5 className="fw-bold mb-1">Mail us</h5>
+                    <p className="text-muted mb-0"><a href="mailto:save.water@aquabrim.com" className="text-muted text-decoration-none">save.water@aquabrim.com</a><br /><a href="mailto:sales@aquabrim.com" className="text-muted text-decoration-none">sales@aquabrim.com</a></p>
                   </div>
                 </div>
 
@@ -41,27 +85,7 @@ const ContactArea = () => {
                   </div>
                   <div>
                     <h5 className="fw-bold mb-1">Phone</h5>
-                    <p className="text-muted mb-0">+91 12345 67890<br />Mon - Sat: 9:00 AM - 6:00 PM</p>
-                  </div>
-                </div>
-
-                <div className="d-flex align-items-start mb-4">
-                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
-                    <i className="bi bi-envelope-fill fs-5"></i>
-                  </div>
-                  <div>
-                    <h5 className="fw-bold mb-1">Email</h5>
-                    <p className="text-muted mb-0">info@aquabrim.com<br />support@aquabrim.com</p>
-                  </div>
-                </div>
-
-                <div className="d-flex align-items-start mb-4">
-                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
-                    <i className="bi bi-globe fs-5"></i>
-                  </div>
-                  <div>
-                    <h5 className="fw-bold mb-1">Website</h5>
-                    <p className="text-muted mb-0">www.aquabrim.com</p>
+                    <p className="text-muted mb-0"><a href="tel:+919560088781" className="text-muted text-decoration-none">+91-9560088781</a></p>
                   </div>
                 </div>
               </div>
