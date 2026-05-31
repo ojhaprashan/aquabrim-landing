@@ -17,7 +17,6 @@ const ServiceDetailsArea = () => {
   const product = (products.find(p => p.id === Number(productId)) || products[0]) as any;
 
   const [selectedImage, setSelectedImage] = useState<any>(null);
-  const scrollRef = React.useRef<HTMLDivElement>(null);
 
   // States for interactive zoom on details page
   const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
@@ -33,57 +32,6 @@ const ServiceDetailsArea = () => {
   useEffect(() => {
     setSelectedImage(null);
   }, [productId]);
-
-  // Auto scroll features list smoothly
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el || !product.features) return;
-
-    let intervalId: any;
-    let scrollSpeed = 0.5; // Smooth pixel speed per step
-    let currentScroll = el.scrollLeft;
-
-    const startScroll = () => {
-      intervalId = setInterval(() => {
-        if (!el) return;
-        currentScroll += scrollSpeed;
-        
-        // Wrap around smoothly
-        if (currentScroll >= el.scrollWidth - el.clientWidth) {
-          currentScroll = 0;
-        }
-        
-        el.scrollLeft = Math.floor(currentScroll);
-      }, 16); // Smooth 60fps tick
-    };
-
-    const timer = setTimeout(() => {
-      startScroll();
-    }, 850);
-
-    const handleMouseEnter = () => clearInterval(intervalId);
-    const handleMouseLeave = () => {
-      currentScroll = el.scrollLeft; // Sync manual scroll position
-      clearInterval(intervalId);
-      startScroll();
-    };
-
-    el.addEventListener('mouseenter', handleMouseEnter);
-    el.addEventListener('mouseleave', handleMouseLeave);
-    el.addEventListener('touchstart', handleMouseEnter);
-    el.addEventListener('touchend', handleMouseLeave);
-
-    return () => {
-      clearTimeout(timer);
-      clearInterval(intervalId);
-      if (el) {
-        el.removeEventListener('mouseenter', handleMouseEnter);
-        el.removeEventListener('mouseleave', handleMouseLeave);
-        el.removeEventListener('touchstart', handleMouseEnter);
-        el.removeEventListener('touchend', handleMouseLeave);
-      }
-    };
-  }, [productId, product.features]);
 
   const mainImage = selectedImage || product.img;
 
@@ -234,34 +182,47 @@ const ServiceDetailsArea = () => {
                 {product.longDescription || `The Aquabrim ${product.title} ${product.description} represents our signature premium tier engineering. Specially optimized for smart and robust performance under dynamic Indian voltage, piping, and tank conditions.`}
               </p>
 
-              {/* Features Small Slides Grid/Carousel */}
+              {/* Features Static Chips */}
               {product.features && (
                 <div className="features-slides-wrapper mb-4">
                   <p className="fw-bold text-uppercase mb-3" style={{ fontSize: '0.82rem', letterSpacing: '1.2px', color: '#006CD0' }}>
                     Key Product Features
                   </p>
-                  <div ref={scrollRef} className="features-horizontal-scroll d-flex gap-3 overflow-auto pb-3 custom-scrollbar">
-                    {product.features.map((feat: string, fIdx: number) => (
-                      <div 
-                        key={fIdx} 
-                        className="feature-slide-card rounded-4 p-3 d-flex flex-column justify-content-between text-start shadow-sm"
-                        style={{ 
-                          minWidth: '180px', 
-                          width: '180px', 
-                          height: '110px', 
-                          background: 'linear-gradient(135deg, #f8fafc 0%, #edf5ff 100%)',
-                          border: '1px solid rgba(0, 108, 208, 0.06)',
-                          flexShrink: 0
-                        }}
-                      >
-                        <div className="feature-card-icon mb-1" style={{ color: '#006CD0' }}>
-                          <i className="bi bi-patch-check-fill fs-5"></i>
+                  <div className="row g-2 mb-3">
+                    {product.features.map((feat: string, fIdx: number) => {
+                      const text = feat.toLowerCase();
+                      let iconClass = 'bi-check-circle-fill';
+                      if (text.includes('water') || text.includes('tank') || text.includes('liquid')) iconClass = 'bi-droplet-half';
+                      else if (text.includes('motor') || text.includes('pump') || text.includes('control')) iconClass = 'bi-gear-wide-connected';
+                      else if (text.includes('wire') || text.includes('rf')) iconClass = 'bi-wifi';
+                      else if (text.includes('remote') || text.includes('monitor') || text.includes('smart')) iconClass = 'bi-display';
+                      else if (text.includes('dry') || text.includes('protect') || text.includes('safe')) iconClass = 'bi-shield-check';
+                      else if (text.includes('volt') || text.includes('power') || text.includes('electric')) iconClass = 'bi-lightning-charge';
+                      else if (text.includes('search') || text.includes('detect')) iconClass = 'bi-search';
+                      else if (text.includes('led') || text.includes('display') || text.includes('indicator')) iconClass = 'bi-lightbulb';
+                      else if (text.includes('maintenance') || text.includes('sensor')) iconClass = 'bi-tools';
+                      else if (text.includes('multi')) iconClass = 'bi-layers';
+
+                      return (
+                        <div key={fIdx} className="col-6 col-sm-6 col-md-auto">
+                          <div 
+                            className="feature-chip d-flex align-items-center rounded-3 px-2 py-2 shadow-sm w-100 h-100"
+                            style={{ 
+                              background: 'linear-gradient(135deg, #f8fafc 0%, #edf5ff 100%)',
+                              border: '1px solid rgba(0, 108, 208, 0.1)',
+                              transition: 'all 0.3s ease'
+                            }}
+                          >
+                            <div className="feature-card-icon me-2 flex-shrink-0" style={{ color: '#006CD0', display: 'flex' }}>
+                              <i className={`bi ${iconClass}`} style={{ fontSize: '1rem' }}></i>
+                            </div>
+                            <span className="fw-semibold text-dark" style={{ fontSize: '0.78rem', lineHeight: '1.2' }}>
+                              {feat}
+                            </span>
+                          </div>
                         </div>
-                        <span className="fw-bold text-dark" style={{ fontSize: '0.88rem', lineHeight: '1.3' }}>
-                          {feat}
-                        </span>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               )}

@@ -281,8 +281,7 @@ const ProductList = () => {
           background: linear-gradient(135deg, #006CD0 0%, #004c99 100%);
           color: #ffffff;
           border-color: transparent !important;
-          box-shadow: 0 8px 16px rgba(0, 108, 208, 0.25);
-          transform: translateY(-2px);
+          box-shadow: none;
         }
 
         .btn-vertical-filter.active i {
