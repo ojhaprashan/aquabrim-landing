@@ -11,9 +11,8 @@ import service_icon_3 from "@/assets/images/resource/service-icon3.png";
 
 import service_img_1 from "../../../../public/assets/Product/ripple_1.png";
 import service_img_2 from "../../../../public/assets/Product/flexibell_1.png";
-import service_img_3 from "../../../../public/assets/Product/ibot_1.png";
-import service_img_4 from "../../../../public/assets/Product/ibot_3.png";
-import service_img_5 from "../../../../public/assets/Product/matrix_2.png";
+import service_img_trigger from "../../../../public/assets/Product/trigger_2.jpeg";
+import service_img_macro from "../../../../public/assets/Product/macro_3.jpeg";
 
 const custom_products = [
   {
@@ -26,30 +25,22 @@ const custom_products = [
   },
   {
     id: 2,
-    img: service_img_3,
-    icon: service_icon_3,
-    title: "iBot A",
-    category: "Smart Water Tank Level Controller",
-    sm_des: "Tracks overhead tank water levels in real time and automatically controls the motor to avoid overflow and ensure smooth water management."
+    img: service_img_trigger,
+    icon: service_icon_1,
+    title: "Trigger",
+    category: "Smart Municipal Water Level Controller",
+    sm_des: "Smart controller for motor, directly connected to corporation water supply line. Automatically detects water availability and manages motor operations."
   },
   {
     id: 3,
-    img: service_img_4,
-    icon: service_icon_1,
-    title: "iBot P",
-    category: "Smart Borewell Water Controller",
-    sm_des: "Built for borewell and submersible pumps with intelligent water level monitoring, automatic motor operation, and motor safety protection."
+    img: service_img_macro,
+    icon: service_icon_3,
+    title: "Macro",
+    category: "Smart Water Tank Level Controller",
+    sm_des: "Controller for borewell/submersible pumps, motor pumping from Underground tank to Overhead tank with overflow prevention and dry run protection."
   },
   {
     id: 4,
-    img: service_img_5,
-    icon: service_icon_2,
-    title: "Matrix",
-    category: "Multi-Tank Water Level Controller",
-    sm_des: "Smart automation solution for managing multiple water tanks, monitoring water levels, and controlling motors across commercial and industrial spaces."
-  },
-  {
-    id: 5,
     img: service_img_2,
     icon: service_icon_2,
     title: "Flexibell",

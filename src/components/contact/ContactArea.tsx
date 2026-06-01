@@ -88,6 +88,20 @@ const ContactArea = () => {
                     <p className="text-muted mb-0"><a href="tel:+919560088781" className="text-muted text-decoration-none">+91-9560088781</a></p>
                   </div>
                 </div>
+
+                <hr className="mb-5 text-muted" style={{ opacity: 0.15 }} />
+
+                <h3 className="fw-bold mb-4">Branch address</h3>
+
+                <div className="d-flex align-items-start mb-4">
+                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
+                    <i className="bi bi-geo-alt-fill fs-5"></i>
+                  </div>
+                  <div>
+                    <h5 className="fw-bold mb-1">STATE: MAHARASHTRA</h5>
+                    <p className="text-muted mb-0">Aquabrim Pvt. Ltd.<br />16/B Elahi Residency, 3 No Colony, Ashoka Society,<br />Kalewadi Phata, Thergaon, Chinchwad,<br />Pune – 411033, Maharashtra</p>
+                  </div>
+                </div>
               </div>
 
               {/* Map Integration */}

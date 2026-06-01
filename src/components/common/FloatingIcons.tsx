@@ -1,21 +1,43 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+const numbers: Record<string, string> = {
+  bablu: "tel:9310035211",
+  kishan: "tel:9599881288",
+  anjali: "tel:9953205554",
+  rajesh: "tel:9910672821",
+};
+
+function getDynamicCallHref(): string {
+  const hour = new Date().getHours();
+  if (hour >= 8 && hour < 11) return numbers.bablu;
+  if (hour >= 11 && hour < 14) return numbers.kishan;
+  if (hour >= 14 && hour < 17) return numbers.anjali;
+  if (hour >= 17 && hour < 20) return numbers.bablu;
+  return numbers.rajesh;
+}
 
 const FloatingIcons = () => {
+  const [callHref, setCallHref] = useState("tel:9310035211");
+
+  useEffect(() => {
+    setCallHref(getDynamicCallHref());
+  }, []);
+
   return (
     <>
       <div className="floating-icons-container">
-        <a 
-          href="https://wa.me/919310035211" 
-          target="_blank" 
-          rel="noopener noreferrer" 
+        <a
+          href="https://wa.me/919310035211"
+          target="_blank"
+          rel="noopener noreferrer"
           className="floating-icon whatsapp-icon"
           aria-label="Chat with us on WhatsApp"
         >
           <i className="bi bi-whatsapp"></i>
         </a>
-        <a 
-          href="tel:+919310035211" 
+        <a
+          href={callHref}
           className="floating-icon phone-icon"
           aria-label="Call us"
         >

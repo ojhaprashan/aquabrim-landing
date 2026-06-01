@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npx tsc *)",
       "Bash(npm run *)",
-      "Bash(node _check_about.js)"
+      "Bash(node _check_about.js)",
+      "Bash(Get-ChildItem -Path \"d:\\\\aquabrim_new\" -Force)",
+      "Bash(Select-Object Name, FullName)"
     ]
   }
 }
