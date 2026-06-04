@@ -38,117 +38,96 @@ const FooterOne = () => {
   const { brand_info, company, support, social, bottom } = footer_content;
 
   return (
-    <>
-      {/* Changed background to a very light blue to match the brand theme */}
-      <footer className="footer-section text-dark py-5" style={{ borderTop: '2px solid #b6d4fe', backgroundColor: '#f0f4f8' }}>
-        <div className="container">
+    <footer className="border-t-2 border-[#b6d4fe] bg-[#f0f4f8] py-12 text-gray-800">
+      <div className="container-app">
 
-          <div className="row mb-4">
+        <div className="mb-4 grid grid-cols-12 gap-8">
 
-            {/* Column 1: Logo & App Info */}
-            <div className="col-lg-4 col-md-12 mb-4 mb-lg-0">
-              <Link href="/" className="d-flex align-items-center text-decoration-none mb-3">
-                <Image src="/assets/images/logo_blue.png" width={40} height={40} style={{ height: 'auto' }} alt="Aquabrim Logo" />
-                <span className='LogoHeader ms-2 fw-bold text-dark fs-5'>Aquabrim</span>
-              </Link>
-              <p className="text-muted small mb-2">{brand_info.app_text}</p>
+          {/* Column 1: Logo & App Info */}
+          <div className="col-span-12 lg:col-span-4">
+            <Link href="/" className="mb-3 flex items-center no-underline">
+              <Image src="/assets/images/logo_blue.png" width={40} height={40} style={{ height: 'auto' }} alt="Aquabrim Logo" />
+              <span className="ms-2 text-xl font-bold text-gray-900">Aquabrim</span>
+            </Link>
+            <p className="mb-2 text-sm text-gray-500">{brand_info.app_text}</p>
 
-              <div className="d-flex gap-4 mb-4">
-                <a href="#" className="text-primary fs-4 transition-hover" title="Web Platform">
-                  <i className="bi bi-globe2"></i>
-                </a>
-                <a href="#" className="text-primary fs-4 transition-hover" title="Android App">
-                  <i className="bi bi-google-play"></i>
-                </a>
-                <a href="#" className="text-primary fs-4 transition-hover" title="iOS App">
-                  <i className="bi bi-apple"></i>
-                </a>
-              </div>
-
-              <p className="text-muted small">
-                {brand_info.tagline.split('Aquabrim')[0]}
-                <span className="text-primary fw-medium">Aquabrim</span>
-                {brand_info.tagline.split('Aquabrim')[1]}
-              </p>
+            <div className="mb-4 flex gap-4">
+              <a href="#" className="inline-block text-2xl text-primary transition-transform duration-300 hover:-translate-y-1" title="Web Platform">
+                <i className="bi bi-globe2"></i>
+              </a>
+              <a href="#" className="inline-block text-2xl text-primary transition-transform duration-300 hover:-translate-y-1" title="Android App">
+                <i className="bi bi-google-play"></i>
+              </a>
+              <a href="#" className="inline-block text-2xl text-primary transition-transform duration-300 hover:-translate-y-1" title="iOS App">
+                <i className="bi bi-apple"></i>
+              </a>
             </div>
 
-            {/* Column 2: Company */}
-            <div className="col-lg-2 col-md-4 col-6 mb-4">
-              <h6 className="text-muted text-uppercase mb-3" style={{ fontSize: '0.8rem' }}>Company</h6>
-              <ul className="list-unstyled">
-                {company.map((item, i) => (
-                  <li key={i} className="mb-2">
-                    <Link href={item.link} className="text-dark text-decoration-none small hover-primary">{item.title}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Column 3: Support */}
-            <div className="col-lg-3 col-md-4 col-6 mb-4">
-              <h6 className="text-muted text-uppercase mb-3" style={{ fontSize: '0.8rem' }}>Support</h6>
-              <ul className="list-unstyled">
-                {support.map((item, i) => (
-                  <li key={i} className="mb-2">
-                    <Link href={item.link} className="text-dark text-decoration-none small hover-primary">{item.title}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Column 5: Social */}
-            <div className="col-lg-3 col-md-3 col-12 mb-4">
-              <h6 className="text-muted text-uppercase mb-3" style={{ fontSize: '0.8rem' }}>{social.title}</h6>
-              <p className="small text-dark mb-3">{social.text}</p>
-              <ul className="list-inline d-flex gap-2 m-0 p-0">
-                <TeamSocialLinks />
-              </ul>
-            </div>
-
+            <p className="text-sm text-gray-500">
+              {brand_info.tagline.split('Aquabrim')[0]}
+              <span className="font-medium text-primary">Aquabrim</span>
+              {brand_info.tagline.split('Aquabrim')[1]}
+            </p>
           </div>
 
-          {/* Changed the horizontal rule divider to light blue */}
-          <hr className="my-4" style={{ borderColor: '#b6d4fe', opacity: 0.6 }} />
-
-          <div className="row align-items-center">
-
-            {/* Bottom Left: Startup Badges */}
-            <div className="col-md-6 d-flex gap-3 align-items-center justify-content-center justify-content-md-start mb-4 mb-md-0">
-              <div className="bg-light border text-muted px-2 py-1 small rounded d-flex align-items-center gap-2">
-                🦁 <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>Make In India</span>
-              </div>
-              <div className="bg-light border text-muted px-2 py-1 small rounded d-flex align-items-center gap-2">
-                <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#ff6b6b' }}>#startupindia</span>
-              </div>
-            </div>
-
-            {/* Bottom Right: Copyright & Address */}
-            <div className="col-md-6 text-center text-md-end text-muted small">
-              <p className="mb-1">{bottom.copyright}</p>
-              <p className="mb-0">{bottom.address} • Ph: {bottom.phone}</p>
-            </div>
-
+          {/* Column 2: Company */}
+          <div className="col-span-6 lg:col-span-2">
+            <h6 className="mb-3 text-xs font-semibold uppercase tracking-wide text-gray-500">Company</h6>
+            <ul className="m-0 list-none p-0">
+              {company.map((item, i) => (
+                <li key={i} className="mb-2">
+                  <Link href={item.link} className="text-sm text-gray-800 no-underline transition-colors hover:text-primary">{item.title}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
+
+          {/* Column 3: Support */}
+          <div className="col-span-6 lg:col-span-3">
+            <h6 className="mb-3 text-xs font-semibold uppercase tracking-wide text-gray-500">Support</h6>
+            <ul className="m-0 list-none p-0">
+              {support.map((item, i) => (
+                <li key={i} className="mb-2">
+                  <Link href={item.link} className="text-sm text-gray-800 no-underline transition-colors hover:text-primary">{item.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Social */}
+          <div className="col-span-12 lg:col-span-3">
+            <h6 className="mb-3 text-xs font-semibold uppercase tracking-wide text-gray-500">{social.title}</h6>
+            <p className="mb-3 text-sm text-gray-800">{social.text}</p>
+            <ul className="m-0 flex list-none gap-3 p-0 [&_a]:text-lg [&_a]:text-primary [&_a]:transition-colors hover:[&_a]:text-primary-600">
+              <TeamSocialLinks />
+            </ul>
+          </div>
+
         </div>
-      </footer>
-      <style jsx>{`
-        .transition-hover {
-          transition: transform 0.3s ease, color 0.3s ease;
-          display: inline-block;
-          text-decoration: none !important;
-        }
-        .transition-hover:hover {
-          transform: translateY(-3px);
-          color: #0056b3 !important;
-        }
-        .hover-primary {
-          transition: color 0.2s ease;
-        }
-        .hover-primary:hover {
-          color: #006CD0 !important;
-        }
-      `}</style>
-    </>
+
+        <hr className="my-8 border-[#b6d4fe] opacity-60" />
+
+        <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between">
+
+          {/* Bottom Left: Startup Badges */}
+          <div className="flex items-center justify-center gap-3 md:justify-start">
+            <div className="flex items-center gap-2 rounded border border-gray-200 bg-gray-50 px-2 py-1 text-xs font-medium text-gray-500">
+              🦁 <span>Make In India</span>
+            </div>
+            <div className="flex items-center gap-2 rounded border border-gray-200 bg-gray-50 px-2 py-1 text-xs">
+              <span className="font-medium text-primary">#startupindia</span>
+            </div>
+          </div>
+
+          {/* Bottom Right: Copyright & Address */}
+          <div className="text-center text-sm text-gray-500 md:text-right">
+            <p className="mb-1">{bottom.copyright}</p>
+            <p className="mb-0">{bottom.address} • Ph: {bottom.phone}</p>
+          </div>
+
+        </div>
+      </div>
+    </footer>
   );
 };
 

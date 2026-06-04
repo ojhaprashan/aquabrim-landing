@@ -134,6 +134,11 @@
     "title": "Wireless water level transmitter ( Capacitive)",
     "description": "Continuous capacitive level sensing for deep tanks and borewells.",
     "imgKey": "accessories_img",
+    "images": [
+      "/assets/accessories/IMG_0661.jpg",
+      "/assets/accessories/IMG_0672.jpg",
+      "/assets/accessories/IMG_0680.jpg"
+    ],
     "longDescription": "The Capacitive Wireless Water Level Transmitter is an advanced solution for high-accuracy, continuous liquid level measurement. Built around a robust capacitive rod probe, the transmitter measures the change in electrical capacitance as liquid rises or falls along its length. Unlike mechanical float switches, it has no moving parts to clog or jam, making it exceptionally reliable in varying liquid types, deep tanks, and challenging environments. A built-in wireless transmitter sends absolute level data in real-time to the main Aquabrim controller.",
     "howItWorks": [
       { "title": "Capacitive Field Analysis", "desc": "Measures changing dielectric capacitance along the probe rod as water levels change." },
@@ -157,6 +162,11 @@
     "title": "Current & Voltage monitoring system",
     "description": "Advanced electrical health monitoring and pump safety system.",
     "imgKey": "prod_starter",
+    "images": [
+      "/assets/accessories/IMG_0683.jpg",
+      "/assets/accessories/IMG_0688.jpg",
+      "/assets/accessories/IMG_0695.jpg"
+    ],
     "longDescription": "The Smart Phase & Current Monitor is a robust electrical protection and diagnostic module designed to protect heavy-duty industrial pump starters and motors. It continuously monitors incoming voltage levels, phase synchronization, load current, and power factor in real-time. Upon detecting electrical faults such as single-phasing, phase reversal, overvoltage, undervoltage, or overload current, it triggers an instant safe-shutdown command to save expensive motors from winding burnouts. Featuring integrated wireless communication, the electrical telemetry is fed directly into building SCADA and command dashboards.",
     "howItWorks": [
       { "title": "Real-Time Electrical Sensing", "desc": "Measures voltage and current across all phases continuously." },
@@ -180,6 +190,11 @@
     "title": "Flowmeter",
     "description": "High-precision wireless electromagnetic flow monitoring system.",
     "imgKey": "accessories_img",
+    "images": [
+      "/assets/accessories/IMG_0707.jpg",
+      "/assets/accessories/IMG_0713.JPG",
+      "/assets/accessories/IMG_0719.jpg"
+    ],
     "longDescription": "Aquabrim's Wireless Electromagnetic Flow Meter is a next-generation solution for high-accuracy liquid flow measurement in commercial, industrial, and municipal supply pipelines. Employing state-of-the-art electromagnetic principles, the system accurately detects flow velocity and volume without any moving parts, minimizing pressure drops and eliminating wear and tear. Equipped with advanced wireless telemetry, the flow meter transmits real-time flow rate data and totalized volume directly to Aquabrim's central controllers or cloud command platform, enabling seamless automated leakage detection and consumption analysis.",
     "howItWorks": [
       { "title": "Detects Flow Rate and Volume", "desc": "Uses electromagnetic induction to calculate flow volume accurately in real-time." },
@@ -203,6 +218,11 @@
     "title": "Temperature and humidity Monitoring system",
     "description": "Remote environmental condition monitoring for panels and server rooms.",
     "imgKey": "accessories_img",
+    "images": [
+      "/assets/accessories/IMG_0724.jpg",
+      "/assets/accessories/IMG_0729.jpg",
+      "/assets/accessories/IMG_0733.jpg"
+    ],
     "longDescription": "The Wireless Temperature & Humidity Sensor provides real-time, high-precision climate tracking inside critical control panels, motor starter rooms, and server infrastructure. Continuous exposure to high humidity or excessive temperatures can lead to early component failures and motor insulation breakdowns. This sensor transmits ambient atmospheric data continuously to the central command centre, triggering automated ventilation control or safety alarms when preset thresholds are breached, ensuring complete operational health.",
     "howItWorks": [
       { "title": "Atmospheric Condition Measurement", "desc": "High sensitivity sensor elements measure temperature and relative humidity continuously." },
@@ -226,6 +246,11 @@
     "title": "Wireless water level transmitter ( Non Contact)",
     "description": "Radar and ultrasonic non-contact level transmitter for open sumps.",
     "imgKey": "accessories_img",
+    "images": [
+      "/assets/accessories/IMG_0737.jpg",
+      "/assets/accessories/IMG_0745.jpg",
+      "/assets/accessories/IMG_0756.jpg"
+    ],
     "longDescription": "The Non-Contact Ultrasonic Level Transmitter utilizes advanced acoustic ranging to measure liquid levels without touching the medium. Positioned at the top of a tank or open sump, the sensor emits high-frequency sound pulses and measures the time-of-flight of the echo. This non-contact approach is ideal for sewage, acidic, or turbulent environments where physical contact would lead to probe degradation or scale build-up. The integrated wireless transmitter eliminates the need for expensive structural cabling, sending raw level information straight to the command gateway.",
     "howItWorks": [
       { "title": "Ultrasonic Acoustic Ranging", "desc": "Emits high-frequency sound waves downward and listens for reflections." },
@@ -249,6 +274,11 @@
     "title": "Lift monitoring system",
     "description": "Real-time elevator status tracking and emergency alert gateway.",
     "imgKey": "accessories_img",
+    "images": [
+      "/assets/accessories/IMG_0758.jpg",
+      "/assets/accessories/IMG_0764.jpg",
+      "/assets/accessories/IMG_0769.jpg"
+    ],
     "longDescription": "The Intelligent Elevator & Lift Monitor is a specialized automation module designed for real-time tracking of lift cabin positions, operations, door transitions, and primary power status in high-rise buildings. Operating independently or integrating with building management networks, it immediately detects power loss, cabin entrapment, or abnormal stops, broadcasting critical priority notifications to the building's maintenance team and the Integrated Command Centre to minimize emergency response times.",
     "howItWorks": [
       { "title": "Cabin State Tracking", "desc": "Monitors lift movement, door state, and level position in real time." },
@@ -272,6 +302,10 @@
     "title": "Integrated Control & Command centre",
     "description": "Unified dashboard and command hub for site-wide water systems.",
     "imgKey": "prod_tank_monitor",
+    "images": [
+      "/assets/accessories/IMG_0773.jpg",
+      "/assets/accessories/IMG_0779.jpg"
+    ],
     "longDescription": "The Integrated Control & Command Centre (ICCC) is a centralized, high-performance console that aggregates telemetry from all controllers, transmitters, flow meters, and current monitors across a commercial campus, residential complex, or manufacturing site. It provides facilities managers with a comprehensive, single-screen dashboard illustrating total water storage, real-time consumption rates, electrical motor health, and alarm statuses. With cloud compatibility, operators can monitor system health, override valve controls, and analyze consumption trends from anywhere.",
     "howItWorks": [
       { "title": "Distributed Telemetry Aggregation", "desc": "Receives and consolidates wireless data from all localized controllers and sensors." },
@@ -295,6 +329,10 @@
     "title": "Scada & BMS system",
     "description": "Modbus, BACnet, and API integration for advanced building automation.",
     "imgKey": "prod_tank_monitor",
+    "images": [
+      "/assets/accessories/IMG_0790.jpg",
+      "/assets/accessories/IMG_0804.jpg"
+    ],
     "longDescription": "The Smart SCADA & BMS Integration Gateway bridges the gap between Aquabrim's proprietary wireless level sensors and industrial-grade Building Management Systems (BMS). Supporting industry-standard protocols including MODBUS RTU/TCP, BACnet, and REST APIs, this gateway converts real-time water levels, motor health, and flow metrics into native registers. This allows seamless integration into master SCADA systems, enabling automated backup power coordination, facility energy optimization, and centralized building operation logs.",
     "howItWorks": [
       { "title": "Protocol Translation", "desc": "Converts sensor radio telemetry into MODBUS/BACnet register values." },
@@ -318,6 +356,10 @@
     "title": "Motorized valve systems",
     "description": "Heavy-duty automated control valves with wireless triggering.",
     "imgKey": "prod_valve",
+    "images": [
+      "/assets/accessories/IMG_0819.jpg",
+      "/assets/accessories/IMG_0828.jpg"
+    ],
     "longDescription": "The Aquabrim Wireless Motorised Valve System is designed for robust and automated routing of water across large-scale commercial and industrial tank networks. Fully integrated with our level controllers, this system eliminates manual valve operation entirely. The valve utilizes an electric actuator linked to a high-torque gearbox, ensuring reliable open and close operations even under high line pressure. Real-time status updates are sent wirelessly to the controller, allowing for multi-tank filling coordination, dynamic flow diverting, and automatic overflow prevention.",
     "howItWorks": [
       { "title": "Automatic Valve Triggering", "desc": "Receives wireless open/close commands from the central level controller." },

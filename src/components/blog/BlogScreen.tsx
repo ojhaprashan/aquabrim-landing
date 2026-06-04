@@ -83,251 +83,184 @@ const blogPosts = [
   },
 ];
 
+const widgetBox = "rounded-2xl border border-solid border-[#e9ecef] bg-white p-4 shadow-sm";
+
+const FeaturedWidget = () => (
+  <div>
+    <h6 className="mb-4 font-bold">Featured Post</h6>
+    <div>
+      <div className="mb-3 h-[140px] overflow-hidden rounded-lg">
+        <Image src={blog_img_2} alt="Featured" className="h-full w-full object-cover" />
+      </div>
+      <span className="mb-2 inline-block rounded bg-[#006CD0]/10 px-2 py-1 text-[10px] font-semibold text-[#006CD0]">Product Updates</span>
+      <div className="mb-2 text-[0.875rem] text-[#6c757d]">15 Apr 2025 • 4 min read</div>
+      <h6 className="mb-2 text-[15px] font-bold leading-[1.4]">Understanding the Aquabrim Matrix Panel</h6>
+      <p className="mb-3 text-[0.875rem] text-[#6c757d]">A complete overview of features, benefits, and real-world applications.</p>
+      <Link href="/blog-details" className="text-[0.875rem] font-bold text-[#006CD0] no-underline">
+        Read More <i className="bi bi-arrow-right"></i>
+      </Link>
+    </div>
+  </div>
+);
+
+const StayUpdatedWidget = () => (
+  <div className="text-center">
+    <div className="mx-auto mb-3 flex h-[50px] w-[50px] items-center justify-center rounded-full bg-[#006CD0]/10">
+      <i className="bi bi-envelope-fill text-[1.5rem] text-[#006CD0]"></i>
+    </div>
+    <h6 className="mb-2 font-bold">Stay Updated</h6>
+    <p className="mb-4 text-[0.875rem] text-[#6c757d]">Subscribe to our newsletter and get the latest insights and updates.</p>
+    <div className="mb-3">
+      <input type="email" className="w-full rounded-lg border border-solid border-[#dee2e6] px-3 py-2 text-center outline-none focus:border-[#006CD0]" placeholder="Enter your email" />
+    </div>
+    <button className="w-full rounded-lg bg-[#006CD0] py-2.5 font-bold text-white transition-colors hover:bg-[#005bb0]">Subscribe</button>
+  </div>
+);
+
 const BlogScreen = () => {
   const [activeCategory, setActiveCategory] = useState('all');
 
-  const filteredPosts = activeCategory === 'all' 
-    ? blogPosts 
+  const filteredPosts = activeCategory === 'all'
+    ? blogPosts
     : blogPosts.filter(post => post.catId === activeCategory);
 
+  const pages = ['prev', '1', '2', '3', '4', '...', '8', 'next'];
+
   return (
-    <section className="blog-screen-section py-5 bg-white">
-      <div className="container">
+    <section className="min-h-screen bg-white py-12">
+      <div className="container-app">
         {/* Top Category Chips */}
-        <div className="category-chips-wrapper mb-5">
-          <div className="d-flex flex-nowrap gap-2 gap-md-3 overflow-auto pb-2 scrollbar-hidden">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                className={`btn rounded-pill px-3 px-md-4 py-2 fw-semibold transition-all category-chip ${activeCategory === cat.id ? 'btn-primary shadow-sm' : 'btn-outline-light text-dark border-light-subtle'}`}
-                onClick={() => setActiveCategory(cat.id)}
-                style={{ whiteSpace: 'nowrap' }}
-              >
-                {cat.name}
-              </button>
-            ))}
-          </div>
+        <div className="mb-12 flex flex-nowrap gap-2 overflow-auto pb-2 md:gap-3 [&::-webkit-scrollbar]:hidden">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`whitespace-nowrap rounded-full px-4 py-2 text-[14px] font-semibold transition-all max-lg:px-4 max-lg:py-1.5 max-lg:text-[13px] ${
+                activeCategory === cat.id
+                  ? 'bg-[#006CD0] text-white shadow-sm'
+                  : 'border border-solid border-[#dee2e6] bg-white text-[#212529] hover:border-[#006CD0] hover:text-[#006CD0]'
+              }`}
+            >
+              {cat.name}
+            </button>
+          ))}
         </div>
 
-        <div className="row g-5">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
           {/* Main Content: Blog Grid */}
-          <div className="col-lg-9 order-2 order-lg-1">
-            <div className="row g-4">
+          <div className="lg:col-span-9">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
               {filteredPosts.map((post) => (
-                <div key={post.id} className="col-md-6 col-xl-4 wow fadeInUp">
-                  <div className="blog-card h-100 bg-white rounded-4 shadow-sm overflow-hidden transition-all hover-shadow-lg">
-                    <div className="blog-img-wrapper position-relative" style={{ height: '220px' }}>
-                      <Image 
-                        src={post.img} 
-                        alt={post.title} 
-                        className="w-100 h-100"
-                        style={{ objectFit: 'cover' }}
-                      />
-                      <span className="badge bg-primary position-absolute bottom-0 start-0 m-3 px-3 py-2 rounded-2" style={{ fontSize: '12px' }}>
-                        {post.category}
-                      </span>
+                <div key={post.id} className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_1rem_3rem_rgba(0,0,0,0.1)]">
+                  <div className="relative h-[220px]">
+                    <Image
+                      src={post.img}
+                      alt={post.title}
+                      className="h-full w-full object-cover"
+                    />
+                    <span className="absolute bottom-0 left-0 m-3 rounded bg-[#006CD0] px-3 py-2 text-[12px] font-semibold text-white">
+                      {post.category}
+                    </span>
+                  </div>
+                  <div className="flex flex-grow flex-col p-4">
+                    <div className="mb-2 text-[0.875rem] text-[#6c757d]">
+                      <span>{post.date}</span>
+                      <span className="mx-2">•</span>
+                      <span>{post.readTime}</span>
                     </div>
-                    <div className="blog-content p-4">
-                      <div className="blog-meta text-muted small mb-2">
-                        <span>{post.date}</span>
-                        <span className="mx-2">•</span>
-                        <span>{post.readTime}</span>
-                      </div>
-                      <h5 className="fw-bold mb-3" style={{ fontSize: '18px', lineHeight: '1.4' }}>
-                        <Link href="/blog-details" className="text-dark text-decoration-none hover-text-primary">
-                          {post.title}
-                        </Link>
-                      </h5>
-                      <p className="text-muted small mb-4" style={{ lineHeight: '1.6' }}>
-                        {post.description}
-                      </p>
-                      <Link href="/blog-details" className="text-primary fw-bold d-flex align-items-center gap-2 text-decoration-none">
-                        Read More <i className="bi bi-arrow-right"></i>
+                    <h5 className="mb-3 text-[18px] font-bold leading-[1.4]">
+                      <Link href="/blog-details" className="text-[#212529] no-underline transition-colors hover:text-[#006CD0]">
+                        {post.title}
                       </Link>
-                    </div>
+                    </h5>
+                    <p className="mb-4 text-[0.875rem] leading-[1.6] text-[#6c757d]">
+                      {post.description}
+                    </p>
+                    <Link href="/blog-details" className="mt-auto flex items-center gap-2 font-bold text-[#006CD0] no-underline">
+                      Read More <i className="bi bi-arrow-right"></i>
+                    </Link>
                   </div>
                 </div>
               ))}
             </div>
 
             {/* Pagination */}
-            <div className="pagination-wrapper mt-5 d-flex justify-content-center">
-              <nav aria-label="Page navigation">
-                <ul className="pagination gap-2">
-                  <li className="page-item disabled">
-                    <a className="page-link rounded-3 border-0 bg-light text-muted" href="#"><i className="bi bi-chevron-left"></i></a>
-                  </li>
-                  <li className="page-item active"><a className="page-link rounded-3 border-0" href="#">1</a></li>
-                  <li className="page-item"><a className="page-link rounded-3 border-0 bg-light text-dark" href="#">2</a></li>
-                  <li className="page-item"><a className="page-link rounded-3 border-0 bg-light text-dark" href="#">3</a></li>
-                  <li className="page-item"><a className="page-link rounded-3 border-0 bg-light text-dark" href="#">4</a></li>
-                  <li className="page-item disabled"><span className="page-link border-0 bg-transparent text-dark">...</span></li>
-                  <li className="page-item"><a className="page-link rounded-3 border-0 bg-light text-dark" href="#">8</a></li>
-                  <li className="page-item">
-                    <a className="page-link rounded-3 border-0 bg-light text-dark" href="#"><i className="bi bi-chevron-right"></i></a>
-                  </li>
-                </ul>
-              </nav>
+            <div className="mt-12 flex justify-center">
+              <ul className="flex list-none gap-2 p-0">
+                {pages.map((p, i) => {
+                  if (p === 'prev' || p === 'next') {
+                    return (
+                      <li key={i}>
+                        <a href="#" className={`flex h-10 w-10 items-center justify-center rounded-lg bg-[#f8f9fa] text-[#6c757d] transition-all ${p === 'prev' ? 'pointer-events-none opacity-60' : 'hover:bg-[#006CD0] hover:text-white'}`}>
+                          <i className={`bi ${p === 'prev' ? 'bi-chevron-left' : 'bi-chevron-right'}`}></i>
+                        </a>
+                      </li>
+                    );
+                  }
+                  if (p === '...') {
+                    return <li key={i}><span className="flex h-10 w-10 items-center justify-center bg-transparent text-[#212529]">...</span></li>;
+                  }
+                  const active = p === '1';
+                  return (
+                    <li key={i}>
+                      <a href="#" className={`flex h-10 w-10 items-center justify-center rounded-lg transition-all ${active ? 'bg-[#006CD0] text-white' : 'bg-[#f8f9fa] text-[#212529] hover:bg-[#006CD0] hover:text-white'}`}>{p}</a>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
 
           {/* Sidebar */}
-          <div className="col-lg-3 order-1 order-lg-2">
-            <div className="sidebar sticky-top" style={{ top: '100px' }}>
+          <div className="lg:col-span-3">
+            <div className="lg:sticky lg:top-[100px]">
               {/* Search */}
-              <div className="sidebar-widget mb-4 mb-lg-5 p-4 bg-white rounded-4 shadow-sm border border-light">
-                <h6 className="fw-bold mb-3">Search Blogs</h6>
-                <div className="position-relative">
-                  <input 
-                    type="text" 
-                    className="form-control border-light-subtle rounded-3 py-2 ps-3 pe-5" 
-                    placeholder="Search for blogs..." 
+              <div className={`mb-4 lg:mb-8 ${widgetBox}`}>
+                <h6 className="mb-3 font-bold">Search Blogs</h6>
+                <div className="relative">
+                  <input
+                    type="text"
+                    className="w-full rounded-lg border border-solid border-[#dee2e6] py-2 pl-3 pr-10 outline-none focus:border-[#006CD0]"
+                    placeholder="Search for blogs..."
                   />
-                  <i className="bi bi-search position-absolute end-0 top-50 translate-middle-y me-3 text-muted"></i>
+                  <i className="bi bi-search absolute right-3 top-1/2 -translate-y-1/2 text-[#6c757d]"></i>
                 </div>
               </div>
 
               {/* Categories */}
-              <div className="sidebar-widget mb-4 mb-lg-5 p-4 bg-white rounded-4 shadow-sm border border-light">
-                <h6 className="fw-bold mb-4">Categories</h6>
-                <div className="category-list">
+              <div className={`mb-4 lg:mb-8 ${widgetBox}`}>
+                <h6 className="mb-4 font-bold">Categories</h6>
+                <div>
                   {categories.map((cat) => (
-                    <div key={cat.id} className="d-flex justify-content-between align-items-center mb-3">
-                      <div className="d-flex align-items-center gap-2">
-                        <i className={`bi ${cat.id === activeCategory ? 'bi-folder-fill text-primary' : 'bi-folder text-muted'}`}></i>
-                        <span 
-                          className={`small fw-semibold cursor-pointer ${cat.id === activeCategory ? 'text-primary' : 'text-dark'}`}
+                    <div key={cat.id} className="mb-3 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <i className={`bi ${cat.id === activeCategory ? 'bi-folder-fill text-[#006CD0]' : 'bi-folder text-[#6c757d]'}`}></i>
+                        <span
+                          className={`cursor-pointer text-[0.875rem] font-semibold ${cat.id === activeCategory ? 'text-[#006CD0]' : 'text-[#212529]'}`}
                           onClick={() => setActiveCategory(cat.id)}
-                          style={{ cursor: 'pointer' }}
                         >
                           {cat.name}
                         </span>
                       </div>
-                      <span className="badge bg-light text-muted rounded-pill" style={{ fontSize: '10px' }}>({cat.count})</span>
+                      <span className="rounded-full bg-[#f8f9fa] px-2 py-0.5 text-[10px] text-[#6c757d]">({cat.count})</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Featured Post */}
-              <div className="sidebar-widget mb-5 p-4 bg-white rounded-4 shadow-sm border border-light d-none d-lg-block">
-                <h6 className="fw-bold mb-4">Featured Post</h6>
-                <div className="featured-post-card">
-                  <div className="rounded-3 overflow-hidden mb-3" style={{ height: '140px' }}>
-                    <Image src={blog_img_2} alt="Featured" className="w-100 h-100" style={{ objectFit: 'cover' }} />
-                  </div>
-                  <span className="badge bg-primary-subtle text-primary mb-2" style={{ fontSize: '10px' }}>Product Updates</span>
-                  <div className="text-muted small mb-2">15 Apr 2025 • 4 min read</div>
-                  <h6 className="fw-bold mb-2" style={{ fontSize: '15px', lineHeight: '1.4' }}>Understanding the Aquabrim Matrix Panel</h6>
-                  <p className="text-muted small mb-3">A complete overview of features, benefits, and real-world applications.</p>
-                  <Link href="/blog-details" className="text-primary small fw-bold text-decoration-none">
-                    Read More <i className="bi bi-arrow-right"></i>
-                  </Link>
-                </div>
+              <div className={`mb-4 lg:mb-8 ${widgetBox}`}>
+                <FeaturedWidget />
               </div>
 
               {/* Stay Updated */}
-              <div className="sidebar-widget p-4 bg-white rounded-4 shadow-sm border border-light text-center d-none d-lg-block">
-                <div className="icon-box mx-auto mb-3 bg-primary-subtle rounded-circle d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
-                  <i className="bi bi-envelope-fill text-primary fs-4"></i>
-                </div>
-                <h6 className="fw-bold mb-2">Stay Updated</h6>
-                <p className="text-muted small mb-4">Subscribe to our newsletter and get the latest insights and updates.</p>
-                <div className="mb-3">
-                  <input type="email" className="form-control border-light-subtle rounded-3 text-center" placeholder="Enter your email" />
-                </div>
-                <button className="btn btn-primary w-100 rounded-3 fw-bold">Subscribe</button>
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile Bottom Widgets: Featured & Stay Updated */}
-          <div className="col-12 order-3 d-lg-none">
-            <div className="row">
-              <div className="col-md-6 mb-4">
-                {/* Featured Post */}
-                <div className="sidebar-widget p-4 bg-white rounded-4 shadow-sm border border-light h-100">
-                  <h6 className="fw-bold mb-4">Featured Post</h6>
-                  <div className="featured-post-card">
-                    <div className="rounded-3 overflow-hidden mb-3" style={{ height: '140px' }}>
-                      <Image src={blog_img_2} alt="Featured" className="w-100 h-100" style={{ objectFit: 'cover' }} />
-                    </div>
-                    <span className="badge bg-primary-subtle text-primary mb-2" style={{ fontSize: '10px' }}>Product Updates</span>
-                    <div className="text-muted small mb-2">15 Apr 2025 • 4 min read</div>
-                    <h6 className="fw-bold mb-2" style={{ fontSize: '15px', lineHeight: '1.4' }}>Understanding the Aquabrim Matrix Panel</h6>
-                    <p className="text-muted small mb-3">A complete overview of features, benefits, and real-world applications.</p>
-                    <Link href="/blog-details" className="text-primary small fw-bold text-decoration-none">
-                      Read More <i className="bi bi-arrow-right"></i>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 mb-4">
-                {/* Stay Updated */}
-                <div className="sidebar-widget p-4 bg-white rounded-4 shadow-sm border border-light text-center h-100">
-                  <div className="icon-box mx-auto mb-3 bg-primary-subtle rounded-circle d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
-                    <i className="bi bi-envelope-fill text-primary fs-4"></i>
-                  </div>
-                  <h6 className="fw-bold mb-2">Stay Updated</h6>
-                  <p className="text-muted small mb-4">Subscribe to our newsletter and get the latest insights and updates.</p>
-                  <div className="mb-3">
-                    <input type="email" className="form-control border-light-subtle rounded-3 text-center" placeholder="Enter your email" />
-                  </div>
-                  <button className="btn btn-primary w-100 rounded-3 fw-bold">Subscribe</button>
-                </div>
+              <div className={widgetBox}>
+                <StayUpdatedWidget />
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <style dangerouslySetInnerHTML={{
-        __html: `
-        .blog-screen-section {
-          min-height: 100vh;
-        }
-        .hover-shadow-lg:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1) !important;
-        }
-        .hover-text-primary:hover {
-          color: #006CD0 !important;
-        }
-        .page-link {
-          transition: all 0.3s ease;
-        }
-        .page-item.active .page-link {
-          background-color: #006CD0;
-          color: white;
-        }
-        .cursor-pointer {
-          cursor: pointer;
-        }
-        .scrollbar-hidden::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hidden {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        ::-webkit-scrollbar {
-          height: 4px;
-        }
-        ::-webkit-scrollbar-thumb {
-          background: #eee;
-          border-radius: 10px;
-        }
-        @media (max-width: 991px) {
-          .sidebar {
-            position: static !important;
-            margin-top: 0px;
-          }
-          .category-chip {
-            font-size: 13px !important;
-            padding: 6px 16px !important;
-          }
-        }
-      `}} />
     </section>
   );
 };

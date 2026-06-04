@@ -1,119 +1,63 @@
 'use client';
-import Accordion from '@/components/common/Accordion'; 
+import Accordion from '@/components/common/Accordion';
+import Link from 'next/link';
 import React from 'react';
+
+const SUPPORT_POINTS = [
+  { icon: 'bi-chat-dots', label: 'Expert Support' },
+  { icon: 'bi-lightning', label: 'Quick Response' },
+  { icon: 'bi-tools', label: 'Installation Guidance' },
+];
+
 const PricingAreaHomeOne = () => {
   return (
-    <>
-      <div className="pricing-section py-5 overflow-hidden">
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-6 col-md-12 mb-4 mb-lg-0">
-              <div className="section-title">
-                <div className="section-sub-title pricing wow animate__fadeInDown">
-                  <h4 className="text-primary text-uppercase fw-bold mb-2" style={{ fontSize: '18px' }}>FAQ</h4>
-                </div>
-                <div className="section-main-title pricing wow animate__fadeInUp mb-4">
-                  <h2 className="display-6 fw-bold">Want to Ask Something <br /> from Us?</h2>
-                </div>
+    <div className="overflow-hidden py-12">
+      <div className="container-app">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+
+          {/* Left: FAQ */}
+          <div className="mb-4 lg:mb-0">
+            <h4 className="mb-2 text-[18px] font-bold uppercase text-primary">FAQ</h4>
+            <h2 className="mb-4 text-[28px] font-bold leading-tight text-[#0d1b2a] md:text-[2.5rem]">
+              Want to Ask Something <br /> from Us?
+            </h2>
+            <Accordion />
+          </div>
+
+          {/* Right: Support card */}
+          <div>
+            <div className="group mx-auto overflow-hidden rounded-2xl border border-gray-100 bg-white p-5 text-center transition-all duration-300 hover:border-primary/20 md:p-12">
+              <div className="mb-4 inline-flex h-[100px] w-[100px] items-center justify-center rounded-full bg-[#f8faff] max-md:h-[80px] max-md:w-[80px]">
+                <i className="bi bi-headset text-[40px] text-primary max-md:text-[30px]"></i>
               </div>
-              <Accordion /> 
-            </div>
-            <div className="col-lg-6 col-md-12">
-              <div className="support-card-wrapper wow animate__fadeInRight">
-                <div className="support-card p-3 p-md-5 bg-white rounded-4 border border-light text-center mx-auto overflow-hidden" style={{ maxWidth: '100%' }}>
-                  <div className="support-icon-box mb-4 d-inline-flex align-items-center justify-content-center rounded-circle" 
-                       style={{ width: '100px', height: '100px', backgroundColor: '#f8faff' }}>
-                    <i className="bi bi-headset text-primary" style={{ fontSize: '40px' }}></i>
-                  </div>
-                  
-                  <h3 className="fw-bold mb-3">Still Have Questions?</h3>
-                  <p className="text-muted mb-4">Our team is here to help you find the right solution for your water automation needs.</p>
-                  
-                  <ul className="list-unstyled text-start d-inline-block mb-4">
-                    <li className="mb-3 d-flex align-items-center">
-                      <div className="icon-circle me-3 d-flex align-items-center justify-content-center rounded-circle" style={{ width: '32px', height: '32px', backgroundColor: '#f8f9fa' }}>
-                        <i className="bi bi-chat-dots text-primary" style={{ fontSize: '14px' }}></i>
-                      </div>
-                      <span className="fw-semibold">Expert Support</span>
-                    </li>
-                    <li className="mb-3 d-flex align-items-center">
-                      <div className="icon-circle me-3 d-flex align-items-center justify-content-center rounded-circle" style={{ width: '32px', height: '32px', backgroundColor: '#f8f9fa' }}>
-                        <i className="bi bi-lightning text-primary" style={{ fontSize: '14px' }}></i>
-                      </div>
-                      <span className="fw-semibold">Quick Response</span>
-                    </li>
-                    <li className="mb-3 d-flex align-items-center">
-                      <div className="icon-circle me-3 d-flex align-items-center justify-content-center rounded-circle" style={{ width: '32px', height: '32px', backgroundColor: '#f8f9fa' }}>
-                        <i className="bi bi-tools text-primary" style={{ fontSize: '14px' }}></i>
-                      </div>
-                      <span className="fw-semibold">Installation Guidance</span>
-                    </li>
-                  </ul>
-                  
-                  <div className="d-flex flex-column flex-sm-row gap-3">
-                    <a href="/contact" className="btn btn-primary py-3 px-4 fw-bold shadow-sm d-flex align-items-center justify-content-center flex-grow-1" style={{ borderRadius: '12px' }}>
-                      Get in Touch <i className="bi bi-arrow-right ms-2"></i>
-                    </a>
-                    <a href="/service" className="btn btn-outline-primary py-3 px-4 fw-bold shadow-sm d-flex align-items-center justify-content-center flex-grow-1" style={{ borderRadius: '12px' }}>
-                      View Products <i className="bi bi-box-seam ms-2"></i>
-                    </a>
-                  </div>
-                </div>
+
+              <h3 className="mb-3 text-2xl font-bold max-md:text-[22px]">Still Have Questions?</h3>
+              <p className="mb-4 text-gray-500">Our team is here to help you find the right solution for your water automation needs.</p>
+
+              <ul className="mb-4 inline-block list-none p-0 text-left">
+                {SUPPORT_POINTS.map((p, i) => (
+                  <li key={i} className="mb-3 flex items-center">
+                    <div className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#f8f9fa] transition-colors duration-300 group-hover:bg-primary">
+                      <i className={`bi ${p.icon} text-[14px] text-primary transition-colors duration-300 group-hover:text-white`}></i>
+                    </div>
+                    <span className="font-semibold">{p.label}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Link href="/contact" className="flex flex-grow items-center justify-center rounded-xl bg-primary px-4 py-3 font-bold text-white no-underline shadow-sm transition-colors hover:bg-primary-600">
+                  Get in Touch <i className="bi bi-arrow-right ml-2"></i>
+                </Link>
+                <Link href="/service" className="flex flex-grow items-center justify-center rounded-xl border border-primary px-4 py-3 font-bold text-primary no-underline shadow-sm transition-colors hover:bg-primary hover:text-white">
+                  View Products <i className="bi bi-box-seam ml-2"></i>
+                </Link>
               </div>
             </div>
           </div>
         </div>
-
-        <style jsx>{`
-          .support-card {
-            transition: all 0.3s ease;
-          }
-          .support-card:hover {
-            border-color: #007bff33 !important;
-          }
-          .icon-circle {
-            transition: all 0.3s ease;
-          }
-          .support-card:hover .icon-circle {
-            background-color: #006CD0 !important;
-          }
-          .support-card:hover .icon-circle :global(i) {
-            color: white !important;
-          }
-          .support-card:hover .support-icon-box :global(i) {
-            color: #006CD0 !important;
-          }
-          @media (max-width: 767px) {
-            .section-main-title h2 {
-              font-size: 28px !important;
-            }
-            .support-card h3 {
-              font-size: 22px !important;
-            }
-            .support-icon-box {
-              width: 80px !important;
-              height: 80px !important;
-            }
-            .support-icon-box i {
-              font-size: 30px !important;
-            }
-          }
-          :global(.accordion-item h2) {
-            background-color: #f0f4f8 !important;
-            border-radius: 8px !important;
-            overflow: hidden;
-          }
-          :global(.accordion-button) {
-            background-color: #f0f4f8 !important;
-            font-weight: 600 !important;
-          }
-          :global(.accordion-body) {
-             background-color: #f0f4f8 !important;
-             border-top: 1px solid rgba(0,0,0,0.05);
-          }
-        `}</style>
       </div>
-    </>
+    </div>
   );
 };
 

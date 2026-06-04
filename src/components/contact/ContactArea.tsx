@@ -3,109 +3,87 @@
 import React from 'react';
 import ContactForm from '../forms/ContactForm';
 
+const mailLink = "text-[#6c757d] no-underline transition-colors hover:text-[#006CD0]";
+
+const InfoRow = ({ icon, title, children }: { icon: string; title: string; children: React.ReactNode }) => (
+  <div className="mb-4 flex items-start">
+    <div className="mr-3 flex h-[50px] w-[50px] min-w-[50px] items-center justify-center rounded-full bg-[#f8f9fa] text-[#006CD0]">
+      <i className={`bi ${icon} text-[1.25rem]`}></i>
+    </div>
+    <div>
+      <h5 className="mb-1 text-[1rem] font-bold text-[#1c1632]">{title}</h5>
+      <p className="mb-0 text-[#6c757d]">{children}</p>
+    </div>
+  </div>
+);
+
+const Divider = () => <div className="my-8 h-px w-full bg-[#212529]/[0.15]"></div>;
+
 const ContactArea = () => {
   return (
-    <div className="contact-section py-5" style={{ backgroundColor: '#ffffff' }}>
-      <div className="container">
-        <div className="row g-4">
+    <div className="bg-white py-12">
+      <div className="container-app">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
+
           {/* Left Column: Contact Form */}
-          <div className="col-lg-7">
-            <div className="card border-0 shadow-sm p-4 p-md-5 h-100" style={{ borderRadius: '20px' }}>
-              <div className="contact-title mb-4">
-                <h3 className="fw-bold mb-2">Send Us a Message</h3>
-                <p className="text-muted">Fill out the form below and our team will get back to you as soon as possible.</p>
+          <div className="lg:col-span-7">
+            <div className="h-full rounded-[20px] bg-white p-6 shadow-sm md:p-12">
+              <div className="mb-6">
+                <h3 className="mb-2 text-[1.5rem] font-bold text-[#1c1632]">Send Us a Message</h3>
+                <p className="text-[#6c757d]">Fill out the form below and our team will get back to you as soon as possible.</p>
               </div>
               <ContactForm />
             </div>
           </div>
 
           {/* Right Column: Contact Information & Map */}
-          <div className="col-lg-5">
-            <div className="card border-0 shadow-sm p-4 p-md-5 h-100" style={{ borderRadius: '20px' }}>
-              <div className="contact-info-section mb-4">
-                <h3 className="fw-bold mb-4">Head office</h3>
-                
-                <div className="d-flex align-items-start mb-4">
-                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
-                    <i className="bi bi-geo-alt-fill fs-5"></i>
-                  </div>
-                  <div>
-                    <h5 className="fw-bold mb-1">Address</h5>
-                    <p className="text-muted mb-0">Aquabrim Pvt. Ltd.<br />Plot no. 35, 1st Floor, Union Bank of India Building,<br />100 Feet road, Ghitorni, Delhi – 110030</p>
-                  </div>
-                </div>
+          <div className="lg:col-span-5">
+            <div className="flex h-full flex-col rounded-[20px] bg-white p-6 shadow-sm md:p-12">
+              <div className="mb-4">
+                <h3 className="mb-4 text-[1.5rem] font-bold text-[#1c1632]">Head office</h3>
 
-                <div className="d-flex align-items-start mb-4">
-                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
-                    <i className="bi bi-envelope-fill fs-5"></i>
-                  </div>
-                  <div>
-                    <h5 className="fw-bold mb-1">Mail us</h5>
-                    <p className="text-muted mb-0"><a href="mailto:save.water@aquabrim.com" className="text-muted text-decoration-none">save.water@aquabrim.com</a><br /><a href="mailto:sales@aquabrim.com" className="text-muted text-decoration-none">sales@aquabrim.com</a></p>
-                  </div>
-                </div>
+                <InfoRow icon="bi-geo-alt-fill" title="Address">
+                  Aquabrim Pvt. Ltd.<br />Plot no. 35, 1st Floor, Union Bank of India Building,<br />100 Feet road, Ghitorni, Delhi – 110030
+                </InfoRow>
 
-                <div className="d-flex align-items-start mb-5">
-                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
-                    <i className="bi bi-telephone-fill fs-5"></i>
-                  </div>
-                  <div>
-                    <h5 className="fw-bold mb-1">Phone</h5>
-                    <p className="text-muted mb-0">Domestic Sales: <a href="tel:+919310035211" className="text-muted text-decoration-none">+91-9310035211</a><br />Corporate Sales: <a href="tel:+919910672821" className="text-muted text-decoration-none">+91-9910672821</a></p>
-                  </div>
-                </div>
+                <InfoRow icon="bi-envelope-fill" title="Mail us">
+                  <a href="mailto:save.water@aquabrim.com" className={mailLink}>save.water@aquabrim.com</a><br />
+                  <a href="mailto:sales@aquabrim.com" className={mailLink}>sales@aquabrim.com</a>
+                </InfoRow>
 
-                <hr className="mb-5 text-muted" style={{ opacity: 0.15 }} />
+                <InfoRow icon="bi-telephone-fill" title="Phone">
+                  Domestic Sales: <a href="tel:+919310035211" className={mailLink}>+91-9310035211</a><br />
+                  Corporate Sales: <a href="tel:+919910672821" className={mailLink}>+91-9910672821</a>
+                </InfoRow>
 
-                <h3 className="fw-bold mb-4">Branch address</h3>
-                
-                <div className="d-flex align-items-start mb-4">
-                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
-                    <i className="bi bi-geo-alt-fill fs-5"></i>
-                  </div>
-                  <div>
-                    <h5 className="fw-bold mb-1">STATE: KARNATAKA</h5>
-                    <p className="text-muted mb-0">Aquabrim Pvt. Ltd.<br />Flat no .20, Mahabala 2nd cross, Chamundi Narsari Road,<br />Jaraganahalli, Bangalore (Landmark: Shivanna Depo).</p>
-                  </div>
-                </div>
+                <Divider />
 
-                <div className="d-flex align-items-start mb-4">
-                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
-                    <i className="bi bi-envelope-fill fs-5"></i>
-                  </div>
-                  <div>
-                    <h5 className="fw-bold mb-1">Mail us</h5>
-                    <p className="text-muted mb-0"><a href="mailto:save.water@aquabrim.com" className="text-muted text-decoration-none">save.water@aquabrim.com</a><br /><a href="mailto:sales@aquabrim.com" className="text-muted text-decoration-none">sales@aquabrim.com</a></p>
-                  </div>
-                </div>
+                <h3 className="mb-4 text-[1.5rem] font-bold text-[#1c1632]">Branch address</h3>
 
-                <div className="d-flex align-items-start mb-4">
-                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
-                    <i className="bi bi-telephone-fill fs-5"></i>
-                  </div>
-                  <div>
-                    <h5 className="fw-bold mb-1">Phone</h5>
-                    <p className="text-muted mb-0"><a href="tel:+919560088781" className="text-muted text-decoration-none">+91-9560088781</a></p>
-                  </div>
-                </div>
+                <InfoRow icon="bi-geo-alt-fill" title="STATE: KARNATAKA">
+                  Aquabrim Pvt. Ltd.<br />Flat no .20, Mahabala 2nd cross, Chamundi Narsari Road,<br />Jaraganahalli, Bangalore (Landmark: Shivanna Depo).
+                </InfoRow>
 
-                <hr className="mb-5 text-muted" style={{ opacity: 0.15 }} />
+                <InfoRow icon="bi-envelope-fill" title="Mail us">
+                  <a href="mailto:save.water@aquabrim.com" className={mailLink}>save.water@aquabrim.com</a><br />
+                  <a href="mailto:sales@aquabrim.com" className={mailLink}>sales@aquabrim.com</a>
+                </InfoRow>
 
-                <h3 className="fw-bold mb-4">Branch address</h3>
+                <InfoRow icon="bi-telephone-fill" title="Phone">
+                  <a href="tel:+919560088781" className={mailLink}>+91-9560088781</a>
+                </InfoRow>
 
-                <div className="d-flex align-items-start mb-4">
-                  <div className="icon-box bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', minWidth: '50px' }}>
-                    <i className="bi bi-geo-alt-fill fs-5"></i>
-                  </div>
-                  <div>
-                    <h5 className="fw-bold mb-1">STATE: MAHARASHTRA</h5>
-                    <p className="text-muted mb-0">Aquabrim Pvt. Ltd.<br />16/B Elahi Residency, 3 No Colony, Ashoka Society,<br />Kalewadi Phata, Thergaon, Chinchwad,<br />Pune – 411033, Maharashtra</p>
-                  </div>
-                </div>
+                <Divider />
+
+                <h3 className="mb-4 text-[1.5rem] font-bold text-[#1c1632]">Branch address</h3>
+
+                <InfoRow icon="bi-geo-alt-fill" title="STATE: MAHARASHTRA">
+                  Aquabrim Pvt. Ltd.<br />16/B Elahi Residency, 3 No Colony, Ashoka Society,<br />Kalewadi Phata, Thergaon, Chinchwad,<br />Pune – 411033, Maharashtra
+                </InfoRow>
               </div>
 
               {/* Map Integration */}
-              <div className="map-wrapper rounded-4 overflow-hidden mt-auto" style={{ height: '200px', position: 'relative' }}>
+              <div className="relative mt-auto h-[200px] overflow-hidden rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7496149.95373021!2d85.84621250756469!3d23.452185887261447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30adaaed80e18ba7%3A0xf2d28e0c4e1fc6b!2sBangladesh!5e0!3m2!1sen!2sbd!4v1635150422284!5m2!1sen!2sbd"
                   width="100%"
@@ -114,10 +92,10 @@ const ContactArea = () => {
                   allowFullScreen
                   loading="lazy"
                 ></iframe>
-                <div className="map-overlay position-absolute bottom-0 start-0 w-100 p-3 text-center">
-                   <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="btn btn-light btn-sm shadow-sm rounded-pill px-3">
-                     View on Google Maps <i className="bi bi-arrow-right small"></i>
-                   </a>
+                <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/40 to-transparent p-3 text-center">
+                  <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-[0.85rem] text-[#212529] no-underline shadow-sm transition-colors hover:bg-[#f8f9fa]">
+                    View on Google Maps <i className="bi bi-arrow-right text-[0.8rem]"></i>
+                  </a>
                 </div>
               </div>
             </div>

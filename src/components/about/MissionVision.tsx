@@ -1,146 +1,54 @@
 'use client';
 import React from 'react';
 
+const CARDS = [
+  {
+    icon: 'bi-bullseye',
+    title: 'Our Mission',
+    desc: 'To develop reliable water level monitoring and automation systems that improve operational efficiency and support smarter infrastructure management.',
+    accent: 'bg-[#006CD0]',
+  },
+  {
+    icon: 'bi-eye',
+    title: 'Our Vision',
+    desc: 'To lead the future of water automation with intelligent, connected, and efficient infrastructure solutions.',
+    accent: 'bg-[#3b82f6]',
+  },
+];
+
 const MissionVision = () => {
   return (
-    <section className="mission-vision-section py-5">
-      <div className="container">
-        <div className="row g-4">
-          
-          {/* Mission Card */}
-          <div className="col-lg-6">
-            <div className="premium-card h-100 p-4 p-md-5 rounded-4 shadow-sm wow slideInLeft">
-              <div className="card-content d-flex flex-column flex-md-row align-items-center align-items-md-start text-center text-md-start">
-                <div className="icon-wrapper mb-4 mb-md-0 me-md-4 d-flex align-items-center justify-content-center shadow-lg">
-                  <i className="bi bi-bullseye"></i>
+    <section className="overflow-hidden bg-[#f8fafc] py-12 sm:py-16 lg:py-20">
+      <div className="container-app">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          {CARDS.map((card, i) => (
+            <div
+              key={i}
+              className="group relative z-[1] h-full overflow-hidden rounded-2xl border border-solid border-[#e2e8f0]/80 bg-white p-8 shadow-sm transition-all duration-[400ms] hover:-translate-y-2.5 hover:border-[#006CD0]/20 hover:shadow-[0_20px_40px_rgba(0,108,208,0.08)] md:p-12"
+            >
+              <div className="flex flex-col items-center text-center md:flex-row md:items-start md:text-left">
+                <div className="mb-4 flex h-20 w-20 min-w-20 items-center justify-center rounded-[20px] bg-gradient-to-br from-[#006CD0] to-[#004a91] text-[2rem] text-white shadow-lg transition-all duration-[400ms] group-hover:scale-110 md:mb-0 md:mr-4 md:h-[90px] md:w-[90px] md:min-w-[90px] md:rounded-3xl md:text-[2.5rem]">
+                  <i className={`bi ${card.icon}`}></i>
                 </div>
-                <div className="text-content">
-                  <h3 className="card-title fw-bold mb-3">Our Mission</h3>
-                  <p className="card-description mb-0">
-                    To develop reliable water level monitoring and automation systems that improve operational efficiency and support smarter infrastructure management.
+                <div>
+                  <h3 className="mb-3 text-[1.5rem] font-bold tracking-[-0.02em] text-[#1c1632] md:text-[1.75rem]">
+                    {card.title}
+                  </h3>
+                  <p className="mb-0 text-[1rem] leading-[1.7] text-[#64748b] md:text-[1.1rem]">
+                    {card.desc}
                   </p>
                 </div>
               </div>
-              <div className="card-accent accent-primary"></div>
+              {/* bottom accent line that fills on hover */}
+              <div
+                className={`absolute bottom-0 left-0 h-1 w-0 rounded-bl-2xl transition-[width] duration-[400ms] group-hover:w-full group-hover:rounded-b-2xl ${card.accent}`}
+              ></div>
             </div>
-          </div>
-
-          {/* Vision Card */}
-          <div className="col-lg-6">
-            <div className="premium-card h-100 p-4 p-md-5 rounded-4 shadow-sm wow slideInRight">
-              <div className="card-content d-flex flex-column flex-md-row align-items-center align-items-md-start text-center text-md-start">
-                <div className="icon-wrapper mb-4 mb-md-0 me-md-4 d-flex align-items-center justify-content-center shadow-lg">
-                  <i className="bi bi-eye"></i>
-                </div>
-                <div className="text-content">
-                  <h3 className="card-title fw-bold mb-3">Our Vision</h3>
-                  <p className="card-description mb-0">
-                    To lead the future of water automation with intelligent, connected, and efficient infrastructure solutions.
-                  </p>
-                </div>
-              </div>
-              <div className="card-accent accent-secondary"></div>
-            </div>
-          </div>
-
+          ))}
         </div>
       </div>
-
-      <style jsx>{`
-        .mission-vision-section {
-          background-color: #f8fafc;
-          overflow: hidden;
-        }
-
-        .premium-card {
-          background: #ffffff;
-          border: 1px solid rgba(226, 232, 240, 0.8);
-          position: relative;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          z-index: 1;
-        }
-
-        .premium-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 40px rgba(0, 108, 208, 0.08) !important;
-          border-color: rgba(0, 108, 208, 0.2);
-        }
-
-        .icon-wrapper {
-          width: 90px;
-          height: 90px;
-          min-width: 90px;
-          background: linear-gradient(135deg, #006CD0 0%, #004a91 100%);
-          border-radius: 24px;
-          color: white;
-          font-size: 2.5rem;
-          transition: all 0.4s ease;
-        }
-
-        .premium-card:hover .icon-wrapper {
-          transform: scale(1.1);
-          background: linear-gradient(135deg, #004a91 0%, #006CD0 100%);
-        }
-
-        .card-title {
-          color: #1c1632;
-          font-size: 1.75rem;
-          letter-spacing: -0.02em;
-        }
-
-        .card-description {
-          color: #64748b;
-          font-size: 1.1rem;
-          line-height: 1.7;
-        }
-
-        .card-accent {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0%;
-          height: 4px;
-          transition: width 0.4s ease;
-          border-radius: 0 0 0 16px;
-        }
-
-        .accent-primary { background-color: #006CD0; }
-        .accent-secondary { background-color: #3b82f6; }
-
-        .premium-card:hover .card-accent {
-          width: 100%;
-          border-radius: 0 0 16px 16px;
-        }
-
-        @media (max-width: 768px) {
-          .icon-wrapper {
-            width: 80px;
-            height: 80px;
-            min-width: 80px;
-            font-size: 2rem;
-            border-radius: 20px;
-          }
-          .card-title {
-            font-size: 1.5rem;
-          }
-          .card-description {
-            font-size: 1rem;
-          }
-          .premium-card {
-            padding: 2rem !important;
-          }
-        }
-
-        @media (max-width: 576px) {
-          .mission-vision-section {
-            padding-top: 3rem !important;
-            padding-bottom: 3rem !important;
-          }
-        }
-      `}</style>
     </section>
   );
 };
 
 export default MissionVision;
-

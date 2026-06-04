@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Preflight is disabled during the Bootstrap to Tailwind transition, so reset the
+   native button chrome (UA border/background) that would otherwise show on bare
+   button elements. Bootstrap .btn and Tailwind background/border utilities still win. */
+@layer base {
+  button {
+    background-color: transparent;
+    background-image: none;
+    border-width: 0;
+  }
+  /* The old template's theme-default.css sets `button:focus { border: 1px solid #FF3C00 }`,
+     which flashes a red-orange border on any button when clicked/focused. Neutralize it so
+     buttons keep only the theme color. Loaded after the template CSS, so this wins. */
+  button:focus,
+  button:focus-visible {
+    border-width: 0;
+    outline: none;
+  }
+}
+
+@layer components {
+  /* Mirrors Bootstrap's .container width so Tailwind-migrated sections line up
+     with not-yet-migrated ones during the transition. */
+  .container-app {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    max-width: 1320px;
+  }
+
+  /* Primary solid button (replaces the template's .solar-btn) — global premium style */
+  .btn-solar {
+    @apply inline-flex items-center justify-center gap-2 rounded-[10px] bg-primary px-7 py-3.5 text-[16px] font-semibold tracking-[0.2px] text-white no-underline shadow-[0_10px_24px_-8px_rgba(0,108,208,0.55)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-primary-700 hover:text-white hover:shadow-[0_16px_30px_-10px_rgba(0,108,208,0.6)] active:translate-y-0;
+  }
+  .btn-solar-light {
+    @apply inline-flex items-center justify-center gap-2 rounded-[10px] bg-white px-7 py-3.5 text-[16px] font-semibold tracking-[0.2px] text-[#0f172a] no-underline shadow-[0_10px_24px_-12px_rgba(15,23,42,0.45)] ring-1 ring-inset ring-primary/15 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-primary hover:text-white hover:ring-primary hover:shadow-[0_16px_30px_-10px_rgba(0,108,208,0.5)] active:translate-y-0;
+  }
+
+  /* Section heading helpers used across the site */
+  .section-label {
+    @apply mb-2 inline-block text-sm font-semibold uppercase tracking-[2px] text-primary;
+  }
+  .section-heading {
+    @apply text-[32px] font-extrabold leading-tight text-[#0d1b2a] md:text-[40px];
+  }
+}

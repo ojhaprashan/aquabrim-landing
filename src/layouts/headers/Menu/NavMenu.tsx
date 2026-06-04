@@ -1,4 +1,4 @@
-
+'use client'
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import menu_data from './MenuData';
@@ -22,71 +22,41 @@ const NavMenu = () => {
   }, [activeIndex]);
 
   const handleClick = (index: number) => {
-    setActiveIndex(prevIndex => (prevIndex === index ? prevIndex : index)); // Prevent toggling if already active
+    setActiveIndex(prevIndex => (prevIndex === index ? prevIndex : index));
   };
 
-  
   return (
-    <>
-      <ul>
-        {menu_data.map((item, i) => (
-          <li key={i} className={activeIndex === i ? 'active' : ''}>
-            <Link href={item.link}>
-              <div onClick={() => handleClick(i)} className="menu-item">
-                {item.title} {item.has_dropdown && <i className="fas fa-chevron-down"></i>}
-              </div>
-            </Link>
-            {item.has_dropdown && // Only show submenu if the item has a dropdown
-              <div className="sub-menu">
-                <ul>
-                  {item.sub_menus?.map((sub_item, index) =>
-                    <li key={index}><Link href={sub_item.link}>{sub_item.title}</Link></li>
-                  )}
-                </ul>
-              </div>
-            }
-          </li>
-        ))}
-      </ul>
-      <style jsx>{`
-        .menu-item {
-          position: relative;
-          font-size: 16px;
-          margin-right: 20px;
-        }
-        
-        ul {
-          display: flex;
-          align-items: center;
-          padding: 0;
-          margin: 0;
-        }
-
-        li {
-          list-style: none;
-        }
-
-        .menu-item:after {
-          content: '';
-          position: absolute;
-          left: 0;
-          bottom: -2px;
-          width: 100%;
-          height: 2px;
-          background-color: #006CD0;
-          visibility: hidden; /* Hide underline by default */
-        }
-
-        .menu-item:hover:after {
-          visibility: visible;
-          background-color:#006CD0 ;
-        }
-        
-        .active .menu-item:after {
-          visibility: visible;
-        }
-      `}</style>
-    </>
+    <ul className="m-0 flex list-none items-center p-0">
+      {menu_data.map((item, i) => (
+        <li key={i} className="group relative">
+          <Link href={item.link} className="no-underline">
+            <div
+              onClick={() => handleClick(i)}
+              className={`relative mr-5 text-base text-gray-900 transition-colors after:absolute after:-bottom-0.5 after:left-0 after:h-0.5 after:w-full after:bg-primary after:transition-opacity ${
+                activeIndex === i
+                  ? 'text-primary after:opacity-100'
+                  : 'after:opacity-0 group-hover:text-primary group-hover:after:opacity-100'
+              }`}
+            >
+              {item.title} {item.has_dropdown && <i className="fas fa-chevron-down ml-1 text-xs"></i>}
+            </div>
+          </Link>
+          {item.has_dropdown && (
+            <div className="invisible absolute left-0 top-[125%] z-50 min-w-[200px] rounded-md bg-white opacity-0 shadow-lg transition-all group-hover:visible group-hover:opacity-100">
+              <ul className="m-0 list-none p-2">
+                {item.sub_menus?.map((sub_item, index) => (
+                  <li key={index}>
+                    <Link href={sub_item.link} className="block rounded px-3 py-2 text-sm text-gray-700 no-underline hover:bg-primary-50 hover:text-primary">
+                      {sub_item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
   );
 };
 

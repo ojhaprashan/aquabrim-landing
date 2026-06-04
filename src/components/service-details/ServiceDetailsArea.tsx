@@ -5,10 +5,6 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { products } from '../service/ProductList';
 
-import prod_controller from "@/assets/images/resource/prod_controller.png";
-import prod_starter from "@/assets/images/resource/prod_starter.png";
-import prod_tank_monitor from "@/assets/images/resource/prod_tank_monitor.png";
-import prod_valve from "@/assets/images/resource/prod_valve.png";
 import service_details_2 from "@/assets/images/resource/service-details2.png";
 
 const ServiceDetailsArea = () => {
@@ -96,15 +92,15 @@ const ServiceDetailsArea = () => {
   }, [lightboxOpen, images]);
 
   return (
-    <section className="product-details-section pt-100 pb-120">
-      <div className="container">
+    <section className="bg-white pb-[60px] pt-6 sm:pt-10 lg:pb-[120px] lg:pt-14">
+      <div className="container-app">
         {/* Product Overview Row */}
-        <div className="row mb-5">
+        <div className="mb-12 grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
           {/* Left: Images */}
-          <div className="col-lg-6 mb-4 mb-lg-0">
-            <div className="product-gallery sticky-lg-top" style={{ top: '100px' }}>
-              <div 
-                className="main-image-wrapper rounded-4 mb-3 text-center position-relative shadow-sm overflow-hidden"
+          <div>
+            <div className="lg:sticky lg:top-[100px]">
+              <div
+                className="group/img relative mx-auto mb-3 flex aspect-[1024/1536] max-h-[550px] cursor-zoom-in items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-b from-white to-[#eef4fb] text-center shadow-sm max-lg:max-h-[400px] max-lg:max-w-[280px] max-sm:max-h-none max-sm:w-full max-sm:max-w-full max-sm:rounded-xl"
                 onMouseMove={handleMouseMove}
                 onMouseEnter={() => setIsZoomed(true)}
                 onMouseLeave={() => {
@@ -112,41 +108,33 @@ const ServiceDetailsArea = () => {
                   setZoomPos({ x: 50, y: 50 });
                 }}
                 onClick={openLightbox}
-                style={{ cursor: 'zoom-in' }}
               >
-                 <Image
-                   src={mainImage}
-                   alt={product.title}
-                   width={600}
-                   height={600}
-                   className="product-main-image transition-transform"
-                   style={{
-                     transform: isZoomed ? 'scale(2.2)' : 'scale(1)',
-                     transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`,
-                     transition: isZoomed ? 'transform 0.05s linear' : 'transform 0.3s ease-out',
-                     objectFit: 'contain'
-                   }}
-                 />
-                 
-                 {/* Visual Hint Badge */}
-                 <div className="zoom-hint-badge d-flex align-items-center gap-2">
-                   <i className="bi bi-arrows-fullscreen"></i>
-                   <span>Click to Zoom</span>
-                 </div>
+                <Image
+                  src={mainImage}
+                  alt={product.title}
+                  width={600}
+                  height={600}
+                  className="h-full w-full object-contain"
+                  style={{
+                    transform: isZoomed ? 'scale(2.2)' : 'scale(1)',
+                    transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`,
+                    transition: isZoomed ? 'transform 0.05s linear' : 'transform 0.3s ease-out',
+                  }}
+                />
+
+                {/* Visual Hint Badge */}
+                <div className="pointer-events-none absolute bottom-4 right-4 z-[2] flex items-center gap-2 rounded-full border border-solid border-white/15 bg-[#0f172a]/65 px-3 py-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.5px] text-white opacity-75 backdrop-blur-[8px] transition-all group-hover/img:-translate-y-0.5 group-hover/img:bg-[#006CD0]/85 group-hover/img:opacity-100">
+                  <i className="bi bi-arrows-fullscreen"></i>
+                  <span>Click to Zoom</span>
+                </div>
               </div>
-              <div className="thumbnail-gallery d-flex gap-3 overflow-auto pb-2 custom-scrollbar justify-content-md-start justify-content-center">
+              <div className="flex justify-center gap-3 overflow-auto pb-2 md:justify-start [&::-webkit-scrollbar-thumb]:rounded-[10px] [&::-webkit-scrollbar-thumb]:bg-[#cbd5e1] [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-track]:bg-[#f1f5f9] [&::-webkit-scrollbar]:h-1.5">
                 {images.map((img: any, idx: number) => (
                   <div
                     key={idx}
-                    className={`thumbnail-item rounded-3 p-1 bg-light shadow-sm overflow-hidden ${mainImage === img ? 'active' : ''}`}
-                    style={{
-                      flexShrink: 0,
-                      border: '2px solid',
-                      borderColor: mainImage === img ? '#006CD0' : 'transparent',
-                      cursor: 'pointer',
-                      backgroundColor: '#f8fafc',
-                      transition: 'all 0.3s ease'
-                    }}
+                    className={`h-20 w-20 shrink-0 cursor-pointer overflow-hidden rounded-lg border-2 border-solid bg-[#f8fafc] p-1 shadow-sm transition-all hover:-translate-y-0.5 max-lg:h-16 max-lg:w-16 max-sm:h-[60px] max-sm:w-[60px] ${
+                      mainImage === img ? 'border-[#006CD0]' : 'border-transparent hover:border-[#006CD0]/50'
+                    }`}
                     onClick={() => setSelectedImage(img)}
                   >
                     <Image
@@ -154,7 +142,7 @@ const ServiceDetailsArea = () => {
                       alt={`Thumbnail ${idx}`}
                       width={80}
                       height={80}
-                      className="thumbnail-image"
+                      className="h-full w-full object-contain"
                     />
                   </div>
                 ))}
@@ -163,32 +151,32 @@ const ServiceDetailsArea = () => {
           </div>
 
           {/* Right: Details */}
-          <div className="col-lg-6 ps-lg-5">
-            <div className="product-info wow fadeInRight">
-              <div className="d-flex align-items-center gap-2 mb-2">
-                <span className="badge px-3 py-2 rounded-pill fw-bold text-uppercase" style={{ backgroundColor: 'rgba(0, 108, 208, 0.1)', color: '#006CD0', fontSize: '0.75rem', letterSpacing: '0.5px' }}>
+          <div className="lg:pl-5">
+            <div>
+              <div className="mb-2 flex items-center gap-2">
+                <span className="rounded-full bg-[#006CD0]/10 px-3 py-2 text-[0.75rem] font-bold uppercase tracking-[0.5px] text-[#006CD0]">
                   {product.categoryName} Solutions
                 </span>
-                <span className="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill d-flex align-items-center gap-2 fw-semibold" style={{ fontSize: '0.75rem' }}>
-                  <div style={{ width: '6px', height: '6px', backgroundColor: '#198754', borderRadius: '50%' }}></div>
+                <span className="flex items-center gap-2 rounded-full bg-[#198754]/10 px-3 py-2 text-[0.75rem] font-semibold text-[#198754]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#198754]"></span>
                   In stock
                 </span>
               </div>
 
-              <h2 className="display-5 fw-extrabold mb-2" style={{ color: '#0f172a', letterSpacing: '-0.5px' }}>{product.title}</h2>
-              <p className="text-primary fw-semibold mb-3 fs-5" style={{ color: '#006CD0' }}>{product.description}</p>
-              
-              <p className="text-muted mb-4 mt-3" style={{ fontSize: '0.98rem', lineHeight: '1.7' }}>
+              <h2 className="mb-2 text-5xl font-extrabold tracking-[-0.5px] text-[#0f172a] max-sm:text-[2rem]">{product.title}</h2>
+              <p className="mb-3 text-[1.25rem] font-semibold text-[#006CD0]">{product.description}</p>
+
+              <p className="mb-4 mt-3 text-[0.98rem] leading-[1.7] text-[#6c757d]">
                 {product.longDescription || `The Aquabrim ${product.title} ${product.description} represents our signature premium tier engineering. Specially optimized for smart and robust performance under dynamic Indian voltage, piping, and tank conditions.`}
               </p>
 
-              {/* Features Static Chips */}
+              {/* Features Chips */}
               {product.features && (
-                <div className="features-slides-wrapper mb-4">
-                  <p className="fw-bold text-uppercase mb-3" style={{ fontSize: '0.82rem', letterSpacing: '1.2px', color: '#006CD0' }}>
+                <div className="mb-4">
+                  <p className="mb-3 text-[0.82rem] font-bold uppercase tracking-[1.2px] text-[#006CD0]">
                     Key Product Features
                   </p>
-                  <div className="row g-2 mb-3">
+                  <div className="mb-3 flex flex-wrap gap-2">
                     {product.features.map((feat: string, fIdx: number) => {
                       const text = feat.toLowerCase();
                       let iconClass = 'bi-check-circle-fill';
@@ -204,22 +192,16 @@ const ServiceDetailsArea = () => {
                       else if (text.includes('multi')) iconClass = 'bi-layers';
 
                       return (
-                        <div key={fIdx} className="col-6 col-sm-6 col-md-auto">
-                          <div 
-                            className="feature-chip d-flex align-items-center rounded-3 px-2 py-2 shadow-sm w-100 h-100"
-                            style={{ 
-                              background: 'linear-gradient(135deg, #f8fafc 0%, #edf5ff 100%)',
-                              border: '1px solid rgba(0, 108, 208, 0.1)',
-                              transition: 'all 0.3s ease'
-                            }}
-                          >
-                            <div className="feature-card-icon me-2 flex-shrink-0" style={{ color: '#006CD0', display: 'flex' }}>
-                              <i className={`bi ${iconClass}`} style={{ fontSize: '1rem' }}></i>
-                            </div>
-                            <span className="fw-semibold text-dark" style={{ fontSize: '0.78rem', lineHeight: '1.2' }}>
-                              {feat}
-                            </span>
-                          </div>
+                        <div
+                          key={fIdx}
+                          className="flex items-center gap-2 rounded-lg border border-solid border-[#006CD0]/10 bg-gradient-to-br from-[#f8fafc] to-[#edf5ff] px-2 py-2 shadow-sm transition-all hover:-translate-y-1 hover:border-[#006CD0]/20 hover:bg-white hover:shadow-[0_10px_20px_rgba(0,108,208,0.06)]"
+                        >
+                          <span className="flex shrink-0 items-center text-[#006CD0]">
+                            <i className={`bi ${iconClass} text-[1rem]`}></i>
+                          </span>
+                          <span className="text-[0.78rem] font-semibold leading-[1.2] text-[#212529]">
+                            {feat}
+                          </span>
                         </div>
                       );
                     })}
@@ -227,570 +209,68 @@ const ServiceDetailsArea = () => {
                 </div>
               )}
 
-              <Link href="/contact" className="btn btn-primary w-100 py-3 rounded-pill fw-bold mb-5 shadow-sm text-uppercase d-flex align-items-center justify-content-center gap-2 transition-all hover-lift text-white text-decoration-none" style={{ backgroundColor: '#006CD0', letterSpacing: '1px', fontSize: '0.95rem' }}>
-                <i className="bi bi-telephone-outbound fs-5"></i> Enquire Now / Contact Us
+              <Link
+                href="/contact"
+                className="mb-12 flex w-full items-center justify-center gap-2 rounded-full bg-[#006CD0] py-3 text-[0.95rem] font-bold uppercase tracking-[1px] text-white no-underline shadow-sm transition-all hover:-translate-y-[3px] hover:shadow-[0_10px_20px_rgba(0,108,208,0.2)]"
+              >
+                <i className="bi bi-telephone-outbound text-[1.25rem]"></i> Enquire Now / Contact Us
               </Link>
-
-
             </div>
           </div>
         </div>
       </div>
 
       {/* How It Works Section */}
-      <div className="how-it-works-section py-5 mt-4" style={{ backgroundColor: '#f8fafc' }}>
-        <div className="container py-lg-4">
-          <div className="row align-items-center">
-            <div className="col-lg-6 mb-5 mb-lg-0 pe-lg-5 wow fadeInLeft">
-              <h2 className="fw-bold mb-4 display-6" style={{ color: '#0f172a' }}>How It Works</h2>
-              
+      <div className="mt-4 bg-[#f8fafc] py-12">
+        <div className="container-app lg:py-4">
+          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+            <div className="lg:pr-10">
+              <h2 className="mb-4 text-[2.5rem] font-bold text-[#0f172a] max-lg:text-[2rem] max-sm:text-[1.75rem]">How It Works</h2>
+
               {product.howItWorks ? (
                 product.howItWorks.map((step: any, sIdx: number) => (
                   <div key={sIdx} className="mb-4">
-                    <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>{step.title}</h5>
-                    <p className="text-muted" style={{ lineHeight: '1.7', fontSize: '0.96rem' }}>{step.desc}</p>
+                    <h5 className="mb-2 text-[1.25rem] font-bold text-[#1e293b]">{step.title}</h5>
+                    <p className="text-[0.96rem] leading-[1.7] text-[#6c757d]">{step.desc}</p>
                   </div>
                 ))
               ) : (
                 <>
                   <div className="mb-4">
-                    <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Monitors Water Levels</h5>
-                    <p className="text-muted" style={{ lineHeight: '1.7', fontSize: '0.96rem' }}>Continuous monitoring of water levels in tanks to ensure uninterrupted operational safety.</p>
+                    <h5 className="mb-2 text-[1.25rem] font-bold text-[#1e293b]">Monitors Water Levels</h5>
+                    <p className="text-[0.96rem] leading-[1.7] text-[#6c757d]">Continuous monitoring of water levels in tanks to ensure uninterrupted operational safety.</p>
                   </div>
                   <div className="mb-4">
-                    <h5 className="fw-bold mb-2" style={{ color: '#1e293b' }}>Intelligent Automation</h5>
-                    <p className="text-muted" style={{ lineHeight: '1.7', fontSize: '0.96rem' }}>Processes signal data automatically to control flow valves and pump starters seamlessly.</p>
+                    <h5 className="mb-2 text-[1.25rem] font-bold text-[#1e293b]">Intelligent Automation</h5>
+                    <p className="text-[0.96rem] leading-[1.7] text-[#6c757d]">Processes signal data automatically to control flow valves and pump starters seamlessly.</p>
                   </div>
                 </>
               )}
             </div>
-            <div className="col-lg-6 wow fadeInRight">
-               <div className="how-it-works-img-container bg-white rounded-4 p-4 shadow-sm text-center h-100 d-flex align-items-center justify-content-center border overflow-hidden position-relative" style={{ borderColor: '#e2e8f0' }}>
-                 <div className="image-hover-zoom w-100 h-100 d-flex align-items-center justify-content-center">
-                    <Image src={product.howItWorksImg || service_details_2} alt="System Setup Diagram" width={600} height={600} className="img-fluid" style={{ maxHeight: '100%', objectFit: 'contain' }} />
-                 </div>
-               </div>
+            <div>
+              <div className="group flex h-full min-h-[400px] items-center justify-center overflow-hidden rounded-2xl border border-solid border-[#e2e8f0] bg-white p-4 text-center shadow-sm max-sm:min-h-[250px]">
+                <div className="flex h-full w-full items-center justify-center transition-all duration-500 group-hover:scale-105">
+                  <Image src={product.howItWorksImg || service_details_2} alt="System Setup Diagram" width={600} height={600} className="max-h-full w-auto object-contain" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <style jsx>{`
-        .product-details-section {
-          background-color: #ffffff;
-        }
-
-        .main-image-wrapper {
-          background: linear-gradient(180deg, #ffffff 0%, #eef4fb 100%);
-          aspect-ratio: 1024 / 1536;
-          max-height: 550px;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 0px;
-        }
-
-        .main-image-wrapper :global(.product-main-image) {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-        }
-
-        .thumbnail-gallery {
-          padding: 4px 2px;
-        }
-
-        .thumbnail-item {
-          width: 80px;
-          height: 80px;
-        }
-
-        .thumbnail-item :global(.thumbnail-image) {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-        }
-
-        .features-horizontal-scroll {
-          scroll-behavior: auto;
-          -webkit-overflow-scrolling: touch;
-        }
-
-        .feature-slide-card {
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          cursor: grab;
-        }
-
-        .feature-slide-card:hover {
-          transform: translateY(-4px);
-          background: #ffffff !important;
-          border-color: rgba(0, 108, 208, 0.2) !important;
-          box-shadow: 0 10px 20px rgba(0, 108, 208, 0.06) !important;
-        }
-
-        /* Accordion Custom Styling - Premium Cards */
-        .custom-accordion {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-        }
-        
-        .custom-accordion .accordion-item {
-          border: 1px solid #e2e8f0;
-          background-color: #ffffff;
-          border-radius: 8px !important;
-          overflow: hidden;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-          transition: all 0.3s ease;
-        }
-
-        .custom-accordion .accordion-item:hover {
-          border-color: #cbd5e1;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-        }
-
-        .custom-accordion .accordion-button {
-          background-color: #f8fafc;
-          color: #1e293b;
-          font-weight: 700;
-          font-size: 0.95rem;
-          padding: 1.1rem 1.25rem;
-          border: none;
-          box-shadow: none;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          transition: all 0.25s ease;
-        }
-
-        .custom-accordion .accordion-button:not(.collapsed) {
-          color: #006CD0;
-          background-color: #edf5ff;
-          box-shadow: none;
-        }
-
-        .custom-accordion .accordion-button:focus {
-          box-shadow: none;
-        }
-
-        .custom-accordion .accordion-button i {
-          transition: color 0.25s ease;
-        }
-
-        .custom-accordion .accordion-button:not(.collapsed) i {
-          color: #006CD0 !important;
-        }
-
-        .custom-accordion .accordion-button::after {
-          background-size: 1rem;
-          transition: transform 0.25s ease;
-        }
-        
-        .custom-accordion .accordion-body {
-          padding: 1.25rem 1.25rem 1.5rem 3.25rem;
-          background-color: #ffffff;
-          border-top: 1px solid #f1f5f9;
-          font-size: 0.95rem;
-          line-height: 1.7;
-        }
-
-        /* Product features list */
-        .product-features-list {
-          list-style: none;
-          padding-left: 0;
-          margin: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        .product-features-list li {
-          position: relative;
-          padding-left: 1.25rem;
-          color: #475569;
-          font-size: 0.95rem;
-        }
-
-        .product-features-list li::before {
-          content: "•";
-          color: #006CD0;
-          font-weight: bold;
-          font-size: 1.3rem;
-          position: absolute;
-          left: 0;
-          top: -2px;
-        }
-        
-        .thumbnail-item {
-          transition: all 0.3s ease;
-        }
-        
-        .thumbnail-item:hover {
-          border-color: rgba(0, 108, 208, 0.5) !important;
-          transform: translateY(-2px);
-        }
-        
-        .hover-lift:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 10px 20px rgba(0, 108, 208, 0.2) !important;
-        }
-        
-        /* Custom scrollbar for thumbnails */
-        .custom-scrollbar::-webkit-scrollbar {
-          height: 6px;
-        }
-        
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: #f1f5f9;
-          border-radius: 10px;
-        }
-        
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #cbd5e1;
-          border-radius: 10px;
-        }
-        
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #94a3b8;
-        }
-
-        .image-hover-zoom {
-          transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .image-hover-zoom:hover {
-          transform: scale(1.05);
-        }
-
-        /* How It Works Container */
-        .how-it-works-img-container {
-          min-height: 400px;
-        }
-
-        /* Mobile specific fixes */
-        @media (max-width: 991px) {
-          .pt-100 {
-            padding-top: 130px !important;
-          }
-          .pb-120 {
-            padding-bottom: 60px !important;
-          }
-          .display-6 {
-            font-size: 2rem;
-          }
-          .custom-accordion .accordion-body {
-            padding: 1.25rem;
-          }
-          .main-image-wrapper {
-            aspect-ratio: 1024 / 1536;
-            padding: 0px;
-            max-height: 400px;
-            max-width: 280px;
-            margin-left: auto;
-            margin-right: auto;
-          }
-          .thumbnail-item {
-            width: 64px;
-            height: 64px;
-          }
-          .thumbnail-gallery {
-            justify-content: center;
-          }
-        }
-
-        @media (max-width: 575px) {
-          .pt-100 {
-            padding-top: 100px !important;
-          }
-          .display-5 {
-            font-size: 2rem !important;
-          }
-          .display-6 {
-            font-size: 1.75rem !important;
-          }
-          .main-image-wrapper {
-            aspect-ratio: 1024 / 1536;
-            padding: 0px;
-            width: 100%;
-            max-width: 100%;
-            max-height: none;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 12px !important;
-          }
-          .main-image-wrapper :global(.product-main-image) {
-            object-fit: contain !important;
-            object-position: center !important;
-          }
-          .thumbnail-item {
-            width: 60px;
-            height: 60px;
-          }
-          .thumbnail-gallery {
-            gap: 10px !important;
-          }
-          .how-it-works-img-container {
-            min-height: 250px;
-            padding: 1rem !important;
-          }
-        }
-
-        /* Lightbox Modal CSS */
-        .lightbox-modal-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: rgba(15, 23, 42, 0.85);
-          backdrop-filter: blur(15px);
-          -webkit-backdrop-filter: blur(15px);
-          z-index: 9999;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          animation: fadeIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .lightbox-header-bar {
-          position: absolute;
-          top: 24px;
-          left: 0;
-          right: 0;
-          padding: 0 32px;
-          z-index: 10001;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 100%;
-        }
-
-        .lightbox-counter {
-          color: rgba(255, 255, 255, 0.9);
-          font-size: 0.9rem;
-          background: rgba(30, 41, 59, 0.5) !important;
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          backdrop-filter: blur(5px);
-        }
-
-        .lightbox-close-btn {
-          background: rgba(30, 41, 59, 0.5);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          color: #ffffff;
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.25s ease;
-          font-size: 1.1rem;
-          backdrop-filter: blur(5px);
-        }
-
-        .lightbox-close-btn:hover {
-          background: rgba(239, 68, 68, 0.8);
-          border-color: transparent;
-          transform: rotate(90deg) scale(1.05);
-        }
-
-        .lightbox-body {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-          height: 80vh;
-          padding: 0 80px;
-          position: relative;
-        }
-
-        .lightbox-image-container {
-          background-color: transparent !important;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
-          position: relative;
-          box-shadow: none !important;
-        }
-
-        .lightbox-main-img {
-          max-height: 100% !important;
-          max-width: 100% !important;
-          width: auto !important;
-          height: auto !important;
-          object-fit: contain;
-          border-radius: 12px;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-          background-color: transparent;
-          transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .lightbox-nav-btn {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          background: rgba(30, 41, 59, 0.55);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          color: #ffffff;
-          width: 56px;
-          height: 56px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-          font-size: 1.4rem;
-          z-index: 10005;
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-        }
-
-        .lightbox-nav-btn:hover {
-          background: #006CD0;
-          border-color: transparent;
-          color: white;
-          transform: translateY(-50%) scale(1.1);
-          box-shadow: 0 8px 20px rgba(0, 108, 208, 0.3);
-        }
-
-        .prev-btn {
-          left: 20px;
-        }
-
-        .next-btn {
-          right: 20px;
-        }
-
-        .lightbox-footer-bar {
-          position: absolute;
-          bottom: 24px;
-          left: 0;
-          right: 0;
-          display: flex;
-          justify-content: center;
-          z-index: 10001;
-        }
-
-        .lightbox-instruction {
-          color: rgba(255, 255, 255, 0.95);
-          font-size: 0.85rem;
-          background: rgba(30, 41, 59, 0.6) !important;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          letter-spacing: 0.5px;
-          backdrop-filter: blur(5px);
-        }
-
-        /* Hover Zoom styles for details page */
-        .zoom-hint-badge {
-          position: absolute;
-          bottom: 16px;
-          right: 16px;
-          background: rgba(15, 23, 42, 0.65);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          color: #ffffff;
-          padding: 6px 12px;
-          border-radius: 50px;
-          font-size: 0.72rem;
-          font-weight: 600;
-          letter-spacing: 0.5px;
-          text-transform: uppercase;
-          pointer-events: none;
-          transition: all 0.3s ease;
-          opacity: 0.75;
-          z-index: 2;
-        }
-
-        .main-image-wrapper:hover .zoom-hint-badge {
-          opacity: 1;
-          background: rgba(0, 108, 208, 0.85);
-          border-color: rgba(0, 108, 208, 0.2);
-          transform: translateY(-2px);
-        }
-
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        @media (max-width: 991px) {
-          .lightbox-body {
-            padding: 0 20px;
-            height: 70vh;
-          }
-          .lightbox-nav-btn {
-            width: 48px;
-            height: 48px;
-            font-size: 1.2rem;
-          }
-          .prev-btn {
-            left: 10px;
-          }
-          .next-btn {
-            right: 10px;
-          }
-          .lightbox-main-img {
-            max-height: 100% !important;
-            max-width: 100% !important;
-          }
-        }
-
-        @media (max-width: 575px) {
-          .lightbox-header-bar {
-            padding: 0 16px;
-            top: 16px;
-          }
-          .lightbox-footer-bar {
-            bottom: 16px;
-          }
-          .lightbox-body {
-            height: 60vh;
-            padding: 0;
-          }
-          .lightbox-nav-btn {
-            position: fixed;
-            bottom: 80px;
-            top: auto;
-            transform: none;
-            width: 50px;
-            height: 50px;
-          }
-          .lightbox-nav-btn:hover {
-            transform: scale(1.05);
-          }
-          .prev-btn {
-            left: 24px;
-          }
-          .next-btn {
-            right: 24px;
-          }
-          .lightbox-main-img {
-            max-height: 100% !important;
-            max-width: 100% !important;
-          }
-        }
-      `}</style>
-
       {/* Glassmorphic Lightbox Modal */}
       {lightboxOpen && (
-        <div 
-          className="lightbox-modal-overlay"
+        <div
+          className="fixed inset-0 z-[9999] flex animate-fade-in flex-col items-center justify-center bg-[#0f172a]/85 backdrop-blur-[15px]"
           onClick={() => setLightboxOpen(false)}
         >
           {/* Header Bar */}
-          <div className="lightbox-header-bar">
-            <span className="lightbox-counter badge bg-dark bg-opacity-50 px-3 py-2 rounded-pill fw-semibold">
+          <div className="absolute left-0 right-0 top-6 z-[10001] flex w-full items-center justify-between px-8 max-sm:top-4 max-sm:px-4">
+            <span className="rounded-full border border-solid border-white/[0.08] bg-[#1e293b]/50 px-3 py-2 text-[0.9rem] font-semibold text-white/90 backdrop-blur-[5px]">
               {lightboxIndex + 1} / {images.length}
             </span>
-            <button 
-              className="lightbox-close-btn" 
+            <button
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-solid border-white/[0.08] bg-[#1e293b]/50 text-[1.1rem] text-white backdrop-blur-[5px] transition-all hover:rotate-90 hover:scale-105 hover:border-transparent hover:bg-[#ef4444]/80"
               onClick={() => setLightboxOpen(false)}
               aria-label="Close lightbox"
             >
@@ -799,10 +279,10 @@ const ServiceDetailsArea = () => {
           </div>
 
           {/* Main Content Area */}
-          <div className="lightbox-body" onClick={(e) => e.stopPropagation()}>
+          <div className="relative flex h-[80vh] w-full items-center justify-center px-20 max-lg:h-[70vh] max-lg:px-5 max-sm:h-[60vh] max-sm:px-0" onClick={(e) => e.stopPropagation()}>
             {images.length > 1 && (
-              <button 
-                className="lightbox-nav-btn prev-btn" 
+              <button
+                className="absolute left-5 top-1/2 z-[10005] flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-solid border-white/10 bg-[#1e293b]/55 text-[1.4rem] text-white backdrop-blur-[8px] transition-all hover:scale-110 hover:border-transparent hover:bg-[#006CD0] hover:shadow-[0_8px_20px_rgba(0,108,208,0.3)] max-lg:left-2.5 max-lg:h-12 max-lg:w-12 max-lg:text-[1.2rem] max-sm:fixed max-sm:bottom-20 max-sm:left-6 max-sm:top-auto max-sm:translate-y-0"
                 onClick={handlePrev}
                 aria-label="Previous image"
               >
@@ -810,8 +290,8 @@ const ServiceDetailsArea = () => {
               </button>
             )}
 
-            <div 
-              className="lightbox-image-container position-relative"
+            <div
+              className="relative flex h-full w-full items-center justify-center overflow-hidden"
               onMouseMove={handleLightboxMouseMove}
               onClick={() => setLightboxZoom(!lightboxZoom)}
               style={{ cursor: lightboxZoom ? 'zoom-out' : 'zoom-in' }}
@@ -819,21 +299,18 @@ const ServiceDetailsArea = () => {
               <img
                 src={getImgSrc(images[lightboxIndex])}
                 alt={`${product.title} detailed view`}
-                className={`lightbox-main-img ${lightboxZoom ? 'zoomed' : ''}`}
+                className="max-h-full max-w-full rounded-xl object-contain shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
                 style={{
                   transform: lightboxZoom ? 'scale(2.5)' : 'scale(1)',
                   transformOrigin: `${lightboxPan.x}% ${lightboxPan.y}%`,
                   transition: lightboxZoom ? 'transform 0.05s linear' : 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)',
-                  objectFit: 'contain',
-                  maxHeight: '100%',
-                  maxWidth: '100%'
                 }}
               />
             </div>
 
             {images.length > 1 && (
-              <button 
-                className="lightbox-nav-btn next-btn" 
+              <button
+                className="absolute right-5 top-1/2 z-[10005] flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-solid border-white/10 bg-[#1e293b]/55 text-[1.4rem] text-white backdrop-blur-[8px] transition-all hover:scale-110 hover:border-transparent hover:bg-[#006CD0] hover:shadow-[0_8px_20px_rgba(0,108,208,0.3)] max-lg:right-2.5 max-lg:h-12 max-lg:w-12 max-lg:text-[1.2rem] max-sm:fixed max-sm:bottom-20 max-sm:right-6 max-sm:top-auto max-sm:translate-y-0"
                 onClick={handleNext}
                 aria-label="Next image"
               >
@@ -843,10 +320,10 @@ const ServiceDetailsArea = () => {
           </div>
 
           {/* Footer Instruction */}
-          <div className="lightbox-footer-bar">
-            <div className="lightbox-instruction badge bg-dark bg-opacity-50 px-3 py-2 rounded-pill fw-medium">
-              {lightboxZoom 
-                ? "💡 Move mouse to pan • Click image to zoom out" 
+          <div className="absolute bottom-6 left-0 right-0 z-[10001] flex justify-center max-sm:bottom-4">
+            <div className="rounded-full border border-solid border-white/10 bg-[#1e293b]/60 px-3 py-2 text-[0.85rem] font-medium tracking-[0.5px] text-white/95 backdrop-blur-[5px]">
+              {lightboxZoom
+                ? "💡 Move mouse to pan • Click image to zoom out"
                 : "💡 Click image to zoom in (2.5x)"}
             </div>
           </div>

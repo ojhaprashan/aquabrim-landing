@@ -49,122 +49,66 @@ const custom_products = [
   }
 ];
 
-const ServiceAreaHomeOne = ({ style, style_2 }: any) => {
+const ServiceAreaHomeOne = ({ style_2 }: any) => {
   const data = custom_products;
   return (
-    <>
-      <div className={`service-section ${style ? "style-two" : style_2 ? "style-three" : ""}`} style={{ backgroundColor: '#f0f4f8' }}>
-        <div className="container">
-          {!style_2 &&
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="section-title text-center">
-                  <div className="section-sub-title wow slideInLeft">
-                    <h4>Our Products</h4>
+    <div className="bg-[#f0f4f8] py-[106px] pb-[110px]">
+      <div className="container-app">
+        {!style_2 &&
+          <div className="text-center">
+            <h4 className="relative mb-2 inline-block px-[50px] text-2xl font-medium text-primary before:absolute before:right-0 before:top-[14px] before:h-0.5 before:w-[35px] before:bg-primary after:absolute after:left-0 after:top-[14px] after:h-0.5 after:w-[35px] after:bg-primary">
+              Our Products
+            </h4>
+            <h2 className="mb-[42px] text-[48px] font-semibold text-[#1c1632] max-md:text-[32px]">Advanced Automation Products</h2>
+          </div>
+        }
+
+        <Swiper
+          slidesPerView={3}
+          spaceBetween={30}
+          loop={true}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          modules={[Autoplay, Pagination]}
+          breakpoints={{
+            320: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1200: { slidesPerView: 3 },
+          }}
+          className="equal-height-slider"
+        >
+          {data.map((item, index) => (
+            <SwiperSlide key={index} className="h-auto">
+              <div className="group flex h-full flex-col overflow-hidden rounded-2xl shadow-sm transition-shadow duration-300 hover:shadow-lg">
+                {/* Full product image — always fully visible */}
+                <div className="relative aspect-[2/3] w-full bg-white">
+                  <Image src={item.img} alt={item.title} fill style={{ objectFit: 'cover', objectPosition: 'center' }} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+                </div>
+                {/* Info panel attached directly below */}
+                <div className="relative flex flex-1 flex-col bg-primary px-7 pb-7">
+                  <div className="-mt-8 mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-md ring-4 ring-primary">
+                    <Image src={item.icon} alt={item.title} className="h-8 w-auto" />
                   </div>
-                  <div className="section-main-title wow slideInLeft">
-                    <h2>Advanced Automation Products</h2>
-                  </div>
+                  <h4 className="mb-1">
+                    <Link href="/service-details" className="text-[26px] font-medium text-white no-underline">{item.title}</Link>
+                  </h4>
+                  <h6 className="mb-3 text-[0.85rem] font-semibold text-white/85">{item.category}</h6>
+                  <p className="mb-4 line-clamp-3 text-[0.9rem] leading-[1.5] text-[#f1f5f9]">{item.sm_des}</p>
+                  <Link href="/service-details" className="mt-auto inline-flex items-center gap-1 text-white no-underline hover:underline">
+                    Product Details <i className="bi bi-arrow-up-right"></i>
+                  </Link>
                 </div>
               </div>
-            </div>
-          }
-
-          <Swiper
-            slidesPerView={3}
-            spaceBetween={30}
-            loop={true}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            modules={[Autoplay, Pagination]}
-            breakpoints={{
-              320: {
-                slidesPerView: 1,
-              },
-              768: {
-                slidesPerView: 2,
-              },
-              1200: {
-                slidesPerView: 3,
-              },
-            }}
-            className="service-slider equal-height-slider"
-          >
-            {data.map((item, index) => (
-              <SwiperSlide key={index} className="h-auto">
-                <div className={`service-box ${style ? "style-two" : ""} wow animate__backInUp`}>
-                  <div className="service-thumb">
-                    <div className="service-img-wrapper">
-                      <Image src={item.img} alt={item.title} fill style={{ objectFit: 'contain', objectPosition: 'center' }} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
-                    </div>
-                    <div className="service-content">
-                      <div className="service-icon-thumb">
-                        <Image src={item.icon} alt={item.title} />
-                      </div>
-                      <div className="service-text">
-                        <h4 className="mb-1"><Link href="/service-details">{item.title}</Link></h4>
-                        <h6 className="fw-semibold mb-3 service-subtitle">{item.category}</h6>
-                        <p className="service-desc mb-3">{item.sm_des}</p>
-                        <Link href="/service-details" className="service-details-link">Product Details <i className="bi bi-arrow-up-right"></i></Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
 
-      <style jsx>{`
-        .service-subtitle {
-          font-size: 0.85rem;
-          color: rgba(255, 255, 255, 0.85) !important;
-          transition: color 0.4s ease-in-out;
-        }
-        .service-box:hover .service-subtitle {
-          color: #38bdf8 !important;
-        }
-        .service-desc {
-          font-size: 0.88rem;
-          line-height: 1.5;
-          color: #f1f5f9;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          min-height: calc(0.88rem * 1.5 * 3);
-        }
-        .service-img-wrapper {
-          position: relative;
-          width: 100%;
-          height: 460px;
-          overflow: hidden;
-          background-color: #ffffff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .service-box {
-          margin-bottom: 30px;
-          height: 100%;
-        }
-      `}</style>
       <style jsx global>{`
-        .equal-height-slider .swiper-wrapper {
-          align-items: stretch;
-        }
-        .equal-height-slider .swiper-slide {
-          height: auto;
-          display: flex;
-        }
-        .equal-height-slider .swiper-slide > div {
-          width: 100%;
-        }
+        .equal-height-slider .swiper-wrapper { align-items: stretch; }
+        .equal-height-slider .swiper-slide { height: auto; display: flex; }
+        .equal-height-slider .swiper-slide > div { width: 100%; }
       `}</style>
-    </>
+    </div>
   );
 };
 

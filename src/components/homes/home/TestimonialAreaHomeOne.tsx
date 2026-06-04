@@ -65,11 +65,11 @@ const TestimonialAreaHomeOne = () => {
   }, []);
 
   return (
-    <section className="testimonial-section py-5 bg-white">
-      <div className="container">
-        <div className="text-center mb-5">
-          <h6 className="text-primary text-uppercase fw-bold mb-2" style={{ letterSpacing: '2px' }}>What Our Clients Say</h6>
-          <h2 className="fw-bold" style={{ fontSize: 'clamp(32px, 5vw, 42px)' }}>Trusted by Thousands</h2>
+    <section className="bg-white py-12">
+      <div className="container-app">
+        <div className="mb-12 text-center">
+          <h6 className="mb-2 text-[1rem] font-bold uppercase tracking-[2px] text-[#006CD0]">What Our Clients Say</h6>
+          <h2 className="text-[clamp(32px,5vw,42px)] font-bold text-[#1c1632]">Trusted by Thousands</h2>
         </div>
 
         <Swiper
@@ -85,117 +85,68 @@ const TestimonialAreaHomeOne = () => {
             768: { slidesPerView: 2, spaceBetween: 20 },
             992: { slidesPerView: 3, spaceBetween: 24 },
           }}
-          className="testimonial-swiper pb-2"
+          className="pb-2"
         >
           {testimonial_data.map((item) => (
-            <SwiperSlide key={item.id} className="h-auto">
-              <div className="testimonial-card p-4 p-md-5 rounded-4 shadow-sm h-100 position-relative border border-light transition-hover"
-                style={{ backgroundColor: '#f8fbff' }}>
+            <SwiperSlide key={item.id} className="flex !h-auto">
+              <div className="group relative flex h-full w-full flex-col rounded-2xl border border-solid border-[#e9ecef] bg-[#f8fbff] p-4 shadow-sm transition-all duration-300 hover:-translate-y-2.5 hover:border-[#007bff]/20 hover:shadow-[0_15px_30px_rgba(0,0,0,0.05)] md:p-8">
 
-                {/* Quote Icon */}
-                <div className="quote-icon mb-4 d-flex align-items-center justify-content-center rounded-circle"
-                  style={{ width: '50px', height: '50px', backgroundColor: '#e6f0ff' }}>
-                  <i className="bi bi-quote fs-3 text-primary"></i>
-                </div>
+              {/* Quote Icon */}
+              <div className="mb-4 flex h-[50px] w-[50px] items-center justify-center rounded-full bg-[#e6f0ff]">
+                <i className="bi bi-quote text-[1.75rem] text-[#006CD0]"></i>
+              </div>
 
-                <p className="text-muted mb-4 fs-6" style={{ lineHeight: '1.7', minHeight: '80px' }}>
-                  "{item.review}"
-                </p>
+              <p className="mb-4 min-h-[80px] text-[1rem] leading-[1.7] text-[#6c757d]">
+                &ldquo;{item.review}&rdquo;
+              </p>
 
-                <div className="d-flex align-items-center mt-auto">
-                  <div className="flex-shrink-0">
-                    <div className="avatar-wrapper rounded-circle overflow-hidden border border-3 border-white shadow-sm"
-                      style={{ width: '60px', height: '60px' }}>
-                      <Image
-                        src={item.avatar}
-                        alt={item.name}
-                        width={60}
-                        height={60}
-                        style={{ objectFit: 'cover' }}
-                        unoptimized
-                      />
-                    </div>
-                  </div>
-                  <div className="ms-3">
-                    <h6 className="fw-bold mb-0">{item.name}</h6>
-                    <p className="text-muted small mb-1">{item.designation}</p>
-                    <div className="rating-stars text-warning small">
-                      {[...Array(item.rating)].map((_, i) => (
-                        <i key={i} className="bi bi-star-fill me-1"></i>
-                      ))}
-                    </div>
+              <div className="mt-auto flex items-center">
+                <div className="flex-shrink-0">
+                  <div className="h-[60px] w-[60px] overflow-hidden rounded-full border-[3px] border-solid border-white shadow-sm">
+                    <Image
+                      src={item.avatar}
+                      alt={item.name}
+                      width={60}
+                      height={60}
+                      style={{ objectFit: 'cover' }}
+                      unoptimized
+                    />
                   </div>
                 </div>
+                <div className="ml-3">
+                  <h6 className="mb-0 text-[1rem] font-bold text-[#1c1632]">{item.name}</h6>
+                  <p className="mb-1 text-[0.875rem] text-[#6c757d]">{item.designation}</p>
+                  <div className="text-[0.875rem] text-[#ffc107]">
+                    {[...Array(item.rating)].map((_, i) => (
+                      <i key={i} className="bi bi-star-fill mr-1"></i>
+                    ))}
+                  </div>
+                </div>
+              </div>
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
 
         {/* Slider Controls */}
-        <div className="d-flex justify-content-center align-items-center mt-4 gap-3">
-          <button type="button" className="testimonial-nav-btn testimonial-prev" aria-label="Previous">
+        <div className="mt-4 flex items-center justify-center gap-3">
+          <button
+            type="button"
+            className="testimonial-prev flex h-[42px] w-[42px] items-center justify-center rounded-full border border-solid border-[#e6f0ff] bg-[#f8fbff] text-[#007bff] transition-all duration-[250ms] hover:border-[#007bff] hover:bg-[#007bff] hover:text-white"
+            aria-label="Previous"
+          >
             <i className="bi bi-arrow-left"></i>
           </button>
-          <div className="testimonial-pagination d-flex justify-content-center"></div>
-          <button type="button" className="testimonial-nav-btn testimonial-next" aria-label="Next">
+          <div className="testimonial-pagination flex justify-center [&_.swiper-pagination-bullet-active]:!w-6 [&_.swiper-pagination-bullet-active]:!rounded-md [&_.swiper-pagination-bullet-active]:!bg-[#007bff] [&_.swiper-pagination-bullet]:!mx-1 [&_.swiper-pagination-bullet]:!h-2.5 [&_.swiper-pagination-bullet]:!w-2.5 [&_.swiper-pagination-bullet]:!bg-[#cfe1ff] [&_.swiper-pagination-bullet]:!opacity-100"></div>
+          <button
+            type="button"
+            className="testimonial-next flex h-[42px] w-[42px] items-center justify-center rounded-full border border-solid border-[#e6f0ff] bg-[#f8fbff] text-[#007bff] transition-all duration-[250ms] hover:border-[#007bff] hover:bg-[#007bff] hover:text-white"
+            aria-label="Next"
+          >
             <i className="bi bi-arrow-right"></i>
           </button>
         </div>
       </div>
-
-      <style jsx>{`
-        .testimonial-card {
-          transition: all 0.3s ease;
-        }
-        .testimonial-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 15px 30px rgba(0,0,0,0.05) !important;
-          border-color: #007bff33 !important;
-        }
-        .bg-primary-light {
-          background-color: #f0f7ff;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        .testimonial-swiper .swiper-slide {
-          height: auto;
-          display: flex;
-        }
-        .testimonial-swiper .swiper-slide > div {
-          width: 100%;
-        }
-        .testimonial-nav-btn {
-          width: 42px;
-          height: 42px;
-          border-radius: 50%;
-          border: 1px solid #e6f0ff;
-          background: #f8fbff;
-          color: #007bff;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.25s ease;
-        }
-        .testimonial-nav-btn:hover {
-          background: #007bff;
-          color: #fff;
-          border-color: #007bff;
-        }
-        .testimonial-pagination .swiper-pagination-bullet {
-          width: 10px;
-          height: 10px;
-          background: #cfe1ff;
-          opacity: 1;
-          margin: 0 4px !important;
-          transition: all 0.25s ease;
-        }
-        .testimonial-pagination .swiper-pagination-bullet-active {
-          background: #007bff;
-          width: 24px;
-          border-radius: 6px;
-        }
-      `}</style>
     </section>
   );
 };

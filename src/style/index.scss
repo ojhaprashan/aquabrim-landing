@@ -47,7 +47,7 @@
 .solar-btn a:hover,
 .solar-btn a::before,
 .solar-btn a::after {
-    border-radius: 12px !important;
+    border-radius: 10px !important;
 }
 
 .solar-btn a {
@@ -118,8 +118,55 @@
 
 .map-wrapper {
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    
+
     .map-overlay {
         background: linear-gradient(transparent, rgba(0,0,0,0.4));
+    }
+}
+
+/* ==========================================================================
+   Global premium polish — typography, smoothing & default control radius.
+   Kept unlayered so it overrides the imported template CSS.
+   ========================================================================== */
+html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    font-family: 'Plus Jakarta Sans', 'Jost', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'ss01' 1, 'cv01' 1;
+    letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', 'Jost', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+}
+
+p {
+    letter-spacing: -0.005em;
+}
+
+/* Broader, more premium default radius for generic interactive controls.
+   Component-level radii (cards, inline Tailwind utilities) still win where set. */
+.btn,
+button:not([class*="rounded"]),
+input:not([type="checkbox"]):not([type="radio"]):not([class*="rounded"]),
+select:not([class*="rounded"]),
+textarea:not([class*="rounded"]) {
+    border-radius: 10px;
+}
+
+/* Smooth, premium interaction feel on the template's bootstrap buttons. */
+.btn {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+
+    &:hover {
+        transform: translateY(-1px);
     }
 }

@@ -2,90 +2,75 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-
-//test git 
-
-import HeaderLogoTwo from "@/assets/images/logo2.png";
-
-import HeaderLogo from "@/assets/images/logo.png";
 import NavMenu from './Menu/NavMenu';
 import { TeamSocialLinks } from '@/components/common/SocialLinks';
 import UseSticky from '@/hooks/UseSticky';
 import MobileMeneu from './Menu/MobileMeneu';
 import SearchPopup from '@/components/common/SearchPopup';
 
-
 const HeaderOne = ({ style }: any) => {
 
   const { sticky } = UseSticky()
-  const [searchPopup, setSearchPopup] = useState<boolean>(false); 
+  const [searchPopup, setSearchPopup] = useState<boolean>(false);
 
   return (
     <>
-
-      <div className="solar-topbar-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6 col-md-6">
-              <div className="solar-top-menu">
-                <ul>
-                  <li className="line"><a href="#"><i className="bi bi-geo-alt"></i> New Delhi, India</a></li>
-                  <li><a href="tel:+91-9560088791"><i className="bi bi-telephone"></i> +91-9560088791</a></li>
-                  <li><a href="mailto:save.water@aquabrim.com"><i className="bi bi-envelope"></i> save.water@aquabrim.com</a></li>
-                </ul>
-              </div>
-            </div>
-            <div className="col-lg-6 col-md-6">
-              <div className="solar-top-content-menu">
-                <div className="solar-top-content">
-                  <select id="Language">
-                    <option value="en">English</option>
-                    <option value="hi">Hindi</option>
-                  </select>
-                </div>
-                <div className="solar-top-social-icon">
-                  <ul>
-                    <TeamSocialLinks />
-                  </ul>
-                </div>
-              </div>
+      {/* ===== Top bar (desktop only) ===== */}
+      <div className="hidden bg-[#19142d] py-3 lg:block">
+        <div className="container-app">
+          <div className="grid grid-cols-2 items-center">
+            <ul className="m-0 flex list-none items-center gap-x-9 p-0 text-sm text-white">
+              <li><a href="#" className="text-white no-underline"><i className="bi bi-geo-alt mr-1.5 text-[15px] text-primary"></i> New Delhi, India</a></li>
+              <li className="relative before:absolute before:-left-[18px] before:top-1/2 before:h-[18px] before:w-0.5 before:-translate-y-1/2 before:bg-[#3a3a42]/70">
+                <a href="tel:+91-9560088791" className="text-white no-underline"><i className="bi bi-telephone mr-1.5 text-[15px] text-primary"></i> +91-9560088791</a>
+              </li>
+              <li className="relative before:absolute before:-left-[18px] before:top-1/2 before:h-[18px] before:w-0.5 before:-translate-y-1/2 before:bg-[#3a3a42]/70">
+                <a href="mailto:save.water@aquabrim.com" className="text-white no-underline"><i className="bi bi-envelope mr-1.5 text-[15px] text-primary"></i> save.water@aquabrim.com</a>
+              </li>
+            </ul>
+            <div className="flex items-center justify-end gap-6">
+              <select id="Language" className="cursor-pointer border-0 bg-transparent text-[15px] text-white outline-none [&>option]:text-black">
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+              </select>
+              <ul className="m-0 flex list-none items-center gap-3 p-0 [&_a]:text-sm [&_a]:text-white [&_a]:transition-colors hover:[&_a]:text-primary">
+                <TeamSocialLinks />
+              </ul>
             </div>
           </div>
         </div>
       </div>
 
-      <header className={`solar-header-section ${style ? 'style-two' : ''} ${sticky ? 'sticky-nav' : ''}`} id="sticky-header">
-        <div className="container">
-          <div className="row align-items-center row">
-            <div className="col-lg-2 col-md-6">
-              <div className={`logo ${style ? 'style-two' : ''}`}>
-               <Link href="/" className="d-flex align-items-center text-decoration-none">
-                <Image src="/assets/images/logo.png" width={50} height={50} style={{height: 'auto'}} alt="Aquabrim Logo" />
-                <span className='LogoHeader ms-2'>Aquabrim</span>
-               </Link>
-              </div>
-            </div>
-            <div className="col-lg-8 col-md-6">
-              <div className="solar-menu justify-content-start" style={{ marginLeft: '130px' }}>
-                <NavMenu />
-              </div>
-            </div>
-            <div className="col-lg-2 col-md-6">
-              <div className="solar-search-button">
-               
-                <div className="solar-btn">
-                  <Link href="/contact">Get a Quote <i className="bi bi-arrow-right"></i></Link>
-                </div>
-               
-              </div>
+      {/* ===== Desktop header ===== */}
+      <header
+        className={`relative z-[999] hidden overflow-hidden bg-white lg:block ${
+          sticky ? 'animate-[slideInDown_0.5s] fixed left-0 top-0 z-[9999] w-full bg-[#f0f4f8] shadow-[0_10px_15px_rgba(25,25,25,0.1)]' : ''
+        }`}
+      >
+        {/* angled blue brand banner behind the logo (matches the original .solar-header-section::before) */}
+        <div aria-hidden="true" className="pointer-events-none absolute left-[-182%] top-0 h-full w-[215%] -skew-x-[30deg] bg-primary" />
+
+        <div className="container-app relative">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="relative z-10 flex shrink-0 items-center py-3 no-underline">
+              <Image src="/assets/images/logo.png" width={50} height={50} style={{ height: 'auto' }} alt="Aquabrim Logo" />
+              <span className="ml-2 text-[30px] font-semibold text-white">Aquabrim</span>
+            </Link>
+            <div className="flex items-center gap-8">
+              <NavMenu />
+              <Link
+                href="/contact"
+                className="inline-block shrink-0 rounded-[3px] bg-primary px-6 py-3 text-[17px] font-medium tracking-wide text-white no-underline transition-colors duration-500 hover:bg-[#19142d]"
+              >
+                Get a Quote <i className="bi bi-arrow-right"></i>
+              </Link>
             </div>
           </div>
         </div>
       </header>
 
-      <MobileMeneu /> 
+      <MobileMeneu />
       <SearchPopup searchPopup={searchPopup} setSearchPopup={setSearchPopup} />
-
     </>
   );
 };

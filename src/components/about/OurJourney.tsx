@@ -90,367 +90,71 @@ const OurJourney = () => {
   ];
 
   return (
-    <section className="journey-section">
-      <div className="container">
-        {/* Header Block */}
-        <div className="row justify-content-center mb-5">
-          <div className="col-lg-8 text-center">
-            <span className="subtitle">OUR ROADMAP</span>
-            <h2 className="title mt-2">The Journey of Innovation</h2>
-            <div className="title-glow-line"></div>
-          </div>
+    <section className="relative block w-full bg-white py-[60px] sm:py-20 lg:py-[100px]">
+      <div className="container-app">
+        {/* Header */}
+        <div className="mx-auto mb-12 max-w-[680px] text-center">
+          <span className="inline-block text-[0.9rem] font-bold uppercase tracking-[3px] text-[#006CD0]">
+            OUR ROADMAP
+          </span>
+          <h2 className="mt-2 text-[1.7rem] font-extrabold text-[#1e293b] sm:text-[2.1rem] lg:text-[2.5rem]">
+            The Journey of Innovation
+          </h2>
+          <div className="mx-auto mt-[18px] h-1 w-20 rounded bg-gradient-to-r from-[#006CD0] to-[#00d2ff] shadow-[0_2px_10px_rgba(0,108,208,0.3)]"></div>
         </div>
 
-        {/* Timeline Dynamic Wrapper */}
-        <div className="timeline-wrapper">
-          {/* Central Vertical Connector Line (Desktop) */}
-          <div className="central-line"></div>
+        {/* Timeline */}
+        <div className="relative mt-[70px] w-full py-5">
+          {/* Central / left connector line */}
+          <div className="absolute bottom-0 top-0 left-[20px] w-1 -translate-x-1/2 rounded bg-gradient-to-b from-[#006CD0]/5 via-[#006CD0]/80 to-[#00d2ff]/5 sm:left-[30px] lg:left-1/2"></div>
 
           {milestones.map((item, idx) => {
             const isLeft = idx % 2 === 0;
             return (
-              <div key={idx} className={`timeline-block ${isLeft ? 'block-left' : 'block-right'}`}>
-                {/* Visual Connector Dot on the line */}
-                <div className="timeline-dot-anchor">
-                  <div className="pulse-ring"></div>
-                  <div className="solid-dot">
-                    <span className="dot-year">{item.year}</span>
-                  </div>
+              <div
+                key={idx}
+                className={`group relative z-[2] mb-[50px] flex w-full last:mb-0 lg:mb-[70px] ${
+                  isLeft ? 'justify-start' : 'justify-start lg:justify-end'
+                }`}
+              >
+                {/* Dot on the line */}
+                <div className="absolute left-[20px] top-[25px] z-10 flex h-10 w-10 -translate-x-1/2 items-center justify-center sm:left-[30px] lg:left-1/2 lg:top-[30px]">
+                  <div className="absolute h-8 w-8 animate-pulse-ring rounded-full bg-[#006CD0]/15"></div>
+                  <div className="h-4 w-4 rounded-full border-[3px] border-solid border-white bg-[#006CD0] shadow-[0_0_10px_rgba(0,108,208,0.4)] transition-all duration-300 group-hover:scale-[1.3] group-hover:bg-[#00d2ff] group-hover:shadow-[0_0_18px_rgba(0,210,255,0.8)]"></div>
                 </div>
 
-                {/* Glassmorphic Milestone Card */}
-                <div className="milestone-card shadow-sm">
-                  <div className="card-badge-header">
-                    <span className="card-year">{item.year}</span>
-                    <div className="card-icon-badge">
+                {/* Milestone card */}
+                <div
+                  className={`relative ml-[50px] flex w-[calc(100%-50px)] flex-col items-start rounded-[24px] border border-solid border-[#006CD0]/[0.08] bg-white/85 px-5 py-6 text-left backdrop-blur-[12px] transition-all duration-[400ms] hover:-translate-y-2 hover:border-[#006CD0]/25 hover:bg-white hover:shadow-[0_20px_40px_rgba(0,108,208,0.08)] sm:ml-[75px] sm:w-[calc(100%-75px)] sm:p-[30px] lg:w-[calc(50%-60px)] ${
+                    isLeft
+                      ? 'lg:ml-0 lg:mr-[50%] lg:items-end lg:text-right'
+                      : 'lg:ml-[50%] lg:mr-0 lg:items-start lg:text-left'
+                  }`}
+                >
+                  <div
+                    className={`mb-[18px] flex w-full items-center gap-4 ${
+                      isLeft ? 'lg:flex-row-reverse' : ''
+                    }`}
+                  >
+                    <span className="rounded-[30px] bg-gradient-to-br from-[#006CD0] to-[#004a91] px-3.5 py-1 text-[0.95rem] font-extrabold text-white shadow-[0_4px_12px_rgba(0,108,208,0.2)] sm:px-[18px] sm:py-1.5 sm:text-[1.15rem]">
+                      {item.year}
+                    </span>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-solid border-[#006CD0]/5 bg-[#f1f5f9] text-[#006CD0] transition-all duration-[400ms] group-hover:rotate-[15deg] group-hover:bg-gradient-to-br group-hover:from-[#006CD0] group-hover:to-[#00d2ff] group-hover:text-white group-hover:shadow-[0_6px_15px_rgba(0,108,208,0.25)] sm:h-12 sm:w-12">
                       {item.icon}
                     </div>
                   </div>
-                  <h3 className="card-title">{item.title}</h3>
-                  <p className="card-desc">{item.desc}</p>
+                  <h3 className="mb-3 text-[1.15rem] font-bold text-[#1e293b] sm:text-[1.35rem]">
+                    {item.title}
+                  </h3>
+                  <p className="m-0 text-[0.88rem] font-normal leading-[1.7] text-[#64748b] sm:text-[0.95rem]">
+                    {item.desc}
+                  </p>
                 </div>
               </div>
             );
           })}
         </div>
       </div>
-
-      <style jsx>{`
-        .journey-section {
-          background: #ffffff;
-          padding: 100px 0;
-          width: 100% !important;
-          display: block !important;
-          position: relative;
-        }
-
-        .subtitle {
-          font-size: 0.9rem;
-          font-weight: 700;
-          color: #006CD0;
-          letter-spacing: 3px;
-          display: inline-block;
-        }
-
-        .title {
-          font-size: 2.5rem;
-          font-weight: 800;
-          color: #1e293b;
-        }
-
-        .title-glow-line {
-          width: 80px;
-          height: 4px;
-          background: linear-gradient(90deg, #006CD0 0%, #00d2ff 100%);
-          margin: 18px auto 0;
-          border-radius: 4px;
-          box-shadow: 0 2px 10px rgba(0, 108, 208, 0.3);
-        }
-
-        /* Timeline structure */
-        .timeline-wrapper {
-          position: relative;
-          width: 100%;
-          margin-top: 70px;
-          padding: 20px 0;
-        }
-
-        /* Connecting vertical line (Desktop) */
-        .central-line {
-          position: absolute;
-          left: 50%;
-          top: 0;
-          bottom: 0;
-          width: 4px;
-          background: linear-gradient(to bottom, 
-            rgba(0, 108, 208, 0.05) 0%, 
-            rgba(0, 108, 208, 0.8) 15%, 
-            rgba(0, 210, 255, 0.8) 85%, 
-            rgba(0, 210, 255, 0.05) 100%
-          );
-          transform: translateX(-50%);
-          z-index: 1;
-          border-radius: 4px;
-        }
-
-        .timeline-block {
-          display: flex;
-          position: relative;
-          margin-bottom: 70px;
-          width: 100%;
-          z-index: 2;
-        }
-
-        .timeline-block:last-child {
-          margin-bottom: 0;
-        }
-
-        /* Desktop Positioning: Left vs Right blocks */
-        .block-left {
-          justify-content: flex-start;
-        }
-
-        .block-right {
-          justify-content: flex-end;
-        }
-
-        .block-left .milestone-card {
-          margin-right: 50%;
-          text-align: right;
-          align-items: flex-end;
-        }
-
-        .block-right .milestone-card {
-          margin-left: 50%;
-          text-align: left;
-          align-items: flex-start;
-        }
-
-        /* Timeline card design */
-        .milestone-card {
-          width: calc(50% - 60px);
-          background: rgba(255, 255, 255, 0.85);
-          backdrop-filter: blur(12px);
-          border: 1px solid rgba(0, 108, 208, 0.08);
-          padding: 30px;
-          border-radius: 24px;
-          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-          position: relative;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .milestone-card:hover {
-          transform: translateY(-8px);
-          border-color: rgba(0, 108, 208, 0.25);
-          box-shadow: 0 20px 40px rgba(0, 108, 208, 0.08) !important;
-          background: #ffffff;
-        }
-
-        /* Header within card */
-        .card-badge-header {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          margin-bottom: 18px;
-          width: 100%;
-        }
-
-        .block-left .card-badge-header {
-          flex-direction: row-reverse;
-        }
-
-        .card-year {
-          font-size: 1.15rem;
-          font-weight: 800;
-          color: #ffffff;
-          background: linear-gradient(135deg, #006CD0 0%, #004a91 100%);
-          padding: 6px 18px;
-          border-radius: 30px;
-          box-shadow: 0 4px 12px rgba(0, 108, 208, 0.2);
-        }
-
-        .card-icon-badge {
-          width: 48px;
-          height: 48px;
-          background: #f1f5f9;
-          border-radius: 50%;
-          color: #006CD0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.4s ease;
-          border: 1px solid rgba(0, 108, 208, 0.05);
-        }
-
-        .milestone-card:hover .card-icon-badge {
-          background: linear-gradient(135deg, #006CD0 0%, #00d2ff 100%);
-          color: #ffffff;
-          transform: rotate(15deg);
-          box-shadow: 0 6px 15px rgba(0, 108, 208, 0.25);
-        }
-
-        .card-title {
-          font-size: 1.35rem;
-          font-weight: 700;
-          color: #1e293b;
-          margin-bottom: 12px;
-        }
-
-        .card-desc {
-          font-size: 0.95rem;
-          line-height: 1.7;
-          color: #64748b;
-          margin: 0;
-          font-weight: 450;
-        }
-
-        /* Central Timeline Dots (Desktop) */
-        .timeline-dot-anchor {
-          position: absolute;
-          left: 50%;
-          top: 30px;
-          transform: translateX(-50%);
-          width: 40px;
-          height: 40px;
-          z-index: 10;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .pulse-ring {
-          position: absolute;
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          background: rgba(0, 108, 208, 0.15);
-          animation: pulse-ring-animation 2.5s infinite;
-        }
-
-        .solid-dot {
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          background: #006CD0;
-          border: 3px solid #ffffff;
-          box-shadow: 0 0 10px rgba(0, 108, 208, 0.4);
-          transition: all 0.3s ease;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .dot-year {
-          display: none; /* hidden on desktop center dot, shown in cards */
-        }
-
-        .timeline-block:hover .solid-dot {
-          background: #00d2ff;
-          transform: scale(1.3);
-          box-shadow: 0 0 18px rgba(0, 210, 255, 0.8);
-        }
-
-        @keyframes pulse-ring-animation {
-          0% {
-            transform: scale(0.65);
-            opacity: 1;
-          }
-          100% {
-            transform: scale(1.6);
-            opacity: 0;
-          }
-        }
-
-        /* ===================================================
-           Responsive Adaptation Rules
-        ==================================================== */
-        @media (max-width: 991px) {
-          .journey-section {
-            padding: 80px 0;
-          }
-
-          .title {
-            font-size: 2.1rem;
-          }
-
-          .central-line {
-            left: 30px;
-            transform: none;
-          }
-
-          .timeline-dot-anchor {
-            left: 30px;
-            transform: translateX(-50%);
-            top: 25px;
-          }
-
-          .dot-year {
-            display: none;
-          }
-
-          .timeline-block {
-            margin-bottom: 50px;
-            justify-content: flex-start;
-          }
-
-          .block-left .milestone-card,
-          .block-right .milestone-card {
-            width: calc(100% - 75px);
-            margin-left: 75px;
-            margin-right: 0;
-            text-align: left;
-            align-items: flex-start;
-          }
-
-          .block-left .card-badge-header {
-            flex-direction: row;
-          }
-        }
-
-        @media (max-width: 575px) {
-          .journey-section {
-            padding: 60px 0;
-          }
-
-          .title {
-            font-size: 1.7rem;
-          }
-
-          .central-line {
-            left: 20px;
-          }
-
-          .timeline-dot-anchor {
-            left: 20px;
-          }
-
-          .block-left .milestone-card,
-          .block-right .milestone-card {
-            width: calc(100% - 50px);
-            margin-left: 50px;
-            padding: 24px 20px;
-          }
-
-          .card-title {
-            font-size: 1.15rem;
-          }
-
-          .card-desc {
-            font-size: 0.88rem;
-          }
-
-          .card-year {
-            font-size: 0.95rem;
-            padding: 4px 14px;
-          }
-
-          .card-icon-badge {
-            width: 40px;
-            height: 40px;
-          }
-        }
-      `}</style>
     </section>
   );
 };

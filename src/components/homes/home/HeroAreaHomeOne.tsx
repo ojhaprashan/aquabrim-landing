@@ -10,12 +10,12 @@ const phrases = [
 ];
 
 const HeroAreaHomeOne = () => {
-  // --- 1. Typewriter State ---
+  // --- Typewriter State ---
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
 
-  // --- 2. Slider State ---
+  // --- Slider State ---
   const sliderImages = [
     "/assets/home/for homes.png",
     "/assets/home/for apartments.png",
@@ -59,243 +59,68 @@ const HeroAreaHomeOne = () => {
   }, [loopNum]);
 
   return (
-    <section
-      className="slider-section hero_slider d-flex align-items-center hero-new-bg"
-      style={{ width: '100%' }}
-    >
-      <div className="container">
-        <div className="row align-items-center">
+    <section className="w-full bg-[#f0f4f8] px-4 pb-[60px] pt-[80px] max-md:pb-[28px] max-md:pt-[36px] max-md:text-center">
+      <div className="container-app">
+        <div className="flex w-full flex-col items-stretch gap-6 lg:flex-row lg:items-center lg:gap-10">
 
           {/* Left Column: Text Content */}
-          <div className="col-12 col-lg-7">
-            <div className="slider-content" style={{ visibility: 'visible', opacity: 1 }}>
-
-              <h1 className="main-title">
-                Smartest Water Level Controller for{' '}
-                <span className="position-relative d-inline-block" style={{ color: '#006CD0' }}>
-                  {/* Invisible placeholder of the longest text ensures container is always the right size */}
-                  <span className="invisible" aria-hidden="true" style={{ pointerEvents: 'none', userSelect: 'none' }}>
-                    Apartments&nbsp;&nbsp;
-                  </span>
-
-                  {/* The actual typing text positioned directly over the invisible placeholder */}
-                  <span className="position-absolute top-0 start-0 w-100 h-100">
-                    {text}
-                    <span className="cursor">|</span>
-                  </span>
+          <div className="w-full lg:w-7/12 lg:pt-[50px]">
+            <h1 className="mb-5 text-center text-[32px] font-extrabold leading-[1.25] text-[#0d1b2a] md:text-[40px] lg:text-left lg:text-[2.8rem] xl:text-[3.2rem]">
+              Wireless Water Level Controller for{' '}
+              {/* On mobile the animated word sits on its own centered line; on desktop it stays inline with a fixed-width placeholder for stability */}
+              <span className="relative text-primary max-md:mt-2 max-md:block lg:inline-block">
+                <span className="invisible select-none max-md:hidden" aria-hidden="true">Apartments&nbsp;&nbsp;</span>
+                <span className="whitespace-nowrap lg:absolute lg:left-0 lg:top-0 lg:h-full lg:w-full lg:text-left">
+                  {text}
+                  <span className="ml-0.5 inline-block animate-blink font-light text-primary">|</span>
                 </span>
-              </h1>
+              </span>
+            </h1>
 
-              <p>
-                Prevent tank overflow, protect motors from dry-run, and maintain a consistent water supply with Aquabrim.
-              </p>
+            <p className="text-[1.1rem] leading-relaxed text-[#4a5568] max-md:mx-auto max-md:text-[15px] lg:max-w-[520px]">
+              Prevent tank overflow, protect motors from dry-run, and maintain a consistent water supply with Aquabrim.
+            </p>
 
-              <div className='buttons'>
-                <div className="solar-btn slider1">
-                  <Link href="/service">Our Products <i className="bi bi-arrow-right"></i></Link>
-                </div>
-                <div className="solar-btn slider2">
-                  <Link href="/contact">Talk to Expert <i className="bi bi-arrow-right"></i></Link>
-                </div>
-              </div>
+            <div className="mt-[25px] flex gap-[15px] max-md:mt-7 max-md:flex-col max-md:items-center max-md:gap-3">
+              <Link href="/service" className="btn-solar text-center max-md:w-full max-md:max-w-[280px]">Our Products <i className="bi bi-arrow-right"></i></Link>
+              <Link href="/contact" className="btn-solar-light text-center max-md:w-full max-md:max-w-[280px]">Talk to Expert <i className="bi bi-arrow-right"></i></Link>
             </div>
           </div>
 
           {/* Right Column: Media Card */}
-          <div className="col-12 col-lg-5">
-            <div className="hero-media-wrapper" style={{ visibility: 'visible', opacity: 1 }}>
-
-              {/* Image Slider Container */}
-              <div className="product-image-container position-relative">
-                {sliderImages.map((imgSrc, index) => (
-                  <div
-                    key={index}
-                    className="position-absolute top-0 start-0 w-100 h-100 transition-opacity"
-                    style={{
-                      opacity: currentSlide === index ? 1 : 0,
-                      transition: 'opacity 0.8s ease-in-out',
-                      zIndex: currentSlide === index ? 1 : 0
-                    }}
-                  >
-                    <Image
-                      src={imgSrc}
-                      alt={`Aquabrim Smart Device View ${index + 1}`}
-                      fill
-                      className="img-fluid"
-                      style={{ objectFit: 'contain' }}
-                    />
-                  </div>
-                ))}
-
-                <div className="slider-dots position-absolute bottom-0 start-50 translate-middle-x mb-2 d-flex gap-2" style={{ zIndex: 2 }}>
-                  {sliderImages.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentSlide(index)}
-                      className={`slider-dot ${currentSlide === index ? 'active' : ''}`}
-                      aria-label={`Go to slide ${index + 1}`}
-                    />
-                  ))}
+          <div className="w-full lg:w-5/12">
+            <div className="relative mx-auto aspect-[3/2] w-full max-w-[540px]">
+              {sliderImages.map((imgSrc, index) => (
+                <div
+                  key={index}
+                  className="absolute left-0 top-0 h-full w-full transition-opacity duration-[800ms] ease-in-out"
+                  style={{ opacity: currentSlide === index ? 1 : 0, zIndex: currentSlide === index ? 1 : 0 }}
+                >
+                  <Image
+                    src={imgSrc}
+                    alt={`Aquabrim Smart Device View ${index + 1}`}
+                    fill
+                    style={{ objectFit: 'contain' }}
+                  />
                 </div>
-              </div>
+              ))}
 
+              <div className="absolute bottom-0 left-1/2 z-[2] mb-2 flex -translate-x-1/2 gap-2">
+                {sliderImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`h-2 cursor-pointer rounded-full border-0 p-0 transition-all duration-300 ${currentSlide === index ? 'w-5 rounded bg-primary' : 'w-2 bg-black/25'
+                      }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
         </div>
       </div>
-
-      <style jsx>{`
-        .hero-new-bg::before {
-          display: none !important;
-        }
-
-        .hero-new-bg {
-          background-color: #f0f4f8 !important; 
-          background-image: none !important;
-          height: auto !important; 
-          min-height: auto !important; 
-          padding: 80px 0 60px !important; 
-        }
-
-        /* Fixed Cursor: Slim and theme blue */
-        .cursor {
-          display: inline-block;
-          color: #006CD0; /* Theme blue */
-          font-weight: 300; 
-          margin-left: 2px;
-          animation: blink 1s step-end infinite;
-        }
-
-        @keyframes blink {
-          from, to { opacity: 1; }
-          50% { opacity: 0; }
-        }
-
-        .slider-content h1 {
-          color: #0d1b2a !important; /* Base color for any text not overridden */
-          margin-bottom: 20px !important;
-          font-weight: 800 !important;
-          font-size: 2.5rem !important; 
-          line-height: 1.25 !important;
-        }
-        
-        .slider-content p {
-          color: #4a5568 !important;
-          max-width: 520px !important; 
-          font-size: 1.1rem;
-          line-height: 1.6;
-          margin-bottom: 0 !important; 
-        }
-        
-        .buttons {
-          display: flex;
-          gap: 15px;
-          margin-top: 25px; 
-        }
-
-        .product-image-container {
-          height: 400px; 
-          background-color: transparent !important;
-          max-width: 540px;
-          margin: 0 auto;
-        }
-
-        .slider-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background-color: rgba(0, 0, 0, 0.25);
-          border: none;
-          padding: 0;
-          margin: 0;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-        .slider-dot.active {
-          background-color: #006CD0;
-          width: 20px;
-          border-radius: 4px;
-        }
-
-        /* =========================================
-           DESKTOP VIEW TWEAKS 
-           ========================================= */
-        @media (min-width: 992px) {
-          .slider-content {
-             padding-top: 50px !important; 
-          }
-          .slider-content h1 {
-            font-size: 2.8rem !important; 
-          }
-        }
-
-        @media (min-width: 1200px) {
-          .slider-content h1 {
-            font-size: 3.2rem !important; 
-          }
-        }
-
-        @media (max-width: 991px) {
-          .hero-media-wrapper {
-            margin-top: 40px;
-          }
-          .slider-content h1 {
-            font-size: 40px !important;
-            line-height: 1.2;
-          }
-        }
-
-        /* =========================================
-           MOBILE VIEW TWEAKS
-           ========================================= */
-        @media (max-width: 767px) {
-          .hero-new-bg {
-            padding: 25px 15px 35px !important; 
-            text-align: center;
-          }
-          
-          .slider-content {
-            padding-top: 0 !important; 
-            margin-top: 0 !important;
-          }
-
-          .slider-content h1 {
-            font-size: 34px !important;
-            margin-bottom: 20px !important;
-            line-height: 1.2 !important;
-          }
-          
-          .slider-content p {
-            margin-top: 15px !important;
-            margin-bottom: 25px !important;
-            font-size: 15px !important;
-            margin-left: auto;
-            margin-right: auto;
-          }
-          .buttons {
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            margin-top: 0;
-          }
-          .solar-btn {
-            width: 100%;
-            max-width: 250px;
-            margin: 0 !important;
-          }
-          .solar-btn.slider2 {
-            margin-left: 0 !important;
-          }
-          .hero-media-wrapper {
-            margin-top: 35px !important; 
-          }
-          .product-image-container {
-            height: 300px; 
-            background-color: transparent !important;
-          }
-        }
-      `}</style>
     </section>
   );
 };

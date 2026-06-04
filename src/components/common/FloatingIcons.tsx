@@ -17,6 +17,14 @@ function getDynamicCallHref(): string {
   return numbers.rajesh;
 }
 
+const ICON_BASE =
+  "flex h-[50px] w-[50px] items-center justify-center rounded-full text-2xl text-white no-underline shadow-[0_4px_10px_rgba(0,0,0,0.3)] transition-all duration-300 hover:-translate-y-1 hover:text-white hover:shadow-[0_6px_14px_rgba(0,0,0,0.4)] md:h-[55px] md:w-[55px] md:text-[28px]";
+
+const WHATSAPP_NUMBER = "919971052059";
+const WHATSAPP_MESSAGE =
+  "Hello AquaBrim - Water Level Controller | Water Pump Controller. Like to know more about your products";
+const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
 const FloatingIcons = () => {
   const [callHref, setCallHref] = useState("tel:9310035211");
 
@@ -25,79 +33,20 @@ const FloatingIcons = () => {
   }, []);
 
   return (
-    <>
-      <div className="floating-icons-container">
-        <a
-          href="https://wa.me/919310035211"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="floating-icon whatsapp-icon"
-          aria-label="Chat with us on WhatsApp"
-        >
-          <i className="bi bi-whatsapp"></i>
-        </a>
-        <a
-          href={callHref}
-          className="floating-icon phone-icon"
-          aria-label="Call us"
-        >
-          <i className="bi bi-telephone-fill"></i>
-        </a>
-      </div>
-
-      <style jsx>{`
-        .floating-icons-container {
-          position: fixed;
-          bottom: 20px;
-          left: 20px;
-          display: flex;
-          flex-direction: column;
-          gap: 15px;
-          z-index: 9999;
-        }
-
-        .floating-icon {
-          width: 55px;
-          height: 55px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          font-size: 28px;
-          text-decoration: none;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .floating-icon:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
-          color: white;
-        }
-
-        .whatsapp-icon {
-          background-color: #25D366;
-        }
-
-        .phone-icon {
-          background-color: #006CD0;
-        }
-
-        @media (max-width: 768px) {
-          .floating-icons-container {
-            bottom: 15px;
-            left: 15px;
-            gap: 10px;
-          }
-          .floating-icon {
-            width: 50px;
-            height: 50px;
-            font-size: 24px;
-          }
-        }
-      `}</style>
-    </>
+    <div className="fixed bottom-4 left-4 z-[9999] flex flex-col gap-2.5 md:bottom-5 md:left-5 md:gap-[15px]">
+      <a
+        href={WHATSAPP_HREF}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`${ICON_BASE} bg-[#25D366]`}
+        aria-label="Chat with us on WhatsApp"
+      >
+        <i className="bi bi-whatsapp"></i>
+      </a>
+      <a href={callHref} className={`${ICON_BASE} bg-primary`} aria-label="Call us">
+        <i className="bi bi-telephone-fill"></i>
+      </a>
+    </div>
   );
 };
 

@@ -44,127 +44,132 @@ const ProductList = () => {
     setActiveFilter('all');
   };
 
-  const filteredProducts = products.filter(product => {
-    // Category Filter
-    if (activeFilter === 'domestic' && product.category !== 'domestic') {
-      return false;
-    }
-    if (activeFilter === 'industrial' && product.category !== 'industrial') {
-      return false;
-    }
+  const filters: { key: 'all' | 'domestic' | 'industrial'; icon: string; label: string; count: number }[] = [
+    { key: 'all', icon: 'bi-grid-fill', label: 'All', count: totalCount },
+    { key: 'domestic', icon: 'bi-house-fill', label: 'Domestic', count: domesticCount },
+    { key: 'industrial', icon: 'bi-building', label: 'Industrial', count: industrialCount },
+  ];
 
+  const filteredProducts = products.filter(product => {
+    if (activeFilter === 'domestic' && product.category !== 'domestic') return false;
+    if (activeFilter === 'industrial' && product.category !== 'industrial') return false;
     return true;
   });
 
   return (
-    <section className="product-list-section pt-100 pb-120" style={{ paddingTop: '130px' }}>
-      <div className="container">
-        <div className="row">
-          {/* Sidebar Left: Categories Only */}
-          <div className="col-lg-3 col-md-4 mb-2 mb-md-0">
-            <div className="sticky-top" style={{ top: '130px', zIndex: 10 }}>
-              <div className="d-flex flex-column gap-3 filter-vertical-group">
-                <button
-                  className={`btn-vertical-filter d-flex align-items-center justify-content-between rounded-3 border px-3 py-2.5 text-start w-100 transition-all ${
-                    activeFilter === 'all' ? 'active' : ''
-                  }`}
-                  onClick={() => setActiveFilter('all')}
-                >
-                  <div className="d-flex align-items-center gap-2">
-                    <i className="bi bi-grid-fill"></i>
-                    <span>All</span>
-                  </div>
-                  <span className="count-pill">{totalCount}</span>
-                </button>
+    <section className="relative min-h-[80vh] overflow-hidden bg-gradient-to-br from-[#f8fafc] to-[#eef2f6] pb-[60px] pt-6 before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-[300px] before:bg-gradient-to-b before:from-[#006CD0]/[0.03] before:to-transparent before:content-[''] sm:pt-10 lg:pb-[120px] lg:pt-14">
+      <div className="container-app relative">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-12 md:gap-6">
 
-                <button
-                  className={`btn-vertical-filter d-flex align-items-center justify-content-between rounded-3 border px-3 py-2.5 text-start w-100 transition-all ${
-                    activeFilter === 'domestic' ? 'active' : ''
-                  }`}
-                  onClick={() => setActiveFilter('domestic')}
-                >
-                  <div className="d-flex align-items-center gap-2">
-                    <i className="bi bi-house-fill"></i>
-                    <span>Domestic</span>
-                  </div>
-                  <span className="count-pill">{domesticCount}</span>
-                </button>
-
-                <button
-                  className={`btn-vertical-filter d-flex align-items-center justify-content-between rounded-3 border px-3 py-2.5 text-start w-100 transition-all ${
-                    activeFilter === 'industrial' ? 'active' : ''
-                  }`}
-                  onClick={() => setActiveFilter('industrial')}
-                >
-                  <div className="d-flex align-items-center gap-2">
-                    <i className="bi bi-building"></i>
-                    <span>Industrial</span>
-                  </div>
-                  <span className="count-pill">{industrialCount}</span>
-                </button>
+          {/* Sidebar Left: Categories */}
+          <div className="md:col-span-4 lg:col-span-3">
+            <div className="md:sticky md:top-[130px] md:z-10">
+              <p className="mb-3 hidden text-[0.72rem] font-bold uppercase tracking-[1.5px] text-[#94a3b8] md:block">Categories</p>
+              <div className="flex flex-col gap-2.5 max-md:-mx-3 max-md:flex-row max-md:flex-nowrap max-md:gap-2 max-md:overflow-x-auto max-md:px-3 max-md:pb-1 max-md:[-ms-overflow-style:none] max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
+                {filters.map((f) => {
+                  const active = activeFilter === f.key;
+                  return (
+                    <button
+                      key={f.key}
+                      onClick={() => setActiveFilter(f.key)}
+                      className={`group flex h-[46px] w-full min-w-0 items-center justify-between gap-2 rounded-xl border border-solid px-3.5 text-left text-[0.9rem] font-semibold transition-all duration-300 ease-out max-md:h-auto max-md:w-auto max-md:shrink-0 max-md:justify-center max-md:rounded-full max-md:px-4 max-md:py-2.5 max-md:text-[0.82rem] ${
+                        active
+                          ? 'border-transparent bg-gradient-to-br from-[#006CD0] to-[#004c99] text-white'
+                          : 'border-[#006CD0]/15 bg-white text-[#475569] hover:border-[#006CD0]/30 hover:text-[#006CD0]'
+                      }`}
+                    >
+                      <span className="flex items-center gap-2">
+                        <i className={`bi ${f.icon} shrink-0 text-[0.95rem] ${active ? 'text-white' : 'text-[#94a3b8] group-hover:text-[#006CD0]'}`}></i>
+                        <span className="whitespace-nowrap">{f.label}</span>
+                      </span>
+                      <span className={`shrink-0 rounded-full px-[7px] py-0.5 text-[0.72rem] font-bold ${active ? 'bg-white/20 text-white' : 'bg-black/[0.04] text-[#64748b]'}`}>
+                        {f.count}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
 
           {/* Main Grid Right: Products */}
-          <div className="col-lg-9 col-md-8">
-            <div className="results-count-bar mb-3 d-flex align-items-center justify-content-between text-muted fw-semibold">
-              <span>Showing {filteredProducts.length} Systems</span>
+          <div className="md:col-span-8 lg:col-span-9">
+            <div className="mb-3">
+              <p className="text-[0.82rem] font-medium text-[#94a3b8]">
+                Showing {filteredProducts.length} of {totalCount} products
+              </p>
             </div>
 
-            <div className="row g-4">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
               {filteredProducts.map((product) => {
                 const isDomestic = product.category === 'domestic';
+                const isIndustrial = product.category === 'industrial';
+                const categoryLabel = isDomestic ? 'Domestic' : isIndustrial ? 'Industrial' : 'Accessory';
+                const categoryIcon = isDomestic ? 'bi-house-fill' : isIndustrial ? 'bi-building' : 'bi-cpu-fill';
                 return (
-                  <div key={product.id} className="col-12 col-sm-6 col-md-6 col-lg-4 mx-auto wow fadeInUp">
-                    <Link href={`/service-details?id=${product.id}`} className="text-decoration-none d-block h-100">
-                      <div className="premium-product-card h-100 rounded-3 overflow-hidden position-relative d-flex flex-column border">
-                        {/* Image Container - compact */}
-                        <div className="product-image-container position-relative">
-                          <div className={`category-tag-new position-absolute ${isDomestic ? 'tag-domestic' : 'tag-industrial'}`}>
-                            <i className={`bi ${isDomestic ? 'bi-house-fill' : 'bi-building'} me-1`}></i>
-                            {isDomestic ? 'Domestic' : 'Industrial'}
-                          </div>
-                          <div className="image-hover-zoom h-100">
-                            <Image
-                              src={product.img}
-                              alt={product.title}
-                              width={1024}
-                              height={1536}
-                              className="w-100 h-100 product-card-image"
-                            />
-                          </div>
+                  <Link
+                    key={product.id}
+                    href={`/service-details?id=${product.id}`}
+                    className="group block h-full no-underline"
+                  >
+                    <div className="relative flex h-full flex-col overflow-hidden rounded-[20px] border-2 border-solid border-[#dbe7f5] bg-white shadow-[0_4px_22px_-10px_rgba(15,23,42,0.18)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-[#006CD0] hover:shadow-[0_26px_50px_-18px_rgba(0,108,208,0.3)]">
+                      {/* Image */}
+                      <div className="relative flex aspect-[1024/1536] items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_50%_30%,#ffffff_0%,#eef4fb_100%)] max-sm:aspect-[4/5]">
+                        <div className={`absolute left-3.5 top-3.5 z-[2] inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[0.66rem] font-extrabold uppercase tracking-[0.6px] shadow-[0_6px_16px_-6px_rgba(15,23,42,0.25)] ring-1 ring-inset backdrop-blur-[10px] ${
+                          isDomestic
+                            ? 'bg-[#006CD0]/[0.12] text-[#006CD0] ring-[#006CD0]/15'
+                            : isIndustrial
+                              ? 'bg-[#0f172a]/[0.08] text-[#0f172a] ring-[#0f172a]/10'
+                              : 'bg-[#0ea5a4]/[0.12] text-[#0d9488] ring-[#0d9488]/15'
+                        }`}>
+                          <i className={`bi ${categoryIcon}`}></i>
+                          {categoryLabel}
                         </div>
-
-                        {/* Content Section - tighter spacing */}
-                        <div className="product-info-body p-4 d-flex flex-column flex-grow-1">
-                          <h5 className="product-title fw-bold mb-2">{product.title}</h5>
-                          {(product as any).subtitle && (
-                            <h6 className="product-subtitle mb-2">{(product as any).subtitle}</h6>
-                          )}
-                          <p className="product-desc mb-0">{product.description}</p>
+                        <div className="flex h-full w-full items-center justify-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.07]">
+                          <Image
+                            src={product.img}
+                            alt={product.title}
+                            width={1024}
+                            height={1536}
+                            className="h-full w-full object-cover"
+                          />
                         </div>
-                        
-                        {/* Underline Accent */}
-                        <div className="card-accent-line"></div>
+                        {/* Subtle gradient veil for depth */}
+                        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white/70 to-transparent"></div>
                       </div>
-                    </Link>
-                  </div>
+
+                      {/* Content */}
+                      <div className="flex flex-grow flex-col border-t border-solid border-[#006CD0]/[0.06] bg-white p-5 max-sm:p-4">
+                        <h5 className="mb-1.5 text-[1.2rem] font-extrabold leading-snug tracking-[-0.3px] text-[#0f172a] transition-colors duration-300 group-hover:text-[#006CD0]">{product.title}</h5>
+                        {(product as any).subtitle && (
+                          <h6 className="mb-2 text-[0.92rem] font-semibold tracking-[-0.2px] text-[#006CD0]">{(product as any).subtitle}</h6>
+                        )}
+                        <p className="mb-4 line-clamp-3 text-[0.875rem] leading-[1.55] text-[#64748b]">{product.description}</p>
+                        <div className="mt-auto flex items-center gap-1.5 text-[0.82rem] font-bold text-[#006CD0]">
+                          <span>View Details</span>
+                          <i className="bi bi-arrow-right transition-transform duration-300 group-hover:translate-x-1.5"></i>
+                        </div>
+                      </div>
+
+                      {/* Accent line */}
+                      <div className="absolute bottom-0 left-0 h-[3px] w-0 bg-gradient-to-r from-[#006CD0] to-[#00a4ff] transition-[width] duration-[450ms] ease-out group-hover:w-full"></div>
+                    </div>
+                  </Link>
                 );
               })}
             </div>
 
             {/* Empty State */}
             {filteredProducts.length === 0 && (
-              <div className="text-center py-5 empty-state-wrapper rounded-3 p-4 bg-white border">
-                <div className="empty-icon-box mb-3 d-flex align-items-center justify-content-center mx-auto">
+              <div className="rounded-lg border border-solid border-[#dee2e6] bg-white p-4 py-12 text-center">
+                <div className="mx-auto mb-3 flex h-[50px] w-[50px] items-center justify-center rounded-full bg-[#006CD0]/[0.06] text-[1.4rem] text-[#006CD0]">
                   <i className="bi bi-search"></i>
                 </div>
-                <h4 className="fw-bold mb-2">No Match Found</h4>
-                <p className="text-muted mb-4">
+                <h4 className="mb-2 font-bold">No Match Found</h4>
+                <p className="mb-4 text-[#6c757d]">
                   Try clearing your search query or selecting a different category.
                 </p>
-                <button onClick={handleReset} className="btn btn-reset-filters px-4 py-2 rounded-3 fw-semibold">
+                <button onClick={handleReset} className="rounded-lg bg-gradient-to-br from-[#006CD0] to-[#0052a3] px-4 py-2 font-semibold text-white shadow-[0_4px_10px_rgba(0,108,208,0.1)]">
                   Clear Filters
                 </button>
               </div>
@@ -172,397 +177,6 @@ const ProductList = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .product-list-section {
-          background: linear-gradient(135deg, #f8fafc 0%, #eef2f6 100%);
-          min-height: 80vh;
-          position: relative;
-        }
-        .product-list-section::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 300px;
-          background: linear-gradient(180deg, rgba(0,108,208,0.03) 0%, rgba(248,250,252,0) 100%);
-          pointer-events: none;
-        }
-
-        /* Sidebar Styling */
-        .sidebar-filter-panel {
-          background: #ffffff;
-          border: 1px solid rgba(0, 108, 208, 0.08) !important;
-          position: sticky;
-          top: 130px;
-          z-index: 10;
-        }
-
-        .sidebar-title {
-          color: #0f172a;
-          font-size: 1.1rem;
-          border-bottom: 2px solid rgba(0, 108, 208, 0.08);
-          padding-bottom: 10px;
-        }
-
-        .search-widget .form-label,
-        .filter-menu-widget .form-label {
-          font-size: 0.76rem;
-          letter-spacing: 0.8px;
-          text-transform: uppercase;
-        }
-
-        /* Search input */
-        .search-input-wrapper {
-          width: 100%;
-        }
-
-        .search-icon-left {
-          left: 12px;
-          top: 50%;
-          transform: translateY(-50%);
-          color: #94a3b8;
-          font-size: 0.9rem;
-          pointer-events: none;
-        }
-
-        .search-input {
-          padding-left: 36px;
-          padding-right: 30px;
-          height: 40px;
-          font-size: 0.85rem;
-          border: 1px solid rgba(0, 108, 208, 0.12);
-          background-color: #ffffff;
-          color: #0f172a;
-          transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-          border-color: #006CD0;
-          box-shadow: 0 0 0 3px rgba(0, 108, 208, 0.1);
-        }
-
-        .btn-clear-search {
-          right: 10px;
-          top: 50%;
-          transform: translateY(-50%);
-          color: #94a3b8;
-          cursor: pointer;
-          font-size: 0.95rem;
-        }
-
-        /* Vertical Buttons */
-        .btn-vertical-filter {
-          background: #ffffff;
-          border: 1px solid rgba(0, 108, 208, 0.1) !important;
-          color: #475569;
-          font-size: 0.86rem;
-          font-weight: 600;
-          cursor: pointer;
-          height: 42px;
-        }
-
-        .btn-vertical-filter i {
-          color: #94a3b8;
-          font-size: 0.95rem;
-          transition: color 0.2s ease;
-        }
-
-        .btn-vertical-filter:hover {
-          background-color: rgba(0, 108, 208, 0.02);
-          color: #006CD0;
-          border-color: rgba(0, 108, 208, 0.2) !important;
-        }
-
-        .btn-vertical-filter:hover i {
-          color: #006CD0;
-        }
-
-        .btn-vertical-filter.active {
-          background: linear-gradient(135deg, #006CD0 0%, #004c99 100%);
-          color: #ffffff;
-          border-color: transparent !important;
-          box-shadow: none;
-        }
-
-        .btn-vertical-filter.active i {
-          color: #ffffff;
-        }
-
-        .count-pill {
-          background-color: rgba(0, 0, 0, 0.04);
-          color: #64748b;
-          font-size: 0.72rem;
-          font-weight: 700;
-          padding: 2px 7px;
-          border-radius: 50px;
-        }
-
-        .btn-vertical-filter.active .count-pill {
-          background-color: rgba(255, 255, 255, 0.2);
-          color: #ffffff;
-        }
-
-        /* Products Grid */
-        .results-count-bar {
-          font-size: 0.85rem;
-          padding-bottom: 8px;
-          border-bottom: 1px solid rgba(0, 108, 208, 0.06);
-        }
-
-        /* Compact Product Cards */
-        .premium-product-card {
-          background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%);
-          backdrop-filter: blur(12px);
-          border: 1px solid rgba(0, 108, 208, 0.35) !important;
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0,0,0,0.02);
-          border-radius: 16px !important;
-          overflow: hidden;
-          transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .premium-product-card:hover {
-          transform: translateY(-8px) scale(1.01);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 20px 40px rgba(0, 108, 208, 0.1), 0 10px 15px rgba(0, 0, 0, 0.04);
-          border: 1px solid rgba(0, 108, 208, 0.8) !important;
-          background: #ffffff;
-        }
-
-        .product-image-container {
-          background: radial-gradient(circle at center, #ffffff 0%, #f8fafc 100%);
-          border-bottom: 1px solid rgba(0, 108, 208, 0.04);
-          aspect-ratio: 1024 / 1536;
-          overflow: hidden;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 0px;
-        }
-
-        .image-hover-zoom {
-          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-          width: 100%;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .image-hover-zoom :global(.product-card-image) {
-          object-fit: cover;
-          width: 100%;
-          height: 100%;
-        }
-
-        .premium-product-card:hover .image-hover-zoom {
-          transform: scale(1.08) translateY(-2px);
-        }
-
-        .category-tag-new {
-          top: 12px;
-          left: 12px;
-          padding: 6px 14px;
-          border-radius: 50px;
-          font-size: 0.65rem;
-          font-weight: 800;
-          letter-spacing: 0.5px;
-          text-transform: uppercase;
-          z-index: 2;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-        }
-
-        .tag-domestic {
-          background-color: rgba(0, 108, 208, 0.08);
-          color: #006CD0;
-          border: 1px solid rgba(0, 108, 208, 0.1);
-        }
-
-        .tag-industrial {
-          background-color: rgba(15, 23, 42, 0.06);
-          color: #0f172a;
-          border: 1px solid rgba(15, 23, 42, 0.08);
-        }
-
-        /* Card Text */
-        .product-info-body {
-          background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
-          border-top: 1px solid rgba(0, 108, 208, 0.05);
-        }
-
-        .product-title {
-          color: #0f172a;
-          font-size: 1.25rem;
-          font-weight: 800 !important;
-          letter-spacing: -0.3px;
-          transition: color 0.3s ease;
-        }
-
-        .premium-product-card:hover .product-title {
-          color: #006CD0;
-        }
-
-        .product-subtitle {
-          color: #006CD0;
-          font-size: 1rem;
-          font-weight: 700;
-          letter-spacing: -0.2px;
-        }
-
-        .product-desc {
-          color: #475569;
-          font-size: 0.9rem;
-          line-height: 1.5;
-        }
-
-        .feature-pill {
-          background-color: #edf5ff;
-          color: #006CD0;
-          font-weight: 700;
-          font-size: 0.68rem;
-          padding: 4px 10px;
-          border-radius: 6px;
-          border: 1px solid rgba(0, 108, 208, 0.12);
-          text-transform: capitalize;
-          box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-          letter-spacing: 0.2px;
-        }
-
-        /* Actions */
-        .card-footer-action {
-          border-top: 1px solid #f1f5f9 !important;
-        }
-
-        .action-text {
-          font-size: 0.72rem;
-          color: #94a3b8;
-          letter-spacing: 0.8px;
-          transition: color 0.3s ease;
-        }
-
-        .action-circle-btn {
-          width: 28px;
-          height: 28px;
-          background-color: #f8fafc;
-          border-radius: 50%;
-          color: #64748b;
-          font-size: 1.10rem;
-          transition: all 0.3s ease;
-        }
-
-        .premium-product-card:hover .action-text {
-          color: #006CD0;
-        }
-
-        .premium-product-card:hover .action-circle-btn {
-          background-color: #006CD0;
-          color: #ffffff;
-          transform: scale(1.05);
-        }
-
-        .card-accent-line {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0;
-          height: 3px;
-          background: linear-gradient(90deg, #006CD0 0%, #00a4ff 100%);
-          transition: width 0.4s ease;
-        }
-
-        .premium-product-card:hover .card-accent-line {
-          width: 100%;
-        }
-
-        /* Empty State */
-        .empty-icon-box {
-          width: 50px;
-          height: 50px;
-          background-color: rgba(0, 108, 208, 0.06);
-          border-radius: 50%;
-          color: #006CD0;
-          font-size: 1.4rem;
-        }
-
-        .btn-reset-filters {
-          background: linear-gradient(135deg, #006CD0 0%, #0052a3 100%);
-          color: #ffffff;
-          border: none;
-          box-shadow: 0 4px 10px rgba(0, 108, 208, 0.1);
-        }
-
-        /* Responsive */
-        @media (max-width: 991px) {
-          .product-list-section {
-            padding-top: 130px !important;
-          }
-        }
-
-        @media (max-width: 767px) {
-          .filter-vertical-group {
-            flex-direction: row !important;
-            overflow-x: auto;
-            gap: 4px !important;
-            padding-bottom: 4px;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-          }
-          .filter-vertical-group::-webkit-scrollbar {
-            display: none;
-          }
-          .btn-vertical-filter {
-            justify-content: center !important;
-            padding: 8px 6px !important;
-            font-size: 0.8rem !important;
-            height: auto;
-            border: 1px solid rgba(0,0,0,0.05) !important;
-            white-space: nowrap;
-            flex: 1;
-          }
-          .btn-vertical-filter .d-flex {
-            gap: 4px !important;
-          }
-          .btn-vertical-filter .count-pill {
-            display: inline-flex !important;
-            margin-left: 4px;
-            padding: 2px 5px;
-          }
-        }
-
-        @media (max-width: 575px) {
-          .product-list-section {
-            padding-top: 100px !important;
-          }
-          .btn-vertical-filter {
-            font-size: 0.8rem !important;
-            padding: 6px 12px !important;
-          }
-          
-          /* Allow card to be full width without side gaps */
-          .premium-product-card {
-            max-width: 100%;
-            margin-bottom: 24px !important;
-          }
-
-          /* Reduce the height of the image so it fits better on screen */
-          .product-image-container {
-            aspect-ratio: 4 / 5 !important;
-          }
-
-          .product-info-body {
-            padding: 10px !important;
-          }
-          .product-features-badges {
-            margin-bottom: 8px !important;
-          }
-          .feature-pill:nth-child(n+3) {
-            display: none !important;
-          }
-          .card-footer-action {
-            padding-top: 6px !important;
-          }
-        }
-      `}</style>
     </section>
   );
 };
