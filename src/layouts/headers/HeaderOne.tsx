@@ -74,7 +74,7 @@ const HeaderOne = ({ style }: any) => {
               <div className="solar-search-button">
                
                 <div className="solar-btn">
-                  <Link href="/login">Sign In <i className="bi bi-arrow-right"></i></Link>
+                  <Link href="/contact">Get a Quote <i className="bi bi-arrow-right"></i></Link>
                 </div>
                
               </div>

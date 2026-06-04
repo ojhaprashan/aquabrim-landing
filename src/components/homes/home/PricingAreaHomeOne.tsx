@@ -54,8 +54,8 @@ const PricingAreaHomeOne = () => {
                     <a href="/contact" className="btn btn-primary py-3 px-4 fw-bold shadow-sm d-flex align-items-center justify-content-center flex-grow-1" style={{ borderRadius: '12px' }}>
                       Get in Touch <i className="bi bi-arrow-right ms-2"></i>
                     </a>
-                    <a href="/faq" className="btn btn-outline-primary py-3 px-4 fw-bold shadow-sm d-flex align-items-center justify-content-center flex-grow-1" style={{ borderRadius: '12px' }}>
-                      FAQs <i className="bi bi-question-circle ms-2"></i>
+                    <a href="/service" className="btn btn-outline-primary py-3 px-4 fw-bold shadow-sm d-flex align-items-center justify-content-center flex-grow-1" style={{ borderRadius: '12px' }}>
+                      View Products <i className="bi bi-box-seam ms-2"></i>
                     </a>
                   </div>
                 </div>

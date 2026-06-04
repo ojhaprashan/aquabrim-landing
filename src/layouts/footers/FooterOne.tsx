@@ -13,8 +13,7 @@ const footer_content = {
     { title: "About Us", link: "/about" },
     { title: "Contact Us", link: "/contact" },
     { title: "Blogs", link: "/blog" },
-    { title: "FAQs", link: "/faq" },
-
+    { title: "Products", link: "/service" },
   ],
   support: [
     { title: "Pricing Policy", link: "/pricing-policy" },
