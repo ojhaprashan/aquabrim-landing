@@ -19,6 +19,16 @@
     border-width: 0;
     outline: none;
   }
+  /* Same template, lines 146-156: `input:focus`/`textarea:focus` force a red-orange
+     border (#FF3C00 / #F16722) on focus. Neutralize to the theme primary so focused
+     fields stay on-brand. Loaded after the template CSS, so this wins. Field-level
+     Tailwind `focus:border-*` utilities still override this when present. */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #006CD0;
+    outline-color: #006CD0;
+  }
 }
 
 @layer components {

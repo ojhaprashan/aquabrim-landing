@@ -1,6 +1,6 @@
 import React from 'react';
 import PolicyBanner from '../common/PolicyBanner';
-import refund_banner_img from "@/assets/images/policy/refund.png";
+import refund_banner_img from "@/assets/images/policy/refund.webp";
 
 const RefundPolicyBanner = () => (
   <PolicyBanner

@@ -1,4 +1,5 @@
 import React from 'react';
+import TrackedCallLink from './TrackedCallLink';
 
 type NavItem = { href: string; label: string };
 
@@ -113,7 +114,7 @@ export const PolicyContact = () => (
       <a href="mailto:save.water@aquabrim.com" className="font-medium text-[#006CD0] no-underline">save.water@aquabrim.com</a>
     </ContactCard>
     <ContactCard icon="bi-telephone-fill" title="Phone">
-      <a href="tel:+919560088791" className="font-medium text-[#212529] no-underline">+91 9560088791</a>
+      <TrackedCallLink href="tel:+919560088791" className="font-medium text-[#212529] no-underline">+91 9560088791</TrackedCallLink>
     </ContactCard>
     <ContactCard icon="bi-geo-alt-fill" title="Address">
       <p className="mb-0 text-[0.875rem] font-medium text-[#6c757d]">Plot No. 35, 1st Floor, Union Bank of India Building, 100 Feet Road, Ghitorni, New Delhi – 110030</p>

@@ -128,3 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Optimized-image originals backup (local only, do not deploy/commit)
+_image_backup/

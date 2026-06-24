@@ -22,7 +22,7 @@ const fallback_data: Testimonial[] = [
     name: "Ramesh Kumar",
     designation: "Homeowner, Coimbatore",
     review: "Aquabrim controller has completely solved our water overflow issue. Very reliable and easy to use.",
-    avatar: "/assets/images/testimonials/ramesh.png",
+    avatar: "/assets/images/testimonials/ramesh.webp",
     rating: 5
   },
   {
@@ -30,7 +30,7 @@ const fallback_data: Testimonial[] = [
     name: "Sunita Rao",
     designation: "Apartment Manager, Chennai",
     review: "We installed Aquabrim in our apartment complex. It works perfectly and the motor is well protected.",
-    avatar: "/assets/images/testimonials/sunita.png",
+    avatar: "/assets/images/testimonials/sunita.webp",
     rating: 5
   },
   {
@@ -38,7 +38,7 @@ const fallback_data: Testimonial[] = [
     name: "Arun Mehta",
     designation: "Builder, Bengaluru",
     review: "Best water level controller we have used. Installation was easy and support is excellent.",
-    avatar: "/assets/images/testimonials/arun.png",
+    avatar: "/assets/images/testimonials/arun.webp",
     rating: 5
   }
 ];

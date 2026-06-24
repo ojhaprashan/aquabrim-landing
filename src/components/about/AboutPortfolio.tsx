@@ -43,7 +43,7 @@ const AboutPortfolio = () => {
           <div className="mb-2 lg:mb-0">
             <div className="group relative mx-auto max-w-[600px] rounded-2xl p-2 transition-all duration-[400ms] max-lg:mt-5 before:pointer-events-none before:absolute before:-left-2.5 before:-top-2.5 before:z-[1] before:h-[50px] before:w-[50px] before:rounded-tl-2xl before:border-b-0 before:border-r-0 before:border-l-4 before:border-t-4 before:border-solid before:border-[#006CD0] before:content-[''] after:pointer-events-none after:absolute after:-bottom-2.5 after:-right-2.5 after:z-[1] after:h-[50px] after:w-[50px] after:rounded-br-2xl after:border-l-0 after:border-t-0 after:border-b-4 after:border-r-4 after:border-solid after:border-[#006CD0] after:content-[''] sm:before:h-20 sm:before:w-20 sm:after:h-20 sm:after:w-20">
               <img
-                src="/assets/about/about.png"
+                src="/assets/about/about.webp"
                 alt="India's Leading Water Level Informatory System & Automation Solutions"
                 className="block h-auto w-full rounded-2xl border-4 border-solid border-white object-cover shadow-lg transition-transform duration-[400ms] group-hover:-translate-y-1 group-hover:scale-[1.02] group-hover:shadow-[0_25px_50px_rgba(0,108,208,0.18)]"
               />

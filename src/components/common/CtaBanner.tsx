@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
+import { trackPhoneCall } from '@/utils/gtag';
 
 interface CtaBannerProps {
   title?: string;
@@ -34,6 +35,7 @@ const CtaBanner = ({
         <div>
           <Link
             href={btnLink}
+            onClick={btnLink.startsWith('tel:') ? trackPhoneCall : undefined}
             className="flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-[15px] font-bold text-primary no-underline transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)]"
           >
             {btnText} <i className={`bi ${btnIcon} text-sm`}></i>

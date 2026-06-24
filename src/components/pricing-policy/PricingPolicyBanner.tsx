@@ -1,6 +1,6 @@
 import React from 'react';
 import PolicyBanner from '../common/PolicyBanner';
-import pricing_banner_img from "@/assets/images/policy/pricing.png";
+import pricing_banner_img from "@/assets/images/policy/pricing.webp";
 
 const PricingPolicyBanner = () => (
   <PolicyBanner

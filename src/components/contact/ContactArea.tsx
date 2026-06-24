@@ -1,7 +1,9 @@
-
+'use client';
 
 import React from 'react';
 import ContactForm from '../forms/ContactForm';
+import { useDynamicCall } from '@/hooks/useDynamicCall';
+import { trackPhoneCall } from '@/utils/gtag';
 
 const mailLink = "text-[#6c757d] no-underline transition-colors hover:text-[#006CD0]";
 
@@ -20,6 +22,7 @@ const InfoRow = ({ icon, title, children }: { icon: string; title: string; child
 const Divider = () => <div className="my-8 h-px w-full bg-[#212529]/[0.15]"></div>;
 
 const ContactArea = () => {
+  const { number: callNumber, href: callHref } = useDynamicCall();
   return (
     <div className="bg-white py-12">
       <div className="container-app">
@@ -52,8 +55,7 @@ const ContactArea = () => {
                 </InfoRow>
 
                 <InfoRow icon="bi-telephone-fill" title="Phone">
-                  Domestic Sales: <a href="tel:+919310035211" className={mailLink}>+91-9310035211</a><br />
-                  Corporate Sales: <a href="tel:+919910672821" className={mailLink}>+91-9910672821</a>
+                  <a href={callHref} onClick={trackPhoneCall} className={mailLink}>+91-{callNumber}</a>
                 </InfoRow>
 
                 <Divider />
@@ -70,7 +72,7 @@ const ContactArea = () => {
                 </InfoRow>
 
                 <InfoRow icon="bi-telephone-fill" title="Phone">
-                  <a href="tel:+919560088781" className={mailLink}>+91-9560088781</a>
+                  <a href="tel:+919560088781" onClick={trackPhoneCall} className={mailLink}>+91-9560088781</a>
                 </InfoRow>
 
                 <Divider />

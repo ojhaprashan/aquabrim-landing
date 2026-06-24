@@ -1,6 +1,6 @@
 import React from 'react';
 import PolicyBanner from '../common/PolicyBanner';
-import privacy_banner_img from "@/assets/images/policy/privacy.png";
+import privacy_banner_img from "@/assets/images/policy/privacy.webp";
 
 const PrivacyPolicyBanner = () => (
   <PolicyBanner

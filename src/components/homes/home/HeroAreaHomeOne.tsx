@@ -17,9 +17,9 @@ const HeroAreaHomeOne = () => {
 
   // --- Slider State ---
   const sliderImages = [
-    "/assets/home/for homes.png",
-    "/assets/home/for apartments.png",
-    "/assets/home/for industries.png"
+    "/assets/home/for homes.webp",
+    "/assets/home/for apartments.webp",
+    "/assets/home/for industries.webp"
   ];
   const [currentSlide, setCurrentSlide] = useState(0);
 

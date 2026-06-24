@@ -4,14 +4,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // Import images
-import prod_controller from "@/assets/images/resource/prod_controller.png";
-import prod_starter from "@/assets/images/resource/prod_starter.png";
-import prod_tank_monitor from "@/assets/images/resource/prod_tank_monitor.png";
-import prod_valve from "@/assets/images/resource/prod_valve.png";
+import prod_controller from "@/assets/images/resource/prod_controller.webp";
+import prod_starter from "@/assets/images/resource/prod_starter.webp";
+import prod_tank_monitor from "@/assets/images/resource/prod_tank_monitor.webp";
+import prod_valve from "@/assets/images/resource/prod_valve.webp";
 import accessories_img from "@/assets/images/resource/service-details3.png";
 
 // Import JSON data
 import productsData from "@/data/products.json";
+import { slugify } from "@/utils/slug";
 
 const imageMap: Record<string, any> = {
   prod_controller,
@@ -28,6 +29,7 @@ export const products = productsData.map((item) => {
     : [imageMap[item.imgKey] || accessories_img];
   return {
     ...item,
+    slug: slugify(item.title),
     img: images[0],
     images: images
   };
@@ -109,7 +111,7 @@ const ProductList = () => {
                 return (
                   <Link
                     key={product.id}
-                    href={`/service-details?id=${product.id}`}
+                    href={`/service-details/${product.slug}`}
                     className="group block h-full no-underline"
                   >
                     <div className="relative flex h-full flex-col overflow-hidden rounded-[20px] border-2 border-solid border-[#dbe7f5] bg-white shadow-[0_4px_22px_-10px_rgba(15,23,42,0.18)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-[#006CD0] hover:shadow-[0_26px_50px_-18px_rgba(0,108,208,0.3)]">

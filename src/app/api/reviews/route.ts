@@ -54,7 +54,7 @@ const parseReviews = (html: string): Review[] => {
       name: decodeEntities(nameMatch[1].trim()),
       designation: formatDesignation(timeMatch ? Number(timeMatch[1]) : 0),
       review: decodeEntities(stripTags(textMatch[1])),
-      avatar: avatarMatch ? avatarMatch[1] : '/assets/images/testimonials/ramesh.png',
+      avatar: avatarMatch ? avatarMatch[1] : '/assets/images/testimonials/ramesh.webp',
       rating: stars,
     });
   });

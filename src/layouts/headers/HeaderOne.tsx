@@ -7,6 +7,7 @@ import { TeamSocialLinks } from '@/components/common/SocialLinks';
 import UseSticky from '@/hooks/UseSticky';
 import MobileMeneu from './Menu/MobileMeneu';
 import SearchPopup from '@/components/common/SearchPopup';
+import { trackPhoneCall } from '@/utils/gtag';
 
 const HeaderOne = ({ style }: any) => {
 
@@ -22,7 +23,7 @@ const HeaderOne = ({ style }: any) => {
             <ul className="m-0 flex list-none items-center gap-x-9 p-0 text-sm text-white">
               <li><a href="#" className="text-white no-underline"><i className="bi bi-geo-alt mr-1.5 text-[15px] text-primary"></i> New Delhi, India</a></li>
               <li className="relative before:absolute before:-left-[18px] before:top-1/2 before:h-[18px] before:w-0.5 before:-translate-y-1/2 before:bg-[#3a3a42]/70">
-                <a href="tel:+91-9560088791" className="text-white no-underline"><i className="bi bi-telephone mr-1.5 text-[15px] text-primary"></i> +91-9560088791</a>
+                <a href="tel:+91-9560088791" onClick={trackPhoneCall} className="text-white no-underline"><i className="bi bi-telephone mr-1.5 text-[15px] text-primary"></i> +91-9560088791</a>
               </li>
               <li className="relative before:absolute before:-left-[18px] before:top-1/2 before:h-[18px] before:w-0.5 before:-translate-y-1/2 before:bg-[#3a3a42]/70">
                 <a href="mailto:save.water@aquabrim.com" className="text-white no-underline"><i className="bi bi-envelope mr-1.5 text-[15px] text-primary"></i> save.water@aquabrim.com</a>

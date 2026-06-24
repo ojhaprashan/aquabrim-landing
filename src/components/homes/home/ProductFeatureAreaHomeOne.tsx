@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const feature_data = [
   { id: 1, img: "/assets/product_feature/WebApp Based Monitoring System.png", title: "App-based Water Control", wide: true, blue: true },
-  { id: 2, img: "/assets/product_feature/Smart Scheduling.png", title: "Smart Scheduling", wide: false, blue: false },
+  { id: 2, img: "/assets/product_feature/Smart Scheduling.webp", title: "Smart Scheduling", wide: false, blue: false },
   { id: 3, img: "/assets/product_feature/Dry-run Protection.png", title: "Automatic Controller", wide: false, blue: true },
   { id: 4, img: "/assets/product_feature/Tank Level Monitoring.png", title: "Customizable Tank Levels", wide: false, blue: true },
   { id: 5, img: "/assets/product_feature/SMS Alert.png", title: "Real-time Updates", wide: false, blue: false },

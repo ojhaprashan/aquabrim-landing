@@ -2,15 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { products } from '../service/ProductList';
 
 import service_details_2 from "@/assets/images/resource/service-details2.png";
 
 const ServiceDetailsArea = () => {
-  const searchParams = useSearchParams();
-  const productId = searchParams.get('id');
-  const product = (products.find(p => p.id === Number(productId)) || products[0]) as any;
+  const params = useParams();
+  const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
+  const product = (products.find(p => p.slug === slug) || products[0]) as any;
 
   const [selectedImage, setSelectedImage] = useState<any>(null);
 
@@ -24,10 +24,10 @@ const ServiceDetailsArea = () => {
   const [lightboxZoom, setLightboxZoom] = useState(false);
   const [lightboxPan, setLightboxPan] = useState({ x: 50, y: 50 });
 
-  // Sync main image when product ID changes
+  // Sync main image when the product (slug) changes
   useEffect(() => {
     setSelectedImage(null);
-  }, [productId]);
+  }, [slug]);
 
   const mainImage = selectedImage || product.img;
 
@@ -220,7 +220,8 @@ const ServiceDetailsArea = () => {
         </div>
       </div>
 
-      {/* How It Works Section */}
+      {/* How It Works Section — hidden for accessories / More Category products */}
+      {product.category !== 'more_categories' && (
       <div className="mt-4 bg-[#f8fafc] py-12">
         <div className="container-app lg:py-4">
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
@@ -257,6 +258,7 @@ const ServiceDetailsArea = () => {
           </div>
         </div>
       </div>
+      )}
 
       {/* Glassmorphic Lightbox Modal */}
       {lightboxOpen && (

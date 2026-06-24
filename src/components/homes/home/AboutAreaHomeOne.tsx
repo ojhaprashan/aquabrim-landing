@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import about_thumb from "@/assets/home/home page image.png";
+import about_thumb from "@/assets/home/home page image.webp";
 
 const FEATURES = [
   "Detects water supply availability",

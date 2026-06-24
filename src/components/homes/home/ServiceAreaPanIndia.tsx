@@ -69,7 +69,7 @@ const ServiceAreaPanIndia = () => {
           <div className="mb-2 flex justify-center md:col-span-1 lg:mb-0">
             <div className="relative inline-block text-center">
               <Image
-                src="/assets/images/india_map.png"
+                src="/assets/images/india_map.webp"
                 alt="India Map"
                 width={400}
                 height={450}

@@ -1,6 +1,6 @@
 import React from 'react';
 import PolicyBanner from '../common/PolicyBanner';
-import shipping_banner_img from "@/assets/images/policy/shipping.png";
+import shipping_banner_img from "@/assets/images/policy/shipping.webp";
 
 const ShippingPolicyBanner = () => (
   <PolicyBanner

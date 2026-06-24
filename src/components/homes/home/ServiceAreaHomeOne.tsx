@@ -9,48 +9,17 @@ import service_icon_1 from "@/assets/images/resource/service-icon1.png";
 import service_icon_2 from "@/assets/images/resource/service-icon2.png";
 import service_icon_3 from "@/assets/images/resource/service-icon3.png";
 
-import service_img_1 from "../../../../public/assets/Product/ripple_1.png";
-import service_img_2 from "../../../../public/assets/Product/flexibell_1.png";
-import service_img_trigger from "../../../../public/assets/Product/trigger_2.jpeg";
-import service_img_macro from "../../../../public/assets/Product/macro_3.jpeg";
+import { products } from '../../service/ProductList';
 
-const custom_products = [
-  {
-    id: 1,
-    img: service_img_1,
-    icon: service_icon_1,
-    title: "Ripple",
-    category: "Smart Municipal Water Level Controller",
-    sm_des: "Automatically senses municipal water availability and operates the motor to maintain a continuous water supply for homes and residential buildings."
-  },
-  {
-    id: 2,
-    img: service_img_trigger,
-    icon: service_icon_1,
-    title: "Trigger",
-    category: "Smart Municipal Water Level Controller",
-    sm_des: "Smart controller for motor, directly connected to corporation water supply line. Automatically detects water availability and manages motor operations."
-  },
-  {
-    id: 3,
-    img: service_img_macro,
-    icon: service_icon_3,
-    title: "Macro",
-    category: "Smart Water Tank Level Controller",
-    sm_des: "Controller for borewell/submersible pumps, motor pumping from Underground tank to Overhead tank with overflow prevention and dry run protection."
-  },
-  {
-    id: 4,
-    img: service_img_2,
-    icon: service_icon_2,
-    title: "Flexibell",
-    category: "Wireless Water Level Alarm",
-    sm_des: "Wireless tank monitoring system that sends instant alerts for low water level, full tank, and overflow conditions across multiple tanks."
-  }
-];
+const icons = [service_icon_1, service_icon_2, service_icon_3];
+
+// Only the Domestic + Industrial products from the product list.
+const home_products = products.filter(
+  (p: any) => p.category === 'domestic' || p.category === 'industrial'
+);
 
 const ServiceAreaHomeOne = ({ style_2 }: any) => {
-  const data = custom_products;
+  const data = home_products;
   return (
     <div className="bg-[#f0f4f8] py-[106px] pb-[110px]">
       <div className="container-app">
@@ -76,8 +45,8 @@ const ServiceAreaHomeOne = ({ style_2 }: any) => {
           }}
           className="equal-height-slider"
         >
-          {data.map((item, index) => (
-            <SwiperSlide key={index} className="h-auto">
+          {data.map((item: any, index: number) => (
+            <SwiperSlide key={item.id} className="h-auto">
               <div className="group flex h-full flex-col overflow-hidden rounded-2xl shadow-sm transition-shadow duration-300 hover:shadow-lg">
                 {/* Full product image — always fully visible */}
                 <div className="relative aspect-[2/3] w-full bg-white">
@@ -86,14 +55,14 @@ const ServiceAreaHomeOne = ({ style_2 }: any) => {
                 {/* Info panel attached directly below */}
                 <div className="relative flex flex-1 flex-col bg-primary px-7 pb-7">
                   <div className="-mt-8 mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-md ring-4 ring-primary">
-                    <Image src={item.icon} alt={item.title} className="h-8 w-auto" />
+                    <Image src={icons[index % icons.length]} alt={item.title} className="h-8 w-auto" />
                   </div>
                   <h4 className="mb-1">
-                    <Link href="/service-details" className="text-[26px] font-medium text-white no-underline">{item.title}</Link>
+                    <Link href={`/service-details/${item.slug}`} className="text-[26px] font-medium text-white no-underline">{item.title}</Link>
                   </h4>
-                  <h6 className="mb-3 text-[0.85rem] font-semibold text-white/85">{item.category}</h6>
-                  <p className="mb-4 line-clamp-3 text-[0.9rem] leading-[1.5] text-[#f1f5f9]">{item.sm_des}</p>
-                  <Link href="/service-details" className="mt-auto inline-flex items-center gap-1 text-white no-underline hover:underline">
+                  <h6 className="mb-3 text-[0.85rem] font-semibold text-white/85">{item.subtitle || item.categoryName}</h6>
+                  <p className="mb-4 line-clamp-3 text-[0.9rem] leading-[1.5] text-[#f1f5f9]">{item.description}</p>
+                  <Link href={`/service-details/${item.slug}`} className="mt-auto inline-flex items-center gap-1 text-white no-underline hover:underline">
                     Product Details <i className="bi bi-arrow-up-right"></i>
                   </Link>
                 </div>

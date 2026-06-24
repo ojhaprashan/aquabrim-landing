@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "optimize:images": "node scripts/optimize-images.mjs && node scripts/update-image-refs.mjs",
+    "optimize:images:restore": "node scripts/optimize-images.mjs --restore"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -34,6 +36,7 @@
     "@types/react-modal-video": "^1.2.1",
     "autoprefixer": "^10.5.0",
     "postcss": "^8.5.15",
+    "sharp": "^0.34.5",
     "tailwindcss": "^3.4.19",
     "typescript": "^5"
   }

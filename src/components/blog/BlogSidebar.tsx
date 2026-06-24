@@ -67,7 +67,7 @@ const BlogSidebar = () => {
           {categories.map((item, i) => (
             <li key={i}>
               <Link
-                href="/service-details"
+                href="/service"
                 className="flex items-center justify-between border-b border-solid border-[#f1f5f9] py-2.5 text-[0.9rem] text-[#475569] no-underline transition-colors last:border-0 hover:text-[#006CD0]"
               >
                 {item.title} <span className="text-[#94a3b8]">({item.items})</span>
