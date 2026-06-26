@@ -87,15 +87,16 @@ const ContactArea = () => {
               {/* Map Integration */}
               <div className="relative mt-auto h-[200px] overflow-hidden rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7496149.95373021!2d85.84621250756469!3d23.452185887261447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30adaaed80e18ba7%3A0xf2d28e0c4e1fc6b!2sBangladesh!5e0!3m2!1sen!2sbd!4v1635150422284!5m2!1sen!2sbd"
+                  src="https://www.google.com/maps?q=Aquabrim%20Pvt.%20Ltd.%2C%20Plot%20no.%2035%2C%20Union%20Bank%20of%20India%20Building%2C%20100%20Feet%20Road%2C%20Ghitorni%2C%20New%20Delhi%20110030&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
+                  title="Aquabrim Pvt. Ltd. location"
                 ></iframe>
                 <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/40 to-transparent p-3 text-center">
-                  <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-[0.85rem] text-[#212529] no-underline shadow-sm transition-colors hover:bg-[#f8f9fa]">
+                  <a href="https://www.google.com/maps/search/?api=1&query=Aquabrim%20Pvt.%20Ltd.%2C%20Plot%20no.%2035%2C%20Union%20Bank%20of%20India%20Building%2C%20100%20Feet%20Road%2C%20Ghitorni%2C%20New%20Delhi%20110030" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-[0.85rem] text-[#212529] no-underline shadow-sm transition-colors hover:bg-[#f8f9fa]">
                     View on Google Maps <i className="bi bi-arrow-right text-[0.8rem]"></i>
                   </a>
                 </div>

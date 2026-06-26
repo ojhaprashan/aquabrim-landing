@@ -86,7 +86,7 @@ const AboutAreaHomeOne = ({ hideClients, hideImpact }: any) => {
 
             {/* CTA */}
             <div className="text-center lg:text-left">
-              <Link href="/service" className="inline-flex items-center rounded-md bg-primary px-4 py-3 font-bold text-white no-underline shadow-sm transition-colors hover:bg-primary-600">
+              <Link href="/products" className="inline-flex items-center rounded-md bg-primary px-4 py-3 font-bold text-white no-underline shadow-sm transition-colors hover:bg-primary-600">
                 View Products <i className="bi bi-arrow-right ml-2"></i>
               </Link>
             </div>

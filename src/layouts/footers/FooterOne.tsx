@@ -10,10 +10,10 @@ const footer_content = {
     tagline: "Transform Your Water System with Aquabrim ",
   },
   company: [
-    { title: "About Us", link: "/about" },
-    { title: "Contact Us", link: "/contact" },
-    { title: "Blogs", link: "/blog" },
-    { title: "Products", link: "/service" },
+    { title: "About Us", link: "/about-us" },
+    { title: "Contact Us", link: "/contact-us" },
+    { title: "Blogs", link: "/blogs" },
+    { title: "Products", link: "/products" },
   ],
   support: [
     { title: "Pricing Policy", link: "/pricing-policy" },
@@ -21,7 +21,7 @@ const footer_content = {
     { title: "Refund Policy", link: "/refund-policy" },
     { title: "Shipping Policy", link: "/shipping-policy" },
     { title: "Warranty Policy", link: "/warranty-policy" },
-    { title: "Terms & Condition", link: "/terms-condition" },
+    { title: "Terms & Condition", link: "/terms-and-conditions" },
   ],
   social: {
     title: "SOCIAL",

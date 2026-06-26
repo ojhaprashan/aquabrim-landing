@@ -17,7 +17,7 @@ const ServiceDetails = () => {
         title="Ready to Automate Your Water System?"
         subtitle="Get pricing, installation support, and product guidance."
         btnText="Get a Quote"
-        btnLink="/contact"
+        btnLink="/contact-us"
         icon="bi-droplet-fill"
         btnIcon="bi-file-earmark-text-fill"
       />

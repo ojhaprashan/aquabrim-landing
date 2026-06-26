@@ -210,7 +210,7 @@ const ServiceDetailsArea = () => {
               )}
 
               <Link
-                href="/contact"
+                href="/contact-us"
                 className="mb-12 flex w-full items-center justify-center gap-2 rounded-full bg-[#006CD0] py-3 text-[0.95rem] font-bold uppercase tracking-[1px] text-white no-underline shadow-sm transition-all hover:-translate-y-[3px] hover:shadow-[0_10px_20px_rgba(0,108,208,0.2)]"
               >
                 <i className="bi bi-telephone-outbound text-[1.25rem]"></i> Enquire Now / Contact Us

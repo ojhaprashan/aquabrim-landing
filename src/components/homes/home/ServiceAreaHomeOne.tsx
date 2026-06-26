@@ -58,11 +58,11 @@ const ServiceAreaHomeOne = ({ style_2 }: any) => {
                     <Image src={icons[index % icons.length]} alt={item.title} className="h-8 w-auto" />
                   </div>
                   <h4 className="mb-1">
-                    <Link href={`/service-details/${item.slug}`} className="text-[26px] font-medium text-white no-underline">{item.title}</Link>
+                    <Link href={`/products/${item.slug}`} className="text-[26px] font-medium text-white no-underline">{item.title}</Link>
                   </h4>
                   <h6 className="mb-3 text-[0.85rem] font-semibold text-white/85">{item.subtitle || item.categoryName}</h6>
                   <p className="mb-4 line-clamp-3 text-[0.9rem] leading-[1.5] text-[#f1f5f9]">{item.description}</p>
-                  <Link href={`/service-details/${item.slug}`} className="mt-auto inline-flex items-center gap-1 text-white no-underline hover:underline">
+                  <Link href={`/products/${item.slug}`} className="mt-auto inline-flex items-center gap-1 text-white no-underline hover:underline">
                     Product Details <i className="bi bi-arrow-up-right"></i>
                   </Link>
                 </div>

@@ -17,7 +17,7 @@ const TermsCondition = () => {
         title="Still Need Help?"
         subtitle="Our team is here to assist you with any questions"
         btnText="Contact Support"
-        btnLink="/contact"
+        btnLink="/contact-us"
         icon="bi-life-preserver"
         btnIcon="bi-headset"
       />

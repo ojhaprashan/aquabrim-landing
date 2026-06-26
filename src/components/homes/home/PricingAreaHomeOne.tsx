@@ -46,10 +46,10 @@ const PricingAreaHomeOne = () => {
               </ul>
 
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Link href="/contact" className="flex flex-grow items-center justify-center rounded-xl bg-primary px-4 py-3 font-bold text-white no-underline shadow-sm transition-colors hover:bg-primary-600">
+                <Link href="/contact-us" className="flex flex-grow items-center justify-center rounded-xl bg-primary px-4 py-3 font-bold text-white no-underline shadow-sm transition-colors hover:bg-primary-600">
                   Get in Touch <i className="bi bi-arrow-right ml-2"></i>
                 </Link>
-                <Link href="/service" className="flex flex-grow items-center justify-center rounded-xl border border-primary px-4 py-3 font-bold text-primary no-underline shadow-sm transition-colors hover:bg-primary hover:text-white">
+                <Link href="/products" className="flex flex-grow items-center justify-center rounded-xl border border-primary px-4 py-3 font-bold text-primary no-underline shadow-sm transition-colors hover:bg-primary hover:text-white">
                   View Products <i className="bi bi-box-seam ml-2"></i>
                 </Link>
               </div>

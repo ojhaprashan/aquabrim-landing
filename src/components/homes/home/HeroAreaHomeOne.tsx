@@ -82,8 +82,8 @@ const HeroAreaHomeOne = () => {
             </p>
 
             <div className="mt-[25px] flex gap-[15px] max-md:mt-7 max-md:flex-col max-md:items-center max-md:gap-3">
-              <Link href="/service" className="btn-solar text-center max-md:w-full max-md:max-w-[280px]">Our Products <i className="bi bi-arrow-right"></i></Link>
-              <Link href="/contact" className="btn-solar-light text-center max-md:w-full max-md:max-w-[280px]">Talk to Expert <i className="bi bi-arrow-right"></i></Link>
+              <Link href="/products" className="btn-solar text-center max-md:w-full max-md:max-w-[280px]">Our Products <i className="bi bi-arrow-right"></i></Link>
+              <Link href="/contact-us" className="btn-solar-light text-center max-md:w-full max-md:max-w-[280px]">Talk to Expert <i className="bi bi-arrow-right"></i></Link>
             </div>
           </div>
 

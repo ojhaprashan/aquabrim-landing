@@ -39,7 +39,7 @@ const BlogArea = () => {
                       <h5>{item.author}</h5>
                     </div>
                     <div className="blog-btn style-two">
-                      <Link href="/blog">More Details <i className="bi bi-arrow-up-right"></i></Link>
+                      <Link href="/blogs">More Details <i className="bi bi-arrow-up-right"></i></Link>
                     </div>
                   </div>
                 </div>

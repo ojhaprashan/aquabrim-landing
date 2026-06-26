@@ -23,7 +23,10 @@ export default function RootLayout({
 
       <head>
         <meta name="description" content="The Solar Panel React Next js template is a modern and responsive design specifically created for websites related to solar energy and renewable energy solutions" />
-        <link rel="icon" href="favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" href="/assets/images/logo_blue.png" />
+        <link rel="shortcut icon" type="image/png" href="/assets/images/logo_blue.png" />
+        <link rel="apple-touch-icon" href="/assets/images/logo_blue.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

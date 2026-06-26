@@ -1,0 +1,26 @@
+# ----------------------------------------------------------------------
+# Aquabrim static export — old → new URL 301 redirects (SEO)
+# This file is uploaded together with the site (inside the /app folder).
+# If the site is served from the domain root instead of /app, change
+# RewriteBase to "/" and remove the "/app" prefix from the targets below.
+# ----------------------------------------------------------------------
+
+Options -MultiViews
+RewriteEngine On
+RewriteBase /app/
+
+# --- Page renames -----------------------------------------------------
+RewriteRule ^about/?$                /app/about-us/             [R=301,L]
+RewriteRule ^contact/?$              /app/contact-us/           [R=301,L]
+RewriteRule ^blog/?$                 /app/blogs/                [R=301,L]
+RewriteRule ^service/?$              /app/products/             [R=301,L]
+RewriteRule ^terms-condition/?$      /app/terms-and-conditions/ [R=301,L]
+
+# --- Product detail base path change ----------------------------------
+# Old product pages lived under /service-details/<slug>. Send the whole
+# section to the new /products/ base.
+RewriteRule ^service-details/?$      /app/products/             [R=301,L]
+RewriteRule ^service-details/(.+)$   /app/products/$1           [R=301,L]
+
+# --- Flow Meter slug typo fix -----------------------------------------
+RewriteRule ^products/flometer/?$    /app/products/flow-meter/  [R=301,L]

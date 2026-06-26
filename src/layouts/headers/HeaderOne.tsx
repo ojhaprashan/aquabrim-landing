@@ -60,7 +60,7 @@ const HeaderOne = ({ style }: any) => {
             <div className="flex items-center gap-8">
               <NavMenu />
               <Link
-                href="/contact"
+                href="/contact-us"
                 className="inline-block shrink-0 rounded-[3px] bg-primary px-6 py-3 text-[17px] font-medium tracking-wide text-white no-underline transition-colors duration-500 hover:bg-[#19142d]"
               >
                 Get a Quote <i className="bi bi-arrow-right"></i>

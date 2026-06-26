@@ -23,31 +23,31 @@ const menu_data: DataType[] = [
 	{
 		id: 2,
 		title: "About Us",
-		link: "/about",
+		link: "/about-us",
 		has_dropdown: false,
 	},
 	{
 		id: 3,
 		title: "Products",
-		link: "/service",
+		link: "/products",
 		has_dropdown: false,
 	},
 	{
 		id: 4,
 		title: "Blog",
-		link: "/blog",
+		link: "/blogs",
 		has_dropdown: false,
 	},
 	{
 		id: 5,
 		title: "Contact Us",
-		link: "/contact",
+		link: "/contact-us",
 		has_dropdown: false,
 	},
 	{
 		id: 6,
 		title: "Support",
-		link: "/contact",
+		link: "/contact-us",
 		has_dropdown: false,
 	},
 ];

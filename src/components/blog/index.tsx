@@ -20,7 +20,7 @@ const Blog = () => {
         title="Reliable Water Management Starts Here"
         subtitle="Explore automation solutions trusted across industries and homes."
         btnText="View Systems"
-        btnLink="/service"
+        btnLink="/products"
         icon="bi-droplet-half"
         btnIcon="bi-grid-fill"
       />

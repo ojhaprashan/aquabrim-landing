@@ -57,7 +57,7 @@ const ServiceAreaPanIndia = () => {
 
             <div className="mt-4">
               <a
-                href="/service"
+                href="/products"
                 className="inline-block rounded-md bg-[#006CD0] px-4 py-3 font-bold text-white no-underline shadow-sm transition-colors hover:bg-[#005bb0]"
               >
                 View Products <i className="bi bi-arrow-right ml-2"></i>
