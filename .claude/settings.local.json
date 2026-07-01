@@ -8,7 +8,17 @@
       "Bash(Select-Object Name, FullName)",
       "Bash(node -e \"const s=require\\('sharp'\\); s\\('public/assets/images/logo_blue.png'\\).metadata\\(\\).then\\(m=>console.log\\('logo_blue.png ->', m.width+'x'+m.height, m.format\\)\\).catch\\(e=>console.log\\('err',e.message\\)\\)\")",
       "Bash(node -e \"const a='Aquabrim Pvt. Ltd., Plot no. 35, Union Bank of India Building, 100 Feet Road, Ghitorni, New Delhi 110030'; console.log\\('EMBED:'\\); console.log\\('https://www.google.com/maps?q='+encodeURIComponent\\(a\\)+'&output=embed'\\); console.log\\('LINK:'\\); console.log\\('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent\\(a\\)\\);\")",
-      "Bash(echo \"exit:$?\")"
+      "Bash(echo \"exit:$?\")",
+      "Bash(cd /d/aquabrim_new)",
+      "Bash(node -e ' *)",
+      "Bash(node -e 'let d=\"\";process.stdin.on\\(\"data\",c=>d+=c\\);process.stdin.on\\(\"end\",\\(\\)=>{const j=JSON.parse\\(d\\);console.log\\(\"count:\",j.reviews.length\\);j.reviews.forEach\\(r=>console.log\\(\" -\",r.rating+\"★\",r.name,\"|\",r.designation,\"\\\\n    \",\\(r.review||\"\"\\).slice\\(0,80\\)\\)\\);}\\)')",
+      "Bash(node -e 'let d=\"\";process.stdin.on\\(\"data\",c=>d+=c\\);process.stdin.on\\(\"end\",\\(\\)=>{const j=JSON.parse\\(d\\);console.log\\(\"count:\",j.reviews.length\\);j.reviews.forEach\\(r=>console.log\\(\" -\",r.rating+\"★\",r.name\\)\\);}\\)')",
+      "Bash(npx next *)",
+      "Bash(mkdir -p seo-root-upload)",
+      "Bash(node -)"
+    ],
+    "additionalDirectories": [
+      "\\tmp"
     ]
   }
 }

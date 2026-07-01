@@ -8,8 +8,10 @@ import CtaBanner from '../common/CtaBanner';
 import Founders from './Founders';
 import AboutPortfolio from './AboutPortfolio';
 import OurJourney from './OurJourney';
+import { getReviews } from '@/lib/reviews';
 
-const About = () => {
+const About = async () => {
+  const reviews = await getReviews();
   return (
     <>
       <HeaderOne />
@@ -17,7 +19,7 @@ const About = () => {
         <AboutPortfolio />
         <MissionVision />
         <OurJourney />
-        <TestimonialAreaHomeOne />
+        <TestimonialAreaHomeOne reviews={reviews} />
         <Founders />
         <ServiceAreaPanIndia />
       </main>
