@@ -26,6 +26,14 @@ const ContactArea = () => {
   return (
     <div className="bg-white py-12">
       <div className="container-app">
+        <div className="mb-6 max-w-[620px]">
+          <h1 className="text-[1.4rem] font-extrabold leading-[1.2] tracking-[-0.5px] text-[#1c1632] sm:text-[1.7rem] lg:text-[1.95rem]">
+            Contact Aquabrim
+            <span className="mt-0.5 block bg-gradient-to-r from-[#006CD0] to-[#00a4ff] bg-clip-text text-transparent">
+              Get a Quote or Expert Support
+            </span>
+          </h1>
+        </div>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
 
           {/* Left Column: Contact Form */}
@@ -43,7 +51,7 @@ const ContactArea = () => {
           <div className="lg:col-span-5">
             <div className="flex h-full flex-col rounded-[20px] bg-white p-6 shadow-sm md:p-12">
               <div className="mb-4">
-                <h3 className="mb-4 text-[1.5rem] font-bold text-[#1c1632]">Head office</h3>
+                <h3 className="mb-4 text-[1.5rem] font-bold text-[#1c1632]">Head Office &ndash; New Delhi (Ghitorni)</h3>
 
                 <InfoRow icon="bi-geo-alt-fill" title="Address">
                   Aquabrim Pvt. Ltd.<br />Plot no. 35, 1st Floor, Union Bank of India Building,<br />100 Feet road, Ghitorni, Delhi – 110030
@@ -60,7 +68,7 @@ const ContactArea = () => {
 
                 <Divider />
 
-                <h3 className="mb-4 text-[1.5rem] font-bold text-[#1c1632]">Branch address</h3>
+                <h3 className="mb-4 text-[1.5rem] font-bold text-[#1c1632]">Branch &ndash; Bangalore, Karnataka</h3>
 
                 <InfoRow icon="bi-geo-alt-fill" title="STATE: KARNATAKA">
                   Aquabrim Pvt. Ltd.<br />Flat no .20, Mahabala 2nd cross, Chamundi Narsari Road,<br />Jaraganahalli, Bangalore (Landmark: Shivanna Depo).
@@ -77,7 +85,7 @@ const ContactArea = () => {
 
                 <Divider />
 
-                <h3 className="mb-4 text-[1.5rem] font-bold text-[#1c1632]">Branch address</h3>
+                <h3 className="mb-4 text-[1.5rem] font-bold text-[#1c1632]">Branch &ndash; Pune, Maharashtra</h3>
 
                 <InfoRow icon="bi-geo-alt-fill" title="STATE: MAHARASHTRA">
                   Aquabrim Pvt. Ltd.<br />16/B Elahi Residency, 3 No Colony, Ashoka Society,<br />Kalewadi Phata, Thergaon, Chinchwad,<br />Pune – 411033, Maharashtra

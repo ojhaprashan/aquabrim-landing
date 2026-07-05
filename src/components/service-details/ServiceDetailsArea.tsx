@@ -163,7 +163,7 @@ const ServiceDetailsArea = () => {
                 </span>
               </div>
 
-              <h2 className="mb-2 text-5xl font-extrabold tracking-[-0.5px] text-[#0f172a] max-sm:text-[2rem]">{product.title}</h2>
+              <h1 className="mb-2 text-5xl font-extrabold tracking-[-0.5px] text-[#0f172a] max-sm:text-[2rem]">{product.h1 || product.title}</h1>
               <p className="mb-3 text-[1.25rem] font-semibold text-[#006CD0]">{product.description}</p>
 
               <p className="mb-4 mt-3 text-[0.98rem] leading-[1.7] text-[#6c757d]">
@@ -173,9 +173,9 @@ const ServiceDetailsArea = () => {
               {/* Features Chips */}
               {product.features && (
                 <div className="mb-4">
-                  <p className="mb-3 text-[0.82rem] font-bold uppercase tracking-[1.2px] text-[#006CD0]">
-                    Key Product Features
-                  </p>
+                  <h2 className="mb-3 text-[0.82rem] font-bold uppercase tracking-[1.2px] text-[#006CD0]">
+                    Key Features
+                  </h2>
                   <div className="mb-3 flex flex-wrap gap-2">
                     {product.features.map((feat: string, fIdx: number) => {
                       const text = feat.toLowerCase();
@@ -226,7 +226,7 @@ const ServiceDetailsArea = () => {
         <div className="container-app lg:py-4">
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
             <div className="lg:pr-10">
-              <h2 className="mb-4 text-[2.5rem] font-bold text-[#0f172a] max-lg:text-[2rem] max-sm:text-[1.75rem]">How It Works</h2>
+              <h2 className="mb-4 text-[2.5rem] font-bold text-[#0f172a] max-lg:text-[2rem] max-sm:text-[1.75rem]">How It Works &ndash; Step by Step</h2>
 
               {product.howItWorks ? (
                 product.howItWorks.map((step: any, sIdx: number) => (

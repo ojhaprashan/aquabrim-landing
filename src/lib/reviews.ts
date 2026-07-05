@@ -37,9 +37,9 @@ export async function getReviews(): Promise<Review[]> {
       relative_time_description?: string;
     }>;
 
-    // Only show reviews rated 4 stars and above.
+    // Only show 5-star reviews that have text.
     return raw
-      .filter((r) => (r.rating || 0) >= 4 && (r.text || '').trim().length > 0)
+      .filter((r) => (r.rating || 0) === 5 && (r.text || '').trim().length > 0)
       .map((r, idx) => ({
         id: idx + 1,
         name: (r.author_name || 'Google User').trim(),

@@ -20,6 +20,9 @@ const MissionVision = () => {
   return (
     <section className="overflow-hidden bg-[#f8fafc] py-12 sm:py-16 lg:py-20">
       <div className="container-app">
+        <div className="mb-10 text-center">
+          <h2 className="text-[1.7rem] font-extrabold text-[#1e293b] sm:text-[2.1rem] lg:text-[2.5rem]">Our Mission &amp; Vision</h2>
+        </div>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {CARDS.map((card, i) => (
             <div

@@ -1,8 +1,8 @@
 import ShippingPolicy from "@/components/shipping-policy";
 
 export const metadata = {
-  title: "Shipping Policy - Aquabrim",
-  description: "Learn how Aquabrim processes and delivers your orders safely and timely.",
+  title: "Shipping & Delivery Policy | Aquabrim",
+  description: "Aquabrim ships water level controllers and automation products across India. Find delivery timelines, shipping charges, courier partners, and how to track your Aquabrim order.",
 };
 
 const page = () => {

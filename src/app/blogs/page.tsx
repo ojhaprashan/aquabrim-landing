@@ -5,8 +5,8 @@ import React from 'react';
 
 
 export const metadata = {
-  title: 'Blog | Aquabrim',
-  description: "Read the latest news and updates from Aquabrim about smart water level controllers and motorized valve systems. Expert advice on water automation since 2008.",
+  title: 'Water Automation Blog – Tips, Guides & Insights | Aquabrim',
+  description: "Expert articles on water level controllers, dry-run protection, smart automation, water conservation & industry insights from Aquabrim — India's water automation specialists since 2008.",
 }
 
 

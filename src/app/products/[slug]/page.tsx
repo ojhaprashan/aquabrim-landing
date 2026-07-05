@@ -10,11 +10,14 @@ export function generateStaticParams() {
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
-  const product = productsData.find((p) => productSlug(p) === params.slug);
+  const product = productsData.find((p) => productSlug(p) === params.slug) as any;
   return {
-    title: product ? `${product.title} | Aquabrim` : 'Product Details | Aquabrim',
+    title:
+      product?.metaTitle ||
+      (product ? `${product.title} | Aquabrim` : 'Product Details | Aquabrim'),
     description:
-      (product as any)?.description ||
+      product?.metaDescription ||
+      product?.description ||
       'Learn more about the technical details of our smart water level control solutions.',
   };
 }

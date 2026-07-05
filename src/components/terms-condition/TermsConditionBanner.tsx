@@ -5,7 +5,7 @@ import terms_banner_img from "@/assets/images/policy/terms&condition.webp";
 const TermsConditionBanner = () => (
   <PolicyBanner
     image={terms_banner_img}
-    title="Terms & Conditions"
+    title="Terms & Conditions – Aquabrim Private Limited"
     subtitle="Read the terms and conditions for using our website and products."
   />
 );

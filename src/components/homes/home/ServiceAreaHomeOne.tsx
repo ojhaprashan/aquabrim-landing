@@ -28,7 +28,7 @@ const ServiceAreaHomeOne = ({ style_2 }: any) => {
             <h4 className="relative mb-2 inline-block px-[50px] text-2xl font-medium text-primary before:absolute before:right-0 before:top-[14px] before:h-0.5 before:w-[35px] before:bg-primary after:absolute after:left-0 after:top-[14px] after:h-0.5 after:w-[35px] after:bg-primary">
               Our Products
             </h4>
-            <h2 className="mb-[42px] text-[48px] font-semibold text-[#1c1632] max-md:text-[32px]">Advanced Automation Products</h2>
+            <h2 className="mb-[42px] text-[48px] font-semibold text-[#1c1632] max-md:text-[32px]">Our Water Automation Products</h2>
           </div>
         }
 

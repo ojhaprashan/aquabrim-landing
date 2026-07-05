@@ -59,8 +59,16 @@ const ProductList = () => {
   });
 
   return (
-    <section className="relative min-h-[80vh] overflow-hidden bg-gradient-to-br from-[#f8fafc] to-[#eef2f6] pb-[60px] pt-6 before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-[300px] before:bg-gradient-to-b before:from-[#006CD0]/[0.03] before:to-transparent before:content-[''] sm:pt-10 lg:pb-[120px] lg:pt-14">
+    <section className="relative min-h-[80vh] overflow-hidden bg-gradient-to-br from-[#f8fafc] to-[#eef2f6] pb-[60px] pt-5 before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-[300px] before:bg-gradient-to-b before:from-[#006CD0]/[0.03] before:to-transparent before:content-[''] sm:pt-7 lg:pb-[120px] lg:pt-9">
       <div className="container-app relative">
+        <div className="mb-5 max-w-[620px] max-md:mb-4">
+          <h1 className="text-[1.4rem] font-extrabold leading-[1.2] tracking-[-0.5px] text-[#0f172a] sm:text-[1.7rem] lg:text-[1.95rem]">
+            Water Level Controller Products
+            <span className="mt-0.5 block bg-gradient-to-r from-[#006CD0] to-[#00a4ff] bg-clip-text text-transparent">
+              Smart Automation for Every Setup
+            </span>
+          </h1>
+        </div>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-12 md:gap-6">
 
           {/* Sidebar Left: Categories */}

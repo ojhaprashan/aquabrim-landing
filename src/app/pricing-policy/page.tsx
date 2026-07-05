@@ -4,8 +4,8 @@ import Wrapper from '@/layouts/Wrapper';
 import PricingPolicy from '@/components/pricing-policy';
 
 export const metadata = {
-  title: 'Pricing Policy | Aquabrim',
-  description: "Learn about Aquabrim's transparent pricing structure, tax policies, and payment terms for our smart water automation solutions.",
+  title: 'Pricing Policy | Aquabrim Water Level Controllers',
+  description: "Understand Aquabrim's pricing, payment terms & discount policy for water level controllers and automation systems. Transparent pricing from ₹2,000 for homes to industrial custom quotes.",
 }
 
 const index = () => {

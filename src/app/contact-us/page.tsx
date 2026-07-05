@@ -4,8 +4,8 @@ import Wrapper from '@/layouts/Wrapper';
 import React from 'react';
 
 export const metadata = {
-  title: 'Contact Us | Aquabrim',
-  description: "Get in touch with Aquabrim for smart water level controllers and automation solutions. We provide expert support and services since 2008.",
+  title: 'Contact Aquabrim | Get a Quote – Delhi, Bangalore, Pune',
+  description: "Contact Aquabrim for water level controllers, installation support & expert advice. Offices in Delhi, Bangalore & Pune. Call +91-9560088791 or send us a message for a quick response.",
 }
 
 const index = () => {

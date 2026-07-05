@@ -7,6 +7,9 @@
     "title": "Trigger",
     "subtitle": "Never miss water supply",
     "description": "Smart controller for motor, directly connected to corporation water supply line",
+    "h1": "Trigger – Smart Wireless Controller for Municipal Water Supply Lines",
+    "metaTitle": "Trigger – Municipal Water Level Controller | Aquabrim",
+    "metaDescription": "Aquabrim Trigger detects municipal water supply, auto-fills your tank & cuts the motor when full. Prevents overflow & dry-run with wireless smart automation. No manual switching needed.",
     "imgKey": "prod_controller",
     "images": [
       "/assets/Product/trigger_2.jpeg",
@@ -54,6 +57,9 @@
     "title": "Macro",
     "subtitle": "Prevents tank overflow",
     "description": "Controller for borewell/ submersible pumps, motor pumping from Underground tank to Overhead tank",
+    "h1": "Macro – Wireless Controller for Borewell & Submersible Pumps",
+    "metaTitle": "Macro – Borewell & Submersible Pump Controller | Aquabrim",
+    "metaDescription": "Aquabrim Macro automates water transfer from underground to overhead tanks using borewell or submersible pumps. Prevents overflow, dry-run & ensures uninterrupted water supply every day.",
     "imgKey": "prod_controller",
     "images": [
       "/assets/Product/macro_3.jpeg",
@@ -98,6 +104,9 @@
     "categoryName": "Industrial",
     "title": "MATRIX",
     "description": "Multi-Tank Water Level Controller",
+    "h1": "MATRIX – Industrial Multi-Tank Water Level Controller with Remote Monitoring",
+    "metaTitle": "MATRIX – Industrial Multi-Tank Water Controller | Aquabrim",
+    "metaDescription": "Aquabrim MATRIX controls multiple tanks & dual motors with MODBUS/BMS integration, SMS alerts & remote monitoring. Ideal for commercial buildings, industries & large infrastructure setups.",
     "imgKey": "prod_tank_monitor",
     "images": [
       "/assets/Product/matix_1.webp",
@@ -143,6 +152,9 @@
     "categoryName": "Industrial",
     "title": "FLEXIBELL",
     "description": "Wireless Water Level Alarm",
+    "h1": "FLEXIBELL – Wireless Water Level Alarm & Real-Time Tank Indicator",
+    "metaTitle": "FLEXIBELL – Wireless Water Level Alarm System | Aquabrim",
+    "metaDescription": "Aquabrim FLEXIBELL gives instant wireless alarms for low water, full tank & overflow across multiple tanks. SMS alerts, pressure monitoring & zero complex wiring — ready in minutes.",
     "imgKey": "prod_tank_monitor",
     "images": [
       "/assets/Product/flexibell_1.webp",

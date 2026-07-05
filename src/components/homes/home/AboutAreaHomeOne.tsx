@@ -54,7 +54,7 @@ const AboutAreaHomeOne = ({ hideClients, hideImpact }: any) => {
           {/* Right: Content */}
           <div>
             <h2 className="mb-2 text-center text-[1.85rem] font-bold leading-tight text-[#0d1b2a] lg:text-left lg:text-[2.4rem]">
-              How Aquabrim&rsquo;s Water Level Controllers works
+              How Aquabrim Water Level Controller Works
             </h2>
 
             <div className="mb-4 text-center lg:text-left">
@@ -102,7 +102,7 @@ const AboutAreaHomeOne = ({ hideClients, hideImpact }: any) => {
               <>
                 <div className="mb-10 text-center">
                   <span className="mb-2 block text-[0.9rem] font-bold uppercase tracking-[1.5px] text-primary">Trusted by thousands</span>
-                  <h3 className="mb-2 text-[clamp(1.375rem,1.375rem+1.5vw,2.5rem)] font-bold text-[#0d1b2a]">Trusted by thousands across multiple sectors</h3>
+                  <h3 className="mb-2 text-[clamp(1.375rem,1.375rem+1.5vw,2.5rem)] font-bold text-[#0d1b2a]">Trusted by 50,000+ Customers Across India</h3>
                   <p className="text-lg text-gray-500">Installed across residential, commercial and institutional</p>
                 </div>
 

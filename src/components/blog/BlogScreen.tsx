@@ -129,6 +129,14 @@ const BlogScreen = () => {
   return (
     <section className="min-h-screen bg-white py-12">
       <div className="container-app">
+        <div className="mb-6 max-w-[620px]">
+          <h1 className="text-[1.4rem] font-extrabold leading-[1.2] tracking-[-0.5px] text-[#0f172a] sm:text-[1.7rem] lg:text-[1.95rem]">
+            Water Automation Blog
+            <span className="mt-0.5 block bg-gradient-to-r from-[#006CD0] to-[#00a4ff] bg-clip-text text-transparent">
+              Expert Guides, Tips &amp; Industry Insights
+            </span>
+          </h1>
+        </div>
         {/* Top Category Chips */}
         <div className="mb-12 flex flex-nowrap gap-2 overflow-auto pb-2 md:gap-3 [&::-webkit-scrollbar]:hidden">
           {categories.map((cat) => (

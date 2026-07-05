@@ -57,9 +57,9 @@ const AboutPortfolio = () => {
             </span>
             <div className="mb-6 mt-1 h-[3px] w-[60px] rounded-[2px] bg-[#006CD0]"></div>
 
-            <h2 className="mb-4 mt-2 text-[1.5rem] font-bold leading-[1.4] tracking-[-0.01em] text-[#1c1632] sm:text-[1.95rem] lg:text-[2.3rem] lg:leading-[1.35]">
-              India&rsquo;s Smart Water Automation Company
-            </h2>
+            <h1 className="mb-4 mt-2 text-[1.5rem] font-bold leading-[1.4] tracking-[-0.01em] text-[#1c1632] sm:text-[1.95rem] lg:text-[2.3rem] lg:leading-[1.35]">
+              India&rsquo;s Smart Water Automation Company &ndash; Aquabrim Since 2008
+            </h1>
 
             <p className="mb-3 text-[1rem] leading-[1.7] text-[#64748b] sm:text-[1.1rem] sm:leading-[1.8]">
               Aquabrim is built to simplify and modernize the way water is monitored, controlled, and managed across residential, commercial, and industrial infrastructure.
@@ -78,9 +78,9 @@ const AboutPortfolio = () => {
 
         {/* Bottom Row: Our Expertise */}
         <div className="mt-12">
-          <h4 className="mb-4 mt-[25px] text-center text-[1.15rem] font-bold text-[#006CD0] sm:mt-[35px] sm:text-[1.3rem]">
-            OUR EXPERTISE
-          </h4>
+          <h2 className="mb-4 mt-[25px] text-center text-[1.15rem] font-bold text-[#006CD0] sm:mt-[35px] sm:text-[1.3rem]">
+            Who We Are &amp; What We Build
+          </h2>
 
           <div className="flex flex-col gap-4 lg:flex-row">
             {EXPERTISE.map((item, i) => (

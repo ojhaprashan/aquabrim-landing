@@ -19,7 +19,7 @@ const PricingAreaHomeOne = () => {
           <div className="mb-4 lg:mb-0">
             <h4 className="mb-2 text-[18px] font-bold uppercase text-primary">FAQ</h4>
             <h2 className="mb-4 text-[28px] font-bold leading-tight text-[#0d1b2a] md:text-[2.5rem]">
-              Want to Ask Something <br /> from Us?
+              Frequently Asked Questions
             </h2>
             <Accordion />
           </div>

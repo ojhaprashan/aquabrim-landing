@@ -66,7 +66,7 @@ const HeroAreaHomeOne = () => {
           {/* Left Column: Text Content */}
           <div className="w-full lg:w-7/12 lg:pt-[50px]">
             <h1 className="mb-5 text-center text-[32px] font-extrabold leading-[1.25] text-[#0d1b2a] md:text-[40px] lg:text-left lg:text-[2.8rem] xl:text-[3.2rem]">
-              Wireless Water Level Controller for{' '}
+              Smart Wireless Water Level Controller for{' '}
               {/* On mobile the animated word sits on its own centered line; on desktop it stays inline with a fixed-width placeholder for stability */}
               <span className="relative text-primary max-md:mt-2 max-md:block lg:inline-block">
                 <span className="invisible select-none max-md:hidden" aria-hidden="true">Apartments&nbsp;&nbsp;</span>

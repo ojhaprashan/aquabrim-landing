@@ -180,6 +180,7 @@ const Founders = () => {
         {/* Title */}
         <div className="mx-auto mb-12 max-w-[680px] text-center">
           <span className="text-[14px] font-bold uppercase tracking-[2px] text-[#006CD0]">OUR FOUNDERS</span>
+          <h2 className="mt-2 text-[1.7rem] font-extrabold text-[#1e293b] sm:text-[2.1rem] lg:text-[2.5rem]">Meet Our Founders</h2>
           <div className="mx-auto mt-[15px] h-[3px] w-[60px] rounded-[2px] bg-[#006CD0]"></div>
         </div>
 

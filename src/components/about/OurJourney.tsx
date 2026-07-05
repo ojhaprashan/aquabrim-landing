@@ -98,7 +98,7 @@ const OurJourney = () => {
             OUR ROADMAP
           </span>
           <h2 className="mt-2 text-[1.7rem] font-extrabold text-[#1e293b] sm:text-[2.1rem] lg:text-[2.5rem]">
-            The Journey of Innovation
+            The Journey of Innovation (2008&ndash;2025)
           </h2>
           <div className="mx-auto mt-[18px] h-1 w-20 rounded bg-gradient-to-r from-[#006CD0] to-[#00d2ff] shadow-[0_2px_10px_rgba(0,108,208,0.3)]"></div>
         </div>

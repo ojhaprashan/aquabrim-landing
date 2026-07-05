@@ -16,32 +16,9 @@ type Testimonial = {
   rating: number;
 };
 
-const fallback_data: Testimonial[] = [
-  {
-    id: 1,
-    name: "Ramesh Kumar",
-    designation: "Homeowner, Coimbatore",
-    review: "Aquabrim controller has completely solved our water overflow issue. Very reliable and easy to use.",
-    avatar: "/assets/images/testimonials/ramesh.webp",
-    rating: 5
-  },
-  {
-    id: 2,
-    name: "Sunita Rao",
-    designation: "Apartment Manager, Chennai",
-    review: "We installed Aquabrim in our apartment complex. It works perfectly and the motor is well protected.",
-    avatar: "/assets/images/testimonials/sunita.webp",
-    rating: 5
-  },
-  {
-    id: 3,
-    name: "Arun Mehta",
-    designation: "Builder, Bengaluru",
-    review: "Best water level controller we have used. Installation was easy and support is excellent.",
-    avatar: "/assets/images/testimonials/arun.webp",
-    rating: 5
-  }
-];
+// Show only real 5-star Google reviews — no fallback data.
+const getLiveReviews = (reviews?: Testimonial[]): Testimonial[] =>
+  (reviews || []).filter((r) => r.rating === 5).map((item, idx) => ({ ...item, id: idx + 1 }));
 
 // Longer reviews are clamped with a "Read more" toggle so every card stays
 // roughly the same height in the slider.
@@ -103,16 +80,19 @@ const TestimonialCard = ({ item }: { item: Testimonial }) => {
 const TestimonialAreaHomeOne = ({ reviews }: { reviews?: Testimonial[] }) => {
   // Reviews are fetched on the server at build time and passed in as a prop,
   // so there is no client-side request that could break under a subfolder.
-  // Fall back to the bundled samples only if no real reviews are available.
-  const testimonial_data: Testimonial[] =
-    reviews && reviews.length > 0 ? reviews.filter((r) => r.rating >= 4) : fallback_data;
+  // Only real Google reviews (4★+) are shown — no curated fallback.
+  const testimonial_data: Testimonial[] = getLiveReviews(reviews);
+
+  // Nothing to show if there are no real reviews — hide the section entirely
+  // rather than showing curated/fallback content.
+  if (testimonial_data.length === 0) return null;
 
   return (
     <section className="bg-white py-12">
       <div className="container-app">
         <div className="mb-12 text-center">
           <h6 className="mb-2 text-[1rem] font-bold uppercase tracking-[2px] text-[#006CD0]">What Our Clients Say</h6>
-          <h2 className="text-[clamp(32px,5vw,42px)] font-bold text-[#1c1632]">Trusted by Thousands</h2>
+          <h2 className="text-[clamp(32px,5vw,42px)] font-bold text-[#1c1632]">Trusted by 50,000+ Customers</h2>
         </div>
 
         <Swiper

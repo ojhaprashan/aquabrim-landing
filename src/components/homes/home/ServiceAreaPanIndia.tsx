@@ -25,9 +25,9 @@ const ServiceAreaPanIndia = () => {
   const states_col_2 = states.slice(7);
 
   const stats = [
-    { icon: 'bi-geo-alt-fill', label: '15+ Cities served' },
-    { icon: 'bi-house-door-fill', label: '50,000+ Customers' },
-    { icon: 'bi-emoji-smile-fill', label: 'Thousands of Happy Customers' },
+    { icon: 'bi-geo-alt-fill', label: '15+ Cities Served Across India' },
+    { icon: 'bi-house-door-fill', label: '50,000+ Homes and Buildings Automated' },
+    { icon: 'bi-emoji-smile-fill', label: 'Trusted Since 2008' },
   ];
 
   return (
@@ -39,7 +39,7 @@ const ServiceAreaPanIndia = () => {
           <div className="mb-2 md:col-span-2 lg:col-span-1 lg:mb-0">
             <div className="mb-4">
               <h6 className="mb-2 text-[1rem] font-bold uppercase tracking-[1px] text-[#006CD0]">Where We Serve</h6>
-              <h2 className="mb-4 text-[clamp(28px,4vw,36px)] font-bold text-[#1c1632]">Serving Across India</h2>
+              <h2 className="mb-4 text-[clamp(28px,4vw,36px)] font-bold text-[#1c1632]">Trusted by Homes and Industries Across India</h2>
             </div>
 
             <div>
