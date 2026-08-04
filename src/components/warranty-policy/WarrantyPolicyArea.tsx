@@ -1,7 +1,7 @@
 import React from 'react';
-import { PolicyArea, PolicySection, PolicyP, PolicyList, PolicyContact } from '../common/PolicyKit';
+import { PolicySection, PolicyP, PolicyList, PolicyContact } from '../common/PolicyKit';
 
-const nav = [
+export const nav = [
   { href: '#overview', label: '1. Overview' },
   { href: '#coverage', label: '2. Coverage' },
   { href: '#process', label: '3. Service Process' },
@@ -15,9 +15,8 @@ const nav = [
   { href: '#contact', label: '11. Contact Us' },
 ];
 
-const WarrantyPolicyArea = () => {
-  return (
-    <PolicyArea lastUpdated="20 May 2026" nav={nav}>
+export const fallbackBody = (
+  <>
       <PolicySection id="overview" title="1. Overview">
         <PolicyP>
           Aquabrim products are designed and manufactured to deliver reliable performance and long-term operational efficiency. Our Warranty and Annual Maintenance Contract (AMC) policies are intended to ensure smooth service support and customer assistance throughout the product lifecycle.
@@ -143,8 +142,5 @@ const WarrantyPolicyArea = () => {
         </PolicyP>
         <PolicyContact />
       </PolicySection>
-    </PolicyArea>
-  );
-};
-
-export default WarrantyPolicyArea;
+  </>
+);

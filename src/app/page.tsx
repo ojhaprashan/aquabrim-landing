@@ -7,6 +7,9 @@ import React from 'react';
 export const metadata = {
   title: 'Wireless Water Level Controller India | Aquabrim',
   description: "Aquabrim's wireless water level controllers stop tank overflow, prevent dry-run damage & automate your motor 24/7. Trusted by 50,000+ homes & industries across India since 2008.",
+  alternates: {
+    canonical: '/',
+  },
 }
 
 

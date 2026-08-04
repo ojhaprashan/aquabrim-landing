@@ -4,13 +4,62 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { products } from '../service/ProductList';
+import Accordion from '../common/Accordion';
+import { useDynamicCall } from '@/hooks/useDynamicCall';
+import { trackPhoneCall } from '@/utils/gtag';
+import { getProductsContent } from '@/services/products/products.service';
+import type { ProductItem } from '@/services/products/products.types';
+import { productSlug } from '@/utils/slug';
 
 import service_details_2 from "@/assets/images/resource/service-details2.png";
+
+// Merge CMS product content over the products.json base, keeping the base value
+// whenever the CMS field is empty/blank so the page never renders blank sections.
+const mergeProduct = (base: any, override: ProductItem) => {
+  const out: any = { ...base };
+  for (const [key, value] of Object.entries(override)) {
+    if (value == null) continue;
+    if (Array.isArray(value) && value.length === 0) continue;
+    if (typeof value === 'string' && value.trim() === '') continue;
+    out[key] = value;
+  }
+  const images = out.images && out.images.length ? out.images : base.images;
+  out.images = images;
+  out.img = images && images.length ? images[0] : base.img;
+  return out;
+};
 
 const ServiceDetailsArea = () => {
   const params = useParams();
   const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
-  const product = (products.find(p => p.slug === slug) || products[0]) as any;
+
+  // Live CMS content for this slug (if any). The static route itself is built
+  // from products.json (see generateStaticParams). NOTE: a product added ONLY
+  // in the CMS has no static detail route until products.json is updated and the
+  // site is rebuilt — this fetch only supplies live content for existing routes.
+  const [cmsProduct, setCmsProduct] = useState<ProductItem | null>(null);
+
+  useEffect(() => {
+    getProductsContent().then((content) => {
+      const list = content?.catalog?.products;
+      if (!list?.length) return;
+      const match = list.find((p) => productSlug(p as any) === slug);
+      setCmsProduct(match ?? null);
+    });
+  }, [slug]);
+
+  const baseProduct = (products.find(p => p.slug === slug) || products[0]) as any;
+  // CMS content overrides the products.json entry when present.
+  const product = cmsProduct ? mergeProduct(baseProduct, cmsProduct) : baseProduct;
+
+  const { number: callNumber, href: callHref } = useDynamicCall();
+
+  const descriptionParagraphs: string[] = Array.isArray(product.longDescription)
+    ? product.longDescription
+    : [
+        product.longDescription ||
+          `The Aquabrim ${product.title} ${product.description} represents our signature premium tier engineering. Specially optimized for smart and robust performance under dynamic Indian voltage, piping, and tank conditions.`,
+      ];
 
   const [selectedImage, setSelectedImage] = useState<any>(null);
 
@@ -166,9 +215,11 @@ const ServiceDetailsArea = () => {
               <h1 className="mb-2 text-5xl font-extrabold tracking-[-0.5px] text-[#0f172a] max-sm:text-[2rem]">{product.h1 || product.title}</h1>
               <p className="mb-3 text-[1.25rem] font-semibold text-[#006CD0]">{product.description}</p>
 
-              <p className="mb-4 mt-3 text-[0.98rem] leading-[1.7] text-[#6c757d]">
-                {product.longDescription || `The Aquabrim ${product.title} ${product.description} represents our signature premium tier engineering. Specially optimized for smart and robust performance under dynamic Indian voltage, piping, and tank conditions.`}
-              </p>
+              <div className="mb-4 mt-3 space-y-3 text-[0.98rem] leading-[1.7] text-[#6c757d]">
+                {descriptionParagraphs.map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
 
               {/* Features Chips */}
               {product.features && (
@@ -259,6 +310,87 @@ const ServiceDetailsArea = () => {
         </div>
       </div>
       )}
+
+      {/* Technical Specifications */}
+      {product.technicalSpecifications && product.technicalSpecifications.length > 0 && (
+        <div className="container-app mt-16">
+          <div className="mb-8 text-center">
+            <h2 className="text-[2.5rem] font-bold text-[#0f172a] max-lg:text-[2rem] max-sm:text-[1.75rem]">Technical Specifications</h2>
+            <p className="mx-auto mt-2 max-w-[560px] text-[0.98rem] leading-[1.7] text-[#6c757d]">Everything you need to know about the {product.title} at a glance.</p>
+          </div>
+          <div className="mx-auto max-w-[820px] overflow-hidden rounded-2xl border border-solid border-[#e2e8f0] shadow-sm">
+            {product.technicalSpecifications.map((spec: any, sIdx: number) => (
+              <div
+                key={sIdx}
+                className={`flex flex-col gap-1 px-5 py-4 sm:flex-row sm:items-center sm:gap-4 sm:px-8 ${
+                  sIdx % 2 === 0 ? 'bg-[#f8fafc]' : 'bg-white'
+                }`}
+              >
+                <span className="flex items-center gap-2 text-[0.9rem] font-bold text-[#0f172a] sm:w-[38%] sm:shrink-0">
+                  <i className="bi bi-check2-circle text-[#006CD0]"></i>
+                  {spec.label}
+                </span>
+                <span className="text-[0.95rem] leading-[1.6] text-[#475569]">{spec.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Frequently Asked Questions */}
+      {product.faqs && product.faqs.length > 0 && (
+        <div className="container-app mt-16">
+          <div className="mb-8 text-center">
+            <h6 className="mb-2 text-[1rem] font-bold uppercase tracking-[2px] text-[#006CD0]">FAQ</h6>
+            <h2 className="text-[2.5rem] font-bold text-[#0f172a] max-lg:text-[2rem] max-sm:text-[1.75rem]">Frequently Asked Questions</h2>
+          </div>
+          <div className="mx-auto max-w-[820px]">
+            <Accordion faqs={product.faqs} />
+          </div>
+        </div>
+      )}
+
+      {/* Product Call To Action */}
+      <div className="container-app mt-16">
+        <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#006CD0] to-[#004c99] px-6 py-10 text-center shadow-[0_20px_50px_-20px_rgba(0,108,208,0.5)] sm:px-12 sm:py-14">
+          <h2 className="mx-auto max-w-[640px] text-[1.6rem] font-extrabold leading-[1.2] text-white sm:text-[2.1rem]">
+            {product.cta?.title || `Ready to automate your water supply with ${product.title}?`}
+          </h2>
+          <p className="mx-auto mt-3 max-w-[560px] text-[0.98rem] leading-[1.7] text-white/85 sm:text-[1.05rem]">
+            {product.cta?.subtitle || `Stop managing your motor manually. Let ${product.title} handle it every day, automatically.`}
+          </p>
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/contact-us"
+              className="flex items-center gap-2 rounded-full bg-white px-6 py-3 text-[0.95rem] font-bold text-[#006CD0] no-underline shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_20px_rgba(0,0,0,0.15)]"
+            >
+              <i className="bi bi-file-earmark-text-fill"></i> Get a Quote
+            </Link>
+            <Link
+              href="/products"
+              className="flex items-center gap-2 rounded-full border border-solid border-white/40 bg-white/10 px-6 py-3 text-[0.95rem] font-bold text-white no-underline backdrop-blur-[4px] transition-all hover:-translate-y-0.5 hover:bg-white/20"
+            >
+              <i className="bi bi-grid-fill"></i> Explore All Products
+            </Link>
+            {product.cta?.contact === 'email' ? (
+              <a
+                href="mailto:save.water@aquabrim.com"
+                className="flex items-center gap-2 rounded-full border border-solid border-white/40 bg-white/10 px-6 py-3 text-[0.95rem] font-bold text-white no-underline backdrop-blur-[4px] transition-all hover:-translate-y-0.5 hover:bg-white/20"
+              >
+                <i className="bi bi-envelope-fill"></i> Email Us
+              </a>
+            ) : (
+              <a
+                href={callHref}
+                onClick={trackPhoneCall}
+                className="flex items-center gap-2 rounded-full border border-solid border-white/40 bg-white/10 px-6 py-3 text-[0.95rem] font-bold text-white no-underline backdrop-blur-[4px] transition-all hover:-translate-y-0.5 hover:bg-white/20"
+              >
+                <i className="bi bi-telephone-fill"></i> Call +91-{callNumber}
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
 
       {/* Glassmorphic Lightbox Modal */}
       {lightboxOpen && (

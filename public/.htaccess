@@ -1,26 +1,66 @@
 # ----------------------------------------------------------------------
-# Aquabrim static export — old → new URL 301 redirects (SEO)
-# This file is uploaded together with the site (inside the /app folder).
-# If the site is served from the domain root instead of /app, change
-# RewriteBase to "/" and remove the "/app" prefix from the targets below.
+# Aquabrim static export — server config
+# NOTE: the site files live inside an /app/ folder on the server, but the
+# public/canonical URLs are the clean root URLs (https://www.aquabrim.com/…).
+# This file is deployed to  <webroot>/app/.htaccess.
 # ----------------------------------------------------------------------
 
+# ======================================================================
+# Security headers (apply site-wide, incl. error responses via "always")
+# ======================================================================
+<IfModule mod_headers.c>
+  # Force HTTPS for 1 year on this domain + all subdomains.
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Disallow the site being framed by other origins (clickjacking).
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Stop browsers MIME-sniffing responses away from the declared type.
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Send origin only on cross-origin requests; full URL same-origin.
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Content-Security-Policy — allowlist tuned to the third parties this
+  # site actually uses: Google Tag Manager + GA4, Google Fonts, the
+  # Google Maps embed iframe, and Google review avatars. 'unsafe-inline'
+  # / 'unsafe-eval' are required because this is a static export (no
+  # nonces) with inline GTM/GA and Next.js bootstrap scripts.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cms.aquabrim.co.in https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com https://maps.googleapis.com; frame-src 'self' https://www.google.com https://www.googletagmanager.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+</IfModule>
+
+# ======================================================================
+# Old → new URL 301 redirects (SEO)
+# ======================================================================
 Options -MultiViews
 RewriteEngine On
-RewriteBase /app/
+RewriteBase /
+
+# --- /app/ duplicate → clean root URL (kill duplicate content) --------
+# The files physically live under /app/, so BOTH the clean URL
+# (/products/) and the /app/ URL (/app/products/) resolve to the same
+# page = duplicate content. This .htaccess sits INSIDE /app/, so rewrite
+# rules see paths relative to /app/ (i.e. "products/", not "app/products/").
+# We therefore match the ORIGINAL request line via THE_REQUEST, which
+# always contains what the browser actually asked for, and 301 any
+# explicit /app/... URL to its clean root equivalent.
+# (No loop: after redirecting to /products/, THE_REQUEST no longer
+#  contains "/app/", so the rule doesn't fire again.)
+RewriteCond %{THE_REQUEST} \s/+app/(\S*) [NC]
+RewriteRule ^ /%1 [R=301,L]
 
 # --- Page renames -----------------------------------------------------
-RewriteRule ^about/?$                /app/about-us/             [R=301,L]
-RewriteRule ^contact/?$              /app/contact-us/           [R=301,L]
-RewriteRule ^blog/?$                 /app/blogs/                [R=301,L]
-RewriteRule ^service/?$              /app/products/             [R=301,L]
-RewriteRule ^terms-condition/?$      /app/terms-and-conditions/ [R=301,L]
+RewriteRule ^about/?$                /about-us/             [R=301,L]
+RewriteRule ^contact/?$              /contact-us/           [R=301,L]
+RewriteRule ^blog/?$                 /blogs/                [R=301,L]
+RewriteRule ^service/?$              /products/             [R=301,L]
+RewriteRule ^terms-condition/?$      /terms-and-conditions/ [R=301,L]
 
 # --- Product detail base path change ----------------------------------
 # Old product pages lived under /service-details/<slug>. Send the whole
 # section to the new /products/ base.
-RewriteRule ^service-details/?$      /app/products/             [R=301,L]
-RewriteRule ^service-details/(.+)$   /app/products/$1           [R=301,L]
+RewriteRule ^service-details/?$      /products/             [R=301,L]
+RewriteRule ^service-details/(.+)$   /products/$1           [R=301,L]
 
 # --- Flow Meter slug typo fix -----------------------------------------
-RewriteRule ^products/flometer/?$    /app/products/flow-meter/  [R=301,L]
+RewriteRule ^products/flometer/?$    /products/flow-meter/  [R=301,L]

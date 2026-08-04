@@ -1,7 +1,7 @@
 import React from 'react';
-import { PolicyArea, PolicySection, PolicyP, PolicySubheading, PolicyList, PolicyContact } from '../common/PolicyKit';
+import { PolicySection, PolicyP, PolicySubheading, PolicyList, PolicyContact } from '../common/PolicyKit';
 
-const nav = [
+export const nav = [
   { href: '#overview', label: '1. Overview' },
   { href: '#collect', label: '2. Information We Collect' },
   { href: '#use', label: '3. How We Use Information' },
@@ -15,9 +15,8 @@ const nav = [
   { href: '#contact', label: '11. Contact Us' },
 ];
 
-const PrivacyPolicyArea = () => {
-  return (
-    <PolicyArea lastUpdated="20 May 2026" nav={nav}>
+export const fallbackBody = (
+  <>
       <PolicySection id="overview" title="1. Overview">
         <PolicyP>
           At Aquabrim, we value your privacy and are committed to protecting the personal information you share with us. This Privacy Policy explains how we collect, use, store, and safeguard your information when you visit our website, interact with our services, or use our products.
@@ -143,8 +142,5 @@ const PrivacyPolicyArea = () => {
         </PolicyP>
         <PolicyContact />
       </PolicySection>
-    </PolicyArea>
-  );
-};
-
-export default PrivacyPolicyArea;
+  </>
+);

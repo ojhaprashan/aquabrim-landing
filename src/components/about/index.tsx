@@ -1,39 +1,12 @@
 import React from 'react';
-import FooterOne from '@/layouts/footers/FooterOne';
-import HeaderOne from '@/layouts/headers/HeaderOne';
-import MissionVision from './MissionVision';
-import TestimonialAreaHomeOne from '../homes/home/TestimonialAreaHomeOne';
-import ServiceAreaPanIndia from '../homes/home/ServiceAreaPanIndia';
-import CtaBanner from '../common/CtaBanner';
-import Founders from './Founders';
-import AboutPortfolio from './AboutPortfolio';
-import OurJourney from './OurJourney';
+import AboutContent from './AboutContent';
 import { getReviews } from '@/lib/reviews';
 
+// Server component: reviews are fetched at build time (the site is a static
+// export) and passed to the client shell, which fetches live CMS content.
 const About = async () => {
   const reviews = await getReviews();
-  return (
-    <>
-      <HeaderOne />
-      <main>
-        <AboutPortfolio />
-        <MissionVision />
-        <OurJourney />
-        <TestimonialAreaHomeOne reviews={reviews} />
-        <Founders />
-        <ServiceAreaPanIndia />
-      </main>
-      <CtaBanner
-        title="Want to See What We Build?"
-        subtitle="Explore smart water Level controllers by Aquabrim."
-        btnText="Explore Products"
-        btnLink="/products"
-        icon="bi-eye-fill"
-        btnIcon="bi-arrow-right"
-      />
-      <FooterOne />
-    </>
-  );
+  return <AboutContent reviews={reviews} />;
 };
 
 export default About;

@@ -1,7 +1,7 @@
 import React from 'react';
-import { PolicyArea, PolicySection, PolicyP, PolicyList, PolicyContact } from '../common/PolicyKit';
+import { PolicySection, PolicyP, PolicyList, PolicyContact } from '../common/PolicyKit';
 
-const nav = [
+export const nav = [
   { href: '#overview', label: '1. Overview' },
   { href: '#pricing-structure', label: '2. Custom Pricing' },
   { href: '#quotes', label: '3. Quotations' },
@@ -14,9 +14,8 @@ const nav = [
   { href: '#contact', label: '10. Contact Us' },
 ];
 
-const PricingPolicyArea = () => {
-  return (
-    <PolicyArea lastUpdated="20 May 2026" nav={nav}>
+export const fallbackBody = (
+  <>
       <PolicySection id="overview" title="1. Overview">
         <PolicyP>
           Aquabrim provides customized water automation and smart water management solutions for residential, commercial, and industrial applications. As most solutions depend on project requirements, installation scope, and system configuration, product pricing is generally shared upon inquiry or consultation.
@@ -134,8 +133,5 @@ const PricingPolicyArea = () => {
         </PolicyP>
         <PolicyContact />
       </PolicySection>
-    </PolicyArea>
-  );
-};
-
-export default PricingPolicyArea;
+  </>
+);

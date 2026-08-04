@@ -1,8 +1,18 @@
 'use client';
 import React from 'react';
+import type { AboutJourney } from '@/services/about/about.types';
 
-const OurJourney = () => {
-  const milestones = [
+const DEFAULTS = {
+  eyebrow: 'OUR ROADMAP',
+  heading: 'The Journey of Innovation (2008–2025)',
+};
+
+const OurJourney = ({ data }: { data?: AboutJourney }) => {
+  const eyebrow = data?.eyebrow || DEFAULTS.eyebrow;
+  const heading = data?.heading || DEFAULTS.heading;
+
+  // SVG icons stay in code (not CMS-editable) and are assigned by position.
+  const defaultMilestones = [
     {
       year: "2008",
       title: "Foundation & Vision",
@@ -89,16 +99,26 @@ const OurJourney = () => {
     },
   ];
 
+  // Merge CMS year/title/desc over the coded milestones, keeping the SVG icons.
+  const milestones = data?.milestones?.length
+    ? data.milestones.map((m, i) => ({
+        year: m.year || defaultMilestones[i]?.year || '',
+        title: m.title || defaultMilestones[i]?.title || '',
+        desc: m.desc || defaultMilestones[i]?.desc || '',
+        icon: defaultMilestones[i]?.icon ?? defaultMilestones[0].icon,
+      }))
+    : defaultMilestones;
+
   return (
     <section className="relative block w-full bg-white py-[60px] sm:py-20 lg:py-[100px]">
       <div className="container-app">
         {/* Header */}
         <div className="mx-auto mb-12 max-w-[680px] text-center">
           <span className="inline-block text-[0.9rem] font-bold uppercase tracking-[3px] text-[#006CD0]">
-            OUR ROADMAP
+            {eyebrow}
           </span>
           <h2 className="mt-2 text-[1.7rem] font-extrabold text-[#1e293b] sm:text-[2.1rem] lg:text-[2.5rem]">
-            The Journey of Innovation (2008&ndash;2025)
+            {heading}
           </h2>
           <div className="mx-auto mt-[18px] h-1 w-20 rounded bg-gradient-to-r from-[#006CD0] to-[#00d2ff] shadow-[0_2px_10px_rgba(0,108,208,0.3)]"></div>
         </div>

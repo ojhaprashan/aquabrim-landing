@@ -1,25 +1,32 @@
 import React from 'react';
 import HeaderOne from '@/layouts/headers/HeaderOne';
 import FooterOne from '@/layouts/footers/FooterOne';
-import CtaBanner from '../common/CtaBanner';
-import ShippingPolicyBanner from './ShippingPolicyBanner';
-import ShippingPolicyArea from './ShippingPolicyArea';
+import PolicyPageContent from '../common/PolicyPageContent';
+import shipping_banner_img from '@/assets/images/policy/shipping.webp';
+import { nav, fallbackBody } from './ShippingPolicyArea';
 
 const ShippingPolicy = () => {
   return (
     <>
       <HeaderOne />
-      <main>
-        <ShippingPolicyBanner />
-        <ShippingPolicyArea />
-      </main>
-      <CtaBanner
-        title="Still Need Help?"
-        subtitle="Our team is here to assist you with any questions"
-        btnText="Contact Support"
-        btnLink="/contact-us"
-        icon="bi-life-preserver"
-        btnIcon="bi-headset"
+      <PolicyPageContent
+        slug="shipping-policy"
+        defaultBanner={{
+          image: shipping_banner_img,
+          title: 'Shipping & Delivery Policy – Aquabrim Orders',
+          subtitle: 'Learn how we process and deliver your Aquabrim orders.',
+        }}
+        defaultLastUpdated="20 May 2026"
+        defaultNav={nav}
+        defaultCta={{
+          title: 'Still Need Help?',
+          subtitle: 'Our team is here to assist you with any questions',
+          btnText: 'Contact Support',
+          btnLink: '/contact-us',
+          icon: 'bi-life-preserver',
+          btnIcon: 'bi-headset',
+        }}
+        fallbackBody={fallbackBody}
       />
       <FooterOne />
     </>

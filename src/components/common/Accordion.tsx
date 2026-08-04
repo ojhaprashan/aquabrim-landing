@@ -2,12 +2,17 @@
 import accordion_data from '@/data/AccordionData';
 import React, { useState } from 'react';
 
-const Accordion = () => {
+type FaqItem = { question: string; answer: string };
+
+// Uses the passed-in `faqs` when provided (e.g. product-specific FAQs),
+// otherwise falls back to the shared site-wide accordion data.
+const Accordion = ({ faqs }: { faqs?: FaqItem[] }) => {
   const [openIndex, setOpenIndex] = useState<number>(0);
+  const data: FaqItem[] = faqs && faqs.length > 0 ? faqs : accordion_data;
 
   return (
     <div className="space-y-3">
-      {accordion_data.map((item, i) => {
+      {data.map((item, i) => {
         const isOpen = openIndex === i;
         return (
           <div

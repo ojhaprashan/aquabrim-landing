@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import HeaderOne from '@/layouts/headers/HeaderOne';
 import ServiceDetailsArea from './ServiceDetailsArea';
 import FooterOne from '@/layouts/footers/FooterOne';
-import CtaBanner from '../common/CtaBanner';
 
 const ServiceDetails = () => {
   return (
@@ -13,14 +12,6 @@ const ServiceDetails = () => {
           <ServiceDetailsArea />
         </Suspense>
       </main>
-      <CtaBanner
-        title="Ready to Automate Your Water System?"
-        subtitle="Get pricing, installation support, and product guidance."
-        btnText="Get a Quote"
-        btnLink="/contact-us"
-        icon="bi-droplet-fill"
-        btnIcon="bi-file-earmark-text-fill"
-      />
       <FooterOne />
     </>
   );

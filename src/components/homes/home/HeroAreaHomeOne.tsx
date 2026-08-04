@@ -2,25 +2,41 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import type { HomeHero } from '@/services/home/home.types';
 
-const phrases = [
-  "Homes",
-  "Apartments",
-  "Industries"
-];
+const DEFAULTS = {
+  headingPrefix: 'Smart Wireless Water Level Controller for',
+  animatedPhrases: ['Homes', 'Apartments', 'Industries'],
+  paragraph:
+    'Prevent tank overflow, protect motors from dry-run, and maintain a consistent water supply with Aquabrim.',
+  primaryBtnText: 'Our Products',
+  primaryBtnLink: '/products',
+  secondaryBtnText: 'Talk to Expert',
+  secondaryBtnLink: '/contact-us',
+  sliderImages: [
+    '/assets/home/for homes.webp',
+    '/assets/home/for apartments.webp',
+    '/assets/home/for industries.webp',
+  ],
+};
 
-const HeroAreaHomeOne = () => {
+const HeroAreaHomeOne = ({ data }: { data?: HomeHero }) => {
+  // Merge CMS content over defaults.
+  const headingPrefix = data?.headingPrefix || DEFAULTS.headingPrefix;
+  const phrases = data?.animatedPhrases?.length ? data.animatedPhrases : DEFAULTS.animatedPhrases;
+  const paragraph = data?.paragraph || DEFAULTS.paragraph;
+  const primaryBtnText = data?.primaryBtnText || DEFAULTS.primaryBtnText;
+  const primaryBtnLink = data?.primaryBtnLink || DEFAULTS.primaryBtnLink;
+  const secondaryBtnText = data?.secondaryBtnText || DEFAULTS.secondaryBtnText;
+  const secondaryBtnLink = data?.secondaryBtnLink || DEFAULTS.secondaryBtnLink;
+  const sliderImages = data?.sliderImages?.length ? data.sliderImages : DEFAULTS.sliderImages;
+
   // --- Typewriter State ---
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
 
   // --- Slider State ---
-  const sliderImages = [
-    "/assets/home/for homes.webp",
-    "/assets/home/for apartments.webp",
-    "/assets/home/for industries.webp"
-  ];
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // --- Typewriter Effect Logic ---
@@ -51,12 +67,12 @@ const HeroAreaHomeOne = () => {
     }
 
     return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum]);
+  }, [text, isDeleting, loopNum, phrases]);
 
   // --- Auto-play & Sync Slider Logic ---
   useEffect(() => {
     setCurrentSlide(loopNum % phrases.length);
-  }, [loopNum]);
+  }, [loopNum, phrases.length]);
 
   return (
     <section className="w-full bg-[#f0f4f8] px-4 pb-[60px] pt-[80px] max-md:pb-[28px] max-md:pt-[36px] max-md:text-center">
@@ -66,7 +82,7 @@ const HeroAreaHomeOne = () => {
           {/* Left Column: Text Content */}
           <div className="w-full lg:w-7/12 lg:pt-[50px]">
             <h1 className="mb-5 text-center text-[32px] font-extrabold leading-[1.25] text-[#0d1b2a] md:text-[40px] lg:text-left lg:text-[2.8rem] xl:text-[3.2rem]">
-              Smart Wireless Water Level Controller for{' '}
+              {headingPrefix}{' '}
               {/* On mobile the animated word sits on its own centered line; on desktop it stays inline with a fixed-width placeholder for stability */}
               <span className="relative text-primary max-md:mt-2 max-md:block lg:inline-block">
                 <span className="invisible select-none max-md:hidden" aria-hidden="true">Apartments&nbsp;&nbsp;</span>
@@ -78,12 +94,12 @@ const HeroAreaHomeOne = () => {
             </h1>
 
             <p className="text-[1.1rem] leading-relaxed text-[#4a5568] max-md:mx-auto max-md:text-[15px] lg:max-w-[520px]">
-              Prevent tank overflow, protect motors from dry-run, and maintain a consistent water supply with Aquabrim.
+              {paragraph}
             </p>
 
             <div className="mt-[25px] flex gap-[15px] max-md:mt-7 max-md:flex-col max-md:items-center max-md:gap-3">
-              <Link href="/products" className="btn-solar text-center max-md:w-full max-md:max-w-[280px]">Our Products <i className="bi bi-arrow-right"></i></Link>
-              <Link href="/contact-us" className="btn-solar-light text-center max-md:w-full max-md:max-w-[280px]">Talk to Expert <i className="bi bi-arrow-right"></i></Link>
+              <Link href={primaryBtnLink} className="btn-solar text-center max-md:w-full max-md:max-w-[280px]">{primaryBtnText} <i className="bi bi-arrow-right"></i></Link>
+              <Link href={secondaryBtnLink} className="btn-solar-light text-center max-md:w-full max-md:max-w-[280px]">{secondaryBtnText} <i className="bi bi-arrow-right"></i></Link>
             </div>
           </div>
 
@@ -99,8 +115,9 @@ const HeroAreaHomeOne = () => {
                   <Image
                     src={imgSrc}
                     alt={`Aquabrim Smart Device View ${index + 1}`}
-                    fill
-                    style={{ objectFit: 'contain' }}
+                    width={1400}
+                    height={933}
+                    className="h-full w-full object-contain"
                   />
                 </div>
               ))}

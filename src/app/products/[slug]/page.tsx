@@ -1,16 +1,18 @@
 import ServiceDetails from '@/components/service-details';
 import Wrapper from '@/layouts/Wrapper';
 import React from 'react';
-import productsData from '@/data/products.json';
-import { productSlug } from '@/utils/slug';
+import { getMergedProducts, getProductBySlug } from '@/services/products/products.service';
 
 // Pre-render one static page per product slug (required for output: 'export').
-export function generateStaticParams() {
-  return productsData.map((p) => ({ slug: productSlug(p) }));
+// Slugs come from the CMS backend merged with products.json, so CMS-managed
+// products get their own page. (New CMS products appear after the next build.)
+export async function generateStaticParams() {
+  const products = await getMergedProducts();
+  return products.filter((p) => p.slug).map((p) => ({ slug: p.slug as string }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const product = productsData.find((p) => productSlug(p) === params.slug) as any;
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const product = await getProductBySlug(params.slug);
   return {
     title:
       product?.metaTitle ||
@@ -19,6 +21,9 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
       product?.metaDescription ||
       product?.description ||
       'Learn more about the technical details of our smart water level control solutions.',
+    alternates: {
+      canonical: `/products/${params.slug}/`,
+    },
   };
 }
 

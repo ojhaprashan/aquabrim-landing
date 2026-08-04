@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import type { AboutFounders } from '@/services/about/about.types';
 
 type Pill = { label: string; icon: React.ReactNode };
 
@@ -137,6 +138,8 @@ const FounderCard = ({ name, role, pills, desc, image, imageSide, className = ''
               <img
                 src={image}
                 alt={name}
+                width={512}
+                height={1024}
                 className="h-full w-full object-cover object-top transition-transform duration-[400ms] group-hover:scale-[1.03]"
               />
             </div>
@@ -173,36 +176,85 @@ const FounderCard = ({ name, role, pills, desc, image, imageSide, className = ''
   );
 };
 
-const Founders = () => {
+// Fallback pill icon for CMS-added pills that have no coded icon.
+const genericPillIcon = (
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
+
+const DEFAULTS = {
+  eyebrow: 'OUR FOUNDERS',
+  heading: 'Meet Our Founders',
+  founders: [
+    {
+      name: 'Praveen Sinha',
+      role: 'Co-Founder & Strategic Advisor',
+      pills: praveenPills,
+      desc: "Bringing strong entrepreneurial vision and strategic leadership, Praveen Sinha has played a key role in shaping Aquabrim's growth, innovation roadmap, and long-term expansion in intelligent infrastructure solutions.",
+      image: '/assets/images/team/praveen.png',
+      imageSide: 'left' as const,
+    },
+    {
+      name: 'Rakesh Kumar',
+      role: 'Co-Founder & Technology Head',
+      pills: rakeshPills,
+      desc: 'With deep expertise in wireless technologies and industrial automation, Rakesh Kumar leads the technology and product innovation initiatives at Aquabrim, driving the development of reliable and future-ready automation systems.',
+      image: '/assets/images/team/rakesh.png',
+      imageSide: 'right' as const,
+    },
+  ],
+};
+
+// Pill icon pools per founder position — icons stay in code (not CMS-editable).
+const PILL_ICON_POOLS = [praveenPills, rakeshPills];
+
+const Founders = ({ data }: { data?: AboutFounders }) => {
+  const eyebrow = data?.eyebrow || DEFAULTS.eyebrow;
+  const heading = data?.heading || DEFAULTS.heading;
+
+  const founders = data?.founders?.length
+    ? data.founders.map((f, fi) => {
+        const pool = PILL_ICON_POOLS[fi] || [];
+        const pills: Pill[] = (f.pills?.length ? f.pills : []).map((label, pi) => ({
+          label,
+          icon: pool[pi]?.icon ?? genericPillIcon,
+        }));
+        return {
+          name: f.name || DEFAULTS.founders[fi]?.name || '',
+          role: f.role || DEFAULTS.founders[fi]?.role || '',
+          desc: f.desc || DEFAULTS.founders[fi]?.desc || '',
+          image: f.image || DEFAULTS.founders[fi]?.image || '',
+          imageSide: (f.imageSide === 'right' ? 'right' : 'left') as 'left' | 'right',
+          pills: pills.length ? pills : DEFAULTS.founders[fi]?.pills || [],
+        };
+      })
+    : DEFAULTS.founders;
+
   return (
     <section className="block w-full bg-white py-[60px] sm:py-20">
       <div className="container-app">
         {/* Title */}
         <div className="mx-auto mb-12 max-w-[680px] text-center">
-          <span className="text-[14px] font-bold uppercase tracking-[2px] text-[#006CD0]">OUR FOUNDERS</span>
-          <h2 className="mt-2 text-[1.7rem] font-extrabold text-[#1e293b] sm:text-[2.1rem] lg:text-[2.5rem]">Meet Our Founders</h2>
+          <span className="text-[14px] font-bold uppercase tracking-[2px] text-[#006CD0]">{eyebrow}</span>
+          <h2 className="mt-2 text-[1.7rem] font-extrabold text-[#1e293b] sm:text-[2.1rem] lg:text-[2.5rem]">{heading}</h2>
           <div className="mx-auto mt-[15px] h-[3px] w-[60px] rounded-[2px] bg-[#006CD0]"></div>
         </div>
 
         {/* Founders Cards */}
         <div className="mt-[50px]">
-          <FounderCard
-            name="Praveen Sinha"
-            role="Co-Founder & Strategic Advisor"
-            pills={praveenPills}
-            desc="Bringing strong entrepreneurial vision and strategic leadership, Praveen Sinha has played a key role in shaping Aquabrim’s growth, innovation roadmap, and long-term expansion in intelligent infrastructure solutions."
-            image="/assets/images/team/praveen.png"
-            imageSide="left"
-          />
-          <FounderCard
-            name="Rakesh Kumar"
-            role="Co-Founder & Technology Head"
-            pills={rakeshPills}
-            desc="With deep expertise in wireless technologies and industrial automation, Rakesh Kumar leads the technology and product innovation initiatives at Aquabrim, driving the development of reliable and future-ready automation systems."
-            image="/assets/images/team/rakesh.png"
-            imageSide="right"
-            className="mt-12"
-          />
+          {founders.map((f, i) => (
+            <FounderCard
+              key={i}
+              name={f.name}
+              role={f.role}
+              pills={f.pills}
+              desc={f.desc}
+              image={f.image}
+              imageSide={f.imageSide}
+              className={i > 0 ? 'mt-12' : ''}
+            />
+          ))}
         </div>
       </div>
     </section>

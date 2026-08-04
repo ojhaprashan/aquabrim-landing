@@ -77,7 +77,15 @@ const TestimonialCard = ({ item }: { item: Testimonial }) => {
   );
 };
 
-const TestimonialAreaHomeOne = ({ reviews }: { reviews?: Testimonial[] }) => {
+const TestimonialAreaHomeOne = ({
+  reviews,
+  eyebrow,
+  heading,
+}: {
+  reviews?: Testimonial[];
+  eyebrow?: string;
+  heading?: string;
+}) => {
   // Reviews are fetched on the server at build time and passed in as a prop,
   // so there is no client-side request that could break under a subfolder.
   // Only real Google reviews (4★+) are shown — no curated fallback.
@@ -91,8 +99,8 @@ const TestimonialAreaHomeOne = ({ reviews }: { reviews?: Testimonial[] }) => {
     <section className="bg-white py-12">
       <div className="container-app">
         <div className="mb-12 text-center">
-          <h6 className="mb-2 text-[1rem] font-bold uppercase tracking-[2px] text-[#006CD0]">What Our Clients Say</h6>
-          <h2 className="text-[clamp(32px,5vw,42px)] font-bold text-[#1c1632]">Trusted by 50,000+ Customers</h2>
+          <h6 className="mb-2 text-[1rem] font-bold uppercase tracking-[2px] text-[#006CD0]">{eyebrow || 'What Our Clients Say'}</h6>
+          <h2 className="text-[clamp(32px,5vw,42px)] font-bold text-[#1c1632]">{heading || 'Trusted by 50,000+ Customers'}</h2>
         </div>
 
         <Swiper

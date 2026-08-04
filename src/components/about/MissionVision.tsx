@@ -1,7 +1,10 @@
 'use client';
 import React from 'react';
+import type { AboutMissionVision } from '@/services/about/about.types';
 
-const CARDS = [
+const DEFAULT_HEADING = 'Our Mission & Vision';
+
+const DEFAULT_CARDS = [
   {
     icon: 'bi-bullseye',
     title: 'Our Mission',
@@ -16,15 +19,28 @@ const CARDS = [
   },
 ];
 
-const MissionVision = () => {
+// Accent colours are coded per position; other fields merge over CMS values.
+const ACCENTS = ['bg-[#006CD0]', 'bg-[#3b82f6]'];
+
+const MissionVision = ({ data }: { data?: AboutMissionVision }) => {
+  const heading = data?.heading || DEFAULT_HEADING;
+  const cards = data?.cards?.length
+    ? data.cards.map((c, i) => ({
+        icon: c.icon || DEFAULT_CARDS[i]?.icon || 'bi-bullseye',
+        title: c.title || DEFAULT_CARDS[i]?.title || '',
+        desc: c.desc || DEFAULT_CARDS[i]?.desc || '',
+        accent: ACCENTS[i % ACCENTS.length],
+      }))
+    : DEFAULT_CARDS;
+
   return (
     <section className="overflow-hidden bg-[#f8fafc] py-12 sm:py-16 lg:py-20">
       <div className="container-app">
         <div className="mb-10 text-center">
-          <h2 className="text-[1.7rem] font-extrabold text-[#1e293b] sm:text-[2.1rem] lg:text-[2.5rem]">Our Mission &amp; Vision</h2>
+          <h2 className="text-[1.7rem] font-extrabold text-[#1e293b] sm:text-[2.1rem] lg:text-[2.5rem]">{heading}</h2>
         </div>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          {CARDS.map((card, i) => (
+          {cards.map((card, i) => (
             <div
               key={i}
               className="group relative z-[1] h-full overflow-hidden rounded-2xl border border-solid border-[#e2e8f0]/80 bg-white p-8 shadow-sm transition-all duration-[400ms] hover:-translate-y-2.5 hover:border-[#006CD0]/20 hover:shadow-[0_20px_40px_rgba(0,108,208,0.08)] md:p-12"

@@ -10,24 +10,24 @@ interface social_links_type {
 
 const social_links: social_links_type[] = [
   {
-    link: "http://facebook.com",
+    link: "https://www.facebook.com/aquabrim",
     target: "_blank",
     icon: "fab fa-facebook-f",
   },
   {
-    link: "http://twitter.com",
+    link: "https://www.instagram.com/aquabrim",
     target: "_blank",
-    icon: "fab fa-twitter",
+    icon: "fab fa-instagram",
   },
   {
-    link: "https://www.linkedin.com",
+    link: "https://www.linkedin.com/company/aquabrim",
     target: "_blank",
     icon: "fab fa-linkedin-in",
   },
   {
-    link: "https://www.vimeo.com",
+    link: "https://www.youtube.com/@aquabrim",
     target: "_blank",
-    icon: "fab fa-vimeo-v",
+    icon: "fab fa-youtube",
   },
 ];
 
@@ -38,7 +38,8 @@ const SocialLinks = () => {
         <Link
           key={i}
           href={l.link}
-          target={l.target ? l.target : ""} style={{color: 'black'}}>
+          target={l.target ? l.target : ""}
+          rel="noopener noreferrer" style={{color: 'black'}}>
           <i className={l.icon} ></i> {' '}
         </Link>
       ))}
@@ -59,24 +60,24 @@ interface social_links_type_2 {
 
 const social_links_2: social_links_type_2[] = [
   {
-    link: "http://facebook.com",
+    link: "https://www.facebook.com/aquabrim",
     color: "footer-facebook",
     icon: "fa-brands fa-facebook-f",
   },
   {
-    link: "http://twitter.com",
-    color: "",
-    icon: "fa-brands fa-twitter",
+    link: "https://www.instagram.com/aquabrim",
+    color: "footer-insta",
+    icon: "fa-brands fa-instagram",
   },
   {
-    link: "http://www.linkedin.com",
+    link: "https://www.linkedin.com/company/aquabrim",
     color: "footer-linkedin",
     icon: "fa-brands fa-linkedin-in",
   },
   {
-    link: "http://www.instagram.com",
-    color: "footer-insta",
-    icon: "fa-brands fa-instagram",
+    link: "https://www.youtube.com/@aquabrim",
+    color: "",
+    icon: "fa-brands fa-youtube",
   },
 ];
 
@@ -88,7 +89,8 @@ export const SocialLinksTwo = () => {
           key={index}
           href={link.link}
           className={link.color}
-          target="_blank">
+          target="_blank"
+          rel="noopener noreferrer">
           <i className={link.icon}></i>{" "}
         </Link>
       ))}
@@ -133,9 +135,10 @@ export const TeamSocialLinks = () => {
     <>
       {team_social_data.map((t_item, t_index) => (
         <li key={t_index}>
-          <Link 
+          <Link
             href={t_item.link}
-            target="_blank">
+            target="_blank"
+            rel="noopener noreferrer">
             <i className={t_item.icon}></i>{" "}
           </Link>
 
@@ -153,7 +156,7 @@ type copy_right_text_type = {
 
 const copy_right_text: copy_right_text_type = {
   copy_right: <>
-     ©{new Date().getFullYear()} | Alrights reserved by <a href="https://themeforest.net/user/theme_house" target="_blank">ThemeHouse</a>
+     ©{new Date().getFullYear()} | Alrights reserved by <a href="https://themeforest.net/user/theme_house" target="_blank" rel="noopener noreferrer">ThemeHouse</a>
   </>
 }
 

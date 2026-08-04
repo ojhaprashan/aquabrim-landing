@@ -13,6 +13,7 @@ import accessories_img from "@/assets/images/resource/service-details3.png";
 // Import JSON data
 import productsData from "@/data/products.json";
 import { productSlug } from "@/utils/slug";
+import type { ProductItem } from "@/services/products/products.types";
 
 const imageMap: Record<string, any> = {
   prod_controller,
@@ -35,12 +36,49 @@ export const products = productsData.map((item) => {
   };
 });
 
-const ProductList = () => {
+// Convert a CMS catalog product into the same display shape used above, so the
+// grid/filter markup stays identical whether the list comes from the CMS or the
+// built-in products.json fallback.
+const toDisplayProduct = (item: ProductItem) => {
+  const images = item.images && item.images.length > 0
+    ? item.images
+    : [imageMap[(item as any).imgKey] || accessories_img];
+  return {
+    ...item,
+    slug: productSlug(item as any),
+    img: images[0],
+    images,
+  };
+};
+
+const HERO_DEFAULTS = {
+  headingLine1: 'Water Level Controller Products',
+  headingLine2: 'Smart Automation for Every Setup',
+  sidebarLabel: 'Categories',
+};
+
+interface ProductListProps {
+  cmsProducts?: ProductItem[];
+  headingLine1?: string;
+  headingLine2?: string;
+  sidebarLabel?: string;
+}
+
+const ProductList = ({ cmsProducts, headingLine1, headingLine2, sidebarLabel }: ProductListProps = {}) => {
   const [activeFilter, setActiveFilter] = useState<'all' | 'domestic' | 'industrial'>('all');
 
-  const domesticCount = products.filter(p => p.category === 'domestic').length;
-  const industrialCount = products.filter(p => p.category === 'industrial').length;
-  const totalCount = products.length;
+  // Prefer the live CMS catalog when present; otherwise the products.json list.
+  const sourceProducts = cmsProducts && cmsProducts.length > 0
+    ? cmsProducts.map(toDisplayProduct)
+    : products;
+
+  const heroLine1 = headingLine1 || HERO_DEFAULTS.headingLine1;
+  const heroLine2 = headingLine2 || HERO_DEFAULTS.headingLine2;
+  const heroSidebarLabel = sidebarLabel || HERO_DEFAULTS.sidebarLabel;
+
+  const domesticCount = sourceProducts.filter(p => p.category === 'domestic').length;
+  const industrialCount = sourceProducts.filter(p => p.category === 'industrial').length;
+  const totalCount = sourceProducts.length;
 
   const handleReset = () => {
     setActiveFilter('all');
@@ -52,7 +90,7 @@ const ProductList = () => {
     { key: 'industrial', icon: 'bi-building', label: 'Industrial', count: industrialCount },
   ];
 
-  const filteredProducts = products.filter(product => {
+  const filteredProducts = sourceProducts.filter(product => {
     if (activeFilter === 'domestic' && product.category !== 'domestic') return false;
     if (activeFilter === 'industrial' && product.category !== 'industrial') return false;
     return true;
@@ -63,9 +101,9 @@ const ProductList = () => {
       <div className="container-app relative">
         <div className="mb-5 max-w-[620px] max-md:mb-4">
           <h1 className="text-[1.4rem] font-extrabold leading-[1.2] tracking-[-0.5px] text-[#0f172a] sm:text-[1.7rem] lg:text-[1.95rem]">
-            Water Level Controller Products
+            {heroLine1}
             <span className="mt-0.5 block bg-gradient-to-r from-[#006CD0] to-[#00a4ff] bg-clip-text text-transparent">
-              Smart Automation for Every Setup
+              {heroLine2}
             </span>
           </h1>
         </div>
@@ -74,7 +112,7 @@ const ProductList = () => {
           {/* Sidebar Left: Categories */}
           <div className="md:col-span-4 lg:col-span-3">
             <div className="md:sticky md:top-[130px] md:z-10">
-              <p className="mb-3 hidden text-[0.72rem] font-bold uppercase tracking-[1.5px] text-[#94a3b8] md:block">Categories</p>
+              <p className="mb-3 hidden text-[0.72rem] font-bold uppercase tracking-[1.5px] text-[#94a3b8] md:block">{heroSidebarLabel}</p>
               <div className="flex flex-col gap-2.5 max-md:-mx-3 max-md:flex-row max-md:flex-nowrap max-md:gap-2 max-md:overflow-x-auto max-md:px-3 max-md:pb-1 max-md:[-ms-overflow-style:none] max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
                 {filters.map((f) => {
                   const active = activeFilter === f.key;
@@ -138,7 +176,7 @@ const ProductList = () => {
                         <div className="flex h-full w-full items-center justify-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.07]">
                           <Image
                             src={product.img}
-                            alt={product.title}
+                            alt={product.title || 'Product'}
                             width={1024}
                             height={1536}
                             className="h-full w-full object-cover"

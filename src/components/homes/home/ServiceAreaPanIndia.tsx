@@ -1,11 +1,28 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
+import type { AboutServiceArea } from '@/services/about/about.types';
 
-const ServiceAreaPanIndia = () => {
-  const [hoveredState, setHoveredState] = useState<string | null>(null);
+type StateItem = {
+  name: string;
+  top?: string;
+  left?: string;
+  displayName?: string;
+  isHeadOffice?: boolean;
+};
 
-  const states = [
+const DEFAULTS = {
+  eyebrow: 'Where We Serve',
+  heading: 'Trusted by Homes and Industries Across India',
+  ctaButtonText: 'View Products',
+  ctaButtonLink: '/products',
+  mapImage: '/assets/images/india_map.webp',
+  stats: [
+    { icon: 'bi-geo-alt-fill', label: '15+ Cities Served Across India' },
+    { icon: 'bi-house-door-fill', label: '50,000+ Homes and Buildings Automated' },
+    { icon: 'bi-emoji-smile-fill', label: 'Trusted Since 2008' },
+  ],
+  states: [
     { name: "Punjab", top: '22%', left: '33%' },
     { name: "Uttarakhand", top: '24%', left: '41%' },
     { name: "Delhi (Head Office)", displayName: "Delhi", isHeadOffice: true, top: '28%', left: '36%' },
@@ -19,16 +36,35 @@ const ServiceAreaPanIndia = () => {
     { name: "Karnataka", top: '71%', left: '35%' },
     { name: "Tamil Nadu", top: '80%', left: '42%' },
     { name: "Kerala", top: '82%', left: '34%' }
-  ];
+  ] as StateItem[],
+};
 
-  const states_col_1 = states.slice(0, 7);
-  const states_col_2 = states.slice(7);
+const ServiceAreaPanIndia = ({ data }: { data?: AboutServiceArea }) => {
+  const [hoveredState, setHoveredState] = useState<string | null>(null);
 
-  const stats = [
-    { icon: 'bi-geo-alt-fill', label: '15+ Cities Served Across India' },
-    { icon: 'bi-house-door-fill', label: '50,000+ Homes and Buildings Automated' },
-    { icon: 'bi-emoji-smile-fill', label: 'Trusted Since 2008' },
-  ];
+  const eyebrow = data?.eyebrow || DEFAULTS.eyebrow;
+  const heading = data?.heading || DEFAULTS.heading;
+  const ctaButtonText = data?.ctaButtonText || DEFAULTS.ctaButtonText;
+  const ctaButtonLink = data?.ctaButtonLink || DEFAULTS.ctaButtonLink;
+  const mapImage = data?.mapImage || DEFAULTS.mapImage;
+
+  const stats = data?.stats?.length
+    ? data.stats.map((s) => ({ icon: s.icon || 'bi-geo-alt-fill', label: s.label || '' }))
+    : DEFAULTS.stats;
+
+  const states: StateItem[] = data?.states?.length
+    ? data.states.map((s) => ({
+        name: s.name || '',
+        top: s.top,
+        left: s.left,
+        displayName: s.displayName,
+        isHeadOffice: s.isHeadOffice,
+      }))
+    : DEFAULTS.states;
+
+  const half = Math.ceil(states.length / 2);
+  const states_col_1 = states.slice(0, half);
+  const states_col_2 = states.slice(half);
 
   return (
     <section className="overflow-hidden bg-white py-12">
@@ -38,8 +74,8 @@ const ServiceAreaPanIndia = () => {
           {/* Left Side: Stats & CTA */}
           <div className="mb-2 md:col-span-2 lg:col-span-1 lg:mb-0">
             <div className="mb-4">
-              <h6 className="mb-2 text-[1rem] font-bold uppercase tracking-[1px] text-[#006CD0]">Where We Serve</h6>
-              <h2 className="mb-4 text-[clamp(28px,4vw,36px)] font-bold text-[#1c1632]">Trusted by Homes and Industries Across India</h2>
+              <h6 className="mb-2 text-[1rem] font-bold uppercase tracking-[1px] text-[#006CD0]">{eyebrow}</h6>
+              <h2 className="mb-4 text-[clamp(28px,4vw,36px)] font-bold text-[#1c1632]">{heading}</h2>
             </div>
 
             <div>
@@ -57,10 +93,10 @@ const ServiceAreaPanIndia = () => {
 
             <div className="mt-4">
               <a
-                href="/products"
+                href={ctaButtonLink}
                 className="inline-block rounded-md bg-[#006CD0] px-4 py-3 font-bold text-white no-underline shadow-sm transition-colors hover:bg-[#005bb0]"
               >
-                View Products <i className="bi bi-arrow-right ml-2"></i>
+                {ctaButtonText} <i className="bi bi-arrow-right ml-2"></i>
               </a>
             </div>
           </div>
@@ -69,7 +105,7 @@ const ServiceAreaPanIndia = () => {
           <div className="mb-2 flex justify-center md:col-span-1 lg:mb-0">
             <div className="relative inline-block text-center">
               <Image
-                src="/assets/images/india_map.webp"
+                src={mapImage}
                 alt="India Map"
                 width={400}
                 height={450}

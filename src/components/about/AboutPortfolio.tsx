@@ -1,6 +1,22 @@
 'use client';
 import React from 'react';
+import type { AboutIntro } from '@/services/about/about.types';
 
+const DEFAULTS = {
+  image: '/assets/about/about.webp',
+  imageAlt: "India's Leading Water Level Informatory System & Automation Solutions",
+  eyebrow: 'About Aquabrim',
+  heading: "India's Smart Water Automation Company – Aquabrim Since 2008",
+  paragraphs: [
+    'Aquabrim is built to simplify and modernize the way water is monitored, controlled, and managed across residential, commercial, and industrial infrastructure.',
+    "Founded in 2008, Aquabrim has grown into one of India's trusted water automation companies, delivering intelligent solutions that help reduce water wastage, improve operational efficiency, and enable smarter infrastructure management.",
+    'From wireless water level automation systems to advanced industrial monitoring technologies, we design solutions that combine engineering reliability with smart automation to solve real-world water management challenges.',
+    'With a strong focus on innovation, scalability, and long-term performance, Aquabrim continues to help homes, businesses, industries, and infrastructure projects transition toward smarter and more efficient water management systems.',
+  ],
+  expertiseHeading: 'Who We Are & What We Build',
+};
+
+// SVG icons stay in code (not CMS-editable); title/desc merge over CMS values.
 const EXPERTISE = [
   {
     title: 'Smart Water Automation',
@@ -33,7 +49,22 @@ const EXPERTISE = [
   },
 ];
 
-const AboutPortfolio = () => {
+const AboutPortfolio = ({ data }: { data?: AboutIntro }) => {
+  const image = data?.image || DEFAULTS.image;
+  const imageAlt = data?.imageAlt || DEFAULTS.imageAlt;
+  const eyebrow = data?.eyebrow || DEFAULTS.eyebrow;
+  const heading = data?.heading || DEFAULTS.heading;
+  const paragraphs = data?.paragraphs?.length ? data.paragraphs : DEFAULTS.paragraphs;
+  const expertiseHeading = data?.expertiseHeading || DEFAULTS.expertiseHeading;
+  // Merge CMS title/desc over the coded expertise cards, keeping the SVG icons.
+  const expertise = data?.expertiseItems?.length
+    ? data.expertiseItems.map((it, i) => ({
+        title: it.title || EXPERTISE[i]?.title || '',
+        desc: it.desc || EXPERTISE[i]?.desc || '',
+        icon: EXPERTISE[i]?.icon ?? EXPERTISE[0].icon,
+      }))
+    : EXPERTISE;
+
   return (
     <section className="block w-full overflow-hidden bg-white py-[50px] sm:py-[60px] lg:py-[100px]">
       <div className="container-app">
@@ -43,8 +74,10 @@ const AboutPortfolio = () => {
           <div className="mb-2 lg:mb-0">
             <div className="group relative mx-auto max-w-[600px] rounded-2xl p-2 transition-all duration-[400ms] max-lg:mt-5 before:pointer-events-none before:absolute before:-left-2.5 before:-top-2.5 before:z-[1] before:h-[50px] before:w-[50px] before:rounded-tl-2xl before:border-b-0 before:border-r-0 before:border-l-4 before:border-t-4 before:border-solid before:border-[#006CD0] before:content-[''] after:pointer-events-none after:absolute after:-bottom-2.5 after:-right-2.5 after:z-[1] after:h-[50px] after:w-[50px] after:rounded-br-2xl after:border-l-0 after:border-t-0 after:border-b-4 after:border-r-4 after:border-solid after:border-[#006CD0] after:content-[''] sm:before:h-20 sm:before:w-20 sm:after:h-20 sm:after:w-20">
               <img
-                src="/assets/about/about.webp"
-                alt="India's Leading Water Level Informatory System & Automation Solutions"
+                src={image}
+                alt={imageAlt}
+                width={932}
+                height={1400}
                 className="block h-auto w-full rounded-2xl border-4 border-solid border-white object-cover shadow-lg transition-transform duration-[400ms] group-hover:-translate-y-1 group-hover:scale-[1.02] group-hover:shadow-[0_25px_50px_rgba(0,108,208,0.18)]"
               />
             </div>
@@ -53,37 +86,33 @@ const AboutPortfolio = () => {
           {/* Right: Core text description */}
           <div className="text-left">
             <span className="mb-1 inline-block text-[0.95rem] font-bold uppercase tracking-[1.5px] text-[#006CD0]">
-              About Aquabrim
+              {eyebrow}
             </span>
             <div className="mb-6 mt-1 h-[3px] w-[60px] rounded-[2px] bg-[#006CD0]"></div>
 
             <h1 className="mb-4 mt-2 text-[1.5rem] font-bold leading-[1.4] tracking-[-0.01em] text-[#1c1632] sm:text-[1.95rem] lg:text-[2.3rem] lg:leading-[1.35]">
-              India&rsquo;s Smart Water Automation Company &ndash; Aquabrim Since 2008
+              {heading}
             </h1>
 
-            <p className="mb-3 text-[1rem] leading-[1.7] text-[#64748b] sm:text-[1.1rem] sm:leading-[1.8]">
-              Aquabrim is built to simplify and modernize the way water is monitored, controlled, and managed across residential, commercial, and industrial infrastructure.
-            </p>
-            <p className="mb-3 text-[1rem] leading-[1.7] text-[#64748b] sm:text-[1.1rem] sm:leading-[1.8]">
-              Founded in 2008, Aquabrim has grown into one of India&rsquo;s trusted water automation companies, delivering intelligent solutions that help reduce water wastage, improve operational efficiency, and enable smarter infrastructure management.
-            </p>
-            <p className="mb-3 text-[1rem] leading-[1.7] text-[#64748b] sm:text-[1.1rem] sm:leading-[1.8]">
-              From wireless water level automation systems to advanced industrial monitoring technologies, we design solutions that combine engineering reliability with smart automation to solve real-world water management challenges.
-            </p>
-            <p className="mb-0 text-[1rem] leading-[1.7] text-[#64748b] sm:text-[1.1rem] sm:leading-[1.8]">
-              With a strong focus on innovation, scalability, and long-term performance, Aquabrim continues to help homes, businesses, industries, and infrastructure projects transition toward smarter and more efficient water management systems.
-            </p>
+            {paragraphs.map((para, i) => (
+              <p
+                key={i}
+                className={`${i === paragraphs.length - 1 ? 'mb-0' : 'mb-3'} text-[1rem] leading-[1.7] text-[#64748b] sm:text-[1.1rem] sm:leading-[1.8]`}
+              >
+                {para}
+              </p>
+            ))}
           </div>
         </div>
 
         {/* Bottom Row: Our Expertise */}
         <div className="mt-12">
           <h2 className="mb-4 mt-[25px] text-center text-[1.15rem] font-bold text-[#006CD0] sm:mt-[35px] sm:text-[1.3rem]">
-            Who We Are &amp; What We Build
+            {expertiseHeading}
           </h2>
 
           <div className="flex flex-col gap-4 lg:flex-row">
-            {EXPERTISE.map((item, i) => (
+            {expertise.map((item, i) => (
               <div
                 key={i}
                 className="group/item flex flex-1 flex-col gap-2 rounded-2xl border border-solid border-[#e2e8f0]/60 bg-[#f8fafc] p-4 text-left transition-all duration-300 hover:translate-x-2 hover:border-[#006CD0]/20 hover:bg-white hover:shadow-[0_12px_30px_rgba(0,108,208,0.06)] lg:hover:translate-x-0 lg:hover:-translate-y-2"

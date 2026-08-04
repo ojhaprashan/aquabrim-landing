@@ -1,7 +1,7 @@
 import React from 'react';
-import { PolicyArea, PolicySection, PolicyP, PolicyList, PolicyContact } from '../common/PolicyKit';
+import { PolicySection, PolicyP, PolicyList, PolicyContact } from '../common/PolicyKit';
 
-const nav = [
+export const nav = [
   { href: '#overview', label: '1. Overview' },
   { href: '#processing', label: '2. Order Processing' },
   { href: '#shipping', label: '3. Shipping & Delivery' },
@@ -13,9 +13,8 @@ const nav = [
   { href: '#contact', label: '9. Contact Us' },
 ];
 
-const ShippingPolicyArea = () => {
-  return (
-    <PolicyArea lastUpdated="20 May 2026" nav={nav}>
+export const fallbackBody = (
+  <>
       <PolicySection id="overview" title="1. Overview">
         <PolicyP>
           Aquabrim is committed to delivering products safely and efficiently across India. All orders are processed and shipped through trusted courier partners and postal services to ensure timely delivery.
@@ -111,8 +110,5 @@ const ShippingPolicyArea = () => {
         <PolicyP className="mb-4">For shipping-related queries or support, please contact:</PolicyP>
         <PolicyContact />
       </PolicySection>
-    </PolicyArea>
-  );
-};
-
-export default ShippingPolicyArea;
+  </>
+);

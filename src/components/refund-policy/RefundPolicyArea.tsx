@@ -1,7 +1,7 @@
 import React from 'react';
-import { PolicyArea, PolicySection, PolicyP, PolicyList, PolicyContact } from '../common/PolicyKit';
+import { PolicySection, PolicyP, PolicyList, PolicyContact } from '../common/PolicyKit';
 
-const nav = [
+export const nav = [
   { href: '#overview', label: '1. Overview' },
   { href: '#eligibility', label: '2. Refund Eligibility' },
   { href: '#request', label: '3. How to Request' },
@@ -13,9 +13,8 @@ const nav = [
   { href: '#contact', label: '9. Contact Us' },
 ];
 
-const RefundPolicyArea = () => {
-  return (
-    <PolicyArea lastUpdated="20 May 2026" nav={nav}>
+export const fallbackBody = (
+  <>
       <PolicySection id="overview" title="1. Overview">
         <PolicyP>
           At Aquabrim, customer satisfaction is important to us. If you experience any issue with your purchase, we offer a transparent and hassle-free refund process subject to the terms outlined below.
@@ -110,8 +109,5 @@ const RefundPolicyArea = () => {
         <PolicyP className="mb-4">For any refund-related queries or assistance, please contact:</PolicyP>
         <PolicyContact />
       </PolicySection>
-    </PolicyArea>
-  );
-};
-
-export default RefundPolicyArea;
+  </>
+);

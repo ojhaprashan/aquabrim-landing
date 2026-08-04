@@ -3,8 +3,12 @@ import "../style/index.scss";
 import "../style/tailwind.css";
 
 export const metadata = {
+  metadataBase: new URL('https://www.aquabrim.com'),
   title: 'Aquabrim',
   description: 'Aquabrim delivers smart, affordable, and reliable water automation solutions for homes, apartments, and industries. Efficient water level management since 2008.',
+  alternates: {
+    canonical: '/',
+  },
 };
 
 
@@ -22,7 +26,6 @@ export default function RootLayout({
     <html lang="en">
 
       <head>
-        <meta name="description" content="The Solar Panel React Next js template is a modern and responsive design specifically created for websites related to solar energy and renewable energy solutions" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/png" href="/assets/images/logo_blue.png" />
         <link rel="shortcut icon" type="image/png" href="/assets/images/logo_blue.png" />

@@ -1,7 +1,7 @@
 import React from 'react';
-import { PolicyArea, PolicySection, PolicyP, PolicyList, PolicyContact } from '../common/PolicyKit';
+import { PolicySection, PolicyP, PolicyList, PolicyContact } from '../common/PolicyKit';
 
-const nav = [
+export const nav = [
   { href: '#overview', label: '1. Overview' },
   { href: '#acceptance', label: '2. Acceptance' },
   { href: '#company', label: '3. Company Info' },
@@ -18,9 +18,8 @@ const nav = [
   { href: '#contact', label: '14. Contact Us' },
 ];
 
-const TermsConditionArea = () => {
-  return (
-    <PolicyArea lastUpdated="20 May 2026" nav={nav}>
+export const fallbackBody = (
+  <>
       <PolicySection id="overview" title="1. Overview">
         <PolicyP>
           Welcome to Aquabrim. By accessing or using our website, products, services, or platform, you agree to comply with and be bound by the following Terms &amp; Conditions.
@@ -168,8 +167,5 @@ const TermsConditionArea = () => {
         </PolicyP>
         <PolicyContact />
       </PolicySection>
-    </PolicyArea>
-  );
-};
-
-export default TermsConditionArea;
+  </>
+);

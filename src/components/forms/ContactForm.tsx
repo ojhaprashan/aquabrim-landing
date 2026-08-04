@@ -32,7 +32,22 @@ const labelClass = "mb-2 block text-[0.9rem] font-semibold text-[#333]";
 const baseField = "w-full rounded-[10px] border border-solid bg-white px-4 py-3 text-[0.95rem] outline-none transition-all placeholder:text-[#aaa] focus:border-[#006CD0] focus:shadow-[0_0_0_0.2rem_rgba(0,108,208,0.1)]";
 const errorText = "mt-1 text-[0.85rem] text-[#dc3545]";
 
-const ContactForm = () => {
+// CMS-editable labels fall back to these current defaults when not provided.
+const DEFAULT_SUBMIT_TEXT = 'Send Message';
+const DEFAULT_SUCCESS_MESSAGE = "Thank you! Your message has been sent. We'll get back to you soon.";
+const DEFAULT_QUERY_TYPES = ['General Inquiry', 'Technical Support', 'Sales', 'Feedback'];
+
+interface ContactFormProps {
+  submitText?: string;
+  successMessage?: string;
+  queryTypes?: string[];
+}
+
+const ContactForm = ({ submitText, successMessage, queryTypes }: ContactFormProps = {}) => {
+  const submitLabel = submitText || DEFAULT_SUBMIT_TEXT;
+  const successText = successMessage || DEFAULT_SUCCESS_MESSAGE;
+  const queryOptions = queryTypes?.length ? queryTypes : DEFAULT_QUERY_TYPES;
+
   const [form, setForm] = useState<FormState>(initialForm);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
@@ -128,7 +143,7 @@ const ContactForm = () => {
       trackContactSubmit();
       setStatus({
         type: 'success',
-        message: "Thank you! Your message has been sent. We'll get back to you soon.",
+        message: successText,
       });
       setForm(initialForm);
     } catch (err) {
@@ -224,10 +239,9 @@ const ContactForm = () => {
             className={fieldClass(false)}
           >
             <option value="">Select a query type</option>
-            <option value="General Inquiry">General Inquiry</option>
-            <option value="Technical Support">Technical Support</option>
-            <option value="Sales">Sales</option>
-            <option value="Feedback">Feedback</option>
+            {queryOptions.map((option) => (
+              <option key={option} value={option}>{option}</option>
+            ))}
           </select>
         </div>
 
@@ -269,7 +283,7 @@ const ContactForm = () => {
             aria-busy={submitting}
             className="flex w-full items-center justify-center gap-2 rounded-[10px] bg-[#006CD0] py-3 font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#005bb0] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:bg-[#006CD0]"
           >
-            {submitting ? 'Sending…' : <>Send Message <i className="bi bi-arrow-right"></i></>}
+            {submitting ? 'Sending…' : <>{submitLabel} <i className="bi bi-arrow-right"></i></>}
           </button>
         </div>
       </div>

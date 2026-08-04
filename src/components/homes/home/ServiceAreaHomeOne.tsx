@@ -10,25 +10,35 @@ import service_icon_2 from "@/assets/images/resource/service-icon2.png";
 import service_icon_3 from "@/assets/images/resource/service-icon3.png";
 
 import { products } from '../../service/ProductList';
+import type { HomeServices } from '@/services/home/home.types';
 
 const icons = [service_icon_1, service_icon_2, service_icon_3];
 
-// Only the Domestic + Industrial products from the product list.
-const home_products = products.filter(
-  (p: any) => p.category === 'domestic' || p.category === 'industrial'
-);
+// Fallback cards: the Domestic + Industrial products from the product list.
+const fallbackCards = products
+  .filter((p: any) => p.category === 'domestic' || p.category === 'industrial')
+  .map((p: any) => ({
+    title: p.title,
+    subtitle: p.subtitle || p.categoryName,
+    description: p.description,
+    image: p.img,
+    slug: p.slug,
+  }));
 
-const ServiceAreaHomeOne = ({ style_2 }: any) => {
-  const data = home_products;
+const ServiceAreaHomeOne = ({ style_2, data }: { style_2?: boolean; data?: HomeServices }) => {
+  const eyebrow = data?.eyebrow || 'Our Products';
+  const heading = data?.heading || 'Our Water Automation Products';
+  const cards = data?.items?.length ? data.items : fallbackCards;
+
   return (
     <div className="bg-[#f0f4f8] py-[106px] pb-[110px]">
       <div className="container-app">
         {!style_2 &&
           <div className="text-center">
             <h4 className="relative mb-2 inline-block px-[50px] text-2xl font-medium text-primary before:absolute before:right-0 before:top-[14px] before:h-0.5 before:w-[35px] before:bg-primary after:absolute after:left-0 after:top-[14px] after:h-0.5 after:w-[35px] after:bg-primary">
-              Our Products
+              {eyebrow}
             </h4>
-            <h2 className="mb-[42px] text-[48px] font-semibold text-[#1c1632] max-md:text-[32px]">Our Water Automation Products</h2>
+            <h2 className="mb-[42px] text-[48px] font-semibold text-[#1c1632] max-md:text-[32px]">{heading}</h2>
           </div>
         }
 
@@ -45,22 +55,24 @@ const ServiceAreaHomeOne = ({ style_2 }: any) => {
           }}
           className="equal-height-slider"
         >
-          {data.map((item: any, index: number) => (
-            <SwiperSlide key={item.id} className="h-auto">
+          {cards.map((item, index: number) => (
+            <SwiperSlide key={index} className="h-auto">
               <div className="group flex h-full flex-col overflow-hidden rounded-2xl shadow-sm transition-shadow duration-300 hover:shadow-lg">
                 {/* Full product image — always fully visible */}
                 <div className="relative aspect-[2/3] w-full bg-white">
-                  <Image src={item.img} alt={item.title} fill style={{ objectFit: 'cover', objectPosition: 'center' }} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+                  {item.image && (
+                    <Image src={item.image} alt={item.title || 'Product'} width={933} height={1400} className="h-full w-full object-cover object-center" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+                  )}
                 </div>
                 {/* Info panel attached directly below */}
                 <div className="relative flex flex-1 flex-col bg-primary px-7 pb-7">
                   <div className="-mt-8 mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-md ring-4 ring-primary">
-                    <Image src={icons[index % icons.length]} alt={item.title} className="h-8 w-auto" />
+                    <Image src={icons[index % icons.length]} alt={item.title || 'Product'} className="h-8 w-auto" />
                   </div>
                   <h4 className="mb-1">
                     <Link href={`/products/${item.slug}`} className="text-[26px] font-medium text-white no-underline">{item.title}</Link>
                   </h4>
-                  <h6 className="mb-3 text-[0.85rem] font-semibold text-white/85">{item.subtitle || item.categoryName}</h6>
+                  <h6 className="mb-3 text-[0.85rem] font-semibold text-white/85">{item.subtitle}</h6>
                   <p className="mb-4 line-clamp-3 text-[0.9rem] leading-[1.5] text-[#f1f5f9]">{item.description}</p>
                   <Link href={`/products/${item.slug}`} className="mt-auto inline-flex items-center gap-1 text-white no-underline hover:underline">
                     Product Details <i className="bi bi-arrow-up-right"></i>
