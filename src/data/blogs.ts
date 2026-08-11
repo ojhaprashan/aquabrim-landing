@@ -59,7 +59,7 @@ export const blogs: Blog[] = [
       "Tired of catching Delhi's irregular DJB municipal water supply by hand? Discover how a smart automatic water level controller solves this problem permanently, no more missed supply, no more overflows.",
     excerpt:
       "If you live in Delhi, you know the drill: wake up before sunrise to catch the DJB supply, or wait another 24 hours. Here's the permanent, low-effort fix thousands of homeowners have already switched to.",
-    image: "/assets/blogs/blogs1.png",
+    image: "/assets/blogs/blogs1.webp",
     imageAlt:
       "Delhi apartment building with water tank - smart automatic water level controller solution by Aquabrim",
     tags: [
@@ -291,7 +291,7 @@ export const blogs: Blog[] = [
       "Tank overflow, dry motors, and manual switching are avoidable. Here's what a smart water level controller does, its advantages, and the main types.",
     excerpt:
       "Most homes still manage water the way they did twenty years ago. A smart water level controller removes tank checking, overflow and dry-run worries from your daily routine, here's what it is and the types you'll come across.",
-    image: "/assets/blogs/blogs2.png",
+    image: "/assets/blogs/blogs2.webp",
     imageAlt: "Smart water level controller installed above a home overhead tank",
     tags: ["Smart Water Level Controller", "Home Automation", "Water Management"],
     content: [
@@ -379,19 +379,224 @@ export const blogs: Blog[] = [
       },
     ],
   },
+  {
+    id: 3,
+    slug: "what-makes-aquabrim-best-water-level-controller",
+    title: "What Makes Aquabrim the Best Water Level Controller?",
+    category: "Tips & Guides",
+    categoryId: "guides",
+    date: "10 Aug 2026",
+    readTime: "6 min read",
+    author: "Aquabrim Team",
+    metaTitle: "What Makes Aquabrim the Best Water Level Controller?",
+    metaDescription:
+      "16+ years of experience, wireless sensors, dry-run protection, a full product range, and 50,000+ customers. Here's exactly what sets Aquabrim apart.",
+    excerpt:
+      "Aquabrim is built specifically for Indian water problems — irregular municipal supply, borewell dry-run risk, and multi-tank apartments. Here are the seven things that set it apart.",
+    image: "/assets/blogs/blogs2.webp",
+    imageAlt:
+      "Aquabrim smart water level controller installed in an Indian apartment",
+    tags: [
+      "Best Water Level Controller",
+      "Aquabrim",
+      "Water Automation India",
+    ],
+    content: [
+      {
+        type: "callout",
+        title: "Quick Answer",
+        text: "Aquabrim is built specifically for Indian water problems — irregular municipal supply, borewell dry-run risk, and multi-tank apartments. With 16+ years of experience, wireless sensor technology, dedicated motor protection, a mobile app for remote monitoring, and a product range that covers every home setup, Aquabrim delivers reliable water automation that generic controllers simply cannot match.",
+      },
+      {
+        type: "p",
+        text: "There are dozens of water level controllers available in India today. A quick search will show you options from ₹400 float switches to ₹15,000 industrial systems, from local shops to Amazon listings, from generic devices to branded products. So the real question isn't just which controller is cheapest or most commonly available, it's which one actually solves the water problems that Indian homes face every single day.",
+      },
+      {
+        type: "p",
+        text: "Aquabrim has been answering that question since 2008. Over 16 years, more than 50,000 homes, housing societies, hotels, hospitals, and industrial facilities across 15+ cities have trusted Aquabrim to manage their water automatically. That track record doesn't happen by accident. Here is exactly what sets Aquabrim apart from every other option in the market.",
+      },
+      { type: "h2", text: "1. It Is Built Specifically for Indian Water Problems" },
+      {
+        type: "p",
+        text: "Most water level controllers available in India are generic products, designed for simple overhead tank setups in stable supply conditions. They were not built around the actual water challenges that Indian homes deal with daily.",
+      },
+      {
+        type: "p",
+        text: "Aquabrim was. Its entire product range is designed around three specific Indian water realities:",
+      },
+      {
+        type: "list",
+        items: [
+          "Municipal supply that arrives unpredictably, sometimes at 5 AM, sometimes skipped entirely, and needs to be captured the moment it arrives",
+          "Borewell and submersible pump setups where the motor can burn out if it runs without water in the source",
+          "Multi-tank buildings, apartments and housing societies, where one controller needs to manage the full system, not just a single tank",
+        ],
+      },
+      {
+        type: "p",
+        text: "No generic controller addresses all three of these. [Aquabrim's product range](/products/) does, with a dedicated product for each scenario.",
+      },
+      { type: "h2", text: "2. 16+ Years of Real-World Experience in Indian Conditions" },
+      {
+        type: "p",
+        text: "Experience matters in a product that runs continuously, every day, in conditions that vary significantly across India, voltage fluctuations, hard water, extreme heat, and water that is sometimes barely a trickle.",
+      },
+      { type: "p", text: "Since 2008, Aquabrim has installed water management systems across:" },
+      {
+        type: "list",
+        items: [
+          "Individual homes and builder flats in Delhi, NCR, and major metros",
+          "Large residential societies and apartment complexes",
+          "Five-star hotels including Radisson Blu and Hyatt Regency",
+          "Government and industrial facilities including Indian Railways, BHEL, Indian Oil, and CPWD",
+        ],
+      },
+      {
+        type: "p",
+        text: "That range of installation environments means Aquabrim's products have been tested in real Indian conditions and refined over time to handle whatever comes. The reliability you get from an Aquabrim product is not theoretical, it is the outcome of 16 years of solving real problems in the field.",
+      },
+      { type: "h2", text: "3. Wireless Sensor Technology" },
+      {
+        type: "p",
+        text: "One of the biggest friction points with older water level controllers is installation. Traditional wired systems require cables to run from the sensor in the overhead tank all the way down to the motor panel, through walls, across terraces, down stairwells. This means drilling, rewiring, and significant installation work.",
+      },
+      {
+        type: "p",
+        text: "Aquabrim uses wireless sensor technology throughout its product range. The sensor sits inside the tank and communicates with the controller near the motor over a radio signal. No cables between the tank and the motor panel. No wall cutting. No rewiring.",
+      },
+      { type: "p", text: "The practical benefits of this are significant:" },
+      {
+        type: "list",
+        items: [
+          "Faster, cleaner installation typically done in a few hours",
+          "No ongoing cable maintenance or damage from water exposure",
+          "Works cleanly in buildings where running new cables is impractical or expensive",
+          "Sensors can be placed accurately in the tank without cable length restrictions",
+        ],
+      },
+      { type: "h2", text: "4. Dedicated Dry-Run Motor Protection" },
+      {
+        type: "p",
+        text: "Motor dry run is one of the most common and most expensive water-related problems in Indian homes, particularly those on borewell or submersible pump setups. When a pump runs without water, because the underground source has run low or the supply has been cut, it overheats rapidly and can burn out within minutes. Replacing a motor can cost ₹5,000 to ₹20,000 depending on the type.",
+      },
+      {
+        type: "p",
+        text: "Aquabrim's [Macro controller](/products/macro-borewell-water-controller/) addresses this at the source. Rather than only monitoring the overhead tank, it monitors the water level in the source, the sump or underground tank, and stops the motor automatically if the source runs too low. The motor never runs dry because the system catches the problem before it can happen.",
+      },
+      {
+        type: "p",
+        text: "This is fundamentally different from controllers that only monitor the tank and let the motor run regardless of what's happening at the source. For anyone on a borewell or submersible pump, this single feature can save the cost of the entire system multiple times over.",
+      },
+      { type: "h2", text: "5. App-Based Remote Monitoring" },
+      {
+        type: "p",
+        text: "Most basic water level controllers give you no visibility. The system runs automatically in the background, and you only discover something went wrong after the tank is already empty, the motor has burned out, or water has been overflowing onto the terrace for hours.",
+      },
+      {
+        type: "p",
+        text: "Aquabrim's smart systems connect to a web platform and mobile app that gives you real-time visibility into:",
+      },
+      {
+        type: "list",
+        items: [
+          "Current water level in the tank",
+          "Motor status — whether it is running, stopped, or in a fault state",
+          "System alerts — overflow risk, dry-run risk, supply detected",
+          "Historical usage patterns and motor run logs",
+        ],
+      },
+      {
+        type: "p",
+        text: "This is particularly valuable for homeowners who travel, apartment residents whose tank is on an inaccessible rooftop, and facility managers who oversee multiple buildings from a central location. You do not need to be physically present to know your water system is working correctly.",
+      },
+      { type: "h2", text: "6. A Purpose-Built Product for Every Type of Home" },
+      {
+        type: "p",
+        text: "Generic water level controllers try to be one solution for every setup. Aquabrim takes the opposite approach, a dedicated product, built around the specific requirements of each type of water source and home configuration.",
+      },
+      {
+        type: "list",
+        items: [
+          "[Trigger](/products/trigger-municipal-water-controller/) — For homes connected to municipal supply. It detects when water pressure arrives in the supply line and automatically starts the motor, so you never miss the morning supply window even if you are asleep or away. This is the right product for Delhi, Mumbai, and most tier-1 city homes that rely on corporation water.",
+          "[Macro](/products/macro-borewell-water-controller/) — For borewell and submersible pump setups. It monitors the source water level, not just the overhead tank, and stops the motor automatically if the source runs too low. This is the right product for homes in areas where borewell water is the primary source.",
+          "[Matrix](/products/matrix-multi-tank-controller/) — For apartments, housing societies, and commercial buildings with multiple tanks. One Matrix controller manages the entire water system across tanks, reducing the need for multiple individual units and giving central control to the facility manager.",
+          "[Flexibell](/products/flexibell-water-level-alarm/) — For setups that need water level monitoring and alerts but not full motor automation. It acts as a wireless alarm system, alerting you when the tank is low or overflowing without taking control of the motor.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Each product uses the same core wireless sensor technology and connects to the Aquabrim app. You are not choosing between features, you are choosing the product that fits your specific setup.",
+      },
+      { type: "h2", text: "7. Trusted by 50,000+ Customers" },
+      {
+        type: "p",
+        text: "Anyone can claim their product is the best. The more meaningful measure is who has actually installed it and kept it running.",
+      },
+      {
+        type: "p",
+        text: "Aquabrim has 50,000+ installations across India, spanning individual homeowners, large residential societies, five-star hotels, government departments, and major industrial facilities. Clients include Radisson Blu, Hyatt Regency, BHEL, Indian Oil, Indian Railways, Emaar Properties, Coca-Cola, and Unilever, organisations that have high standards for the systems they install and maintain.",
+      },
+      {
+        type: "p",
+        text: "That breadth of customer base, from a single apartment in Gurugram to a large industrial plant, reflects a product that performs reliably across very different operating environments. It is also the reason Aquabrim has been refining its products for 16 years rather than being replaced by newer entrants: when something works consistently, people keep recommending it.",
+      },
+      { type: "h2", text: "Is Aquabrim the Right Choice for Your Home?" },
+      { type: "p", text: "If any of the following applies to you, the answer is yes:" },
+      {
+        type: "list",
+        items: [
+          "You have manually switched a motor on and off at least once this week",
+          "Your tank has overflowed onto the terrace or caused seepage in the last year",
+          "Your motor has had a dry-run burnout or you are worried about this happening",
+          "You are on municipal supply and have missed the morning water window",
+          "You live in an apartment and have no easy way to check the tank level",
+          "You manage a building or housing society and need a centralised water system",
+        ],
+      },
+      {
+        type: "p",
+        text: "Aquabrim removes all of these problems permanently. The right product for your setup depends on your water source, the [product page](/products/) explains each system clearly, or you can contact the team to get a recommendation for your specific configuration.",
+      },
+      {
+        type: "callout",
+        title: "New to water controllers?",
+        text: "Start with [Why Every Home Needs a Smart Water Level Controller](/blogs/why-every-home-needs-a-smart-water-level-controller/) for a plain-language explanation of what these systems do and the main types available.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What is the best water level controller brand in India?",
+        answer:
+          "Aquabrim is one of the most trusted brands for smart wireless water level controllers in India, with 16+ years of experience and over 50,000 systems installed across homes, apartments, and commercial buildings across 15+ cities.",
+      },
+      {
+        question: "Why is Aquabrim better than a basic float switch?",
+        answer:
+          "A float switch is a mechanical device that can get stuck, wear out, or fail without warning. Aquabrim uses electronic wireless sensors that are more accurate and reliable, adds dry-run motor protection, supports app-based monitoring, and covers multi-tank setups, none of which a basic float switch can do.",
+      },
+      {
+        question: "Does Aquabrim work with both municipal supply and borewell setups?",
+        answer:
+          "Yes. The Trigger product is designed specifically for municipal supply lines, detecting when water arrives and starting the motor automatically. The Macro is built for borewell and submersible pump systems, monitoring the source itself to prevent dry run. Both use wireless sensors and fully automatic motor control.",
+      },
+      {
+        question: "Can I monitor my water tank from my phone with Aquabrim?",
+        answer:
+          "Yes. Aquabrim's systems connect to a web platform and a mobile app that gives you real-time visibility into water levels, motor status, and alerts, from anywhere, without needing to go up to the tank or motor panel.",
+      },
+      {
+        question: "How long has Aquabrim been making water level controllers?",
+        answer:
+          "Aquabrim has been manufacturing and installing smart water level controllers since 2008, over 16 years, across residential homes, housing societies, commercial buildings, hospitals, railways, and industrial facilities in more than 15 cities across India.",
+      },
+    ],
+  },
 ];
 
-// Helpers
+// Helpers.
+// NOTE: these look up the SHIPPED posts only. Pages must use getMergedBlogs() /
+// getMergedBlogBySlug() from @/services/blog/blog.service so CMS edits are applied.
 export const getBlogBySlug = (slug: string): Blog | undefined =>
   blogs.find((b) => b.slug === slug);
-
-// Category list with live post counts derived from the blogs above.
-export const categoriesWithCounts = () => [
-  { id: "all", name: "All Posts", count: blogs.length },
-  ...blogCategories.map((c) => ({
-    ...c,
-    count: blogs.filter((b) => b.categoryId === c.id).length,
-  })),
-];
 
 export default blogs;

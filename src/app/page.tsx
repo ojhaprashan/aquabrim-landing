@@ -2,6 +2,9 @@
 import HomeOne from '@/components/homes/home';
 import Wrapper from '@/layouts/Wrapper';
 import React from 'react';
+import JsonLd from '@/components/common/JsonLd';
+import accordion_data from '@/data/AccordionData';
+import { faqSchema, organizationSchema, webSiteSchema } from '@/utils/schema';
 
 
 export const metadata = {
@@ -16,6 +19,11 @@ export const metadata = {
 const MainHome = () => {
   return (
     <Wrapper>
+      {/* The FAQ block on this page renders accordion_data by default, so the
+          markup mirrors what a crawler sees. */}
+      {/* No BreadcrumbList here — the homepage IS the root, so a one-item trail
+          carries no information for Google. */}
+      <JsonLd data={[organizationSchema(), webSiteSchema(), faqSchema(accordion_data)]} />
       <HomeOne />
     </Wrapper>
   );

@@ -3,7 +3,7 @@ import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { blogs, categoriesWithCounts } from '@/data/blogs';
+import { blogCategories, type Blog } from '@/data/blogs';
 import type { BlogContent } from '@/services/blog/blog.types';
 
 const widgetBox = "rounded-2xl border border-solid border-[#e9ecef] bg-white p-4 shadow-sm";
@@ -30,36 +30,9 @@ const DEFAULTS = {
   featuredWidgetHeading: 'Featured Post',
 };
 
-// A normalized post shape used by the card grid regardless of source.
-interface PostView {
-  id: string | number;
-  title: string;
-  excerpt: string;
-  category: string;
-  catId: string;
-  date: string;
-  readTime: string;
-  image: string;
-  imageAlt: string;
-  slug?: string;
-}
-
-const DEFAULT_POSTS: PostView[] = blogs.map((b) => ({
-  id: b.id,
-  title: b.title,
-  excerpt: b.excerpt,
-  category: b.category,
-  catId: b.categoryId,
-  date: b.date,
-  readTime: b.readTime,
-  image: b.image,
-  imageAlt: b.imageAlt,
-  slug: b.slug,
-}));
-
-const DEFAULT_CATEGORIES = categoriesWithCounts();
-
-const BlogScreen = ({ data }: { data?: BlogContent }) => {
+// Posts arrive already merged (src/data/blogs.ts + CMS overrides) from the page,
+// so the listing and the article routes can never disagree about which posts exist.
+const BlogScreen = ({ posts, data }: { posts: Blog[]; data?: BlogContent }) => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [query, setQuery] = useState('');
 
@@ -67,27 +40,14 @@ const BlogScreen = ({ data }: { data?: BlogContent }) => {
   const heroLine1 = data?.hero?.headingLine1 || DEFAULTS.hero.headingLine1;
   const heroLine2 = data?.hero?.headingLine2 || DEFAULTS.hero.headingLine2;
 
-  const categories = data?.categories?.categories?.length
-    ? data.categories.categories.map((c) => ({
-        id: c.id || '',
-        name: c.name || '',
-        count: c.count ?? 0,
-      }))
-    : DEFAULT_CATEGORIES;
-
-  const posts: PostView[] = data?.posts?.posts?.length
-    ? data.posts.posts.map((p) => ({
-        id: p.id ?? '',
-        title: p.title || '',
-        excerpt: p.description || '',
-        category: p.category || '',
-        catId: p.catId || '',
-        date: p.date || '',
-        readTime: p.readTime || '',
-        image: p.img || '',
-        imageAlt: p.title || '',
-      }))
-    : DEFAULT_POSTS;
+  // Categories and their counts are derived from the posts themselves — there is
+  // nothing to keep in sync by hand, and a count can never go stale.
+  const categories = useMemo(() => {
+    const used = blogCategories
+      .map((c) => ({ ...c, count: posts.filter((p) => p.categoryId === c.id).length }))
+      .filter((c) => c.count > 0);
+    return [{ id: 'all', name: 'All Posts', count: posts.length }, ...used];
+  }, [posts]);
 
   const newsletter = {
     heading: data?.newsletter?.heading || DEFAULTS.newsletter.heading,
@@ -96,25 +56,25 @@ const BlogScreen = ({ data }: { data?: BlogContent }) => {
     buttonText: data?.newsletter?.buttonText || DEFAULTS.newsletter.buttonText,
   };
 
-  // The CMS "featured" section, or the most recent default post as a fallback.
-  const defaultFeatured = DEFAULT_POSTS[0];
-  const featured = {
+  // The CMS picks WHICH post to feature by slug — its text and image always come
+  // from that post, so the widget can never drift out of sync with the article.
+  const featuredPost =
+    posts.find((p) => p.slug === data?.featured?.postSlug?.trim()) || posts[posts.length - 1];
+  const featured = featuredPost && {
     widgetHeading: data?.featured?.widgetHeading || DEFAULTS.featuredWidgetHeading,
-    image: data?.featured?.image || defaultFeatured?.image || '',
-    imageAlt: defaultFeatured?.imageAlt || data?.featured?.title || '',
-    category: data?.featured?.category || defaultFeatured?.category || '',
-    date: data?.featured?.date || defaultFeatured?.date || '',
-    readTime: data?.featured?.readTime || defaultFeatured?.readTime || '',
-    title: data?.featured?.title || defaultFeatured?.title || '',
-    description: data?.featured?.description || defaultFeatured?.excerpt || '',
-    link:
-      data?.featured?.link ||
-      (defaultFeatured?.slug ? `/blogs/${defaultFeatured.slug}` : '/blogs'),
+    image: featuredPost.image,
+    imageAlt: featuredPost.imageAlt,
+    category: featuredPost.category,
+    date: featuredPost.date,
+    readTime: featuredPost.readTime,
+    title: featuredPost.title,
+    description: featuredPost.excerpt,
+    link: `/blogs/${featuredPost.slug}`,
   };
 
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
-      const matchesCategory = activeCategory === 'all' || post.catId === activeCategory;
+      const matchesCategory = activeCategory === 'all' || post.categoryId === activeCategory;
       const q = query.trim().toLowerCase();
       const matchesQuery =
         !q ||
@@ -245,6 +205,7 @@ const BlogScreen = ({ data }: { data?: BlogContent }) => {
               </div>
 
               {/* Featured Post */}
+              {featured && (
               <div className={`mb-4 lg:mb-8 ${widgetBox}`}>
                 <h6 className="mb-4 font-bold">{featured.widgetHeading}</h6>
                 <div>
@@ -260,6 +221,7 @@ const BlogScreen = ({ data }: { data?: BlogContent }) => {
                   </Link>
                 </div>
               </div>
+              )}
 
               {/* Stay Updated */}
               <div className={widgetBox}>

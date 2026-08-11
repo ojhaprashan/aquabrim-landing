@@ -6,10 +6,12 @@ import CtaBanner from '../common/CtaBanner';
 import BlogScreen from './BlogScreen';
 import { getBlogContent } from '@/services/blog/blog.service';
 import type { BlogContent } from '@/services/blog/blog.types';
+import type { Blog as BlogPost } from '@/data/blogs';
 
-const Blog = () => {
-  // Content is managed in the CMS and fetched in the browser so edits reflect
-  // live without a rebuild. Until it arrives, sections render their defaults.
+const Blog = ({ posts }: { posts: BlogPost[] }) => {
+  // Page chrome (headings, newsletter, CTA, which post is featured) is fetched
+  // live from the CMS so copy edits show without a rebuild. The posts themselves
+  // are passed in from the build — every card must point at a page that exists.
   const [content, setContent] = useState<BlogContent | null>(null);
 
   useEffect(() => {
@@ -22,7 +24,7 @@ const Blog = () => {
     <>
       <HeaderOne />
       <main>
-        <BlogScreen data={content ?? undefined} />
+        <BlogScreen posts={posts} data={content ?? undefined} />
       </main>
       <CtaBanner
         title={cta?.title ?? 'Reliable Water Management Starts Here'}

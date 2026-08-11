@@ -1,4 +1,6 @@
 import ShippingPolicy from "@/components/shipping-policy";
+import JsonLd from "@/components/common/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "@/utils/schema";
 
 export const metadata = {
   title: "Shipping & Delivery Policy | Aquabrim",
@@ -9,7 +11,21 @@ export const metadata = {
 };
 
 const page = () => {
-  return <ShippingPolicy />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          webPageSchema({
+            path: "/shipping-policy",
+            name: metadata.title,
+            description: metadata.description,
+          }),
+          breadcrumbSchema([{ name: "Shipping Policy", path: "/shipping-policy" }]),
+        ]}
+      />
+      <ShippingPolicy />
+    </>
+  );
 };
 
 export default page;

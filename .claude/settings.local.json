@@ -89,7 +89,18 @@
       "Bash(grep -v -E '\\(^\\\\./node_modules|\\\\.env$|/\\\\.git/\\)')",
       "Bash(powershell -Command \"Compress-Archive -Path \\(Get-ChildItem -Path 'D:\\\\Aquabrim_cms\\\\api' -Exclude 'node_modules','.env'\\) -DestinationPath 'D:\\\\Aquabrim_cms\\\\aquabrim-api-deploy.zip' -Force\")",
       "Bash(powershell -Command \"Compress-Archive -Path 'D:\\\\Aquabrim_cms\\\\admin\\\\dist\\\\*' -DestinationPath 'D:\\\\Aquabrim_cms\\\\admin-dist.zip' -Force\")",
-      "Bash(powershell -Command \"Add-Type -A System.IO.Compression.FileSystem; [IO.Compression.ZipFile]::OpenRead\\('D:\\\\Aquabrim_cms\\\\admin-dist.zip'\\).Entries | Select-Object -First 8 -ExpandProperty FullName\")"
+      "Bash(powershell -Command \"Add-Type -A System.IO.Compression.FileSystem; [IO.Compression.ZipFile]::OpenRead\\('D:\\\\Aquabrim_cms\\\\admin-dist.zip'\\).Entries | Select-Object -First 8 -ExpandProperty FullName\")",
+      "Bash(node /tmp/validate-schema.js)",
+      "Bash(node -e \"const p=require\\('./package.json'\\);console.log\\(JSON.stringify\\(p.dependencies,null,1\\)\\);console.log\\(p.scripts\\)\")",
+      "Bash(awk '{s+=$1} END {print s\" bytes\"}')",
+      "Bash(node -e \"require\\('sharp'\\);console.log\\('sharp OK', require\\('sharp/package.json'\\).version\\)\")",
+      "Bash(node scripts/optimize-hero-webp.mjs)",
+      "Read(//d/public/assets/css/**)",
+      "Bash(awk '{s+=$1} END {print \"total: \"s\" bytes\"}')",
+      "Bash(cp /tmp/shot.mjs /d/aquabrim_new/shot-tmp.mjs)",
+      "Bash(node shot-tmp.mjs)",
+      "Bash(node scripts/optimize-images.mjs --only blogs)",
+      "Bash(node -e \"console.log\\(Object.keys\\(require\\('./api/package.json'\\).dependencies\\)\\)\")"
     ],
     "additionalDirectories": [
       "\\tmp"

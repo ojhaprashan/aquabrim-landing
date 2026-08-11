@@ -2,6 +2,8 @@
 import Contact from '@/components/contact';
 import Wrapper from '@/layouts/Wrapper';
 import React from 'react';
+import JsonLd from '@/components/common/JsonLd';
+import { breadcrumbSchema, contactPageSchema } from '@/utils/schema';
 
 export const metadata = {
   title: 'Contact Aquabrim | Get a Quote – Delhi, Bangalore, Pune',
@@ -14,6 +16,12 @@ export const metadata = {
 const index = () => {
   return (
     <Wrapper>
+      <JsonLd
+        data={[
+          contactPageSchema(),
+          breadcrumbSchema([{ name: 'Contact Us', path: '/contact-us' }]),
+        ]}
+      />
       <Contact />
     </Wrapper>
   );

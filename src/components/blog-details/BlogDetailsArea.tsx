@@ -8,6 +8,37 @@ import ArticleToc, { type TocItem } from './ArticleToc';
 import { slugify } from '@/utils/slug';
 import type { Blog, ContentBlock } from '@/data/blogs';
 
+// Article text may carry inline links written in markdown style: [label](/path).
+// This keeps the CMS free of HTML — an SEO writer just types the brackets — while
+// still producing real <Link>s for internal SEO. Anything else renders as plain text.
+const LINK_PATTERN = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+
+const richText = (text: string): React.ReactNode => {
+  if (!text.includes('](')) return text;
+
+  const nodes: React.ReactNode[] = [];
+  let lastIndex = 0;
+
+  for (const match of text.matchAll(LINK_PATTERN)) {
+    const [full, label, href] = match;
+    const start = match.index ?? 0;
+    if (start > lastIndex) nodes.push(text.slice(lastIndex, start));
+    nodes.push(
+      <Link
+        key={`${start}-${href}`}
+        href={href}
+        className="font-semibold text-[#006CD0] underline decoration-[#006CD0]/30 underline-offset-2 transition-colors hover:decoration-[#006CD0]"
+      >
+        {label}
+      </Link>
+    );
+    lastIndex = start + full.length;
+  }
+
+  if (lastIndex < text.length) nodes.push(text.slice(lastIndex));
+  return nodes;
+};
+
 const renderBlock = (block: ContentBlock, i: number) => {
   switch (block.type) {
     case 'h2':
@@ -25,7 +56,7 @@ const renderBlock = (block: ContentBlock, i: number) => {
     case 'p':
       return (
         <p key={i} className="mb-5 text-[1.05rem] leading-[1.85] text-[#334155]">
-          {block.text}
+          {richText(block.text)}
         </p>
       );
     case 'list':
@@ -34,7 +65,7 @@ const renderBlock = (block: ContentBlock, i: number) => {
           {block.items.map((item, li) => (
             <li key={li} className="flex items-start gap-3 text-[1.05rem] leading-[1.7] text-[#334155]">
               <i className="bi bi-check-circle-fill mt-1 shrink-0 text-[#006CD0]"></i>
-              <span>{item}</span>
+              <span>{richText(item)}</span>
             </li>
           ))}
         </ul>
@@ -47,7 +78,7 @@ const renderBlock = (block: ContentBlock, i: number) => {
               <i className="bi bi-lightbulb-fill"></i> {block.title}
             </div>
           )}
-          <p className="m-0 text-[1.05rem] leading-[1.75] text-[#1e3a5f]">{block.text}</p>
+          <p className="m-0 text-[1.05rem] leading-[1.75] text-[#1e3a5f]">{richText(block.text)}</p>
         </div>
       );
     case 'table':
@@ -69,7 +100,7 @@ const renderBlock = (block: ContentBlock, i: number) => {
                       key={ci}
                       className={`border-t border-solid border-[#e2e8f0] px-5 py-4 align-top leading-[1.65] text-[#475569] ${ci === 0 ? 'font-bold text-[#0f172a] sm:whitespace-nowrap' : ''}`}
                     >
-                      {cell}
+                      {richText(cell)}
                     </td>
                   ))}
                 </tr>

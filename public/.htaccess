@@ -26,7 +26,64 @@
   # Google Maps embed iframe, and Google review avatars. 'unsafe-inline'
   # / 'unsafe-eval' are required because this is a static export (no
   # nonces) with inline GTM/GA and Next.js bootstrap scripts.
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cms.aquabrim.co.in https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com https://maps.googleapis.com; frame-src 'self' https://www.google.com https://www.googletagmanager.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://aquabrim.com https://www.aquabrim.com https://cms.aquabrim.co.in https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com https://maps.googleapis.com; frame-src 'self' https://www.google.com https://www.googletagmanager.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+</IfModule>
+
+# ======================================================================
+# Compression  (Core Web Vitals: FCP / LCP)
+# Text assets were previously served UNCOMPRESSED — the CSS bundle alone is
+# ~600 KB raw and gzips to roughly a tenth of that. Brotli is preferred when
+# the module is present; mod_deflate is the fallback.
+# ======================================================================
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript application/x-javascript
+  AddOutputFilterByType BROTLI_COMPRESS application/json application/manifest+json
+  AddOutputFilterByType BROTLI_COMPRESS image/svg+xml application/xml application/rss+xml
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/manifest+json
+  AddOutputFilterByType DEFLATE image/svg+xml application/xml application/rss+xml
+
+  # Don't waste CPU re-compressing already-compressed binaries.
+  SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp|avif|ico|zip|gz|br|woff2?|mp4)$ no-gzip dont-vary
+</IfModule>
+
+# ======================================================================
+# Cache headers  (Core Web Vitals: repeat-visit LCP + TTFB)
+# /_next/static/* filenames are content-hashed by the build, so they are
+# safe to cache immutably. HTML must always revalidate so content edits and
+# new deploys are picked up straight away.
+# ======================================================================
+<IfModule mod_headers.c>
+  <FilesMatch "\.(?:css|js|woff2?|ttf|eot|otf|svg|jpe?g|png|gif|webp|avif|ico|mp4)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  <FilesMatch "\.(?:html|json|xml|txt)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType font/woff2                "access plus 1 year"
+  ExpiresByType image/webp                "access plus 1 year"
+  ExpiresByType image/avif                "access plus 1 year"
+  ExpiresByType image/jpeg                "access plus 1 year"
+  ExpiresByType image/png                 "access plus 1 year"
+  ExpiresByType image/svg+xml             "access plus 1 year"
+  ExpiresByType text/html                 "access plus 0 seconds"
+</IfModule>
+
+# Keep connections alive — saves a TLS handshake per asset.
+<IfModule mod_headers.c>
+  Header set Connection keep-alive
 </IfModule>
 
 # ======================================================================

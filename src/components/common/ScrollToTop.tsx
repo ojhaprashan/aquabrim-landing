@@ -18,7 +18,7 @@ const ScrollToTop = () => {
         sticky ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
       }`}
     >
-      <i className="fas fa-arrow-up"></i>
+      <i className="bi bi-arrow-up"></i>
     </button>
   );
 };

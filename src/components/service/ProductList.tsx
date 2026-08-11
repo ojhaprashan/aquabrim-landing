@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -67,10 +67,33 @@ interface ProductListProps {
 const ProductList = ({ cmsProducts, headingLine1, headingLine2, sidebarLabel }: ProductListProps = {}) => {
   const [activeFilter, setActiveFilter] = useState<'all' | 'domestic' | 'industrial'>('all');
 
-  // Prefer the live CMS catalog when present; otherwise the products.json list.
-  const sourceProducts = cmsProducts && cmsProducts.length > 0
-    ? cmsProducts.map(toDisplayProduct)
-    : products;
+  // Layer live CMS edits ON TOP of the products.json catalog, matched by slug.
+  // It must never REPLACE the list: a CMS record holding fewer products than
+  // products.json would otherwise silently hide the missing ones from the grid.
+  // CMS-only products are not added here either — they have no detail page until
+  // the next build, so the card would link to a 404. The build-time merge in
+  // products.service.ts is what publishes those.
+  const sourceProducts = useMemo(() => {
+    const cmsBySlug = new Map(
+      (cmsProducts ?? [])
+        .filter((p) => p.slug)
+        .map((p) => [p.slug as string, p])
+    );
+    if (cmsBySlug.size === 0) return products;
+
+    return products.map((base) => {
+      const cms = cmsBySlug.get(base.slug);
+      if (!cms) return base;
+      // Only fields the CMS author actually filled in override the JSON.
+      const overrides: Record<string, unknown> = {};
+      for (const [key, value] of Object.entries(cms)) {
+        const isEmpty =
+          value == null || value === '' || (Array.isArray(value) && value.length === 0);
+        if (!isEmpty) overrides[key] = value;
+      }
+      return toDisplayProduct({ ...base, ...overrides } as ProductItem);
+    });
+  }, [cmsProducts]);
 
   const heroLine1 = headingLine1 || HERO_DEFAULTS.headingLine1;
   const heroLine2 = headingLine2 || HERO_DEFAULTS.headingLine2;

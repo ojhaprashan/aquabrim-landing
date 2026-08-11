@@ -12,22 +12,22 @@ const social_links: social_links_type[] = [
   {
     link: "https://www.facebook.com/aquabrim",
     target: "_blank",
-    icon: "fab fa-facebook-f",
+    icon: "bi bi-facebook",
   },
   {
     link: "https://www.instagram.com/aquabrim",
     target: "_blank",
-    icon: "fab fa-instagram",
+    icon: "bi bi-instagram",
   },
   {
     link: "https://www.linkedin.com/company/aquabrim",
     target: "_blank",
-    icon: "fab fa-linkedin-in",
+    icon: "bi bi-linkedin",
   },
   {
     link: "https://www.youtube.com/@aquabrim",
     target: "_blank",
-    icon: "fab fa-youtube",
+    icon: "bi bi-youtube",
   },
 ];
 
@@ -62,22 +62,22 @@ const social_links_2: social_links_type_2[] = [
   {
     link: "https://www.facebook.com/aquabrim",
     color: "footer-facebook",
-    icon: "fa-brands fa-facebook-f",
+    icon: "bi bi-facebook",
   },
   {
     link: "https://www.instagram.com/aquabrim",
     color: "footer-insta",
-    icon: "fa-brands fa-instagram",
+    icon: "bi bi-instagram",
   },
   {
     link: "https://www.linkedin.com/company/aquabrim",
     color: "footer-linkedin",
-    icon: "fa-brands fa-linkedin-in",
+    icon: "bi bi-linkedin",
   },
   {
     link: "https://www.youtube.com/@aquabrim",
     color: "",
-    icon: "fa-brands fa-youtube",
+    icon: "bi bi-youtube",
   },
 ];
 
@@ -111,22 +111,22 @@ const team_social_data: DataType[] = [
   {
     id: 1,
     link: "https://www.facebook.com/aquabrim",
-    icon: "fab fa-facebook-f",
+    icon: "bi bi-facebook",
   },
   {
     id: 2,
     link: "https://www.instagram.com/aquabrim",
-    icon: "fab fa-instagram",
+    icon: "bi bi-instagram",
   },
   {
     id: 3,
     link: "https://www.linkedin.com/company/aquabrim",
-    icon: "fab fa-linkedin-in",
+    icon: "bi bi-linkedin",
   },
   {
     id: 4,
     link: "https://www.youtube.com/@aquabrim",
-    icon: "fab fa-youtube",
+    icon: "bi bi-youtube",
   },
 ]
 

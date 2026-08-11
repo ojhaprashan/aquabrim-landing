@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "from": "/assets/blogs/blogs1.png",
+    "to": "/assets/blogs/blogs1.webp"
+  },
+  {
+    "from": "/assets/blogs/blogs2.png",
+    "to": "/assets/blogs/blogs2.webp"
+  }
+]

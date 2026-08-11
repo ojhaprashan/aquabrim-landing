@@ -1,17 +1,20 @@
 import { notFound } from 'next/navigation';
 import Wrapper from '@/layouts/Wrapper';
 import BlogDetails from '@/components/blog-details';
-import { blogs, getBlogBySlug } from '@/data/blogs';
-
-const SITE_URL = 'https://aquabrim.com';
+import { getMergedBlogs, getMergedBlogBySlug } from '@/services/blog/blog.service';
+import JsonLd from '@/components/common/JsonLd';
+import { blogPostingSchema, breadcrumbSchema, faqSchema } from '@/utils/schema';
 
 // Pre-render one static page per blog slug (required for output: 'export').
-export function generateStaticParams() {
+// Uses the same merged source as the listing, so a post authored in the CMS
+// gets its own page on the next build.
+export async function generateStaticParams() {
+  const blogs = await getMergedBlogs();
   return blogs.map((b) => ({ slug: b.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const blog = getBlogBySlug(params.slug);
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const blog = await getMergedBlogBySlug(params.slug);
   if (!blog) return { title: 'Blog Details | Aquabrim' };
   return {
     title: blog.metaTitle,
@@ -28,44 +31,21 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
-const BlogDetailsPage = ({ params }: { params: { slug: string } }) => {
-  const blog = getBlogBySlug(params.slug);
+const BlogDetailsPage = async ({ params }: { params: { slug: string } }) => {
+  const blog = await getMergedBlogBySlug(params.slug);
   if (!blog) notFound();
-
-  const blogPostingSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: blog.title,
-    description: blog.metaDescription,
-    image: `${SITE_URL}${blog.image}`,
-    author: { '@type': 'Organization', name: blog.author },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Aquabrim',
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/images/logo.png` },
-    },
-    mainEntityOfPage: `${SITE_URL}/blogs/${blog.slug}/`,
-  };
-
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: blog.faqs.map((f) => ({
-      '@type': 'Question',
-      name: f.question,
-      acceptedAnswer: { '@type': 'Answer', text: f.answer },
-    })),
-  };
 
   return (
     <Wrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      <JsonLd
+        data={[
+          blogPostingSchema(blog),
+          faqSchema(blog.faqs),
+          breadcrumbSchema([
+            { name: 'Blogs', path: '/blogs' },
+            { name: blog.title, path: `/blogs/${blog.slug}` },
+          ]),
+        ]}
       />
       <BlogDetails blog={blog} />
     </Wrapper>

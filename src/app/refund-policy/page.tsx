@@ -1,4 +1,6 @@
 import RefundPolicy from "@/components/refund-policy";
+import JsonLd from "@/components/common/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "@/utils/schema";
 
 export const metadata = {
   title: "Refund & Return Policy | Aquabrim",
@@ -9,7 +11,21 @@ export const metadata = {
 };
 
 const page = () => {
-  return <RefundPolicy />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          webPageSchema({
+            path: "/refund-policy",
+            name: metadata.title,
+            description: metadata.description,
+          }),
+          breadcrumbSchema([{ name: "Refund Policy", path: "/refund-policy" }]),
+        ]}
+      />
+      <RefundPolicy />
+    </>
+  );
 };
 
 export default page;

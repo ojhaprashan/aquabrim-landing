@@ -112,11 +112,18 @@ const HeroAreaHomeOne = ({ data }: { data?: HomeHero }) => {
                   className="absolute left-0 top-0 h-full w-full transition-opacity duration-[800ms] ease-in-out"
                   style={{ opacity: currentSlide === index ? 1 : 0, zIndex: currentSlide === index ? 1 : 0 }}
                 >
+                  {/* The first slide is the LCP element: it gets fetchpriority
+                      ="high" + eager loading via `priority`. Slides 2-3 are
+                      off-screen (opacity 0) until the typewriter advances, so
+                      they load lazily instead of competing for bandwidth. */}
                   <Image
                     src={imgSrc}
                     alt={`Aquabrim Smart Device View ${index + 1}`}
-                    width={1400}
-                    height={933}
+                    width={1080}
+                    height={720}
+                    sizes="(max-width: 1024px) 92vw, 540px"
+                    priority={index === 0}
+                    loading={index === 0 ? undefined : 'lazy'}
                     className="h-full w-full object-contain"
                   />
                 </div>

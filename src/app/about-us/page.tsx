@@ -2,6 +2,8 @@
 import About from '@/components/about';
 import Wrapper from '@/layouts/Wrapper';
 import React from 'react';
+import JsonLd from '@/components/common/JsonLd';
+import { breadcrumbSchema, webPageSchema } from '@/utils/schema';
 
 export const metadata = {
   title: 'About Aquabrim | Water Automation Company Since 2008',
@@ -14,6 +16,19 @@ export const metadata = {
 const index = () => {
   return (
     <Wrapper>
+      <JsonLd
+        data={[
+          {
+            ...webPageSchema({
+              path: '/about-us',
+              name: metadata.title,
+              description: metadata.description,
+            }),
+            '@type': 'AboutPage',
+          },
+          breadcrumbSchema([{ name: 'About Us', path: '/about-us' }]),
+        ]}
+      />
       <About />
     </Wrapper>
   );

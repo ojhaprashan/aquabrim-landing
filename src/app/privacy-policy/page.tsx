@@ -1,4 +1,6 @@
 import PrivacyPolicy from "@/components/privacy-policy";
+import JsonLd from "@/components/common/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "@/utils/schema";
 
 export const metadata = {
   title: "Privacy Policy | How Aquabrim Protects Your Data",
@@ -9,7 +11,21 @@ export const metadata = {
 };
 
 const page = () => {
-  return <PrivacyPolicy />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          webPageSchema({
+            path: "/privacy-policy",
+            name: metadata.title,
+            description: metadata.description,
+          }),
+          breadcrumbSchema([{ name: "Privacy Policy", path: "/privacy-policy" }]),
+        ]}
+      />
+      <PrivacyPolicy />
+    </>
+  );
 };
 
 export default page;

@@ -1,7 +1,12 @@
-@import "../../public/assets/css/all.min.css";
-@import "../../public/assets/css/animate.css";
-@import "../../public/assets/css/animate.min.css";
-@import "../../public/assets/css/animated-text.css";
+// Removed from the render-blocking bundle (Core Web Vitals: FCP) — ~157 KB raw:
+//   all.min.css      (59 KB) FontAwesome. Only 8 icons were used; they now use
+//                    Bootstrap Icons, which is already loaded below.
+//   animate.css      ( 7 KB) + animate.min.css (71 KB) — the only `wow
+//                    animate__*` markup lives in ContactAreaHomeOne /
+//                    SubscribeAreaHomeOne / VedioAreaHomeOne, none of which are
+//                    rendered by any route. Re-add if those are revived.
+//   animated-text.css (20 KB) defines only `.cd-words-wrapper`, unused — the
+//                    hero typewriter is hand-rolled in HeroAreaHomeOne.
 @import "../../public/assets/css/bootstrap-icons.css";
 @import "../../public/assets/css/flaticon.css";
 @import "../../public/assets/css/theme-default.css";

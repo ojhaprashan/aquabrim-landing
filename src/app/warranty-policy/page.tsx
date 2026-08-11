@@ -1,4 +1,6 @@
 import WarrantyPolicy from "@/components/warranty-policy";
+import JsonLd from "@/components/common/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "@/utils/schema";
 
 export const metadata = {
   title: "Warranty Policy | Aquabrim Water Level Controllers",
@@ -9,7 +11,21 @@ export const metadata = {
 };
 
 const page = () => {
-  return <WarrantyPolicy />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          webPageSchema({
+            path: "/warranty-policy",
+            name: metadata.title,
+            description: metadata.description,
+          }),
+          breadcrumbSchema([{ name: "Warranty Policy", path: "/warranty-policy" }]),
+        ]}
+      />
+      <WarrantyPolicy />
+    </>
+  );
 };
 
 export default page;

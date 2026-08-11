@@ -2,6 +2,8 @@
 import React from 'react';
 import Wrapper from '@/layouts/Wrapper';
 import PricingPolicy from '@/components/pricing-policy';
+import JsonLd from '@/components/common/JsonLd';
+import { breadcrumbSchema, webPageSchema } from '@/utils/schema';
 
 export const metadata = {
   title: 'Pricing Policy | Aquabrim Water Level Controllers',
@@ -14,6 +16,16 @@ export const metadata = {
 const index = () => {
   return (
     <Wrapper>
+      <JsonLd
+        data={[
+          webPageSchema({
+            path: '/pricing-policy',
+            name: metadata.title,
+            description: metadata.description,
+          }),
+          breadcrumbSchema([{ name: 'Pricing Policy', path: '/pricing-policy' }]),
+        ]}
+      />
       <PricingPolicy />
     </Wrapper>
   );

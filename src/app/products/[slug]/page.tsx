@@ -2,6 +2,8 @@ import ServiceDetails from '@/components/service-details';
 import Wrapper from '@/layouts/Wrapper';
 import React from 'react';
 import { getMergedProducts, getProductBySlug } from '@/services/products/products.service';
+import JsonLd from '@/components/common/JsonLd';
+import { breadcrumbSchema, faqSchema, productSchema } from '@/utils/schema';
 
 // Pre-render one static page per product slug (required for output: 'export').
 // Slugs come from the CMS backend merged with products.json, so CMS-managed
@@ -27,9 +29,25 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-const ServiceDetailsPage = () => {
+const ServiceDetailsPage = async ({ params }: { params: { slug: string } }) => {
+  // Schema is built from the same merged CMS/JSON record the page renders, so a
+  // price or spec change in the CMS flows into the structured data on rebuild.
+  const product = await getProductBySlug(params.slug);
+
   return (
     <Wrapper>
+      {product && (
+        <JsonLd
+          data={[
+            productSchema(product),
+            faqSchema(product.faqs),
+            breadcrumbSchema([
+              { name: 'Products', path: '/products' },
+              { name: product.title || params.slug, path: `/products/${params.slug}` },
+            ]),
+          ]}
+        />
+      )}
       <ServiceDetails />
     </Wrapper>
   );

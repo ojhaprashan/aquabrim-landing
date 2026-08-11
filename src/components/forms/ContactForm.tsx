@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import { getTracking } from '@/utils/tracking';
 import { trackContactSubmit } from '@/utils/gtag';
 
-const API_ENDPOINT = "https://aquabrim.com/api/contact.php";
+// Same-origin, relative on purpose. An absolute "https://aquabrim.com/..." URL is a
+// DIFFERENT origin from www.aquabrim.com, so visitors on www were blocked by CSP
+// connect-src / CORS and saw "couldn't reach the server". Relative works on both hosts.
+const API_ENDPOINT = "/api/contact.php";
 
 interface FormState {
   name: string;
@@ -91,7 +94,8 @@ const ContactForm = ({ submitText, successMessage, queryTypes }: ContactFormProp
     try {
       // The browser forbids setting a literal `Cookie` request header from JS, so we
       // write the cookie on the document instead; `credentials: "include"` then sends it.
-      // Only reaches aquabrim.com if this site is served from the same domain/subdomain.
+      // Host-only cookie — it only travels with the request because API_ENDPOINT is
+      // same-origin (a cross-host absolute URL would silently drop it).
       document.cookie = "humans_21909=1; path=/";
 
       // Merge the visit's captured Google Ads / UTM attribution into the payload.

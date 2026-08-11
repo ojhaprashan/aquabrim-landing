@@ -38,7 +38,7 @@ const NavMenu = () => {
                   : 'after:opacity-0 group-hover:text-primary group-hover:after:opacity-100'
               }`}
             >
-              {item.title} {item.has_dropdown && <i className="fas fa-chevron-down ml-1 text-xs"></i>}
+              {item.title} {item.has_dropdown && <i className="bi bi-chevron-down ml-1 text-xs"></i>}
             </div>
           </Link>
           {item.has_dropdown && (

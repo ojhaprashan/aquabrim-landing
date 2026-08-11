@@ -1,4 +1,6 @@
 import TermsCondition from "@/components/terms-condition";
+import JsonLd from "@/components/common/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "@/utils/schema";
 
 export const metadata = {
   title: "Terms & Conditions | Aquabrim",
@@ -9,7 +11,23 @@ export const metadata = {
 };
 
 const page = () => {
-  return <TermsCondition />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          webPageSchema({
+            path: "/terms-and-conditions",
+            name: metadata.title,
+            description: metadata.description,
+          }),
+          breadcrumbSchema([
+            { name: "Terms & Conditions", path: "/terms-and-conditions" },
+          ]),
+        ]}
+      />
+      <TermsCondition />
+    </>
+  );
 };
 
 export default page;
